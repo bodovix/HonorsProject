@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201910121316541_addedStudentTable.Designer.cs">
       <DependentUpon>201910121316541_addedStudentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910121319344_addedSession_Question_Group_Answer_Table.cs" />
+    <Compile Include="Migrations\201910121319344_addedSession_Question_Group_Answer_Table.Designer.cs">
+      <DependentUpon>201910121319344_addedSession_Question_Group_Answer_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910121316541_addedStudentTable.resx">
       <DependentUpon>201910121316541_addedStudentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910121319344_addedSession_Question_Group_Answer_Table.resx">
+      <DependentUpon>201910121319344_addedSession_Question_Group_Answer_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
