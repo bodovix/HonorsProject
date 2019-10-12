@@ -50,8 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Core\ILecturerRepository.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Data\LecturerRepository.cs" />
+    <Compile Include="Data\Repository.cs" />
+    <Compile Include="Core\IEntity.cs" />
+    <Compile Include="Core\IRepository.cs" />
     <Compile Include="Data\LabAssistantContext.cs" />
+    <Compile Include="Data\UnitOfWork.cs" />
+    <Compile Include="Entities\Lecturer.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.Designer.cs">
       <DependentUpon>201910081704152_InitialModel.cs</DependentUpon>
