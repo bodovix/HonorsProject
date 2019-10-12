@@ -62,7 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Tests\SessionTest.cs" />
+    <Compile Include="Tests\StudentTest.cs" />
+    <Compile Include="Tests\QuestionTest.cs" />
+    <Compile Include="Tests\LecturerTest.cs" />
+    <Compile Include="Tests\GroupTest.cs" />
+    <Compile Include="Tests\AnswerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
