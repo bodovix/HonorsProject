@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201910121309501_AddLecturerTable.Designer.cs">
       <DependentUpon>201910121309501_AddLecturerTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910121316541_addedStudentTable.cs" />
+    <Compile Include="Migrations\201910121316541_addedStudentTable.Designer.cs">
+      <DependentUpon>201910121316541_addedStudentTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910121309501_AddLecturerTable.resx">
       <DependentUpon>201910121309501_AddLecturerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910121316541_addedStudentTable.resx">
+      <DependentUpon>201910121316541_addedStudentTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

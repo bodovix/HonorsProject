@@ -9,6 +9,7 @@ namespace HonorsProject.Model.Data
     public partial class LabAssistantContext : DbContext
     {
         public virtual DbSet<Lecturer> Lecturers { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
 
         public LabAssistantContext()
             : base("name=LabAssistantContext")
