@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Lecturer : IEntity
+    public class Question : IEntity
     {
         public int Id { get; set; }
     }

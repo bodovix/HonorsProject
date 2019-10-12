@@ -58,10 +58,19 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Data\LabAssistantContext.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
+    <Compile Include="Entities\Answer.cs" />
+    <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Lecturer.cs" />
+    <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\Session.cs" />
+    <Compile Include="Entities\Student.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.Designer.cs">
       <DependentUpon>201910081704152_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910121309501_AddLecturerTable.cs" />
+    <Compile Include="Migrations\201910121309501_AddLecturerTable.Designer.cs">
+      <DependentUpon>201910121309501_AddLecturerTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910081704152_InitialModel.resx">
       <DependentUpon>201910081704152_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910121309501_AddLecturerTable.resx">
+      <DependentUpon>201910121309501_AddLecturerTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
