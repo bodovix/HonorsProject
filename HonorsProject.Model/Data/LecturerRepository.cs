@@ -15,7 +15,7 @@ namespace HonorsProject.Model.Data
         }
 
         //Lecturer specific Query's to be populated below
-        public IEnumerable<Lecturer> GetLecturer(int id)
+        public IEnumerable<Lecturer> GetLecturerWhereX(int id)
         {
             throw new NotImplementedException();
         }

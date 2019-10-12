@@ -9,6 +9,6 @@ namespace HonorsProject.Model.Data
 {
     public interface ILecturerRepository
     {
-        IEnumerable<Lecturer> GetLecturer(int id);
+        IEnumerable<Lecturer> GetLecturerWhereX(int id);
     }
 }

@@ -11,7 +11,7 @@ namespace HonorsProject.Model.Data
     public class Repository<T> : IRepository<IEntity>
     {
         protected readonly DbContext Context;
-        private DbSet<IEntity> _entities;
+        protected DbSet<IEntity> _entities;
 
         public Repository(DbContext context)
         {
