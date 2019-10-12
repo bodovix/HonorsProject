@@ -67,7 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enum\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
