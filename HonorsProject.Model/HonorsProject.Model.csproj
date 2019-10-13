@@ -57,11 +57,16 @@
     <Compile Include="Core\ISessionRepository.cs" />
     <Compile Include="Core\IStudentRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Data\AnswerRepository.cs" />
+    <Compile Include="Data\GroupRepository.cs" />
     <Compile Include="Data\LecturerRepository.cs" />
+    <Compile Include="Data\QuestionRepository.cs" />
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Core\IEntity.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Data\LabAssistantContext.cs" />
+    <Compile Include="Data\SessionRepository.cs" />
+    <Compile Include="Data\StudentRepository.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Entities\Answer.cs" />
     <Compile Include="Entities\Group.cs" />
