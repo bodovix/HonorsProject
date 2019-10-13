@@ -50,7 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\IAnswerRepository.cs" />
+    <Compile Include="Core\IGroupRepository.cs" />
     <Compile Include="Core\ILecturerRepository.cs" />
+    <Compile Include="Core\IQuestionRepository.cs" />
+    <Compile Include="Core\ISessionRepository.cs" />
+    <Compile Include="Core\IStudentRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Data\LecturerRepository.cs" />
     <Compile Include="Data\Repository.cs" />
