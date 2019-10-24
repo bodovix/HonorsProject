@@ -9,6 +9,8 @@ namespace HonorsProject.Model.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
+        #region Properties
+
         private readonly LabAssistantContext _context;
         public ILecturerRepository LecturerRepo { get; private set; }
         public IStudentRepository StudentRepo { get; private set; }
@@ -16,6 +18,8 @@ namespace HonorsProject.Model.Data
         public IQuestionRepository QuestionRepository { get; private set; }
         public IAnswerRepository AnswerRepository { get; private set; }
         public IGroupRepository GroupRepository { get; private set; }
+
+        #endregion Properties
 
         public UnitOfWork(LabAssistantContext context)
         {
