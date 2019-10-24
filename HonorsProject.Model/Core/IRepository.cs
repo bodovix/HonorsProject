@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HonorsProject.Model.Data
+namespace HonorsProject.Model.Core
 {
     public interface IRepository<IEntity>
     {

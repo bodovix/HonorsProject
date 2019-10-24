@@ -1,4 +1,5 @@
-﻿using HonorsProject.Model.Entities;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
