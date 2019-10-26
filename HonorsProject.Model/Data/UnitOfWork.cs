@@ -11,13 +11,20 @@ namespace HonorsProject.Model.Data
     {
         #region Properties
 
-        private readonly LabAssistantContext _context;
+        private LabAssistantContext _context
+        {
+            get { return _context; }
+            set { _context = value; }
+        }
+
         public ILecturerRepository LecturerRepo { get; private set; }
         public IStudentRepository StudentRepo { get; private set; }
         public ISessionRepository SessionRepository { get; private set; }
         public IQuestionRepository QuestionRepository { get; private set; }
         public IAnswerRepository AnswerRepository { get; private set; }
         public IGroupRepository GroupRepository { get; private set; }
+
+        LabAssistantContext IUnitOfWork._context => throw new NotImplementedException();
 
         #endregion Properties
 

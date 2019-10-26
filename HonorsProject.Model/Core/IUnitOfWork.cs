@@ -1,4 +1,5 @@
 ﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace HonorsProject.Model.Core
 {
     public interface IUnitOfWork
     {
+        LabAssistantContext _context { get; }
         ILecturerRepository LecturerRepo { get; }
         IStudentRepository StudentRepo { get; }
         ISessionRepository SessionRepository { get; }
@@ -17,5 +19,7 @@ namespace HonorsProject.Model.Core
         IGroupRepository GroupRepository { get; }
 
         int Complete();
+
+        void Dispose();
     }
 }
