@@ -15,9 +15,10 @@ namespace HonorsProject.Model.Data
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
 
-        public LabAssistantContext()
-            : base("name=LabAssistantContext")
+        public LabAssistantContext(string conectionName)
+            : base(conectionName)
         {
+            //live: "name=LabAssistantContext"
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
