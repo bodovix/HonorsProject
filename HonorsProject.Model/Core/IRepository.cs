@@ -13,7 +13,8 @@ namespace HonorsProject.Model.Core
 
         IEnumerable<IEntity> GetAll();
 
-        IEnumerable<IEntity> Find(Expression<Func<IEntity, bool>> predicaIEntitye);
+        //IEnumerable<IEntity> Find(Expression<Func<IEntity, bool>> predicaIEntitye);
+        //IEnumerable<IEntity> SingleOrDefault(Expression<Func<IEntity, bool>> predicaIEntitye);
 
         void Add(IEntity enIEntityiIEntityy);
 

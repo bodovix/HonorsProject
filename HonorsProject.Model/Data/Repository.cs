@@ -30,15 +30,16 @@ namespace HonorsProject.Model.Data
             return _entities.ToList();
         }
 
-        public IEnumerable<IEntity> Find(Expression<Func<IEntity, bool>> predicate)
-        {
-            return _entities.Where(predicate);
-        }
+        /// //////////////FIND METHODS SHOLD PROBABLTY BE ENCAPSULATED INSIDE THE Specific Repositories
+        //public IEnumerable<IEntity> Find(Expression<Func<IEntity, bool>> predicate)
+        //{
+        //    return _entities.Where(predicate);
+        //}
 
-        public IEntity SingleOrDefault(Expression<Func<IEntity, bool>> predicate)
-        {
-            return _entities.SingleOrDefault(predicate);
-        }
+        //public IEntity SingleOrDefault(Expression<Func<IEntity, bool>> predicate)
+        //{
+        //    return _entities.SingleOrDefault(predicate);
+        //}
 
         public void Add(IEntity entity)
         {
