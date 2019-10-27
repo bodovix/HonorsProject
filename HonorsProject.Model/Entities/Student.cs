@@ -19,8 +19,7 @@ namespace HonorsProject.Model.Entities
         public int CreatedByLecturerID { get; set; }
 
         //TODO:think about NN &N1 relationships and how they'll work. watch out for cascade delete
-        //public List<Group> Groups { get; set; }
-        //public List<Question> Questions { get; set; }
+        //public List<Group> Groups { get; set; }}
         //public List<Session> Sessions { get; set; }
         public Student()
         {
