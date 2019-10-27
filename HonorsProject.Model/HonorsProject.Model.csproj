@@ -100,6 +100,10 @@
     <Compile Include="Migrations\201910271043597_BasicGroupColumnsAdded.Designer.cs">
       <DependentUpon>201910271043597_BasicGroupColumnsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910271221077_AddedBasicSessionColumns.cs" />
+    <Compile Include="Migrations\201910271221077_AddedBasicSessionColumns.Designer.cs">
+      <DependentUpon>201910271221077_AddedBasicSessionColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -128,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910271043597_BasicGroupColumnsAdded.resx">
       <DependentUpon>201910271043597_BasicGroupColumnsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910271221077_AddedBasicSessionColumns.resx">
+      <DependentUpon>201910271221077_AddedBasicSessionColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
