@@ -24,6 +24,10 @@ namespace HonorsProject.Model.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Group>()
+                .HasMany<Session>(g => g.Sessions)
+                .WithRequired(s => s.Group)
+                .WillCascadeOnDelete(true);
         }
     }
 }
