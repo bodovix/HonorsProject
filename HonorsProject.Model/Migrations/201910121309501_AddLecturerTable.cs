@@ -11,7 +11,7 @@ namespace HonorsProject.Model.Migrations
                 "dbo.Lecturers",
                 c => new
                 {
-                    Id = c.Int(nullable: false, identity: true),
+                    Id = c.Int(nullable: false, identity: false),
                 })
                 .PrimaryKey(t => t.Id);
         }
