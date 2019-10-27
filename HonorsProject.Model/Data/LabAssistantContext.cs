@@ -40,6 +40,19 @@ namespace HonorsProject.Model.Data
             modelBuilder.Entity<Question>()
                 .Property(q => q.QuestionText)
                 .IsRequired();
+            modelBuilder.Entity<Question>()
+                .HasMany<Answer>(p => p.Answers)
+                .WithRequired(a => a.Question)
+                .WillCascadeOnDelete(true);
+            //Answer
+            modelBuilder.Entity<Answer>()
+                .Property(q => q.AnswerTest)
+                .IsRequired();
+            //Lecturer
+            modelBuilder.Entity<Lecturer>()
+                .HasMany<Answer>(l => l.Answers)
+                .WithRequired(a => a.AnsweredBy)
+                .WillCascadeOnDelete(true);
         }
     }
 }

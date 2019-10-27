@@ -14,8 +14,9 @@ namespace HonorsProject.Model.Entities
         public DateTime TimeAsked { get; set; }
         public string QuestionText { get; set; }
         public bool IsResolved { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public List<Answer> Answers { get; set; }
         public Student AskedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public Question()
         {

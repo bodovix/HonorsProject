@@ -11,5 +11,11 @@ namespace HonorsProject.Model.Entities
     public class Lecturer : IEntity
     {
         public int Id { get; set; }
+        public List<Answer> Answers { get; set; }
+
+        public Lecturer()
+        {
+            Answers = new List<Answer>();
+        }
     }
 }
