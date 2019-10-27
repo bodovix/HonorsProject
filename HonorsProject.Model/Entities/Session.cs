@@ -16,7 +16,7 @@ namespace HonorsProject.Model.Entities
         public DateTime EndTime { get; set; }
         public Group Group { get; set; }
         public DateTime CreatedOn { get; set; }
-        public int CreatedByLecturerID { get; set; }
+        public int CreatedByLecturerId { get; set; }
 
         public Session()
         {

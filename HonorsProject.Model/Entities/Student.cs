@@ -15,7 +15,7 @@ namespace HonorsProject.Model.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime CreatedOn { get; set; }
-        public Lecturer CreatedBy { get; set; }
+        public int CreatedByLecturerID { get; set; }
 
         //TODO:think about NN &N1 relationships and how they'll work. watch out for cascade delete
         //public List<Group> Groups { get; set; }
