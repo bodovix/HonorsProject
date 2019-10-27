@@ -53,6 +53,15 @@ namespace HonorsProject.Model.Data
                 .HasMany<Answer>(l => l.Answers)
                 .WithRequired(a => a.AnsweredBy)
                 .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Lecturer>()
+                .Property(l => l.Name)
+                .IsRequired();
+            modelBuilder.Entity<Lecturer>()
+                .Property(l => l.Email)
+                .IsRequired();
+            modelBuilder.Entity<Lecturer>()
+                .Property(l => l.Password)
+                .IsRequired();
         }
     }
 }
