@@ -15,6 +15,7 @@ namespace HonorsProject.Model.Data
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
 
+        //Default to live database
         public LabAssistantContext(string conectionName)
             : base(conectionName)
         {

@@ -59,6 +59,7 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Data\AnswerRepository.cs" />
     <Compile Include="Data\ConnectionConfigs.cs" />
+    <Compile Include="Data\DbContextFactory.cs" />
     <Compile Include="Data\GroupRepository.cs" />
     <Compile Include="Data\LecturerRepository.cs" />
     <Compile Include="Data\QuestionRepository.cs" />
@@ -91,6 +92,10 @@
     <Compile Include="Migrations\201910121319344_addedSession_Question_Group_Answer_Table.Designer.cs">
       <DependentUpon>201910121319344_addedSession_Question_Group_Answer_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910271033335_AddBasicStudentColumns.cs" />
+    <Compile Include="Migrations\201910271033335_AddBasicStudentColumns.Designer.cs">
+      <DependentUpon>201910271033335_AddBasicStudentColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -113,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910121319344_addedSession_Question_Group_Answer_Table.resx">
       <DependentUpon>201910121319344_addedSession_Question_Group_Answer_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910271033335_AddBasicStudentColumns.resx">
+      <DependentUpon>201910271033335_AddBasicStudentColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
