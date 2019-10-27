@@ -11,5 +11,14 @@ namespace HonorsProject.Model.Entities
     public class Question : IEntity
     {
         public int Id { get; set; }
+        public DateTime TimeAsked { get; set; }
+        public string QuestionText { get; set; }
+        public bool IsResolved { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public Student AskedBy { get; set; }
+
+        public Question()
+        {
+        }
     }
 }

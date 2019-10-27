@@ -112,6 +112,10 @@
     <Compile Include="Migrations\201910271332220_N1RelationshipSetupForSessionsAndGroupsCascadeDelete.Designer.cs">
       <DependentUpon>201910271332220_N1RelationshipSetupForSessionsAndGroupsCascadeDelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910271402356_InitialColumnsSetForQuestionTable.cs" />
+    <Compile Include="Migrations\201910271402356_InitialColumnsSetForQuestionTable.Designer.cs">
+      <DependentUpon>201910271402356_InitialColumnsSetForQuestionTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910271332220_N1RelationshipSetupForSessionsAndGroupsCascadeDelete.resx">
       <DependentUpon>201910271332220_N1RelationshipSetupForSessionsAndGroupsCascadeDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910271402356_InitialColumnsSetForQuestionTable.resx">
+      <DependentUpon>201910271402356_InitialColumnsSetForQuestionTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

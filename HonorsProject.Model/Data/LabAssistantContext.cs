@@ -24,10 +24,22 @@ namespace HonorsProject.Model.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //One Group can have many Sessions
             modelBuilder.Entity<Group>()
                 .HasMany<Session>(g => g.Sessions)
                 .WithRequired(s => s.Group)
                 .WillCascadeOnDelete(true);
+
+            //One Student can have Many Questions
+            modelBuilder.Entity<Student>()
+                .HasMany<Question>(s => s.Questions)
+                .WithRequired(q => q.AskedBy)
+                .WillCascadeOnDelete(true);
+
+            //question
+            modelBuilder.Entity<Question>()
+                .Property(q => q.QuestionText)
+                .IsRequired();
         }
     }
 }
