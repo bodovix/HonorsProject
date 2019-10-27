@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201910271033335_AddBasicStudentColumns.Designer.cs">
       <DependentUpon>201910271033335_AddBasicStudentColumns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910271043597_BasicGroupColumnsAdded.cs" />
+    <Compile Include="Migrations\201910271043597_BasicGroupColumnsAdded.Designer.cs">
+      <DependentUpon>201910271043597_BasicGroupColumnsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910271033335_AddBasicStudentColumns.resx">
       <DependentUpon>201910271033335_AddBasicStudentColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910271043597_BasicGroupColumnsAdded.resx">
+      <DependentUpon>201910271043597_BasicGroupColumnsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,5 +11,12 @@ namespace HonorsProject.Model.Entities
     public class Group : IEntity
     {
         public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public Lecturer CreatedBy { get; set; }
+
+        public Group()
+        {
+        }
     }
 }
