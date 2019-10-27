@@ -20,6 +20,7 @@ namespace HonorsProject.Model.Entities
 
         public Question()
         {
+            Answers = new List<Answer>();
         }
     }
 }
