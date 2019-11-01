@@ -15,10 +15,9 @@ namespace HonorsProject.Model.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public List<Session> Sessions { get; set; }
+        public List<Answer> Answers { get; set; }
         public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerId { get; set; }
-
-        public List<Answer> Answers { get; set; }
 
         public Lecturer()
         {
