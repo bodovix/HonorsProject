@@ -62,6 +62,11 @@ namespace HonorsProject.Model.Data
             modelBuilder.Entity<Lecturer>()
                 .Property(l => l.Password)
                 .IsRequired();
+            //Session
+            modelBuilder.Entity<Session>()
+                .HasMany<Question>(s => s.Questions)
+                .WithRequired(q => q.Session)
+                .WillCascadeOnDelete(true);
         }
     }
 }
