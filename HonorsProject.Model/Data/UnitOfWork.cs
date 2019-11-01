@@ -11,7 +11,9 @@ namespace HonorsProject.Model.Data
     {
         #region Properties
 
-        private LabAssistantContext _context
+        private LabAssistantContext _context;
+
+        LabAssistantContext IUnitOfWork.Context
         {
             get { return _context; }
             set { _context = value; }
@@ -23,8 +25,6 @@ namespace HonorsProject.Model.Data
         public IQuestionRepository QuestionRepository { get; private set; }
         public IAnswerRepository AnswerRepository { get; private set; }
         public IGroupRepository GroupRepository { get; private set; }
-
-        LabAssistantContext IUnitOfWork._context => throw new NotImplementedException();
 
         #endregion Properties
 

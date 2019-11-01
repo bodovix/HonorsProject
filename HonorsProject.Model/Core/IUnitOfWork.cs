@@ -10,7 +10,7 @@ namespace HonorsProject.Model.Core
 {
     public interface IUnitOfWork
     {
-        LabAssistantContext _context { get; }
+        LabAssistantContext Context { get; set; }
         ILecturerRepository LecturerRepo { get; }
         IStudentRepository StudentRepo { get; }
         ISessionRepository SessionRepository { get; }
