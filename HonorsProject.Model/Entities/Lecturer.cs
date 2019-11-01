@@ -14,6 +14,7 @@ namespace HonorsProject.Model.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public List<Session> Sessions { get; set; }
         public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerId { get; set; }
 
@@ -22,6 +23,7 @@ namespace HonorsProject.Model.Entities
         public Lecturer()
         {
             Answers = new List<Answer>();
+            Sessions = new List<Session>();
         }
     }
 }

@@ -69,6 +69,9 @@ namespace HonorsProject.Model.Data
                 .HasMany<Question>(s => s.Questions)
                 .WithRequired(q => q.Session)
                 .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Session>()
+                .HasMany<Lecturer>(s => s.Lecturers)
+                .WithMany(l => l.Sessions);
         }
     }
 }
