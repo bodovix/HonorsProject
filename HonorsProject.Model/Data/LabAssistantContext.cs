@@ -29,7 +29,9 @@ namespace HonorsProject.Model.Data
                 .HasMany<Session>(g => g.Sessions)
                 .WithRequired(s => s.Group)
                 .WillCascadeOnDelete(true);
-
+            modelBuilder.Entity<Group>()
+                .HasMany<Student>(g => g.Students)
+                .WithMany(s => s.Groups);
             //One Student can have Many Questions
             modelBuilder.Entity<Student>()
                 .HasMany<Question>(s => s.Questions)
