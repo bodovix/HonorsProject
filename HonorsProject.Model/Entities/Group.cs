@@ -20,6 +20,7 @@ namespace HonorsProject.Model.Entities
         public Group()
         {
             Students = new List<Student>();
+            Sessions = new List<Session>();
         }
     }
 }
