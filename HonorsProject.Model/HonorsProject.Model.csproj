@@ -140,6 +140,10 @@
     <Compile Include="Migrations\201911071505225_NameColumnAddedToQuestions.Designer.cs">
       <DependentUpon>201911071505225_NameColumnAddedToQuestions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911071508550_NameColumnAddedToAnswers.cs" />
+    <Compile Include="Migrations\201911071508550_NameColumnAddedToAnswers.Designer.cs">
+      <DependentUpon>201911071508550_NameColumnAddedToAnswers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -198,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911071505225_NameColumnAddedToQuestions.resx">
       <DependentUpon>201911071505225_NameColumnAddedToQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911071508550_NameColumnAddedToAnswers.resx">
+      <DependentUpon>201911071508550_NameColumnAddedToAnswers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
