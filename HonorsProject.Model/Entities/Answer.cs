@@ -15,7 +15,7 @@ namespace HonorsProject.Model.Entities
         public string AnswerTest { get; set; }
         public Lecturer AnsweredBy { get; set; }
         public Question Question { get; set; }
-        public DateTime DateAnswered { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public Answer()
