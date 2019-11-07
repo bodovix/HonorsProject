@@ -12,6 +12,7 @@ namespace HonorsProject.Model.Entities
     {
         public int Id { get; set; }
         public DateTime TimeAsked { get; set; }
+        public string Name { get; set; }
         public string QuestionText { get; set; }
         public bool IsResolved { get; set; }
         public Session Session { get; set; }
