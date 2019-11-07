@@ -13,6 +13,7 @@ namespace HonorsProject.Model.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string AnswerTest { get; set; }
+        public bool WasHelpfull { get; set; }
         public Lecturer AnsweredBy { get; set; }
         public Question Question { get; set; }
 
