@@ -43,10 +43,10 @@
         <StackPanel DockPanel.Dock="Right"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
-            <!--<Frame x:Name="MainContent"-->
-            <!--NavigationUIVisibility="Hidden"-->
-            <!--Source="">-->
-            <!--</Frame>-->
+            <Frame x:Name="MainContent"
+            NavigationUIVisibility="Hidden"
+            Source="Pages/StudentsPage.xaml">
+            </Frame>
         </StackPanel>
     </DockPanel>
 </Window>
