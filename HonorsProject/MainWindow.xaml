@@ -38,10 +38,10 @@
         <StackPanel DockPanel.Dock="Right"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
-            <Frame x:Name="MainContent"
-                   NavigationUIVisibility="Hidden"
-                   Source="UserControls/CoursesControl.xaml">
-            </Frame>
+            <!--<Frame x:Name="MainContent"-->
+            <!--NavigationUIVisibility="Hidden"-->
+            <!--Source="">-->
+            <!--</Frame>-->
         </StackPanel>
     </DockPanel>
 </Window>
