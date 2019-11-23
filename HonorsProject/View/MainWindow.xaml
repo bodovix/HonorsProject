@@ -14,20 +14,25 @@
             </MenuItem>
         </Menu>
         <!--Control Panel-->
-        <StackPanel DockPanel.Dock="Left"
+        <StackPanel Name="SideNavigationPannel"
+                    DockPanel.Dock="Left"
                     VerticalAlignment="Center"
                     MinWidth="50"
                     MaxWidth="150">
-            <Button Name="ManageAccountsBtn"
-                    Content="Accounts" />
-            <Button Name="CoursesBtn"
-                    Content="Courses" />
-            <Button Name="ActiveSessionsBtn"
-                    Content="Active Sessions" />
-            <Button Name="UnansweredQuestionsBtn"
-                    Content="Unanswered Questions" />
+            <Button Name="StudentsBtn"
+                    Content="Students" />
+            <Button Name="GroupsBtn"
+                    Content="Groups" />
+            <Button Name="MyGroupsBtn"
+                    Content="My Groups" />
+            <Button Name="MySessionsBtn"
+                    Content="My Sessions" />
+            <Button Name="MyQuestoins"
+                    Content="My Questions" />
             <Button Name="DataAnalysisBtn"
                     Content="Data Analysis" />
+            <Button Name="MyAccountBtn"
+                    Content="My Account" />
         </StackPanel>
         <!--Main Content Area (Center)-->
         <StackPanel>
