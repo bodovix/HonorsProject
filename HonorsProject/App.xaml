@@ -18,5 +18,10 @@
             <Setter Property="Margin" Value="10" />
             <Setter Property="Height" Value="40" />
         </Style>
+        <Style TargetType="TextBlock" x:Key="FormTitleText">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
     </Application.Resources>
 </Application>

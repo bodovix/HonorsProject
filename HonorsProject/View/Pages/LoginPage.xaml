@@ -1,14 +1,30 @@
 ﻿<Page x:Class="HonorsProject.View.Pages.LoginPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="200"
+                    Margin="10"
+                    Background="Beige">
+        <TextBlock Text="LS Login" Style="{StaticResource FormTitleText}" />
+        <TextBlock Text="User ID" Style="{StaticResource UserInputLabel}" />
+        <TextBox Text="{Binding Player.PlayerID, Mode=TwoWay}"  Style="{StaticResource UserInput}" />
+        <TextBlock Text="Password" Style="{StaticResource UserInputLabel}" />
+        <TextBox Text="{Binding Player.Password, Mode=TwoWay}"
+                     Style="{StaticResource UserInput}" />
+        <Button Content="Login"
+                    Command=""
+                    CommandParameter=""
+                    Style="{StaticResource FormSubmitButton}" />
+
+        <TextBlock Text="{Binding LoginError}"
+                       Style="{StaticResource UserInputError}" />
+    </StackPanel>
 </Page>
