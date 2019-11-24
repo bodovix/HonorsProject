@@ -1,14 +1,74 @@
 ﻿<Page x:Class="HonorsProject.View.Pages.QandAPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QandAPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <!--Search Questions-->
+            <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
+                <Button Name="NewQuestionBtn" Content="New Question" Style="{StaticResource FormSubmitButton}" />
+                <Label Content="Search"
+                   Style="{StaticResource SearchLabel}" />
+                <TextBox Name="SearchQTxtBox" />
+                <ListView  x:Name="searchQResultsList"
+                       Height="390">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="" />
+                                <TextBlock Text="" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <!--Answers Search bar-->
+            <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
+                <Button Name="NewAnswerBtn" Content="New Answer" Style="{StaticResource FormSubmitButton}" />
+                <Label Content="Search"
+                   Style="{StaticResource SearchLabel}" />
+                <TextBox Name="SearchTxtBox" />
+                <ListView  x:Name="searchAResultsList"
+                       Height="390">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="" />
+                                <TextBlock Text="" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+        <!--Main Form Container-->
+        <Grid Grid.Column="1" Grid.Row="0" Style="{StaticResource ContainerGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--Questions Form-->
+            <Grid>
+            </Grid>
+            <!--Answer Form-->
+            <Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
