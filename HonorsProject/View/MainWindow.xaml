@@ -20,19 +20,26 @@
                     MinWidth="50"
                     MaxWidth="150">
             <Button Name="StudentsBtn"
-                    Content="Students" />
+                    Content="Students"
+                    Style="{StaticResource InfoButton}" />
             <Button Name="GroupsBtn"
-                    Content="Groups" />
+                    Content="Groups"
+                    Style="{StaticResource InfoButton}" />
             <Button Name="MyGroupsBtn"
-                    Content="My Groups" />
+                    Content="My Groups"
+                    Style="{StaticResource InfoButton}" />
             <Button Name="MySessionsBtn"
-                    Content="My Sessions" />
+                    Content="My Sessions"
+                    Style="{StaticResource InfoButton}" />
             <Button Name="MyQuestoins"
-                    Content="My Questions" />
+                    Content="My Questions"
+                    Style="{StaticResource InfoButton}" />
             <Button Name="DataAnalysisBtn"
-                    Content="Data Analysis" />
+                    Content="Data Analysis"
+                    Style="{StaticResource InfoButton}" />
             <Button Name="MyAccountBtn"
-                    Content="My Account" />
+                    Content="My Account"
+                    Style="{StaticResource InfoButton}" />
         </StackPanel>
         <!--Main Content Area (Center)-->
         <StackPanel>
