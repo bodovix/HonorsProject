@@ -10,7 +10,7 @@
 
     <StackPanel Orientation="Vertical">
         <Button Name="NewSessionBtn" Content="Create New" Style="{StaticResource FormSubmitButton}" Width="100" HorizontalAlignment="Left" />
-        <Grid>
+        <Grid Style="{StaticResource ContainerGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
@@ -22,10 +22,39 @@
             <!--Lecturers Panel-->
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Name="SearchTeachersTxtBox" />
-                    <Image />
+                    <TextBox Name="SearchTeachersTxtBox" Width="88" Margin="0" />
+                    <Button Name="AddLecturerBtn"
+                        Margin="0"
+                        BorderThickness="0">
+                        <Image Source="../Images/plusIcon.png"
+                                Style="{StaticResource IconImage}" />
+                    </Button>
                 </StackPanel>
+                <ListView Name="LecutersInSessonLV"
+                          Width="100"
+                          Margin="0"
+                          Height="100"
+                          Padding="0">
+                </ListView>
             </StackPanel>
+            <!--Main Details Form-->
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <TextBox TextWrapping="Wrap"
+                                 Style="{StaticResource UserInput}"
+                                 Text="" />
+                </GroupBox>
+            </Grid>
         </Grid>
     </StackPanel>
 </Page>

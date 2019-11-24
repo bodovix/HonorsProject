@@ -146,5 +146,8 @@
   <ItemGroup>
     <Folder Include="ViewModel\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\plusIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -55,8 +55,6 @@
                 </Grid.ColumnDefinitions>
                 <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
-                                 MaxLength="100"
-                                 Height="30"
                                  Style="{StaticResource UserInput}"
                                  Text="" />
                 </GroupBox>
@@ -70,8 +68,6 @@
                         Style="{StaticResource InfoButton}" />
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
-                                 MaxLength="100"
-                                 Height="30"
                                  Style="{StaticResource UserInput}"
                                  Text="" />
                 </GroupBox>
