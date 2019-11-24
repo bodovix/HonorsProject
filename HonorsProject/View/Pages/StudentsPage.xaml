@@ -76,12 +76,10 @@
                                  Text="" />
                     </GroupBox>
                     <GroupBox Header="Created On" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                        <Label Content=""
-                           Height="30" />
+                        <Label Content="" Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <GroupBox Header="Created By" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <Label Content=""
-                           Height="30" />
+                        <Label Content="" Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <Button Name="SaveStudentBtn" Content="Save" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormSaveButton}" />
                     <Button Name="CancelStudentBtn" Content="Cancel" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormCancelButton}" />

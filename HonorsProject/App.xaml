@@ -12,6 +12,9 @@
         <Style TargetType="TextBlock" x:Key="UserInputLabel">
             <Setter Property="Margin" Value="10" />
         </Style>
+        <Style TargetType="Label" x:Key="UserFormLbl">
+            <Setter Property="Height" Value="30" />
+        </Style>
         <Style TargetType="TextBlock" x:Key="UserInputError" BasedOn="{StaticResource UserInputLabel}">
             <Setter Property="Foreground" Value="Red" />
             <Setter Property="TextWrapping" Value="Wrap" />

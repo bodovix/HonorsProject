@@ -33,7 +33,7 @@
                 <ListView Name="LecutersInSessonLV"
                           Width="100"
                           Margin="0"
-                          Height="100"
+                          Height="240"
                           Padding="0">
                 </ListView>
             </StackPanel>
@@ -54,6 +54,81 @@
                                  Style="{StaticResource UserInput}"
                                  Text="" />
                 </GroupBox>
+                <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <TextBox TextWrapping="Wrap"
+                                 Style="{StaticResource UserInput}"
+                                 Text="" />
+                </GroupBox>
+                <GroupBox Header="Role" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <ComboBox x:Name="RoleComboBox"
+                              Height="23"
+                              SelectedValuePath="Role">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Height" Value="20" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
+                </GroupBox>
+                <GroupBox Header="End Time" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <GroupBox Header="Start Time" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <Button Name="SaveBtn"
+                        Content="Save"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Style="{StaticResource FormSaveButton}" />
+                <GroupBox Header="Created On" Grid.Row="0" Grid.Column="2" Style="{StaticResource FormGroupBox}">
+                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <GroupBox Header="Created By" Grid.Row="1" Grid.Column="2" Style="{StaticResource FormGroupBox}">
+                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <Button Name="CancelBtn"
+                        Content="Cancel"
+                        Grid.Row="2"
+                        Grid.Column="3"
+                        Style="{StaticResource FormCancelButton}" />
+            </Grid>
+            <!--Sub Grid Container-->
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="My Sessions" Grid.Column="0" Grid.Row="0" Style="{StaticResource FormTitleText}" />
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                    <Button Name="ActiveSessionsBtn" Content="Active" Style="{StaticResource InfoButton}" />
+                    <Button Name="FutureSessionsBtn" Content="Future" Style="{StaticResource InfoButton}" />
+                    <Button Name="Previous" Content="Previous" Style="{StaticResource InfoButton}" />
+                </StackPanel>
+                <ListView  Grid.Column="0" Grid.Row="2">
+                </ListView>
+                <DataGrid Grid.Column="0" Grid.Row="3">  
+                    <!--HeadingStyle-->
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Gray" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="BorderThickness" Value="0,0,1,2" />
+                            <Setter Property="BorderBrush" Value="Black" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <!--Column header and text bindings-->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Width="*" />
+                        <DataGridTextColumn Header="Name" Width="*" />
+                        <DataGridTextColumn Header="Start Date" Width="*" />
+                        <DataGridTextColumn Header="End Date" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
     </StackPanel>

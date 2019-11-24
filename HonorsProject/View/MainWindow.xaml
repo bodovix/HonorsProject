@@ -52,7 +52,7 @@
                     VerticalAlignment="Stretch">
             <Frame x:Name="MainContent"
             NavigationUIVisibility="Hidden"
-            Source="Pages/GroupPage.xaml">
+            Source="Pages/MySessionsPage.xaml">
             </Frame>
         </StackPanel>
     </DockPanel>
