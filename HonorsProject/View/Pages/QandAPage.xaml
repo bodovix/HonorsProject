@@ -60,11 +60,25 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            <!--Context Title-->
+            <TextBlock Text="CONTEXT NAME WILL  BIND HERE"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       Style="{StaticResource FormTitleText}" />
             <!--Questions Form-->
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
             </Grid>
             <!--Answer Form-->
             <Grid>
