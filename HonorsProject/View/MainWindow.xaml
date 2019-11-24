@@ -45,7 +45,7 @@
                     VerticalAlignment="Stretch">
             <Frame x:Name="MainContent"
             NavigationUIVisibility="Hidden"
-            Source="Pages/StudentsPage.xaml">
+            Source="Pages/GroupPage.xaml">
             </Frame>
         </StackPanel>
     </DockPanel>

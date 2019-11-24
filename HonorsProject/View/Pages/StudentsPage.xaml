@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <!--Search Panel-->
         <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
-            <Button Name="NewStudentBtn" Content="New Student" />
+            <Button Name="NewStudentBtn" Content="New Student" Style="{StaticResource FormSubmitButton}" />
             <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
             <TextBox Name="SearchTxtBox" />
@@ -91,7 +91,7 @@
                         <Label Content=""
                            Height="30" />
                     </GroupBox>
-                    <Button Name="SaveStudentBtn" Content="Save" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormSubmitButton}" />
+                    <Button Name="SaveStudentBtn" Content="Save" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormSaveButton}" />
                     <Button Name="CancelStudentBtn" Content="Cancel" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormCancelButton}" />
                 </Grid>
                 <!--Add To Group Form-->
@@ -111,6 +111,7 @@
                     <Button Name="AddToGroupBtn" Content="Add To Group" Style="{StaticResource FormSubmitButton}" />
                 </StackPanel>
             </Grid>
+            <!--sub-grid section-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -123,7 +124,7 @@
                     <Button Name="StudentsGroupsBtn" Content="Groups" Style="{StaticResource InfoButton}" />
                     <Button Name="StudentQuestionsBTn" Content="Questions" Style="{StaticResource InfoButton}" />
                 </StackPanel>
-                <Frame>
+                <Frame Grid.Column="0" Grid.Row="1">
                 </Frame>
             </Grid>
         </StackPanel>

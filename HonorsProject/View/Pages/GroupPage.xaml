@@ -1,14 +1,116 @@
 ﻿<Page x:Class="HonorsProject.View.Pages.GroupPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GroupPage">
-
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--Search Panel-->
+        <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
+            <Button Name="NewGroupBtn" Content="New Group" Style="{StaticResource FormSubmitButton}" />
+            <Label Content="Search"
+                   Style="{StaticResource SearchLabel}" />
+            <TextBox Name="SearchTxtBox" />
+            <ListView  x:Name="searchResultsList"
+                       Height="390">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="" />
+                            <TextBlock Text="" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--main details form-->
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <TextBox TextWrapping="Wrap"
+                                 MaxLength="100"
+                                 Height="30"
+                                 Style="{StaticResource UserInput}"
+                                 Text="" />
+                </GroupBox>
+                <GroupBox Header="Created On" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="" Height="30" />
+                </GroupBox>
+                <Button Name="AddStudentsBtn"
+                        Content="Add Students"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        Style="{StaticResource InfoButton}" />
+                <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <TextBox TextWrapping="Wrap"
+                                 MaxLength="100"
+                                 Height="30"
+                                 Style="{StaticResource UserInput}"
+                                 Text="" />
+                </GroupBox>
+                <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content=""
+                           Height="30" />
+                </GroupBox>
+                <Button Name="AddSessionBtn"
+                        Content="Add Session"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Style="{StaticResource InfoButton}" />
+                <Button Name="SaveBtn"
+                        Content="Save"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Style="{StaticResource FormSaveButton}" />
+                <Button Name="CancelBtn"
+                        Content="Cancel"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Style="{StaticResource FormCancelButton}" />
+            </Grid>
+            <!--sub-grid section-->
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <Button Name="StudentsGroupsBtn" Content="Groups" Style="{StaticResource InfoButton}" />
+                    <Button Name="StudentQuestionsBTn" Content="Questions" Style="{StaticResource InfoButton}" />
+                </StackPanel>
+                <Frame Grid.Column="0" Grid.Row="1">
+                </Frame>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
