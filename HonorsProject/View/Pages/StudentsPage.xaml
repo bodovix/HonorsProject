@@ -112,6 +112,19 @@
                 </StackPanel>
             </Grid>
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <Button Name="StudentsGroupsBtn" Content="Groups" Style="{StaticResource InfoButton}" />
+                    <Button Name="StudentQuestionsBTn" Content="Questions" Style="{StaticResource InfoButton}" />
+                </StackPanel>
+                <Frame>
+                </Frame>
             </Grid>
         </StackPanel>
     </Grid>

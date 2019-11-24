@@ -21,7 +21,12 @@
         </Style>
         <Style TargetType="Button" x:Key="FormCancelButton">
             <Setter Property="Margin" Value="10" />
-            <Setter Property="Background" Value="Gray" />
+            <Setter Property="Background" Value="Red" />
+            <Setter Property="Height" Value="40" />
+        </Style>
+        <Style TargetType="Button" x:Key="InfoButton">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Background" Value="LightGray" />
             <Setter Property="Height" Value="40" />
         </Style>
         <Style TargetType="TextBlock" x:Key="FormTitleText">
