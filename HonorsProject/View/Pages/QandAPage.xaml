@@ -121,7 +121,58 @@
                 </StackPanel>
             </Grid>
             <!--Answer Form-->
-            <Grid  Grid.Column="0" Grid.Row="2">
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Answer {Name will get bound here}"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Style="{StaticResource FormTitleText}" />
+                <GroupBox Header="ID" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <TextBox TextWrapping="Wrap"
+                                 Style="{StaticResource UserInput}"
+                                 Text="" />
+                </GroupBox>
+                <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <GroupBox Header="Time Asked" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1">
+                    <GroupBox Header="Created On" Style="{StaticResource FormGroupBox}">
+                        <Label Content="" Style="{StaticResource UserFormLbl}" />
+                    </GroupBox>
+                    <Image Source="../Images/starIcon.png" />
+                </StackPanel>
+                <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
+                    <TextBox TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                         MaxLength="300"
+                         Height="80"
+                         Style="{StaticResource UserInput}"
+                         Text="" />
+                </GroupBox>
+                <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
+                </Image>
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Button Name="AnswerSaveBtn" Content="Save" Style="{StaticResource FormSaveButton}" />
+                    <Button Name="AnswerCancelBtn" Content="Cancel" Style="{StaticResource FormCancelButton}" />
+                    <Button Name="AnswerDeleteBtn" Content="Delete" Style="{StaticResource FormCancelButton}" />
+                    <Button Name="AnswerResolvedBtn" Content="Resolved" Style="{StaticResource FormSubmitButton}" />
+                    <Button Name="AnswerUploadBtn" Content="Upload" Style="{StaticResource InfoButton}" />
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>
