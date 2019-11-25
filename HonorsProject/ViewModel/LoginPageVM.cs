@@ -11,6 +11,9 @@ namespace HonorsProject.ViewModel
 {
     public class LoginPageVM : BaseViewModel
     {
+        #region Properties
+
+        private MainWindowVM parentVM;
         private SecureString _securePassword;
 
         public SecureString SecurePassword
@@ -35,8 +38,19 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        #endregion Properties
+
         public LoginPageVM()
         {
+        }
+
+        internal void Login()
+        {
+            throw new NotImplementedException();
+            //TODO: DECIDE HOW TO STORE app info (static in app.cs or properties in MainWindowVM)
+            //attempt student login
+
+            //attempt lecturer login
         }
     }
 }
