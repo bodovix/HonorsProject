@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\Pages\DataAnalysisPage.xaml.cs">
       <DependentUpon>DataAnalysisPage.xaml</DependentUpon>
     </Compile>
@@ -143,9 +144,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="View\Images\plusIcon.png" />
   </ItemGroup>

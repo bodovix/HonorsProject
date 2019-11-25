@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HonorsProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace HonorsProject.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindowVM VM { get; set; }
+
         public MainWindow()
         {
+            //Initialize window with View Model
+            VM = new MainWindowVM();
             InitializeComponent();
+            ContainerDockPannel.DataContext = VM;
         }
     }
 }
