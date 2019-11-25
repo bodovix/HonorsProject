@@ -7,15 +7,8 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class MainWindowVM : INotifyPropertyChanged
+    public class MainWindowVM : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public MainWindowVM()
         {
         }
