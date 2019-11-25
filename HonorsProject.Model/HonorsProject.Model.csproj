@@ -76,6 +76,7 @@
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Enums\Role.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.Designer.cs">
       <DependentUpon>201910081704152_InitialModel.cs</DependentUpon>
@@ -155,9 +156,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

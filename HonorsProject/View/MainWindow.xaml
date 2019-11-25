@@ -21,31 +21,38 @@
                     MaxWidth="150">
             <Button Name="StudentsBtn"
                     Content="Students"
+                    Click="StudentsBtn_Click"
                     Style="{StaticResource InfoButton}" />
             <Button Name="GroupsBtn"
                     Content="Groups"
-                    Style="{StaticResource InfoButton}" />
-            <Button Name="MyGroupsBtn"
-                    Content="My Groups"
+                    Click="GroupsBtn_Click"
                     Style="{StaticResource InfoButton}" />
             <Button Name="MySessionsBtn"
                     Content="My Sessions"
+                    Click="MySessionsBtn_Click"
                     Style="{StaticResource InfoButton}" />
             <Button Name="MyQuestoins"
                     Content="My Questions"
+                    Click="MyQuestoins_Click"
+                    Style="{StaticResource InfoButton}" />
+            <Button Name="MyAnswers"
+                    Content="My Answers"
+                    Click="MyAnswers_Click"
                     Style="{StaticResource InfoButton}" />
             <Button Name="DataAnalysisBtn"
                     Content="Data Analysis"
+                    Click="DataAnalysisBtn_Click"
                     Style="{StaticResource InfoButton}" />
             <Button Name="MyAccountBtn"
                     Content="My Account"
+                    Click="MyAccountBtn_Click"
                     Style="{StaticResource InfoButton}" />
         </StackPanel>
         <!--Main Content Area (Center)-->
         <StackPanel HorizontalAlignment="Stretch">
             <Frame x:Name="MainContent"
             NavigationUIVisibility="Hidden"
-            Source="Pages/QandAPage.xaml">
+            Source="Pages/LoginPage.xaml">
             </Frame>
         </StackPanel>
     </DockPanel>
