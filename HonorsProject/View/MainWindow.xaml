@@ -42,14 +42,7 @@
                     Style="{StaticResource InfoButton}" />
         </StackPanel>
         <!--Main Content Area (Center)-->
-        <StackPanel>
-        </StackPanel>
-        <!--Bottom content area-->
-
-        <!--right content area-->
-        <StackPanel DockPanel.Dock="Right"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch">
+        <StackPanel HorizontalAlignment="Stretch">
             <Frame x:Name="MainContent"
             NavigationUIVisibility="Hidden"
             Source="Pages/QandAPage.xaml">
