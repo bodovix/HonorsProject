@@ -47,7 +47,7 @@ namespace HonorsProject.ViewModel
         internal void Login()
         {
             throw new NotImplementedException();
-            //TODO: DECIDE HOW TO STORE app info (static in app.cs or properties in MainWindowVM)
+            //TODO: DECIDE HOW TO STORE app info (static in app.cs or properties in MainWindowVM - MainWindowVM)
             //attempt student login
 
             //attempt lecturer login
