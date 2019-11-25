@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\LoginPageVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\Pages\DataAnalysisPage.xaml.cs">
       <DependentUpon>DataAnalysisPage.xaml</DependentUpon>
@@ -152,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Images\starIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HonorsProject.Model\HonorsProject.Model.csproj">
+      <Project>{7386fa79-0c2b-4db6-970d-19b0351ab575}</Project>
+      <Name>HonorsProject.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HonorsProject.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,22 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        public LoginPageVM VM { get; set; }
+
         public LoginPage()
         {
+            //Initialize window with View Model
+            VM = new LoginPageVM();
             InitializeComponent();
+            MainContainer.DataContext = VM;
+            this.DataContext = VM;
+        }
+
+        //manually binding secure string to VM
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((LoginPageVM)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
         }
     }
 }

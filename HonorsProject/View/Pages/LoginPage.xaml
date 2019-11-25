@@ -8,17 +8,19 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage">
 
-    <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Width="200"
-                    Margin="10"
-                    Background="Beige">
+    <StackPanel
+        Name="MainContainer"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Width="200"
+        Margin="10">
         <TextBlock Text="LS Login" Style="{StaticResource FormTitleText}" />
         <TextBlock Text="User ID" Style="{StaticResource UserInputLabel}" />
-        <TextBox Text="{Binding Player.PlayerID, Mode=TwoWay}"  Style="{StaticResource UserInput}" />
+        <TextBox Text="{Binding UserId, Mode=TwoWay}"  Style="{StaticResource UserInput}" />
         <TextBlock Text="Password" Style="{StaticResource UserInputLabel}" />
-        <TextBox Text="{Binding Player.Password, Mode=TwoWay}"
-                     Style="{StaticResource UserInput}" />
+        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"
+                 FontFamily="Password"
+                     Style="{StaticResource UserInputPassword}" />
         <Button Content="Login"
                     Command=""
                     CommandParameter=""
