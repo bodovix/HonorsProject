@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HonorsProject.Model.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace HonorsProject.Model.Core
 {
     public interface IStudentRepository
     {
+        Student Login();
     }
 }

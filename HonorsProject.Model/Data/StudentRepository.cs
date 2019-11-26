@@ -13,5 +13,10 @@ namespace HonorsProject.Model.Data
         public StudentRepository(LabAssistantContext context) : base(context)
         {
         }
+
+        public Student Login()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

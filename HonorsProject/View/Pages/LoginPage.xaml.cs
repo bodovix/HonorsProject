@@ -23,10 +23,10 @@ namespace HonorsProject.View.Pages
     {
         public LoginPageVM VM { get; set; }
 
-        public LoginPage()
+        public LoginPage(MainWindowVM mainWindowVM)
         {
             //Initialize window with View Model
-            VM = new LoginPageVM();
+            VM = new LoginPageVM(mainWindowVM);
             InitializeComponent();
             MainContainer.DataContext = VM;
             this.DataContext = VM;

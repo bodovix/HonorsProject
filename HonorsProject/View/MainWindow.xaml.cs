@@ -1,4 +1,6 @@
-﻿using HonorsProject.View.Pages;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Data;
+using HonorsProject.View.Pages;
 using HonorsProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -27,7 +29,7 @@ namespace HonorsProject.View
         public MainWindow()
         {
             //Initialize window with View Model
-            VM = new MainWindowVM();
+            VM = new MainWindowVM(((App)App.Current).UnitOfWork);
             InitializeComponent();
             ContainerDockPannel.DataContext = VM;
         }

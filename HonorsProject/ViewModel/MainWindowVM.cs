@@ -1,4 +1,5 @@
-﻿using HonorsProject.Model.Enums;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,10 +11,13 @@ namespace HonorsProject.ViewModel
 {
     public class MainWindowVM : BaseViewModel
     {
+        public IUnitOfWork UnitOfWork { get; set; }
+
         public Role LoggedInAs { get; set; }
 
-        public MainWindowVM()
+        public MainWindowVM(IUnitOfWork UoW)
         {
+            UnitOfWork = UoW;
         }
     }
 }
