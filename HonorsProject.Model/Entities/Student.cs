@@ -8,7 +8,7 @@ using HonorsProject.Model.Core;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Student : IEntity
+    public class Student : IEntity, ISystemUser
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -23,6 +23,11 @@ namespace HonorsProject.Model.Entities
         {
             Groups = new List<Group>();
             Questions = new List<Question>();
+        }
+
+        public void Login()
+        {
+            throw new NotImplementedException();
         }
     }
 }

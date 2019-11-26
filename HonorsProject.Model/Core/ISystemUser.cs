@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HonorsProject.Model.Enums
+namespace HonorsProject.Model.Core
 {
-    public enum Role
+    internal interface ISystemUser
     {
-        Student,
-        Lecturer
+        void Login();
     }
 }
