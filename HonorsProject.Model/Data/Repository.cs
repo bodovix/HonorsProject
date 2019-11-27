@@ -9,54 +9,43 @@ using HonorsProject.Model.Core;
 
 namespace HonorsProject.Model.Data
 {
-    public class Repository<T> : IRepository<IEntity>
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         protected readonly DbContext Context;
-        protected DbSet<IEntity> _entities;
+        protected DbSet<T> _entities;
 
         public Repository(DbContext context)
         {
             Context = context;
-            _entities = Context.Set<IEntity>();
+            _entities = Context.Set<T>();
         }
 
-        public IEntity Get(int id)
+        public T Get(int id)
         {
             return _entities.Find(id);
         }
 
-        public IEnumerable<IEntity> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return _entities.ToList();
         }
 
-        /// //////////////FIND METHODS SHOLD PROBABLTY BE ENCAPSULATED INSIDE THE Specific Repositories
-        //public IEnumerable<IEntity> Find(Expression<Func<IEntity, bool>> predicate)
-        //{
-        //    return _entities.Where(predicate);
-        //}
-
-        //public IEntity SingleOrDefault(Expression<Func<IEntity, bool>> predicate)
-        //{
-        //    return _entities.SingleOrDefault(predicate);
-        //}
-
-        public void Add(IEntity entity)
+        public void Add(T entity)
         {
             _entities.Add(entity);
         }
 
-        public void AddRange(IEnumerable<IEntity> entities)
+        public void AddRange(IEnumerable<T> entities)
         {
             _entities.AddRange(entities);
         }
 
-        public void Remove(IEntity entity)
+        public void Remove(T entity)
         {
             _entities.Remove(entity);
         }
 
-        public void RemoveRange(IEnumerable<IEntity> entities)
+        public void RemoveRange(IEnumerable<T> entities)
         {
             _entities.RemoveRange(entities);
         }

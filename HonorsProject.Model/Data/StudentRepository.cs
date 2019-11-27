@@ -3,6 +3,7 @@ using HonorsProject.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +15,14 @@ namespace HonorsProject.Model.Data
         {
         }
 
-        public Student Login()
+        public Student Login(int id, string password)
         {
-            throw new NotImplementedException();
+            string passwordString = password.ToString();
+
+            Student newS = new Student(id, "test", "e@a.cp", password, DateTime.Now, 1234);
+            _entities.Add(newS);
+            return newS;
+            // return _entities.FirstOrDefault(s => s.Id == id && s.Password == passwordString);
         }
     }
 }

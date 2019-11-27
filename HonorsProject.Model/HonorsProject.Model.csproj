@@ -65,7 +65,7 @@
     <Compile Include="Data\LecturerRepository.cs" />
     <Compile Include="Data\QuestionRepository.cs" />
     <Compile Include="Data\Repository.cs" />
-    <Compile Include="Core\IEntity.cs" />
+    <Compile Include="Core\BaseEntity.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Data\LabAssistantContext.cs" />
     <Compile Include="Data\SessionRepository.cs" />

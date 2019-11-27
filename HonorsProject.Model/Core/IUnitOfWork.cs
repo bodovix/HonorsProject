@@ -20,6 +20,7 @@ namespace HonorsProject.Model.Core
 
         int Complete();
 
-        void Dispose();
+        //IDisposable interface covers this
+        //void Dispose();
     }
 }

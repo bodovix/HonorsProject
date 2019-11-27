@@ -8,7 +8,7 @@ using HonorsProject.Model.Core;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Session : IEntity
+    public class Session : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,5 +1,6 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
+using HonorsProject.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,11 +16,12 @@ namespace HonorsProject
     /// </summary>
     public partial class App : Application
     {
-        public IUnitOfWork UnitOfWork;
+        public LabAssistantContext LabAssistantContext;
+        public Role LoggedInAs { get; set; }
 
         public App()
         {
-            UnitOfWork = new UnitOfWork(new LabAssistantContext("LabAssistantContext"));
+            LabAssistantContext = LabAssistantContext = new LabAssistantContext("name=LabAssistantContext");
         }
     }
 }

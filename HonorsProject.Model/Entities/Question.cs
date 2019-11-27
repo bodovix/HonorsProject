@@ -8,7 +8,7 @@ using HonorsProject.Model.Core;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Question : IEntity
+    public class Question : BaseEntity
     {
         public int Id { get; set; }
         public DateTime TimeAsked { get; set; }

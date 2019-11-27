@@ -23,10 +23,10 @@ namespace HonorsProject.View.Pages
     {
         public LoginPageVM VM { get; set; }
 
-        public LoginPage(MainWindowVM mainWindowVM)
+        public LoginPage()
         {
             //Initialize window with View Model
-            VM = new LoginPageVM(mainWindowVM);
+            VM = new LoginPageVM(((App)App.Current).LabAssistantContext);
             InitializeComponent();
             MainContainer.DataContext = VM;
             this.DataContext = VM;
@@ -36,7 +36,7 @@ namespace HonorsProject.View.Pages
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (this.DataContext != null)
-            { ((LoginPageVM)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
+            { ((LoginPageVM)this.DataContext).Password = ((PasswordBox)sender).Password; }
         }
     }
 }

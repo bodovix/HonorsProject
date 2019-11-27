@@ -2,6 +2,7 @@
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,51 +17,54 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
-        private MainWindowVM _parentVM;
-        private SecureString _securePassword;
+        private string _password;
 
-        public SecureString SecurePassword
+        public string Password
         {
-            get { return _securePassword; }
+            get { return _password; }
             set
             {
-                _securePassword = value;
-                OnPropertyChanged(nameof(SecurePassword));
+                _password = value;
+                OnPropertyChanged(nameof(Password));
             }
         }
 
-        private string _userId;
+        public LoginCmd LoginCmd { get; set; }
+        private int _userId;
 
-        public string UserId
+        public int UserId
         {
             get { return _userId; }
             set
             {
                 _userId = value;
-                OnPropertyChanged(nameof(SecurePassword));
+                OnPropertyChanged(nameof(Password));
             }
         }
 
         #endregion Properties
 
-        public LoginPageVM(MainWindowVM parentVM)
+        public LoginPageVM(LabAssistantContext labAssistantContext) : base(labAssistantContext)
         {
-            _parentVM = parentVM;
+            LoginCmd = new LoginCmd(this);
         }
 
         internal void Login()
         {
-            //TODO: DECIDE HOW TO STORE app info (static in app.cs or properties in MainWindowVM - MainWindowVM)
+            //TODO: DECIDE HOW TO STORE App info (static in app.cs or properties in MainWindowVM - MainWindowVM)
             //attempt student login
-            Student student = new Student();
-            student.Login();
-            //Student login Successful
-            if (student != null)
+            using (UnitOfWork UoW = new UnitOfWork(_labAssistantContext))
             {
-                // try lecturer
-            }
+                Student student = UoW.StudentRepo.Login(_userId, _password);
+                UoW.Complete();
+                //Student login Successful
+                if (student != null)
+                {
+                    // try lecturer
+                }
 
-            //attempt lecturer login
+                //attempt lecturer login
+            }
         }
     }
 }

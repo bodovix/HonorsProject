@@ -22,8 +22,7 @@
                  FontFamily="Password"
                      Style="{StaticResource UserInputPassword}" />
         <Button Content="Login"
-                    Command=""
-                    CommandParameter=""
+                    Command="{Binding LoginCmd}"
                     Style="{StaticResource FormSubmitButton}" />
 
         <TextBlock Text="{Binding LoginError}"

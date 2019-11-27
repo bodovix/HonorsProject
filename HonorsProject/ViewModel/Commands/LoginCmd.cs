@@ -20,7 +20,8 @@ namespace HonorsProject.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            //no pre checks needed
+            return true;
         }
 
         public void Execute(object parameter)

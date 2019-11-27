@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Core
 {
-    public interface IRepository<IEntity>
+    public interface IRepository<T> where T : BaseEntity
     {
-        IEntity Get(int id);
+        T Get(int id);
 
-        IEnumerable<IEntity> GetAll();
+        IEnumerable<T> GetAll();
 
         //IEnumerable<IEntity> Find(Expression<Func<IEntity, bool>> predicaIEntitye);
         //IEnumerable<IEntity> SingleOrDefault(Expression<Func<IEntity, bool>> predicaIEntitye);
 
-        void Add(IEntity enIEntityiIEntityy);
+        void Add(T enIEntityiIEntityy);
 
-        void AddRange(IEnumerable<IEntity> eniIEntityies);
+        void AddRange(IEnumerable<T> eniIEntityies);
 
-        void Remove(IEntity enIEntityiIEntityy);
+        void Remove(T enIEntityiIEntityy);
 
-        void RemoveRange(IEnumerable<IEntity> enIEntityiIEntityies);
+        void RemoveRange(IEnumerable<T> enIEntityiIEntityies);
     }
 }

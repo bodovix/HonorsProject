@@ -8,7 +8,7 @@ using HonorsProject.Model.Core;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Student : IEntity, ISystemUser
+    public class Student : BaseEntity, ISystemUser
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,6 +21,18 @@ namespace HonorsProject.Model.Entities
 
         public Student()
         {
+            Groups = new List<Group>();
+            Questions = new List<Question>();
+        }
+
+        public Student(int id, string name, string email, string password, DateTime createdOn, int createdByLecturerID)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Password = password;
+            CreatedOn = createdOn;
+            CreatedByLecturerID = createdByLecturerID;
             Groups = new List<Group>();
             Questions = new List<Question>();
         }

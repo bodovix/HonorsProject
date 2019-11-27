@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Core
 {
-    public interface IEntity
+    public class BaseEntity
     {
     }
 }

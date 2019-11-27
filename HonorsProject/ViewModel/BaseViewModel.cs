@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HonorsProject.Model.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace HonorsProject.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        protected LabAssistantContext _labAssistantContext;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
@@ -16,8 +19,9 @@ namespace HonorsProject.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public BaseViewModel()
+        public BaseViewModel(LabAssistantContext labAssistantContext)
         {
+            _labAssistantContext = labAssistantContext;
         }
     }
 }
