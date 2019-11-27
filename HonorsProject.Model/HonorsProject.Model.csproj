@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201911071757514_WasHelpfullColumnAddedToAnswerTable.Designer.cs">
       <DependentUpon>201911071757514_WasHelpfullColumnAddedToAnswerTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911271603137_StudentIDNotGenerated.cs" />
+    <Compile Include="Migrations\201911271603137_StudentIDNotGenerated.Designer.cs">
+      <DependentUpon>201911271603137_StudentIDNotGenerated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911071757514_WasHelpfullColumnAddedToAnswerTable.resx">
       <DependentUpon>201911071757514_WasHelpfullColumnAddedToAnswerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911271603137_StudentIDNotGenerated.resx">
+      <DependentUpon>201911271603137_StudentIDNotGenerated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

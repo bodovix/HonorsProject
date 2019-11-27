@@ -38,6 +38,10 @@ namespace HonorsProject.Model.Data
                 .WithRequired(q => q.AskedBy)
                 .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<Student>()
+                .Property(s => s.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             //question
             modelBuilder.Entity<Question>()
                 .Property(q => q.QuestionText)
