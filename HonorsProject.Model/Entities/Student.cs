@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HonorsProject.Model.Core;
+using HonorsProject.Model.HelperClasses;
+using System.Security.Cryptography;
+using System.Security.Authentication;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Student : BaseEntity, ISystemUser
+    public class Student : BaseEntity, ISystemUser<Student>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -37,9 +40,27 @@ namespace HonorsProject.Model.Entities
             Questions = new List<Question>();
         }
 
-        public void Login()
+        public ISystemUser<Student> Login(int userId, string password, string conName)
         {
-            throw new NotImplementedException();
+            //attempt student login
+            using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
+            {
+                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                string hashedPassword = Cryptography.Hash(password);
+                Student student = UoW.StudentRepo.FindById(userId);
+                if (student != null)
+                {
+                    //verify
+                    if (Cryptography.Verify(password, student.Password))
+                    {
+                        return student;
+                    }
+                    else
+                        return null;
+                }
+                else
+                    return null;
+            }
         }
     }
 }

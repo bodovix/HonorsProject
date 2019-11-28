@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Core
 {
-    public interface ILecturerRepository
+    public interface ILecturerRepository : IRepository<Lecturer>
     {
         IEnumerable<Lecturer> GetLecturerWhereX(int id);
     }

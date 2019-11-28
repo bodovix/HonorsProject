@@ -10,7 +10,7 @@ namespace HonorsProject.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        protected string dbContextResourceName;
+        protected string dbConName;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,7 +21,7 @@ namespace HonorsProject.ViewModel
 
         public BaseViewModel(string dbcontextName)
         {
-            this.dbContextResourceName = dbcontextName;
+            this.dbConName = dbcontextName;
         }
     }
 }

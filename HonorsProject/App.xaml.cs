@@ -16,7 +16,7 @@ namespace HonorsProject
     /// </summary>
     public partial class App : Application
     {
-        public Role LoggedInAs { get; set; }
+        public static Role LoggedInAs { get; set; }
 
         public App()
         {

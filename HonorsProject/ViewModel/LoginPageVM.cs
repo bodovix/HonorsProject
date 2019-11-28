@@ -72,34 +72,27 @@ namespace HonorsProject.ViewModel
             if (String.IsNullOrEmpty(ErrorMessage))
                 try
                 {
-                    //attempt student login
-                    using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(dbContextResourceName)))
+                    Student student = new Student();
+                    Lecturer tmpLecturer = new Lecturer();
+
+                    student = (Student)student.Login(_userId.Value, _password, dbConName);
+                    if (student != null)
                     {
-                        MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-                        string hashedPassword = Cryptography.Hash(_password);
-                        Student student = UoW.StudentRepo.FindById(_userId.Value);
-                        if (student != null)
+                        //student login successful
+                        App.LoggedInAs = Role.Student;
+                    }
+                    else
+                    {
+                        //try lecturer
+                        tmpLecturer = (Lecturer)tmpLecturer.Login(_userId.Value, _password, dbConName);
+                        if (tmpLecturer != null)
                         {
-                            //verify
-                            if (Cryptography.Verify(_password, student.Password))
-                            {
-                                //clear error message
-                                ErrorMessage = "";
-                                //TODO: go to next window
-                            }
-                            else
-                            {
-                                ErrorMessage = "Invalid Login.";
-                            }
+                            //lecturer login successful
+                            App.LoggedInAs = Role.Lecturer;
+                        }
                         else
-                            ErrorMessage = "Invalid user ID.";
-
-                            if (student == null)
-                            {
-                                // try lecturer
-                            }
-
-                            //attempt lecturer login
+                        {
+                            ErrorMessage = "Invalid Login Credentials.";
                         }
                     }
                 }
