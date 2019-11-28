@@ -64,6 +64,8 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Commands\LoginCmd.cs" />
+    <Compile Include="ViewModel\Converters\BoolToVisibleConverter.cs" />
+    <Compile Include="ViewModel\Converters\ErrorMessageToVisibleConverter.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\Pages\DataAnalysisPage.xaml.cs">

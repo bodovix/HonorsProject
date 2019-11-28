@@ -19,15 +19,15 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
-        private string _systemMessage;
+        private string _errorMessage;
 
-        public string SystemMessage
+        public string ErrorMessage
         {
-            get { return _systemMessage; }
+            get { return _errorMessage; }
             set
             {
-                _systemMessage = value;
-                OnPropertyChanged(nameof(SystemMessage));
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
             }
         }
 
@@ -44,14 +44,14 @@ namespace HonorsProject.ViewModel
         }
 
         public LoginCmd LoginCmd { get; set; }
-        private int _userId;
+        private int? _userId;
 
-        public int UserId
+        public int? UserId
         {
             get { return _userId; }
             set
             {
-                _userId = value;
+                _userId = value.Value;
                 OnPropertyChanged(nameof(Password));
             }
         }
@@ -60,48 +60,68 @@ namespace HonorsProject.ViewModel
 
         public LoginPageVM(string dbContextName) : base(dbContextName)
         {
+            ErrorMessage = "";
             LoginCmd = new LoginCmd(this);
         }
 
         internal void Login()
         {
             //clear error message
-            SystemMessage = "";
-            try
-            {
-                //attempt student login
-                using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(dbContextResourceName)))
+            ErrorMessage = "";
+            ErrorMessage = ValidateLogin(UserId, _password);
+            if (String.IsNullOrEmpty(ErrorMessage))
+                try
                 {
-                    MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-                    string hashedPassword = Cryptography.Hash(_password);
-                    Student student = UoW.StudentRepo.FindById(_userId);
-                    if (student != null)
+                    //attempt student login
+                    using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(dbContextResourceName)))
                     {
-                        //verify
-                        if (Cryptography.Verify(_password, student.Password))
+                        MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                        string hashedPassword = Cryptography.Hash(_password);
+                        Student student = UoW.StudentRepo.FindById(_userId.Value);
+                        if (student != null)
                         {
-                            //success
-                            SystemMessage = "Success";
+                            //verify
+                            if (Cryptography.Verify(_password, student.Password))
+                            {
+                                //clear error message
+                                ErrorMessage = "";
+                                //TODO: go to next window
+                            }
+                            else
+                            {
+                                ErrorMessage = "Invalid Login.";
+                            }
                         }
                         else
+                            ErrorMessage = "Invalid user ID.";
+
+                        if (student == null)
                         {
-                            SystemMessage = "Invalid Login. Please try again.";
+                            // try lecturer
                         }
-                    }
 
-                    //Student login Successful
-                    if (student != null)
-                    {
-                        // try lecturer
+                        //attempt lecturer login
                     }
-
-                    //attempt lecturer login
                 }
-            }
-            catch (Exception ex)
+                catch (Exception ex)
+                {
+                    ErrorMessage = ex.Message;
+                }
+        }
+
+        private string ValidateLogin(int? userId, string password)
+        {
+            string errorMsg = "";
+            if (userId == null || userId == 0)
             {
-                SystemMessage = ex.Message;
+                errorMsg = "ID Required";
             }
+            if (String.IsNullOrEmpty(password))
+            {
+                errorMsg = "Password Required";
+            }
+
+            return errorMsg;
         }
     }
 }
