@@ -10,7 +10,7 @@ namespace HonorsProject.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        protected LabAssistantContext _labAssistantContext;
+        protected string dbContextResourceName;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -19,9 +19,9 @@ namespace HonorsProject.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public BaseViewModel(LabAssistantContext labAssistantContext)
+        public BaseViewModel(string dbcontextName)
         {
-            _labAssistantContext = labAssistantContext;
+            this.dbContextResourceName = dbcontextName;
         }
     }
 }

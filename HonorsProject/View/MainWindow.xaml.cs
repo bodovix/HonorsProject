@@ -29,7 +29,7 @@ namespace HonorsProject.View
         public MainWindow()
         {
             //Initialize window with View Model
-            VM = new MainWindowVM(((App)App.Current).LabAssistantContext);
+            VM = new MainWindowVM(ConnectionConfigs.LiveConfig);
             InitializeComponent();
             ContainerDockPannel.DataContext = VM;
         }

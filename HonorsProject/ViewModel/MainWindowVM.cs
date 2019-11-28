@@ -12,7 +12,7 @@ namespace HonorsProject.ViewModel
 {
     public class MainWindowVM : BaseViewModel
     {
-        public MainWindowVM(LabAssistantContext labAssistantContext) : base(labAssistantContext)
+        public MainWindowVM(string dbContextName) : base(dbContextName)
         {
         }
     }

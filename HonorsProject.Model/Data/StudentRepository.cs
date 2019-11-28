@@ -15,14 +15,9 @@ namespace HonorsProject.Model.Data
         {
         }
 
-        public Student Login(int id, string password)
+        public Student FindById(int id)
         {
-            string passwordString = password.ToString();
-
-            Student newS = new Student(id, "test", "e@a.cp", password, DateTime.Now, 1234);
-            _entities.Add(newS);
-            return newS;
-            // return _entities.FirstOrDefault(s => s.Id == id && s.Password == passwordString);
+            return _entities.FirstOrDefault(s => s.Id.Equals(id));
         }
     }
 }

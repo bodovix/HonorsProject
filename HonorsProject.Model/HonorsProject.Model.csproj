@@ -78,6 +78,7 @@
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Enums\Role.cs" />
+    <Compile Include="HelperClasses\Cryptography.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.Designer.cs">
       <DependentUpon>201910081704152_InitialModel.cs</DependentUpon>

@@ -16,12 +16,10 @@ namespace HonorsProject
     /// </summary>
     public partial class App : Application
     {
-        public LabAssistantContext LabAssistantContext;
         public Role LoggedInAs { get; set; }
 
         public App()
         {
-            LabAssistantContext = LabAssistantContext = new LabAssistantContext("name=LabAssistantContext");
         }
     }
 }

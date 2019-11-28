@@ -1,4 +1,5 @@
-﻿using HonorsProject.ViewModel;
+﻿using HonorsProject.Model.Data;
+using HonorsProject.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace HonorsProject.View.Pages
         public LoginPage()
         {
             //Initialize window with View Model
-            VM = new LoginPageVM(((App)App.Current).LabAssistantContext);
+            VM = new LoginPageVM(ConnectionConfigs.LiveConfig);
             InitializeComponent();
             MainContainer.DataContext = VM;
             this.DataContext = VM;

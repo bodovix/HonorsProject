@@ -10,6 +10,6 @@ namespace HonorsProject.Model.Core
 {
     public interface IStudentRepository : IRepository<Student>
     {
-        Student Login(int id, string password);
+        Student FindById(int id);
     }
 }

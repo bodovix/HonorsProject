@@ -2,12 +2,14 @@
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +18,18 @@ namespace HonorsProject.ViewModel
     public class LoginPageVM : BaseViewModel
     {
         #region Properties
+
+        private string _systemMessage;
+
+        public string SystemMessage
+        {
+            get { return _systemMessage; }
+            set
+            {
+                _systemMessage = value;
+                OnPropertyChanged(nameof(SystemMessage));
+            }
+        }
 
         private string _password;
 
@@ -44,26 +58,49 @@ namespace HonorsProject.ViewModel
 
         #endregion Properties
 
-        public LoginPageVM(LabAssistantContext labAssistantContext) : base(labAssistantContext)
+        public LoginPageVM(string dbContextName) : base(dbContextName)
         {
             LoginCmd = new LoginCmd(this);
         }
 
         internal void Login()
         {
-            //TODO: DECIDE HOW TO STORE App info (static in app.cs or properties in MainWindowVM - MainWindowVM)
-            //attempt student login
-            using (UnitOfWork UoW = new UnitOfWork(_labAssistantContext))
+            //clear error message
+            SystemMessage = "";
+            try
             {
-                Student student = UoW.StudentRepo.Login(_userId, _password);
-                UoW.Complete();
-                //Student login Successful
-                if (student != null)
+                //attempt student login
+                using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(dbContextResourceName)))
                 {
-                    // try lecturer
-                }
+                    MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                    string hashedPassword = Cryptography.Hash(_password);
+                    Student student = UoW.StudentRepo.FindById(_userId);
+                    if (student != null)
+                    {
+                        //verify
+                        if (Cryptography.Verify(_password, student.Password))
+                        {
+                            //success
+                            SystemMessage = "Success";
+                        }
+                        else
+                        {
+                            SystemMessage = "Invalid Login. Please try again.";
+                        }
+                    }
 
-                //attempt lecturer login
+                    //Student login Successful
+                    if (student != null)
+                    {
+                        // try lecturer
+                    }
+
+                    //attempt lecturer login
+                }
+            }
+            catch (Exception ex)
+            {
+                SystemMessage = ex.Message;
             }
         }
     }

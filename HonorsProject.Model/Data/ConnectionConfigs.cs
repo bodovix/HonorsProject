@@ -9,6 +9,6 @@ namespace HonorsProject.Model.Data
     public static class ConnectionConfigs
     {
         public static readonly string LiveConfig = "name=LabAssistantContext";
-        public static readonly string TestConfig = "";
+        public static readonly string TestConfig = "TestDBContext";
     }
 }
