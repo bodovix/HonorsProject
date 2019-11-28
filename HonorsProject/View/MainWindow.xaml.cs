@@ -1,5 +1,6 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.View.Pages;
 using HonorsProject.ViewModel;
 using System;
@@ -32,6 +33,13 @@ namespace HonorsProject.View
             VM = new MainWindowVM(ConnectionConfigs.LiveConfig);
             InitializeComponent();
             ContainerDockPannel.DataContext = VM;
+
+            Mediator.Register("GoToMyScenarioPage", GoToMyScenarioPage);
+        }
+
+        private void GoToMyScenarioPage(object obj)
+        {
+            MainContent.Content = new MySessionsPage();
         }
 
         private void StudentsBtn_Click(object sender, RoutedEventArgs e)

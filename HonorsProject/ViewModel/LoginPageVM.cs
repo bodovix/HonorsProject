@@ -80,6 +80,7 @@ namespace HonorsProject.ViewModel
                     {
                         //student login successful
                         App.LoggedInAs = Role.Student;
+                        Mediator.NotifyColleagues("GoToMyScenarioPage", "");
                     }
                     else
                     {
@@ -89,6 +90,7 @@ namespace HonorsProject.ViewModel
                         {
                             //lecturer login successful
                             App.LoggedInAs = Role.Lecturer;
+                            Mediator.NotifyColleagues("GoToMyScenarioPage", "");
                         }
                         else
                         {
