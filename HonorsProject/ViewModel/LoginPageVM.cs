@@ -91,16 +91,16 @@ namespace HonorsProject.ViewModel
                             {
                                 ErrorMessage = "Invalid Login.";
                             }
-                        }
                         else
                             ErrorMessage = "Invalid user ID.";
 
-                        if (student == null)
-                        {
-                            // try lecturer
-                        }
+                            if (student == null)
+                            {
+                                // try lecturer
+                            }
 
-                        //attempt lecturer login
+                            //attempt lecturer login
+                        }
                     }
                 }
                 catch (Exception ex)
