@@ -70,6 +70,11 @@ namespace HonorsProject.Model.Entities
         {
             using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
             {
+                //check id free
+                if (UoW.LecturerRepo.Get(student.Id) != null)
+                    throw new Exception("ID already owned by Lecturer");
+                if (UoW.StudentRepo.Get(student.Id) != null)
+                    throw new Exception("ID already owned by Student");
                 //hash password
                 student.Password = Cryptography.Hash(student.Password);
                 //save to DB

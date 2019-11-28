@@ -7,6 +7,7 @@ using HonorsProject.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Security;
 using System.Security.Cryptography;
@@ -70,11 +71,21 @@ namespace HonorsProject.ViewModel
             ErrorMessage = "";
             ErrorMessage = ValidateLogin(UserId, _password);
             if (String.IsNullOrEmpty(ErrorMessage))
+            {
                 try
                 {
                     Student student = new Student();
                     Lecturer tmpLecturer = new Lecturer();
+                    //
+                    //tmpLecturer.Id = 444;
+                    //tmpLecturer.Name = "Suzy";
+                    //tmpLecturer.Email = "lecturer1@uad.ac.uk";
+                    //tmpLecturer.Password = "password";
+                    //tmpLecturer.CreatedOn = DateTime.Now;
+                    //tmpLecturer.CreatedByLecturerId = 1234;
+                    //tmpLecturer.Register(tmpLecturer, dbConName);
 
+                    //
                     student = (Student)student.Login(_userId.Value, _password, dbConName);
                     if (student != null)
                     {
@@ -98,8 +109,9 @@ namespace HonorsProject.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    ErrorMessage = ex.Message;
+                    ErrorMessage = ex.GetBaseException().Message;
                 }
+            }
         }
 
         private string ValidateLogin(int? userId, string password)
