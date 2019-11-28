@@ -74,7 +74,16 @@ namespace HonorsProject.ViewModel
                 {
                     Student student = new Student();
                     Lecturer tmpLecturer = new Lecturer();
+                    //
+                    tmpLecturer.Id = 444;
+                    tmpLecturer.Name = "Suzy";
+                    tmpLecturer.Email = "lecturer1@uad.ac.uk";
+                    tmpLecturer.Password = "password";
+                    tmpLecturer.CreatedOn = DateTime.Now;
+                    tmpLecturer.CreatedByLecturerId = 1234;
+                    tmpLecturer.Register(tmpLecturer, dbConName);
 
+                    //
                     student = (Student)student.Login(_userId.Value, _password, dbConName);
                     if (student != null)
                     {

@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201911271603137_StudentIDNotGenerated.Designer.cs">
       <DependentUpon>201911271603137_StudentIDNotGenerated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911281602400_LectureIDNowManual.cs" />
+    <Compile Include="Migrations\201911281602400_LectureIDNowManual.Designer.cs">
+      <DependentUpon>201911281602400_LectureIDNowManual.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -228,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911271603137_StudentIDNotGenerated.resx">
       <DependentUpon>201911271603137_StudentIDNotGenerated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911281602400_LectureIDNowManual.resx">
+      <DependentUpon>201911281602400_LectureIDNowManual.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -68,6 +68,9 @@ namespace HonorsProject.Model.Data
             modelBuilder.Entity<Lecturer>()
                 .Property(l => l.Password)
                 .IsRequired();
+            modelBuilder.Entity<Lecturer>()
+                .Property(s => s.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             //Session
             modelBuilder.Entity<Session>()
                 .HasMany<Question>(s => s.Questions)
