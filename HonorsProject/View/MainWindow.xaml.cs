@@ -1,5 +1,6 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
+using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
 using HonorsProject.View.Pages;
 using HonorsProject.ViewModel;
@@ -39,6 +40,8 @@ namespace HonorsProject.View
 
         private void GoToMyScenarioPage(object obj)
         {
+            Role userRole = (Role)obj;
+            App.LoggedInAs = userRole;
             MainContent.Content = new MySessionsPage();
         }
 

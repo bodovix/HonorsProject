@@ -9,5 +9,7 @@ namespace HonorsProject.Model.Core
     public interface ISystemUser<T> where T : BaseEntity
     {
         ISystemUser<T> Login(int userId, string password, string conName);
+
+        bool Register(T user, string conName);
     }
 }

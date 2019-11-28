@@ -13,6 +13,8 @@ namespace HonorsProject.Model.Entities
 {
     public class Student : BaseEntity, ISystemUser<Student>
     {
+        #region Properties
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -21,6 +23,8 @@ namespace HonorsProject.Model.Entities
         public List<Question> Questions { get; set; }
         public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerID { get; set; }
+
+        #endregion Properties
 
         public Student()
         {
@@ -45,7 +49,6 @@ namespace HonorsProject.Model.Entities
             //attempt student login
             using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
             {
-                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 string hashedPassword = Cryptography.Hash(password);
                 Student student = UoW.StudentRepo.FindById(userId);
                 if (student != null)
@@ -60,6 +63,22 @@ namespace HonorsProject.Model.Entities
                 }
                 else
                     return null;
+            }
+        }
+
+        public bool Register(Student student, string conName)
+        {
+            using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
+            {
+                //hash password
+                student.Password = Cryptography.Hash(student.Password);
+                //save to DB
+                UoW.StudentRepo.Add(student);
+                int result = UoW.Complete();
+                if (result != 0)
+                    return true;
+                else
+                    return false;
             }
         }
     }

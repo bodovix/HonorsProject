@@ -33,7 +33,6 @@ namespace HonorsProject.Model.Entities
             //attempt student login
             using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
             {
-                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 string hashedPassword = Cryptography.Hash(password);
                 Lecturer lecturer = UoW.LecturerRepo.Get(userId);
                 if (lecturer != null)
@@ -48,6 +47,22 @@ namespace HonorsProject.Model.Entities
                 }
                 else
                     return null;
+            }
+        }
+
+        public bool Register(Lecturer lecturer, string conName)
+        {
+            using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
+            {
+                //hash password
+                lecturer.Password = Cryptography.Hash(lecturer.Password);
+                //save to DB
+                UoW.LecturerRepo.Add(lecturer);
+                int result = UoW.Complete();
+                if (result != 0)
+                    return true;
+                else
+                    return false;
             }
         }
     }
