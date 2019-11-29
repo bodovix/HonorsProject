@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Core
 {
-    public interface ISystemUser<T> where T : BaseEntity
+    public interface IGenericUser<T> where T : BaseEntity
     {
-        T Login(int userId, string password, string conName);
-
-        bool Register(T user, string conName);
+        T User { get; set; }
     }
 }

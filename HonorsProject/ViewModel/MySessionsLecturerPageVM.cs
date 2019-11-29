@@ -10,13 +10,13 @@ using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
 {
-    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM<Lecturer>
+    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM, IGenericUser<Lecturer>
     {
         #region Properties
 
         private Lecturer _user;
 
-        public ISystemUser<Lecturer> User
+        public Lecturer User
         {
             get { return _user; }
             set

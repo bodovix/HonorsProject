@@ -38,7 +38,7 @@ namespace HonorsProject.Model.Entities
             CreatedByLecturerId = createdByLecturerId;
         }
 
-        public ISystemUser<Lecturer> Login(int userId, string password, string conName)
+        public Lecturer Login(int userId, string password, string conName)
         {
             //attempt student login
             using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))

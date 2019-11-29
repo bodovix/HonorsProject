@@ -44,7 +44,7 @@ namespace HonorsProject.Model.Entities
             Questions = new List<Question>();
         }
 
-        public ISystemUser<Student> Login(int userId, string password, string conName)
+        public Student Login(int userId, string password, string conName)
         {
             //attempt student login
             using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
