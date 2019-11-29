@@ -28,11 +28,16 @@ namespace HonorsProject.View.Pages
 
         public MySessionsPage()
         {
+            CreateMySesoinVM();
+            InitializeComponent();
+        }
+
+        private void CreateMySesoinVM()
+        {
             if (App.LoggedInAs == Role.Lecturer)
                 VM = new MySessionsLecturerPageVM(ConnectionConfigs.LiveConfig);
             else
                 VM = new MySessionsStudentPageVM(ConnectionConfigs.LiveConfig);
-            InitializeComponent();
         }
     }
 }
