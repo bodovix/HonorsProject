@@ -27,9 +27,7 @@ namespace HonorsProject.View.Pages
     public partial class MySessionsPage : Page
     {
         //
-        private IMySessionsPageVM<Lecturer> LVM;
-
-        private IMySessionsPageVM<Student> SVM;
+        private IMySessionsPageVM VM;
 
         public MySessionsPage()
         {
