@@ -17,6 +17,7 @@ using HonorsProject.ViewModel.CoreVM;
 using HonorsProject.ViewModel;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Core;
+using HonorsProject.Model.Entities;
 
 namespace HonorsProject.View.Pages
 {
@@ -25,7 +26,10 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class MySessionsPage : Page
     {
-        private IMySessionsPageVM VM;
+        //
+        private IMySessionsPageVM<Lecturer> LVM;
+
+        private IMySessionsPageVM<Student> SVM;
 
         public MySessionsPage()
         {
