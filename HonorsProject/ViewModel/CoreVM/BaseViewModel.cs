@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HonorsProject.ViewModel
+namespace HonorsProject.ViewModel.CoreVM
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.CoreVM;
+using HonorsProject.ViewModel;
+using HonorsProject.Model.Data;
 
 namespace HonorsProject.View.Pages
 {
@@ -20,8 +24,14 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class MySessionsPage : Page
     {
+        private IMySessionsPageVM VM;
+
         public MySessionsPage()
         {
+            if (App.LoggedInAs == Role.Lecturer)
+                VM = new MySessionsLecturerPageVM(ConnectionConfigs.LiveConfig);
+            else
+                VM = new MySessionsStudentPageVM(ConnectionConfigs.LiveConfig);
             InitializeComponent();
         }
     }

@@ -13,6 +13,7 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
 {
