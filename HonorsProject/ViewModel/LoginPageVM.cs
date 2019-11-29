@@ -65,12 +65,9 @@ namespace HonorsProject.ViewModel
             LoginCmd = new LoginCmd(this);
         }
 
-        internal void Login()
+        public bool Login()
         {
-            //clear error message
-            ErrorMessage = "";
-            ErrorMessage = ValidateLogin(UserId, _password);
-            if (String.IsNullOrEmpty(ErrorMessage))
+            if (ValidateLogin(UserId, _password))
             {
                 try
                 {
@@ -89,8 +86,8 @@ namespace HonorsProject.ViewModel
                     student = (Student)student.Login(_userId.Value, _password, dbConName);
                     if (student != null)
                     {
-                        //student login successful
                         Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Student);
+                        return true;
                     }
                     else
                     {
@@ -98,35 +95,41 @@ namespace HonorsProject.ViewModel
                         tmpLecturer = (Lecturer)tmpLecturer.Login(_userId.Value, _password, dbConName);
                         if (tmpLecturer != null)
                         {
-                            //lecturer login successful
                             Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Lecturer);
+                            return true;
                         }
                         else
                         {
                             ErrorMessage = "Invalid Login Credentials.";
+                            return false;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
                     ErrorMessage = ex.GetBaseException().Message;
+                    return false;
                 }
             }
+            else
+                return false;
         }
 
-        private string ValidateLogin(int? userId, string password)
+        private bool ValidateLogin(int? userId, string password)
         {
-            string errorMsg = "";
+            ErrorMessage = "";
             if (userId == null || userId == 0)
             {
-                errorMsg = "ID Required";
+                ErrorMessage = "ID Required";
+                return false;
             }
             if (String.IsNullOrEmpty(password))
             {
-                errorMsg = "Password Required";
+                ErrorMessage = "Password Required";
+                return false;
             }
 
-            return errorMsg;
+            return true;
         }
     }
 }

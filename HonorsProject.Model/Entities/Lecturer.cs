@@ -28,6 +28,16 @@ namespace HonorsProject.Model.Entities
             Sessions = new List<Session>();
         }
 
+        public Lecturer(int id, string name, string email, string password, DateTime createdOn, int createdByLecturerId)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Password = password;
+            CreatedOn = createdOn;
+            CreatedByLecturerId = createdByLecturerId;
+        }
+
         public ISystemUser<Lecturer> Login(int userId, string password, string conName)
         {
             //attempt student login
