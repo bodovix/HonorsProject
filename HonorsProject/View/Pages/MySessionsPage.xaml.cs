@@ -16,6 +16,7 @@ using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel.CoreVM;
 using HonorsProject.ViewModel;
 using HonorsProject.Model.Data;
+using HonorsProject.Model.Core;
 
 namespace HonorsProject.View.Pages
 {
@@ -30,6 +31,7 @@ namespace HonorsProject.View.Pages
         {
             CreateMySesoinVM();
             InitializeComponent();
+            MainContainer.DataContext = VM;
         }
 
         private void CreateMySesoinVM()

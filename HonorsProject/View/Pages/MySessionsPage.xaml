@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MySessionsPage">
 
-    <StackPanel Orientation="Vertical">
+    <StackPanel Name="MainContainer" Orientation="Vertical">
         <Button Name="NewSessionBtn" Content="Create New" Style="{StaticResource FormSubmitButton}" Width="100" HorizontalAlignment="Left" />
         <Grid Style="{StaticResource ContainerGrid}">
             <Grid.ColumnDefinitions>
@@ -111,7 +111,7 @@
                 </StackPanel>
                 <ListView  Grid.Column="0" Grid.Row="2">
                 </ListView>
-                <DataGrid Grid.Column="0" Grid.Row="3">  
+                <DataGrid Grid.Column="0" Grid.Row="3">
                     <!--HeadingStyle-->
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">

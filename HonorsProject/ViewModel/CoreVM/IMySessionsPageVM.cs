@@ -11,6 +11,7 @@ namespace HonorsProject.ViewModel.CoreVM
 {
     public interface IMySessionsPageVM
     {
+        BaseSystemUser User { get; set; }
         Session SelectedSession { get; set; }
         ObservableCollection<Session> MySessions { get; set; }
     }

@@ -11,14 +11,10 @@ using System.Security.Authentication;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Student : BaseEntity, ISystemUser<Student>
+    public class Student : BaseSystemUser, ISystemUser<Student>
     {
         #region Properties
 
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
         public List<Group> Groups { get; set; }
         public List<Question> Questions { get; set; }
         public DateTime CreatedOn { get; set; }

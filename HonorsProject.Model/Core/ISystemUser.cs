@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Core
 {
-    public interface ISystemUser<T> where T : BaseEntity
+    public interface ISystemUser<T> where T : BaseSystemUser
     {
         T Login(int userId, string password, string conName);
 

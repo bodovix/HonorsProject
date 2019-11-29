@@ -11,12 +11,8 @@ using System.Security.Authentication;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Lecturer : BaseEntity, ISystemUser<Lecturer>
+    public class Lecturer : BaseSystemUser, ISystemUser<Lecturer>
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
         public List<Session> Sessions { get; set; }
         public List<Answer> Answers { get; set; }
         public DateTime CreatedOn { get; set; }
