@@ -54,6 +54,7 @@ namespace HonorsProject.ViewModel
 
         public MySessionsStudentPageVM(string dbcontextName) : base(dbcontextName)
         {
+            User = (Student)App.AppUser;
         }
     }
 }
