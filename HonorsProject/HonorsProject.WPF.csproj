@@ -69,7 +69,7 @@
     <Compile Include="ViewModel\Commands\LoginCmd.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibleConverter.cs" />
     <Compile Include="ViewModel\Converters\ErrorMessageToVisibleConverter.cs" />
-    <Compile Include="ViewModel\CoreVM\IAddSession.cs" />
+    <Compile Include="ViewModel\CoreVM\ISaveVMForm.cs" />
     <Compile Include="ViewModel\CoreVM\IMySessionsPageVM.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />
     <Compile Include="ViewModel\MySessionsLecturerPageVM.cs" />

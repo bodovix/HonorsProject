@@ -16,6 +16,18 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        private FormContext formContext;
+
+        public FormContext FormContext
+        {
+            get { return formContext; }
+            set
+            {
+                formContext = value;
+                OnPropertyChanged(nameof(FormContext));
+            }
+        }
+
         private Role _userRole;
 
         public Role UserRole
