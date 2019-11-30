@@ -20,6 +20,6 @@ namespace HonorsProject.Model.Core
 
         bool Register(string conName);
 
-        bool AddNewSession(Session selectedSession);
+        bool AddNewSession(Session selectedSession, string conName);
     }
 }

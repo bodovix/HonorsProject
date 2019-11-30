@@ -85,10 +85,19 @@ namespace HonorsProject.Model.Entities
             }
         }
 
-        public bool AddNewSession(Session selectedSession)
+        public bool AddNewSession(Session session, string conName)
         {
             //creating session this way so constructor can validate it
-            Session newSession = new Session(selectedSession);
+            if (session.ValidateSession())
+            {
+                using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(conName)))
+                {
+                    u.SessionRepository.Add(session);
+                    return true;
+                }
+            }
+            else
+                return false;
         }
     }
 }

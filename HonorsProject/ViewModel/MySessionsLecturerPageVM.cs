@@ -100,7 +100,7 @@ namespace HonorsProject.ViewModel
 
         public bool AddSession()
         {
-            return User.AddNewSession(SelectedSession);
+            return User.AddNewSession(SelectedSession, dbConName);
         }
     }
 }

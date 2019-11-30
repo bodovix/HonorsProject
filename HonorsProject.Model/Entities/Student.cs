@@ -87,7 +87,7 @@ namespace HonorsProject.Model.Entities
             }
         }
 
-        public bool AddNewSession(Session selectedSession)
+        public bool AddNewSession(Session selectedSession, string conName)
         {
             throw new NotImplementedException("Students Cannot Create New Sessions.");
         }

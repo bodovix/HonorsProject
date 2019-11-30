@@ -25,5 +25,35 @@ namespace HonorsProject.Model.Entities
             Questions = new List<Question>();
             Lecturers = new List<Lecturer>();
         }
+
+        public Session(Session sessionToCopy)
+        {
+            Id = sessionToCopy.Id;
+            Name = sessionToCopy.Name;
+            StartTime = sessionToCopy.StartTime;
+            EndTime = sessionToCopy.EndTime;
+            Lecturers = sessionToCopy.Lecturers;
+            Group = sessionToCopy.Group;
+            Questions = sessionToCopy.Questions;
+            CreatedOn = DateTime.Now;
+            CreatedByLecturerId = sessionToCopy.CreatedByLecturerId;
+            Questions = new List<Question>();
+            Lecturers = new List<Lecturer>();
+        }
+
+        public bool ValidateSession()
+        {
+            if (String.IsNullOrEmpty(this.Name))
+                throw new ArgumentException("Name required.");
+            if (StartTime == null)
+                throw new ArgumentException("Start time required.");
+            if (EndTime == null)
+                throw new ArgumentException("End time required.");
+            if (Group == null)
+                throw new ArgumentException("Sessions must belong to a group.");
+            if (CreatedByLecturerId == 0)
+                throw new ArgumentException("Session created by Id required.");
+            return true;
+        }
     }
 }
