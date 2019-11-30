@@ -8,13 +8,13 @@ using System.Windows.Input;
 
 namespace HonorsProject.ViewModel.Commands
 {
-    public class SaveCmd : ICommand
+    public class NewModeCmd : ICommand
     {
-        public ISaveVMFormCmd VM { get; set; }
+        public IEnterNewModeCmd VM { get; set; }
 
         public event EventHandler CanExecuteChanged;
 
-        public SaveCmd(ISaveVMFormCmd vm)
+        public NewModeCmd(IEnterNewModeCmd vm)
         {
             VM = vm;
         }
@@ -27,7 +27,7 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            VM.Save();
+            VM.EnterNewMode();
         }
     }
 }

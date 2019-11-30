@@ -8,23 +8,36 @@ using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
 {
-    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM, ISaveVMForm
+    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM
     {
         #region Properties
 
-        private FormContext formContext;
+        private FormContext _formContext;
 
         public FormContext FormContext
         {
-            get { return formContext; }
+            get { return _formContext; }
             set
             {
-                formContext = value;
-                OnPropertyChanged(nameof(FormContext));
+                _formContext = value;
+                FormContextTxt = (_formContext == FormContext.Create) ? "Create New" : "Save Changes";
+            }
+        }
+
+        private string _formContextTxt;
+
+        public string FormContextTxt
+        {
+            get { return _formContextTxt; }
+            set
+            {
+                _formContextTxt = value;
+                OnPropertyChanged(nameof(FormContextTxt));
             }
         }
 
@@ -90,8 +103,20 @@ namespace HonorsProject.ViewModel
 
         #endregion Properties
 
+        #region Commands
+
+        public NewModeCmd NewModeCmd { get; set; }
+        public SaveCmd SaveFormCmd { get; set; }
+
+        #endregion Commands
+
         public MySessionsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
+            //register commands
+            NewModeCmd = new NewModeCmd(this);
+
+            //initial setup
+            FormContext = FormContext.Create;
             SelectedSession = new Session();
             MySessions = new ObservableCollection<Session>();
             Groups = new ObservableCollection<Group>();
@@ -113,6 +138,12 @@ namespace HonorsProject.ViewModel
         public bool Save()
         {
             return User.AddNewSession(SelectedSession, dbConName);
+        }
+
+        public void EnterNewMode()
+        {
+            FormContext = FormContext.Create;
+            SelectedSession = new Session();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace HonorsProject.Model.Enums
 {
     public enum FormContext
     {
-        New,
+        Create,
         Update
     }
 }

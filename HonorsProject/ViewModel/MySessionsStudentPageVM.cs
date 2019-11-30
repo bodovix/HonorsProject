@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
@@ -24,6 +25,18 @@ namespace HonorsProject.ViewModel
             {
                 formContext = value;
                 OnPropertyChanged(nameof(FormContext));
+            }
+        }
+
+        private string _formContextTxt;
+
+        public string FormContextTxt
+        {
+            get { return _formContextTxt; }
+            set
+            {
+                _formContextTxt = value;
+                OnPropertyChanged(nameof(FormContextTxt));
             }
         }
 
@@ -89,10 +102,27 @@ namespace HonorsProject.ViewModel
 
         #endregion Properties
 
+        #region Commands
+
+        public NewModeCmd NewModeCmd { get; set; }
+        public SaveCmd SaveFormCmd { get; set; }
+
+        #endregion Commands
+
         public MySessionsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
             User = (Student)appUser;
             UserRole = Role.Student;
+        }
+
+        public bool Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EnterNewMode()
+        {
+            throw new NotImplementedException();
         }
     }
 }
