@@ -12,7 +12,7 @@ using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
 {
-    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM
+    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM, ISaveVMForm
     {
         #region Properties
 
@@ -98,7 +98,7 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        public bool AddSession()
+        public bool Save()
         {
             return User.AddNewSession(SelectedSession, dbConName);
         }

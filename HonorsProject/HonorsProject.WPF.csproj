@@ -62,12 +62,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\SaveCmd.cs" />
     <Compile Include="ViewModel\Converters\EnumToItemsSource.cs" />
     <Compile Include="ViewModel\Converters\RoleToVisibleConverter.cs" />
     <Compile Include="ViewModel\CoreVM\BaseViewModel.cs" />
     <Compile Include="ViewModel\Commands\LoginCmd.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibleConverter.cs" />
     <Compile Include="ViewModel\Converters\ErrorMessageToVisibleConverter.cs" />
+    <Compile Include="ViewModel\CoreVM\IAddSession.cs" />
     <Compile Include="ViewModel\CoreVM\IMySessionsPageVM.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />
     <Compile Include="ViewModel\MySessionsLecturerPageVM.cs" />
