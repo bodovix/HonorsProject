@@ -33,7 +33,8 @@
                     <TextBox Name="SearchTeachersTxtBox" Width="88" Margin="0" />
                     <Button Name="AddLecturerBtn"
                         Margin="0"
-                        BorderThickness="0">
+                        BorderThickness="0"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}">
                         <Image Source="../Images/plusIcon.png"
                                 Style="{StaticResource IconImage}" />
                     </Button>
