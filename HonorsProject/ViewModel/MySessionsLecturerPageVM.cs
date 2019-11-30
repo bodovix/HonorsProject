@@ -17,6 +17,18 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        private string _feedbackMessage;
+
+        public string FeedbackMessage
+        {
+            get { return _feedbackMessage; }
+            set
+            {
+                _feedbackMessage = value;
+                OnPropertyChanged(nameof(FeedbackMessage));
+            }
+        }
+
         private FormContext _formContext;
 
         public FormContext FormContext
@@ -137,7 +149,23 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
-            return User.AddNewSession(SelectedSession, dbConName);
+            try
+            {
+                if (FormContext == FormContext.Create)
+                {
+                    //Create New
+                    return User.AddNewSession(SelectedSession, dbConName);
+                }
+                else
+                {
+                    //Update
+                    throw new NotImplementedException("Not worked on update yet");
+                }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.GetBaseException().Message;
+            }
         }
 
         public void EnterNewMode()

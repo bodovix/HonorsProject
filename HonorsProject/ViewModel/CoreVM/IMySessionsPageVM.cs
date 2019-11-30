@@ -12,6 +12,7 @@ namespace HonorsProject.ViewModel.CoreVM
 {
     public interface IMySessionsPageVM : ISaveVMFormCmd, IEnterNewModeCmd
     {
+        string FeedbackMessage { get; set; }
         FormContext FormContext { get; set; }
         string FormContextTxt { get; set; }
         Role UserRole { get; set; }
