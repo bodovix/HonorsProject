@@ -37,8 +37,8 @@ namespace HonorsProject.Test
             {
                 Lecturer l = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
                 Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", new DateTime(2019, 11, 28, 12, 05, 09, 200), 444);
-                l.Register(l, dbConName);
-                s.Register(s, dbConName);
+                l.Register(dbConName);
+                s.Register(dbConName);
             }
         }
     }

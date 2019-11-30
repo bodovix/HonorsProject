@@ -62,19 +62,19 @@ namespace HonorsProject.Model.Entities
             }
         }
 
-        public bool Register(Student student, string conName)
+        public bool Register(string conName)
         {
             using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
             {
                 //check id free
-                if (UoW.LecturerRepo.Get(student.Id) != null)
+                if (UoW.LecturerRepo.Get(Id) != null)
                     throw new Exception("ID already owned by Lecturer");
-                if (UoW.StudentRepo.Get(student.Id) != null)
+                if (UoW.StudentRepo.Get(Id) != null)
                     throw new Exception("ID already owned by Student");
                 //hash password
-                student.Password = Cryptography.Hash(student.Password);
+                Password = Cryptography.Hash(Password);
                 //save to DB
-                UoW.StudentRepo.Add(student);
+                UoW.StudentRepo.Add(this);
                 int result = UoW.Complete();
                 if (result != 0)
                     return true;

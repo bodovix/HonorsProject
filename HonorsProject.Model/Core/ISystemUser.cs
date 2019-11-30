@@ -10,6 +10,6 @@ namespace HonorsProject.Model.Core
     {
         T Login(int userId, string password, string conName);
 
-        bool Register(T user, string conName);
+        bool Register(string conName);
     }
 }

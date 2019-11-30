@@ -10,7 +10,7 @@ using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
 {
-    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM
+    public class MySessionsLecturerPageVM : BaseViewModel, IMySessionsPageVM<BaseSystemUser>
     {
         #region Properties
 
