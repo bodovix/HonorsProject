@@ -9,6 +9,10 @@
             <Setter Property="MaxLength" Value="100" />
             <Setter Property="Height" Value="30" />
         </Style>
+        <Style TargetType="DatePicker" x:Key="UserInputDate">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Height" Value="30" />
+        </Style>
         <Style TargetType="PasswordBox" x:Key="UserInputPassword">
             <Setter Property="Margin" Value="10" />
             <Setter Property="MaxLength" Value="100" />
