@@ -58,7 +58,6 @@
     <Compile Include="Core\IStudentRepository.cs" />
     <Compile Include="Core\ISystemUser.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
-    <Compile Include="Core\BaseSystemUser.cs" />
     <Compile Include="Data\AnswerRepository.cs" />
     <Compile Include="Data\ConnectionConfigs.cs" />
     <Compile Include="Data\DbContextFactory.cs" />

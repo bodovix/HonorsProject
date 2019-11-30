@@ -84,7 +84,7 @@ namespace HonorsProject.ViewModel
                     //tmpLecturer.Register(tmpLecturer, dbConName);
 
                     //
-                    student = student.Login(_userId.Value, _password, dbConName);
+                    student = (Student)student.Login(_userId.Value, _password, dbConName);
                     if (student != null)
                     {
                         Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Student);
@@ -93,7 +93,7 @@ namespace HonorsProject.ViewModel
                     else
                     {
                         //try lecturer
-                        tmpLecturer = tmpLecturer.Login(_userId.Value, _password, dbConName);
+                        tmpLecturer = (Lecturer)tmpLecturer.Login(_userId.Value, _password, dbConName);
                         if (tmpLecturer != null)
                         {
                             Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Lecturer);

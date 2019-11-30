@@ -11,10 +11,14 @@ using System.Security.Authentication;
 
 namespace HonorsProject.Model.Entities
 {
-    public class Student : BaseSystemUser, ISystemUser<Student>
+    public class Student : BaseEntity, ISystemUser
     {
         #region Properties
 
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public List<Group> Groups { get; set; }
         public List<Question> Questions { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -40,7 +44,7 @@ namespace HonorsProject.Model.Entities
             Questions = new List<Question>();
         }
 
-        public Student Login(int userId, string password, string conName)
+        public ISystemUser Login(int userId, string password, string conName)
         {
             //attempt student login
             using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))

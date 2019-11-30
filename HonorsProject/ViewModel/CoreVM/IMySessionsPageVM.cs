@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public interface IMySessionsPageVM<T> where T : BaseSystemUser
+    public interface IMySessionsPageVM
     {
-        T User { get; set; }
+        ISystemUser User { get; set; }
         Session SelectedSession { get; set; }
         ObservableCollection<Session> MySessions { get; set; }
     }

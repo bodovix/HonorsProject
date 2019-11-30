@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Core
 {
-    public interface ISystemUser<T> where T : BaseSystemUser
+    public interface ISystemUser
     {
-        T Login(int userId, string password, string conName);
+        int Id { get; set; }
+        string Name { get; set; }
+        string Email { get; set; }
+        string Password { get; set; }
+
+        ISystemUser Login(int userId, string password, string conName);
 
         bool Register(string conName);
     }
