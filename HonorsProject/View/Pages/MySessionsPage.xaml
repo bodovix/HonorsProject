@@ -4,12 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
+      xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MySessionsPage">
-
+    <Page.Resources>
+        <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
+    </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
-        <Button Name="NewSessionBtn" Content="Create New" Style="{StaticResource FormSubmitButton}" Width="100" HorizontalAlignment="Left" />
+        <Button Name="NewSessionBtn"
+                Content="Create New"
+                Style="{StaticResource FormSubmitButton}"
+                Width="100"
+                HorizontalAlignment="Left"
+                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}" />
         <Grid Style="{StaticResource ContainerGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -80,6 +88,7 @@
                         Content="Save"
                         Grid.Row="2"
                         Grid.Column="1"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
                         Style="{StaticResource FormSaveButton}" />
                 <GroupBox Header="Created On" Grid.Row="0" Grid.Column="2" Style="{StaticResource FormGroupBox}">
                     <Label Content="" Style="{StaticResource UserFormLbl}" />
@@ -91,6 +100,7 @@
                         Content="Cancel"
                         Grid.Row="2"
                         Grid.Column="3"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
                         Style="{StaticResource FormCancelButton}" />
             </Grid>
             <!--Sub Grid Container-->

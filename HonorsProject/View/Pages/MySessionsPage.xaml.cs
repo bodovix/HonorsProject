@@ -39,9 +39,9 @@ namespace HonorsProject.View.Pages
         private void CreateMySesoinVM()
         {
             if (App.LoggedInAs == Role.Lecturer)
-                VM = new MySessionsLecturerPageVM(ConnectionConfigs.LiveConfig);
+                VM = new MySessionsLecturerPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
             else
-                VM = new MySessionsStudentPageVM(ConnectionConfigs.LiveConfig);
+                VM = new MySessionsStudentPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
+using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
@@ -13,6 +14,18 @@ namespace HonorsProject.ViewModel
     public class MySessionsStudentPageVM : BaseViewModel, IMySessionsPageVM
     {
         #region Properties
+
+        private Role _userRole;
+
+        public Role UserRole
+        {
+            get { return _userRole; }
+            set
+            {
+                _userRole = value;
+                OnPropertyChanged(nameof(UserRole));
+            }
+        }
 
         private ISystemUser _user;
 
@@ -52,9 +65,10 @@ namespace HonorsProject.ViewModel
 
         #endregion Properties
 
-        public MySessionsStudentPageVM(string dbcontextName) : base(dbcontextName)
+        public MySessionsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
-            User = (Student)App.AppUser;
+            User = (Student)appUser;
+            UserRole = Role.Student;
         }
     }
 }
