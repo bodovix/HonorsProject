@@ -86,5 +86,10 @@ namespace HonorsProject.Model.Entities
                     return false;
             }
         }
+
+        public bool AddNewSession(Session selectedSession)
+        {
+            throw new NotImplementedException("Students Cannot Create New Sessions.");
+        }
     }
 }

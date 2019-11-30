@@ -97,5 +97,10 @@ namespace HonorsProject.ViewModel
                 }
             }
         }
+
+        public bool AddSession()
+        {
+            return User.AddNewSession(SelectedSession);
+        }
     }
 }

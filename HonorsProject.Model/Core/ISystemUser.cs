@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HonorsProject.Model.Entities;
 
 namespace HonorsProject.Model.Core
 {
@@ -18,5 +19,7 @@ namespace HonorsProject.Model.Core
         ISystemUser Login(int userId, string password, string conName);
 
         bool Register(string conName);
+
+        bool AddNewSession(Session selectedSession);
     }
 }

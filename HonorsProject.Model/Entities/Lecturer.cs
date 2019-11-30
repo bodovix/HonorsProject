@@ -84,5 +84,11 @@ namespace HonorsProject.Model.Entities
                     return false;
             }
         }
+
+        public bool AddNewSession(Session selectedSession)
+        {
+            //creating session this way so constructor can validate it
+            Session newSession = new Session(selectedSession);
+        }
     }
 }
