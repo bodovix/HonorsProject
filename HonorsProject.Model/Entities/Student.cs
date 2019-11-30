@@ -22,7 +22,7 @@ namespace HonorsProject.Model.Entities
         public List<Group> Groups { get; set; }
         public List<Question> Questions { get; set; }
         public DateTime CreatedOn { get; set; }
-        public int CreatedByLecturerID { get; set; }
+        public int CreatedByLecturerId { get; set; }
 
         #endregion Properties
 
@@ -39,7 +39,7 @@ namespace HonorsProject.Model.Entities
             Email = email;
             Password = password;
             CreatedOn = createdOn;
-            CreatedByLecturerID = createdByLecturerID;
+            CreatedByLecturerId = createdByLecturerID;
             Groups = new List<Group>();
             Questions = new List<Question>();
         }

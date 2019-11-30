@@ -12,6 +12,8 @@ namespace HonorsProject.Model.Core
         string Name { get; set; }
         string Email { get; set; }
         string Password { get; set; }
+        DateTime CreatedOn { get; set; }
+        int CreatedByLecturerId { get; set; }
 
         ISystemUser Login(int userId, string password, string conName);
 
