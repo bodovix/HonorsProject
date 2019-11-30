@@ -80,6 +80,7 @@ namespace HonorsProject.ViewModel
 
         public MySessionsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
+            SelectedSession = new Session();
             MySessions = new ObservableCollection<Session>();
             Groups = new ObservableCollection<Group>();
             Groups.Add(new Group());

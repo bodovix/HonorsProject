@@ -82,11 +82,13 @@
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
                 </GroupBox>
-                <GroupBox Header="End Time" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                <GroupBox Header="Start Time" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding SelectedSession.StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           Style="{StaticResource UserFormLbl}" />
                 </GroupBox>
-                <GroupBox Header="Start Time" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                <GroupBox Header="End Time" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding SelectedSession.EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           Style="{StaticResource UserFormLbl}" />
                 </GroupBox>
                 <Button Name="SaveBtn"
                         Content="Save"
@@ -95,10 +97,12 @@
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
                         Style="{StaticResource FormSaveButton}" />
                 <GroupBox Header="Created On" Grid.Row="0" Grid.Column="2" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                    <Label Content="{Binding SelectedSession.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           Style="{StaticResource UserFormLbl}" />
                 </GroupBox>
                 <GroupBox Header="Created By" Grid.Row="1" Grid.Column="2" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                    <Label Content="{Binding SelectedSession.CreatedByLecturerId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           Style="{StaticResource UserFormLbl}" />
                 </GroupBox>
                 <Button Name="CancelBtn"
                         Content="Cancel"
