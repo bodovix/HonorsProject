@@ -58,6 +58,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <Label  Style="{StaticResource UserFormLbl}"
@@ -83,11 +84,11 @@
                     </ComboBox>
                 </GroupBox>
                 <GroupBox Header="Start Time" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <DatePicker Text="{Binding SelectedSession.StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    <DatePicker SelectedDate="{Binding SelectedSession.StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource UserInputDate}" />
                 </GroupBox>
                 <GroupBox Header="End Time" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <DatePicker Text="{Binding SelectedSession.EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    <DatePicker SelectedDate="{Binding SelectedSession.EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource UserInputDate}" />
                 </GroupBox>
                 <Button Name="SaveBtn"
@@ -111,6 +112,10 @@
                         Grid.Column="3"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
                         Style="{StaticResource FormCancelButton}" />
+                <TextBlock Grid.Row="3"
+                       Grid.Column="1"
+                       Text="{Binding FeedbackMessage}"
+                       Style="{StaticResource UserInputError}" />
             </Grid>
             <!--Sub Grid Container-->
             <Grid Grid.Column="1" Grid.Row="1">
