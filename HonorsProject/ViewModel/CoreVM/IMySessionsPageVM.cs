@@ -16,5 +16,6 @@ namespace HonorsProject.ViewModel.CoreVM
         ISystemUser User { get; set; }
         Session SelectedSession { get; set; }
         ObservableCollection<Session> MySessions { get; set; }
+        ObservableCollection<Group> Groups { get; set; }
     }
 }

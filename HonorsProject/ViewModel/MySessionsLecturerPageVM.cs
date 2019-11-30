@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HonorsProject.Model.Core;
+using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel.CoreVM;
@@ -63,12 +64,37 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private ObservableCollection<Group> _groups;
+
+        public ObservableCollection<Group> Groups
+        {
+            get { return _groups; }
+            set
+            {
+                _groups = value;
+                OnPropertyChanged(nameof(Groups));
+            }
+        }
+
         #endregion Properties
 
         public MySessionsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
+            MySessions = new ObservableCollection<Session>();
+            Groups = new ObservableCollection<Group>();
+            Groups.Add(new Group());
             User = (Lecturer)appUser;
             UserRole = Role.Lecturer;
+            List<Group> results;
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbcontextName)))
+                results = u.GroupRepository.GetAll().ToList();
+            if (results != null)
+            {
+                foreach (Group g in results)
+                {
+                    Groups.Add(g);
+                }
+            }
         }
     }
 }

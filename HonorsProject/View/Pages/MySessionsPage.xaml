@@ -61,17 +61,20 @@
                 <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedSession.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
-                <GroupBox Header="Role" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <ComboBox x:Name="RoleComboBox"
+                <GroupBox Header="Group" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <ComboBox x:Name="GroupComboBox"
                               Height="23"
-                              SelectedValuePath="Role">
+                              ItemsSource="{Binding Groups}"
+                              SelectedItem="{Binding SelectedSession.Group,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              DisplayMemberPath="Name"
+                              SelectedValuePath="Id">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="Height" Value="20" />

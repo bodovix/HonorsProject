@@ -63,6 +63,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private ObservableCollection<Group> _groups;
+
+        public ObservableCollection<Group> Groups
+        {
+            get { return _groups; }
+            set
+            {
+                _groups = value;
+                OnPropertyChanged(nameof(Groups));
+            }
+        }
+
         #endregion Properties
 
         public MySessionsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
