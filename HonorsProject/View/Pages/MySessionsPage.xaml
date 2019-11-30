@@ -60,9 +60,8 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <TextBox TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="{Binding SelectedSession.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <Label  Style="{StaticResource UserFormLbl}"
+                            Content="{Binding SelectedSession.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
@@ -93,6 +92,7 @@
                 </GroupBox>
                 <Button Name="SaveBtn"
                         Content="{Binding FormContextTxt}"
+                        Command="{Binding SaveFormCmd}"
                         Grid.Row="2"
                         Grid.Column="1"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"

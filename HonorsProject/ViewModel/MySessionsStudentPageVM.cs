@@ -16,6 +16,14 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        private string _feedbackMessage;
+
+        public string FeedbackMessage
+        {
+            get { return _feedbackMessage; }
+            set { _feedbackMessage = value; }
+        }
+
         private FormContext formContext;
 
         public FormContext FormContext

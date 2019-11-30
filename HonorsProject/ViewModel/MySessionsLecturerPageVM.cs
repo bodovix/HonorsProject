@@ -126,7 +126,7 @@ namespace HonorsProject.ViewModel
         {
             //register commands
             NewModeCmd = new NewModeCmd(this);
-
+            SaveFormCmd = new SaveCmd(this);
             //initial setup
             FormContext = FormContext.Create;
             SelectedSession = new Session();
@@ -165,6 +165,7 @@ namespace HonorsProject.ViewModel
             catch (Exception ex)
             {
                 FeedbackMessage = ex.GetBaseException().Message;
+                return false;
             }
         }
 
