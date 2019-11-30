@@ -26,7 +26,7 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            VM.Login();
+            VM.Login(ref App.AppUser);
         }
     }
 }

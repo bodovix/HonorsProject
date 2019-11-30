@@ -66,36 +66,29 @@ namespace HonorsProject.ViewModel
             LoginCmd = new LoginCmd(this);
         }
 
-        public bool Login()
+        public bool Login(ref ISystemUser appUser)
         {
             if (ValidateLogin(UserId, _password))
             {
                 try
                 {
                     Student student = new Student();
-                    Lecturer tmpLecturer = new Lecturer();
-                    //
-                    //tmpLecturer.Id = 444;
-                    //tmpLecturer.Name = "Suzy";
-                    //tmpLecturer.Email = "lecturer1@uad.ac.uk";
-                    //tmpLecturer.Password = "password";
-                    //tmpLecturer.CreatedOn = DateTime.Now;
-                    //tmpLecturer.CreatedByLecturerId = 1234;
-                    //tmpLecturer.Register(tmpLecturer, dbConName);
+                    Lecturer lecturer = new Lecturer();
 
-                    //
                     student = (Student)student.Login(_userId.Value, _password, dbConName);
                     if (student != null)
                     {
+                        appUser = student;
                         Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Student);
                         return true;
                     }
                     else
                     {
                         //try lecturer
-                        tmpLecturer = (Lecturer)tmpLecturer.Login(_userId.Value, _password, dbConName);
-                        if (tmpLecturer != null)
+                        lecturer = (Lecturer)lecturer.Login(_userId.Value, _password, dbConName);
+                        if (lecturer != null)
                         {
+                            appUser = lecturer;
                             Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Lecturer);
                             return true;
                         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
 using HonorsProject.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,9 +10,11 @@ namespace HonorsProject.Test
     public class LoginVMTest : BaseTest
     {
         private LoginPageVM VM;
+        private ISystemUser _appUser;
 
         public LoginVMTest() : base()
         {
+            _appUser = null;
             VM = new LoginPageVM(dbConName);
         }
 
@@ -24,7 +27,7 @@ namespace HonorsProject.Test
             VM.Password = "password";
             VM.UserId = 1701267;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsTrue(result);
         }
@@ -38,7 +41,7 @@ namespace HonorsProject.Test
             VM.Password = "password";
             VM.UserId = 1701267234;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsFalse(result);
         }
@@ -52,7 +55,7 @@ namespace HonorsProject.Test
             VM.Password = "passwordNotThis";
             VM.UserId = 1701267;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsFalse(result);
         }
@@ -66,7 +69,7 @@ namespace HonorsProject.Test
             VM.Password = null;
             VM.UserId = 1701267;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsFalse(result);
         }
@@ -80,7 +83,7 @@ namespace HonorsProject.Test
             VM.Password = "password";
             VM.UserId = 444;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsTrue(result);
         }
@@ -94,7 +97,7 @@ namespace HonorsProject.Test
             VM.Password = "password";
             VM.UserId = 4449999;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsFalse(result);
         }
@@ -108,7 +111,7 @@ namespace HonorsProject.Test
             VM.Password = "passwordNotCorrect";
             VM.UserId = 444;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsFalse(result);
         }
@@ -122,7 +125,7 @@ namespace HonorsProject.Test
             VM.Password = null;
             VM.UserId = 444;
             //Act
-            bool result = VM.Login();
+            bool result = VM.Login(ref _appUser);
             //Assert
             Assert.IsFalse(result);
         }

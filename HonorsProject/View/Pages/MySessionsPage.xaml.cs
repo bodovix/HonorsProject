@@ -26,7 +26,7 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class MySessionsPage : Page
     {
-        //
+        //Polymorphic VM for Students or Lecturers
         private IMySessionsPageVM VM;
 
         public MySessionsPage()
