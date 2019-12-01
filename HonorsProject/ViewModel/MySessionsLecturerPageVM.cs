@@ -88,6 +88,19 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private ObservableCollection<Lecturer> _availableLecturers;
+
+        public ObservableCollection<Lecturer> AvailableLecturers
+        {
+            get { return _availableLecturers; }
+
+            set
+            {
+                _availableLecturers = value;
+                OnPropertyChanged(nameof(AvailableLecturers));
+            }
+        }
+
         private ObservableCollection<Group> _groups;
 
         public ObservableCollection<Group> Groups

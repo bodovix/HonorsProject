@@ -20,5 +20,6 @@ namespace HonorsProject.ViewModel.CoreVM
         Session SelectedSession { get; set; }
         ObservableCollection<Session> MySessions { get; set; }
         ObservableCollection<Group> Groups { get; set; }
+        ObservableCollection<Lecturer> AvailableLecturers { get; set; }
     }
 }
