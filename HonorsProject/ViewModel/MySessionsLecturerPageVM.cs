@@ -37,19 +37,6 @@ namespace HonorsProject.ViewModel
             set
             {
                 _formContext = value;
-                FormContextTxt = (_formContext == FormContext.Create) ? "Create New" : "Save Changes";
-            }
-        }
-
-        private string _formContextTxt;
-
-        public string FormContextTxt
-        {
-            get { return _formContextTxt; }
-            set
-            {
-                _formContextTxt = value;
-                OnPropertyChanged(nameof(FormContextTxt));
             }
         }
 

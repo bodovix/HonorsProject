@@ -36,18 +36,6 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private string _formContextTxt;
-
-        public string FormContextTxt
-        {
-            get { return _formContextTxt; }
-            set
-            {
-                _formContextTxt = value;
-                OnPropertyChanged(nameof(FormContextTxt));
-            }
-        }
-
         private Role _userRole;
 
         public Role UserRole

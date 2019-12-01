@@ -10,6 +10,7 @@
       Title="MySessionsPage">
     <Page.Resources>
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
+        <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
     </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
         <Button Name="NewSessionBtn"
@@ -92,7 +93,7 @@
                            Style="{StaticResource UserInputDate}" />
                 </GroupBox>
                 <Button Name="SaveBtn"
-                        Content="{Binding FormContextTxt}"
+                        Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
                         Command="{Binding SaveFormCmd}"
                         Grid.Row="2"
                         Grid.Column="1"
