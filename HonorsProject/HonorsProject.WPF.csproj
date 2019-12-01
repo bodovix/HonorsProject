@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\IComands\ISessionSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\NewModeCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
     <Compile Include="ViewModel\Converters\EnumToItemsSource.cs" />

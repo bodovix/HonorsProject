@@ -136,7 +136,15 @@
                 </StackPanel>
                 <ListView  Grid.Column="0" Grid.Row="2">
                 </ListView>
-                <DataGrid Grid.Column="0" Grid.Row="3">
+                <DataGrid Grid.Column="0"
+                          Grid.Row="3"
+                          ItemsSource="{Binding MySessions}"
+                          SelectionMode="Single"
+                          SelectionUnit="FullRow"
+                          CanUserReorderColumns="True"
+                          CanUserResizeColumns="True"
+                          CanUserResizeRows="False"
+                          CanUserSortColumns="True">
                     <!--HeadingStyle-->
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">
@@ -148,10 +156,10 @@
                     </DataGrid.Resources>
                     <!--Column header and text bindings-->
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Width="*" />
-                        <DataGridTextColumn Header="Name" Width="*" />
-                        <DataGridTextColumn Header="Start Date" Width="*" />
-                        <DataGridTextColumn Header="End Date" Width="*" />
+                        <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartDate}" />
+                        <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding EndDate}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

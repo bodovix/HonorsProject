@@ -120,5 +120,20 @@ namespace HonorsProject.ViewModel
         {
             throw new NotImplementedException();
         }
+
+        public List<Session> GetAllMyCurrentSessions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Session> GetAllMyPreviousSessions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Session> GetAllMyFutureSessions()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

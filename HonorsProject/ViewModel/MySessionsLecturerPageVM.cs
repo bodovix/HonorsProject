@@ -102,12 +102,12 @@ namespace HonorsProject.ViewModel
 
         #endregion Properties
 
-        #region Commands
+        #region CommandProperties
 
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
 
-        #endregion Commands
+        #endregion CommandProperties
 
         public MySessionsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
@@ -115,13 +115,18 @@ namespace HonorsProject.ViewModel
             NewModeCmd = new NewModeCmd(this);
             SaveFormCmd = new SaveCmd(this);
             //initial setup
+            User = (Lecturer)appUser;
+            UserRole = Role.Lecturer;
             FormContext = FormContext.Create;
             SelectedSession = new Session();
             MySessions = new ObservableCollection<Session>();
+            GetAllGroups(dbcontextName);
+        }
+
+        private void GetAllGroups(string dbcontextName)
+        {
             Groups = new ObservableCollection<Group>();
             Groups.Add(new Group());
-            User = (Lecturer)appUser;
-            UserRole = Role.Lecturer;
             List<Group> results;
             using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbcontextName)))
                 results = u.GroupRepository.GetAll().ToList();
@@ -135,6 +140,7 @@ namespace HonorsProject.ViewModel
         }
 
         public bool Save()
+
         {
             try
             {
@@ -160,6 +166,21 @@ namespace HonorsProject.ViewModel
         {
             FormContext = FormContext.Create;
             SelectedSession = new Session();
+        }
+
+        public List<Session> GetAllMyCurrentSessions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Session> GetAllMyPreviousSessions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Session> GetAllMyFutureSessions()
+        {
+            throw new NotImplementedException();
         }
     }
 }
