@@ -19,7 +19,6 @@ namespace HonorsProject.Model.Data
         public LabAssistantContext(string conectionName)
             : base(conectionName)
         {
-            //live: "name=LabAssistantContext"
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -170,8 +170,8 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Id}" />
                         <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartDate}" />
-                        <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding EndDate}" />
+                        <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" />
+                        <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
