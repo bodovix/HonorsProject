@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="Tests\RepositoryTests\SessionRepositoryTest.cs" />
     <Compile Include="Tests\SessionTest.cs" />
     <Compile Include="Tests\StudentTest.cs" />
     <Compile Include="Tests\QuestionTest.cs" />

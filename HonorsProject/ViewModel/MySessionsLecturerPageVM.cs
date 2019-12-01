@@ -119,7 +119,8 @@ namespace HonorsProject.ViewModel
             UserRole = Role.Lecturer;
             FormContext = FormContext.Create;
             SelectedSession = new Session();
-            MySessions = new ObservableCollection<Session>();
+            List<Session> sessions = GetAllMyCurrentSessions();
+            MySessions = new ObservableCollection<Session>(sessions);
             GetAllGroups(dbcontextName);
         }
 
@@ -140,7 +141,6 @@ namespace HonorsProject.ViewModel
         }
 
         public bool Save()
-
         {
             try
             {
@@ -170,7 +170,15 @@ namespace HonorsProject.ViewModel
 
         public List<Session> GetAllMyCurrentSessions()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return User.GetAllMyCurrentSessions(dbConName);
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.GetBaseException().Message;
+                return null;
+            }
         }
 
         public List<Session> GetAllMyPreviousSessions()

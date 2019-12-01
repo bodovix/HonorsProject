@@ -103,5 +103,29 @@ namespace HonorsProject.Model.Entities
             else
                 return false;
         }
+
+        public List<Session> GetAllMyCurrentSessions(string dbConName)
+        {
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                return u.SessionRepository.GetCurrentSessions(this, DateTime.Now.Date);
+            }
+        }
+
+        public List<Session> GetAllMyPreviousSessions(string dbConName)
+        {
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                return u.SessionRepository.GetPreviousSessions(this, DateTime.Now.Date);
+            }
+        }
+
+        public List<Session> GetAllMyFutureSessions(string dbConName)
+        {
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                return u.SessionRepository.GetFutureSessions(this, DateTime.Now.Date);
+            }
+        }
     }
 }

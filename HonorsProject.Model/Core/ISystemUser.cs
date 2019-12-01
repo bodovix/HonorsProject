@@ -21,5 +21,11 @@ namespace HonorsProject.Model.Core
         bool Register(string conName);
 
         bool AddNewSession(Session selectedSession, string conName);
+
+        List<Session> GetAllMyCurrentSessions(string conName);
+
+        List<Session> GetAllMyPreviousSessions(string conName);
+
+        List<Session> GetAllMyFutureSessions(string conName);
     }
 }

@@ -91,5 +91,20 @@ namespace HonorsProject.Model.Entities
         {
             throw new NotImplementedException("Students Cannot Create New Sessions.");
         }
+
+        public List<Session> GetAllMyCurrentSessions(string dbConName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Session> GetAllMyPreviousSessions(string dbConName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Session> GetAllMyFutureSessions(string dbConName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
