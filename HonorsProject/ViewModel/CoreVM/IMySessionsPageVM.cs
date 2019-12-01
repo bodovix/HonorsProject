@@ -1,6 +1,7 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.Commands.IComands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

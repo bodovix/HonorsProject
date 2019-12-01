@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HonorsProject.ViewModel.CoreVM
+namespace HonorsProject.ViewModel.Commands.IComands
 {
-    public interface IEnterNewModeCmd
+    public interface ISaveVMFormCmd
     {
-        NewModeCmd NewModeCmd { get; set; }
+        SaveCmd SaveFormCmd { get; set; }
 
-        void EnterNewMode();
+        bool Save();
     }
 }

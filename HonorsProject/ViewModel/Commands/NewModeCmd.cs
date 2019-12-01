@@ -1,4 +1,4 @@
-﻿using HonorsProject.ViewModel.CoreVM;
+﻿using HonorsProject.ViewModel.Commands.IComands;
 using System;
 using System.Collections.Generic;
 using System.Linq;

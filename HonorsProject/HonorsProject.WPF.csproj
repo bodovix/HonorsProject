@@ -70,8 +70,8 @@
     <Compile Include="ViewModel\Commands\LoginCmd.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibleConverter.cs" />
     <Compile Include="ViewModel\Converters\ErrorMessageToVisibleConverter.cs" />
-    <Compile Include="ViewModel\CoreVM\IEnterNewModeCmd.cs" />
-    <Compile Include="ViewModel\CoreVM\ISaveVMFormCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\IEnterNewModeCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\ISaveVMFormCmd.cs" />
     <Compile Include="ViewModel\CoreVM\IMySessionsPageVM.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />
     <Compile Include="ViewModel\MySessionsLecturerPageVM.cs" />
