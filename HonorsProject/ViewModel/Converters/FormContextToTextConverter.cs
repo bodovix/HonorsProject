@@ -20,6 +20,9 @@ namespace HonorsProject.ViewModel.Converters
                 throw new Exception("Parameters required for FormContextConverter");
             //New | Update
             string[] newOrUpdate = parameterString.Split('|');
+            if (newOrUpdate.Length != 2)
+                throw new Exception("Converter must only have 2 parameters for true and false");
+
             //if lecturer make the item visible
             if (formContext == FormContext.Create)
                 return newOrUpdate[0];
