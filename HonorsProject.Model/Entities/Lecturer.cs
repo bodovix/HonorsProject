@@ -87,12 +87,16 @@ namespace HonorsProject.Model.Entities
 
         public bool AddNewSession(Session session, string conName)
         {
+            session.CreatedByLecturerId = Id;
+            session.CreatedOn = DateTime.Now;
+
             //creating session this way so constructor can validate it
             if (session.ValidateSession())
             {
                 using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(conName)))
                 {
                     u.SessionRepository.Add(session);
+                    u.Complete();
                     return true;
                 }
             }

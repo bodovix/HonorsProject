@@ -12,8 +12,26 @@ namespace HonorsProject.Model.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+
+        private DateTime _startTime;
+
+        public DateTime StartTime
+        {
+            get { return DefaultDate(ref _startTime); }
+            set
+            {
+                _startTime = DefaultDate(ref value);
+            }
+        }
+
+        private DateTime _endTime;
+
+        public DateTime EndTime
+        {
+            get { return DefaultDate(ref _endTime); }
+            set { _endTime = DefaultDate(ref value); }
+        }
+
         public List<Lecturer> Lecturers { get; set; }
         public Group Group { get; set; }
         public List<Question> Questions { get; set; }
@@ -39,6 +57,15 @@ namespace HonorsProject.Model.Entities
             CreatedByLecturerId = sessionToCopy.CreatedByLecturerId;
             Questions = new List<Question>();
             Lecturers = new List<Lecturer>();
+        }
+
+        private DateTime DefaultDate(ref DateTime value)
+        {
+            //if date is default set it to today
+            if (DateTime.Compare(value.Date, new DateTime(0001, 01, 01)) == 0)
+                value = DateTime.Now.Date;
+
+            return value;
         }
 
         public bool ValidateSession()
