@@ -42,10 +42,19 @@
                     </Button>
                 </StackPanel>
                 <ListView Name="LecutersInSessonLV"
+                          ItemsSource="{Binding SelectedSession.Lecturers}"
                           Width="100"
                           Margin="0"
                           Height="240"
                           Padding="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Id}" />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
             <!--Main Details Form-->
@@ -139,12 +148,15 @@
                 <DataGrid Grid.Column="0"
                           Grid.Row="3"
                           ItemsSource="{Binding MySessions}"
+                          SelectedItem="{Binding SelectedSession, Mode=TwoWay}"
+                          AutoGenerateColumns="False"
                           SelectionMode="Single"
                           SelectionUnit="FullRow"
                           CanUserReorderColumns="True"
                           CanUserResizeColumns="True"
                           CanUserResizeRows="False"
-                          CanUserSortColumns="True">
+                          CanUserSortColumns="True"
+                          IsReadOnly="True">
                     <!--HeadingStyle-->
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">

@@ -16,6 +16,7 @@ namespace HonorsProject.Model.Data
 
         public List<Session> GetCurrentSessions(Lecturer lecturer, DateTime date)
         {
+            //TODO:Add date filter
             List<Session> results = _entities.Where(s => s.Lecturers.Any(l => l.Id == lecturer.Id)).ToList();
             return results;
         }
