@@ -42,7 +42,7 @@
                     </Button>
                 </StackPanel>
                 <ListView Name="LecutersInSessonLV"
-                          ItemsSource="{Binding SelectedSession.Lecturers}"
+                          ItemsSource="{Binding SelectedSession.Lecturers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                           Width="100"
                           Margin="0"
                           Height="240"
@@ -84,8 +84,7 @@
                               Height="23"
                               ItemsSource="{Binding Groups}"
                               SelectedItem="{Binding SelectedSession.Group,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Id">
+                              DisplayMemberPath="Name">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="Height" Value="20" />
