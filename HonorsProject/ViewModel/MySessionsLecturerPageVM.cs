@@ -131,10 +131,10 @@ namespace HonorsProject.ViewModel
             User = (Lecturer)appUser;
             UserRole = Role.Lecturer;
             FormContext = FormContext.Create;
+            GetAllGroups(dbcontextName);
             SelectedSession = new Session();
             List<Session> sessions = GetAllMyCurrentSessions();
             MySessions = new ObservableCollection<Session>(sessions);
-            GetAllGroups(dbcontextName);
         }
 
         private void GetAllGroups(string dbcontextName)

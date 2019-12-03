@@ -22,5 +22,14 @@ namespace HonorsProject.Model.Entities
             Students = new List<Student>();
             Sessions = new List<Session>();
         }
+
+        public Group(string name, List<Student> students, List<Session> sessions, DateTime createdOn, int createdByLecturerId)
+        {
+            Name = name;
+            Students = students;
+            Sessions = sessions;
+            CreatedOn = createdOn;
+            CreatedByLecturerId = createdByLecturerId;
+        }
     }
 }

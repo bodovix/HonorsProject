@@ -44,19 +44,16 @@ namespace HonorsProject.Model.Entities
             Lecturers = new List<Lecturer>();
         }
 
-        public Session(Session sessionToCopy)
+        public Session(string name, DateTime startTime, DateTime endTime, List<Lecturer> lecturers, Group group, List<Question> questions, DateTime createdOn, int createdByLecturerId)
         {
-            Id = sessionToCopy.Id;
-            Name = sessionToCopy.Name;
-            StartTime = sessionToCopy.StartTime;
-            EndTime = sessionToCopy.EndTime;
-            Lecturers = sessionToCopy.Lecturers;
-            Group = sessionToCopy.Group;
-            Questions = sessionToCopy.Questions;
-            CreatedOn = DateTime.Now;
-            CreatedByLecturerId = sessionToCopy.CreatedByLecturerId;
-            Questions = new List<Question>();
-            Lecturers = new List<Lecturer>();
+            Name = name;
+            StartTime = startTime;
+            EndTime = endTime;
+            Lecturers = lecturers;
+            Group = group;
+            Questions = questions;
+            CreatedOn = createdOn;
+            CreatedByLecturerId = createdByLecturerId;
         }
 
         private DateTime DefaultDate(ref DateTime value)

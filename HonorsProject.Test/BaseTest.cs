@@ -41,5 +41,28 @@ namespace HonorsProject.Test
                 s.Register(dbConName);
             }
         }
+
+        protected void CreateMySessionTestData(Lecturer lecturer)
+        {
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                //test data cleared each test - need to re  register users
+                Lecturer l = lecturer;
+                Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", new DateTime(2019, 11, 28, 12, 05, 09, 200), 444);
+                l.Register(dbConName);
+                s.Register(dbConName);
+                List<Lecturer> lecL = new List<Lecturer>();
+                lecL.Add(l);
+                List<Student> stL = new List<Student>();
+                stL.Add(s);
+                //group added before session
+                Group g = new Group("Computing 19/20", stL, null, new DateTime(2019, 12, 3), l.Id);
+                u.GroupRepository.Add(g);
+                //session added with group
+                Session sesh = new Session("Week 1", new DateTime(2019, 12, 3), new DateTime(2019, 12, 3), lecL, g, null, new DateTime(2019, 12, 1), l.Id);
+                u.SessionRepository.Add(sesh);
+                u.Complete();
+            }
+        }
     }
 }
