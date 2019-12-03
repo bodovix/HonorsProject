@@ -14,8 +14,8 @@ namespace HonorsProject.Model.Entities
         public string Name { get; set; }
         public string AnswerTest { get; set; }
         public bool WasHelpfull { get; set; }
-        public Lecturer AnsweredBy { get; set; }
-        public Question Question { get; set; }
+        public virtual Lecturer AnsweredBy { get; set; }
+        public virtual Question Question { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

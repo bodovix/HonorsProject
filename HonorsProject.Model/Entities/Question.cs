@@ -15,9 +15,9 @@ namespace HonorsProject.Model.Entities
         public string Name { get; set; }
         public string QuestionText { get; set; }
         public bool IsResolved { get; set; }
-        public Session Session { get; set; }
-        public List<Answer> Answers { get; set; }
-        public Student AskedBy { get; set; }
+        public virtual Session Session { get; set; }
+        public virtual List<Answer> Answers { get; set; }
+        public virtual Student AskedBy { get; set; }
         public DateTime CreatedOn { get; set; }
 
         public Question()

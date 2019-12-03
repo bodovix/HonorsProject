@@ -32,9 +32,9 @@ namespace HonorsProject.Model.Entities
             set { _endTime = DefaultDate(ref value); }
         }
 
-        public List<Lecturer> Lecturers { get; set; }
-        public Group Group { get; set; }
-        public List<Question> Questions { get; set; }
+        public virtual List<Lecturer> Lecturers { get; set; }
+        public virtual Group Group { get; set; }
+        public virtual List<Question> Questions { get; set; }
         public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerId { get; set; }
 

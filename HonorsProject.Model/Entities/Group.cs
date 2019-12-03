@@ -12,8 +12,8 @@ namespace HonorsProject.Model.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Student> Students { get; set; }
-        public List<Session> Sessions { get; set; }
+        public virtual List<Student> Students { get; set; }
+        public virtual List<Session> Sessions { get; set; }
         public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerId { get; set; }
 
