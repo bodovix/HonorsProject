@@ -20,12 +20,12 @@ namespace HonorsProject.Model.Core
 
         bool Register(IUnitOfWork unitOfWork);
 
-        bool AddNewSession(Session selectedSession, string conName);
+        bool AddNewSession(Session selectedSession, IUnitOfWork unitOfWork);
 
-        List<Session> GetAllMyCurrentSessions(string conName);
+        List<Session> GetAllMyCurrentSessions(IUnitOfWork unitOfWork);
 
-        List<Session> GetAllMyPreviousSessions(string conName);
+        List<Session> GetAllMyPreviousSessions(IUnitOfWork unitOfWork);
 
-        List<Session> GetAllMyFutureSessions(string conName);
+        List<Session> GetAllMyFutureSessions(IUnitOfWork unitOfWork);
     }
 }

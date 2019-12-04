@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Core
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
+
     {
         LabAssistantContext Context { get; set; }
         ILecturerRepository LecturerRepo { get; }

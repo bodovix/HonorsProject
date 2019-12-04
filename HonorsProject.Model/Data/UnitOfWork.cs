@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.Data
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
         #region Properties
 

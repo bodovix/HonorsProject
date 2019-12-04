@@ -84,22 +84,22 @@ namespace HonorsProject.Model.Entities
                 return false;
         }
 
-        public bool AddNewSession(Session selectedSession, string conName)
+        public bool AddNewSession(Session selectedSession, IUnitOfWork u)
         {
             throw new NotImplementedException("Students Cannot Create New Sessions.");
         }
 
-        public List<Session> GetAllMyCurrentSessions(string dbConName)
+        public List<Session> GetAllMyCurrentSessions(IUnitOfWork unitOfWork)
         {
             throw new NotImplementedException();
         }
 
-        public List<Session> GetAllMyPreviousSessions(string dbConName)
+        public List<Session> GetAllMyPreviousSessions(IUnitOfWork unitOfWork)
         {
             throw new NotImplementedException();
         }
 
-        public List<Session> GetAllMyFutureSessions(string dbConName)
+        public List<Session> GetAllMyFutureSessions(IUnitOfWork unitOfWork)
         {
             throw new NotImplementedException();
         }

@@ -82,7 +82,7 @@ namespace HonorsProject.Model.Entities
                 return false;
         }
 
-        public bool AddNewSession(Session session, string conName)
+        public bool AddNewSession(Session session, IUnitOfWork u)
         {
             session.CreatedByLecturerId = Id;
             session.CreatedOn = DateTime.Now;
@@ -90,39 +90,27 @@ namespace HonorsProject.Model.Entities
             //creating session this way so constructor can validate it
             if (session.ValidateSession())
             {
-                using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(conName)))
-                {
-                    u.SessionRepository.Add(session);
-                    u.Complete();
-                    return true;
-                }
+                u.SessionRepository.Add(session);
+                u.Complete();
+                return true;
             }
             else
                 return false;
         }
 
-        public List<Session> GetAllMyCurrentSessions(string dbConName)
+        public List<Session> GetAllMyCurrentSessions(IUnitOfWork unitOfWork)
         {
-            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
-            {
-                return u.SessionRepository.GetCurrentSessions(this, DateTime.Now.Date);
-            }
+            return unitOfWork.SessionRepository.GetCurrentSessions(this, DateTime.Now.Date);
         }
 
-        public List<Session> GetAllMyPreviousSessions(string dbConName)
+        public List<Session> GetAllMyPreviousSessions(IUnitOfWork unitOfWork)
         {
-            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
-            {
-                return u.SessionRepository.GetPreviousSessions(this, DateTime.Now.Date);
-            }
+            return unitOfWork.SessionRepository.GetPreviousSessions(this, DateTime.Now.Date);
         }
 
-        public List<Session> GetAllMyFutureSessions(string dbConName)
+        public List<Session> GetAllMyFutureSessions(IUnitOfWork unitOfWork)
         {
-            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
-            {
-                return u.SessionRepository.GetFutureSessions(this, DateTime.Now.Date);
-            }
+            return unitOfWork.SessionRepository.GetFutureSessions(this, DateTime.Now.Date);
         }
     }
 }

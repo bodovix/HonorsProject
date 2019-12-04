@@ -160,7 +160,7 @@ namespace HonorsProject.ViewModel
                 if (FormContext == FormContext.Create)
                 {
                     //Create New
-                    return User.AddNewSession(SelectedSession, dbConName);
+                    return User.AddNewSession(SelectedSession, UnitOfWork);
                 }
                 else
                 {
@@ -185,7 +185,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                return User.GetAllMyCurrentSessions(dbConName);
+                return User.GetAllMyCurrentSessions(UnitOfWork);
             }
             catch (Exception ex)
             {

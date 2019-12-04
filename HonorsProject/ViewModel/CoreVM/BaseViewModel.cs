@@ -11,6 +11,7 @@ namespace HonorsProject.ViewModel.CoreVM
     public class BaseViewModel : INotifyPropertyChanged
     {
         protected string dbConName;
+        public UnitOfWork UnitOfWork { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,6 +23,7 @@ namespace HonorsProject.ViewModel.CoreVM
         public BaseViewModel(string dbcontextName)
         {
             this.dbConName = dbcontextName;
+            UnitOfWork = new UnitOfWork(new LabAssistantContext(dbConName));
         }
     }
 }
