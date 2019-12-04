@@ -18,7 +18,7 @@ namespace HonorsProject.Model.Core
 
         ISystemUser Login(int userId, string password, string conName);
 
-        bool Register(string conName);
+        bool Register(IUnitOfWork unitOfWork);
 
         bool AddNewSession(Session selectedSession, string conName);
 

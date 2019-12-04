@@ -31,7 +31,7 @@ namespace HonorsProject.Test
             //Assert
             Assert.IsTrue(VM.FormContext == FormContext.Create, "FormContext in wrong initial mode");
             Assert.IsTrue(VM.MySessions.Count == 1, "VM Sessions Count Wrong");
-            Assert.IsTrue(VM.Groups.Count == 1, "VM Groups Count Wrong");
+            Assert.IsTrue(VM.Groups.Count == 2, "VM Groups Count Wrong");//one null and the test one(s)
         }
     }
 }

@@ -66,25 +66,22 @@ namespace HonorsProject.Model.Entities
             }
         }
 
-        public bool Register(string conName)
+        public bool Register(IUnitOfWork UoW)
         {
-            using (UnitOfWork UoW = new UnitOfWork(new LabAssistantContext(conName)))
-            {
-                //check id free
-                if (UoW.LecturerRepo.Get(Id) != null)
-                    throw new Exception("ID already owned by Lecturer");
-                if (UoW.StudentRepo.Get(Id) != null)
-                    throw new Exception("ID already owned by Student");
-                //hash password
-                Password = Cryptography.Hash(Password);
-                //save to DB
-                UoW.StudentRepo.Add(this);
-                int result = UoW.Complete();
-                if (result != 0)
-                    return true;
-                else
-                    return false;
-            }
+            //check id free
+            if (UoW.LecturerRepo.Get(Id) != null)
+                throw new Exception("ID already owned by Lecturer");
+            if (UoW.StudentRepo.Get(Id) != null)
+                throw new Exception("ID already owned by Student");
+            //hash password
+            Password = Cryptography.Hash(Password);
+            //save to DB
+            UoW.StudentRepo.Add(this);
+            int result = UoW.Complete();
+            if (result != 0)
+                return true;
+            else
+                return false;
         }
 
         public bool AddNewSession(Session selectedSession, string conName)
