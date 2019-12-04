@@ -71,7 +71,10 @@ namespace HonorsProject.ViewModel
             get { return _selectedSession; }
             set
             {
+                //if selected.id == 0 create else update
+                FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedSession = value;
+
                 OnPropertyChanged(nameof(SelectedSession));
             }
         }
@@ -160,7 +163,9 @@ namespace HonorsProject.ViewModel
                 if (FormContext == FormContext.Create)
                 {
                     //Create New
-                    return User.AddNewSession(SelectedSession, UnitOfWork);
+                    bool result = User.AddNewSession(SelectedSession, UnitOfWork);
+                    MySessions.Add(SelectedSession);
+                    return result;
                 }
                 else
                 {
