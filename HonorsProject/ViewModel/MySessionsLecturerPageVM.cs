@@ -37,6 +37,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _formContext = value;
+                OnPropertyChanged(nameof(FormContext));
             }
         }
 
