@@ -142,8 +142,8 @@ namespace HonorsProject.ViewModel
             Groups = new ObservableCollection<Group>();
             Groups.Add(new Group());
             List<Group> results;
-            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbcontextName)))
-                results = u.GroupRepository.GetAll().ToList();
+
+            results = UnitOfWork.GroupRepository.GetAll().ToList();
             if (results != null)
             {
                 foreach (Group g in results)
