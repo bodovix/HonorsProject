@@ -135,6 +135,7 @@ namespace HonorsProject.ViewModel
 
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
+        public AddLecturerCmd AddLecturerCmd { get; set; }
 
         #endregion CommandProperties
 
@@ -143,6 +144,7 @@ namespace HonorsProject.ViewModel
             //register commands
             NewModeCmd = new NewModeCmd(this);
             SaveFormCmd = new SaveCmd(this);
+            AddLecturerCmd = new AddLecturerCmd(this);
             //initial setup
             User = (Lecturer)appUser;
             GetAllLecturers();
@@ -234,6 +236,30 @@ namespace HonorsProject.ViewModel
         public List<Session> GetAllMyFutureSessions()
         {
             throw new NotImplementedException();
+        }
+
+        public bool AddLecturer()
+        {
+            FeedbackMessage = "";
+            try
+            {
+                //is lecturer selected
+                if (SelectedLecturer == null)
+                    throw new Exception("No lecturer selected.");
+                //check if lecture already in session
+                if (SelectedSession.Lecturers.Contains(SelectedLecturer))
+                    throw new Exception("Lecturer already in session.");
+                else
+                {
+                    SelectedSession.Lecturers.Add(SelectedLecturer);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
     }
 }

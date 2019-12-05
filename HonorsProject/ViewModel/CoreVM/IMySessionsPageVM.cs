@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public interface IMySessionsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, ISessionSubgridCmd
+    public interface IMySessionsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, ISessionSubgridCmd, IAddLecturerCmd
     {
         string FeedbackMessage { get; set; }
         FormContext FormContext { get; set; }
@@ -19,7 +19,6 @@ namespace HonorsProject.ViewModel.CoreVM
         ISystemUser User { get; set; }
         Session SelectedSession { get; set; }
         ObservableCollection<Session> MySessions { get; set; }
-
         ObservableCollection<Group> Groups { get; set; }
         ObservableCollection<Lecturer> AvailableLecturers { get; set; }
         Lecturer SelectedLecturer { get; set; }

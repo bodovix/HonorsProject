@@ -127,6 +127,7 @@ namespace HonorsProject.ViewModel
 
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
+        public AddLecturerCmd AddLecturerCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         #endregion Commands
 
@@ -157,6 +158,11 @@ namespace HonorsProject.ViewModel
         }
 
         public List<Session> GetAllMyFutureSessions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddLecturer()
         {
             throw new NotImplementedException();
         }

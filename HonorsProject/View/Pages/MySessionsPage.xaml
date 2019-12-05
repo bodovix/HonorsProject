@@ -54,6 +54,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Button Name="AddLecturerBtn"
+                            Command="{Binding AddLecturerCmd}"
                         Margin="0"
                         BorderThickness="0"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}">
