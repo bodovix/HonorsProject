@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
@@ -48,7 +49,7 @@ namespace HonorsProject.Test
             DateTime startDate = new DateTime();
             DateTime endDate = new DateTime();
             DateTime createdOn = new DateTime();
-            List<Lecturer> LecLst = new List<Lecturer>();
+            ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             Group group = VM.Groups.Where(g => g.Id == 1).FirstOrDefault();
             VM.SelectedSession = new Session("Test Session", startDate, endDate, LecLst, group, null, createdOn, _lecturer.Id);
 

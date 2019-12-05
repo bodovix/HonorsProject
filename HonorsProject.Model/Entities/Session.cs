@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HonorsProject.Model.Core;
+using System.Collections.ObjectModel;
 
 namespace HonorsProject.Model.Entities
 {
@@ -32,7 +33,7 @@ namespace HonorsProject.Model.Entities
             set { _endTime = DefaultDate(ref value); }
         }
 
-        public virtual List<Lecturer> Lecturers { get; set; }
+        public virtual ObservableCollection<Lecturer> Lecturers { get; set; }
         public virtual Group Group { get; set; }
         public virtual List<Question> Questions { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -41,10 +42,10 @@ namespace HonorsProject.Model.Entities
         public Session()
         {
             Questions = new List<Question>();
-            Lecturers = new List<Lecturer>();
+            Lecturers = new ObservableCollection<Lecturer>();
         }
 
-        public Session(string name, DateTime startTime, DateTime endTime, List<Lecturer> lecturers, Group group, List<Question> questions, DateTime createdOn, int createdByLecturerId)
+        public Session(string name, DateTime startTime, DateTime endTime, ObservableCollection<Lecturer> lecturers, Group group, List<Question> questions, DateTime createdOn, int createdByLecturerId)
         {
             Name = name;
             StartTime = startTime;

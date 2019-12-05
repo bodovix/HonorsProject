@@ -2,6 +2,7 @@
 using HonorsProject.Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,7 +52,7 @@ namespace HonorsProject.Test
                 Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", new DateTime(2019, 11, 28, 12, 05, 09, 200), 444);
                 l.Register(u);
                 s.Register(u);
-                List<Lecturer> lecL = new List<Lecturer>();
+                ObservableCollection<Lecturer> lecL = new ObservableCollection<Lecturer>();
                 lecL.Add(l);
                 List<Student> stL = new List<Student>();
                 stL.Add(s);
