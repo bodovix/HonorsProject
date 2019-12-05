@@ -97,6 +97,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private Lecturer _selectedLecturer;
+
+        public Lecturer SelectedLecturer
+        {
+            get { return _selectedLecturer; }
+            set
+            {
+                _selectedLecturer = value;
+                OnPropertyChanged(nameof(SelectedLecturer));
+            }
+        }
+
         private ObservableCollection<Group> _groups;
 
         public ObservableCollection<Group> Groups

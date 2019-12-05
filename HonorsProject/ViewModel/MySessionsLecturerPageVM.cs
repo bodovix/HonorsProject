@@ -105,6 +105,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private Lecturer _selectedLecturer;
+
+        public Lecturer SelectedLecturer
+        {
+            get { return _selectedLecturer; }
+            set
+            {
+                _selectedLecturer = value;
+                OnPropertyChanged(nameof(SelectedLecturer));
+            }
+        }
+
         private ObservableCollection<Group> _groups;
 
         public ObservableCollection<Group> Groups
@@ -133,12 +145,26 @@ namespace HonorsProject.ViewModel
             SaveFormCmd = new SaveCmd(this);
             //initial setup
             User = (Lecturer)appUser;
+            GetAllLecturers();
             UserRole = Role.Lecturer;
             FormContext = FormContext.Create;
             GetAllGroups(dbcontextName);
             SelectedSession = new Session();
             List<Session> sessions = GetAllMyCurrentSessions();
             MySessions = new ObservableCollection<Session>(sessions);
+        }
+
+        private void GetAllLecturers()
+        {
+            AvailableLecturers = new ObservableCollection<Lecturer>();
+            List<Lecturer> results = UnitOfWork.LecturerRepo.GetAll().ToList();
+            if (results != null)
+            {
+                foreach (Lecturer l in results)
+                {
+                    AvailableLecturers.Add(l);
+                }
+            }
         }
 
         private void GetAllGroups(string dbcontextName)

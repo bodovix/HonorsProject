@@ -32,7 +32,27 @@
             <!--Lecturers Panel-->
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Name="SearchTeachersTxtBox" Width="88" Margin="0" />
+                    <ComboBox x:Name="NoFollowComboBox"
+                              Height="23"
+                              Width="178"
+                              Margin="0"
+                              ItemsSource="{Binding AvailableLecturers}"
+                              SelectedItem="{Binding SelectedLecturer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="NoFollowup">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Height" Value="20" />
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Id}" />
+                                    <Run Text="{Binding Name}" />
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <Button Name="AddLecturerBtn"
                         Margin="0"
                         BorderThickness="0"
@@ -43,7 +63,7 @@
                 </StackPanel>
                 <ListView Name="LecutersInSessonLV"
                           ItemsSource="{Binding SelectedSession.Lecturers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                          Width="100"
+                          Width="200"
                           Margin="0"
                           Height="240"
                           Padding="0">
