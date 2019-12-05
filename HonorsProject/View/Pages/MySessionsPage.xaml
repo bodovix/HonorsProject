@@ -76,6 +76,23 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                            <MenuItem  Header="Delete"
+                                           Command="{Binding DataContext.RemoveLecturerCmd}"
+                                           CommandParameter="{Binding SelectedItem}">
+                                <MenuItem.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold">Remove</TextBlock>
+                                            <TextBlock>Removes Lecturer from session.</TextBlock>
+                                            <TextBlock>Changes must be saved.</TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </MenuItem.ToolTip>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                 </ListView>
             </StackPanel>
             <!--Main Details Form-->

@@ -62,6 +62,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\IComands\IRemoveLecturerCmd.cs" />
+    <Compile Include="ViewModel\Commands\RemoveLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IAddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\ISessionSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\AddLecturerCmd.cs" />

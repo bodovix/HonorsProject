@@ -136,6 +136,7 @@ namespace HonorsProject.ViewModel
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
         public AddLecturerCmd AddLecturerCmd { get; set; }
+        public RemoveLecturerCmd RemoveLecturerCmd { get; set; }
 
         #endregion CommandProperties
 
@@ -145,6 +146,7 @@ namespace HonorsProject.ViewModel
             NewModeCmd = new NewModeCmd(this);
             SaveFormCmd = new SaveCmd(this);
             AddLecturerCmd = new AddLecturerCmd(this);
+            RemoveLecturerCmd = new RemoveLecturerCmd(this);
             //initial setup
             User = (Lecturer)appUser;
             GetAllLecturers();
@@ -258,6 +260,22 @@ namespace HonorsProject.ViewModel
             catch (Exception ex)
             {
                 FeedbackMessage = ex.Message;
+                return false;
+            }
+        }
+
+        public bool RemoveLecturer(Lecturer lecturer)
+        {
+            FeedbackMessage = "";
+            //Saving done on update Save button clicked
+            if (SelectedSession.Lecturers.Contains(lecturer))
+            {
+                SelectedSession.Lecturers.Remove(lecturer);
+                return true;
+            }
+            else
+            {
+                FeedbackMessage = "Lecturer not found in session.";
                 return false;
             }
         }
