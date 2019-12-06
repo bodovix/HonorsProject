@@ -29,6 +29,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private SessionsContext _sessionsContext;
+
+        public SessionsContext SessionContext
+        {
+            get { return _sessionsContext; }
+            set
+            {
+                _sessionsContext = value;
+                OnPropertyChanged(nameof(SessionContext));
+            }
+        }
+
         private FormContext _formContext;
 
         public FormContext FormContext
@@ -154,6 +166,7 @@ namespace HonorsProject.ViewModel
             FormContext = FormContext.Create;
             GetAllGroups(dbcontextName);
             SelectedSession = new Session();
+            //initially loads current sessions
             List<Session> sessions = GetAllMyCurrentSessions();
             MySessions = new ObservableCollection<Session>(sessions);
         }
@@ -240,23 +253,42 @@ namespace HonorsProject.ViewModel
         {
             try
             {
+                SessionContext = SessionsContext.Current;
                 return User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.GetBaseException().Message;
+                FeedbackMessage = ex.Message;
                 return null;
             }
         }
 
         public List<Session> GetAllMyPreviousSessions()
         {
-            throw new NotImplementedException();
+            try
+            {
+                SessionContext = SessionsContext.Previous;
+                return User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return null;
+            }
         }
 
         public List<Session> GetAllMyFutureSessions()
         {
-            throw new NotImplementedException();
+            try
+            {
+                SessionContext = SessionsContext.Previous;
+                return User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return null;
+            }
         }
 
         public bool AddLecturer()
