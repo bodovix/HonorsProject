@@ -56,16 +56,21 @@ namespace HonorsProject.Test
             {
                 //test data cleared each test - need to re  register users
                 Lecturer l = lecturer;
+                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", new DateTime(2010, 01, 01), 444);
                 Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", new DateTime(2019, 11, 28, 12, 05, 09, 200), 444);
                 l.Register(u);
+                l2.Register(u);
                 s.Register(u);
                 ObservableCollection<Lecturer> lecL = new ObservableCollection<Lecturer>();
                 lecL.Add(l);
+                lecL.Add(l2);
                 List<Student> stL = new List<Student>();
                 stL.Add(s);
                 //group added before session
                 Group g = new Group("Computing 19/20", stL, null, new DateTime(2019, 12, 3), 444);
+                Group g2 = new Group("Ethical Hacking 19/20", stL, null, new DateTime(2019, 10, 3), 555);
                 u.GroupRepository.Add(g);
+                u.GroupRepository.Add(g2);
                 //session added with group
 
                 Session sesh = new Session("Week 1", new DateTime(2019, 12, 3), new DateTime(2019, 12, 3), lecL, g, null, new DateTime(2019, 12, 1), 444);

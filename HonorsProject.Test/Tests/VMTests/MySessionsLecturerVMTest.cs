@@ -35,8 +35,8 @@ namespace HonorsProject.Test
             Assert.IsTrue(VM.FormContext == FormContext.Create, "FormContext in wrong initial mode");
             Assert.IsTrue(VM.UserRole == Role.Lecturer, "UserRole in wrong initial mode for lecturer");
             Assert.IsTrue(VM.MySessions.Count == 1, "VM Sessions Count Wrong");
-            Assert.AreEqual(VM.Groups.Count, 2, "VM Groups Count Wrong");//one null and the test one(s)
-            Assert.AreEqual(VM.AvailableLecturers.Count, 1);
+            Assert.AreEqual(3, VM.Groups.Count, "VM Groups Count Wrong");//one null and the test one(s)
+            Assert.AreEqual(2, VM.AvailableLecturers.Count);
         }
 
         [TestMethod]
@@ -47,15 +47,48 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-            DateTime startDate = new DateTime(2019, 10, 01);
-            DateTime endDate = new DateTime(2019, 10, 01);
-            DateTime createdOn = new DateTime(2019, 09, 29);
+
             ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 444).FirstOrDefault());
             Group group = VM.Groups.Where(g => g.Id == 1).FirstOrDefault();
+            DateTime startDate = new DateTime(2019, 10, 01);
+            DateTime endDate = new DateTime(2019, 10, 01);
+            DateTime createdOn = new DateTime(2019, 09, 29);
             VM.SelectedSession = new Session("Test Session", startDate, endDate, LecLst, group, null, createdOn, _lecturer.Id);
 
             //Act
+            bool result = VM.Save();
+            //Assert
+            Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
+            Assert.AreEqual(FormContext.Create, VM.FormContext, "FormContext in wrong initial mode");
+            Assert.AreEqual(Role.Lecturer, VM.UserRole, "UserRole in wrong initial mode for lecturer");
+            Assert.AreEqual(2, VM.MySessions.Count, $"VM Sessions Count Wrong {VM.MySessions.Count} : should be {2}");
+            Assert.AreEqual(2, VM.AvailableLecturers.Count, "VM Lecturer Count Wrong");
+            Assert.AreEqual(3, VM.Groups.Count, "VM Groups Count Wrong");//one null and the test one(s)
+        }
+
+        [TestMethod]
+        public void Save_UpdateSelected_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_lecturer);
+            VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
+            VM.FormContext = FormContext.Create;
+
+            ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
+            LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 444).FirstOrDefault());
+            Group group = VM.Groups.Where(g => g.Id == 1).FirstOrDefault();
+
+            //Act - update session details
+            //select a session
+            VM.SelectedSession = VM.MySessions.Where(s => s.Id == 1).FirstOrDefault();
+            //update it
+            VM.SelectedSession.Name = "UpdatedTo";
+            VM.SelectedSession.Group = VM.Groups.Where(g => g.Id == 2).FirstOrDefault();
+            VM.SelectedSession.Lecturers.Add(VM.AvailableLecturers.Where(l => l.Id == 555).FirstOrDefault());
+            VM.SelectedSession.StartTime = new DateTime(2019, 12, 06);
+            VM.SelectedSession.EndTime = new DateTime(2019, 12, 06);
             bool result = VM.Save();
             //Assert
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
