@@ -22,12 +22,19 @@ namespace HonorsProject.Test
         {
             using (LabAssistantContext context = new LabAssistantContext(dbConName))
             {
+                //clear data
                 context.Answers.RemoveRange(context.Answers);
                 context.Questions.RemoveRange(context.Questions);
                 context.Groups.RemoveRange(context.Groups);
                 context.Lecturers.RemoveRange(context.Lecturers);
                 context.Sessions.RemoveRange(context.Sessions);
                 context.Students.RemoveRange(context.Students);
+                //reset auto increment ids
+                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Answers', RESEED, 0)");
+                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Groups', RESEED, 0)");
+                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Questions', RESEED, 0)");
+                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Sessions', RESEED, 0)");
+
                 context.SaveChanges();
             }
         }

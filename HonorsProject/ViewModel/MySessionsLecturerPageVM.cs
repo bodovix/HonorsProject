@@ -195,7 +195,8 @@ namespace HonorsProject.ViewModel
                 {
                     //Create New
                     bool result = User.AddNewSession(SelectedSession, UnitOfWork);
-                    MySessions.Add(SelectedSession);
+                    if (result)
+                        MySessions.Add(SelectedSession);
                     return result;
                 }
                 else
