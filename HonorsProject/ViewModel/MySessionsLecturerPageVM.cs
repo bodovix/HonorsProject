@@ -84,6 +84,8 @@ namespace HonorsProject.ViewModel
             get { return _selectedSession; }
             set
             {
+                if (value == null)
+                    value = new Session();
                 //if selected.id == 0 create else update
                 FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedSession = value;
@@ -162,13 +164,12 @@ namespace HonorsProject.ViewModel
             //initial setup
             User = (Lecturer)appUser;
             GetAllLecturers();
+            SelectedSession = new Session();
             UserRole = Role.Lecturer;
             FormContext = FormContext.Create;
             GetAllGroups(dbcontextName);
-            SelectedSession = new Session();
             //initially loads current sessions
-            List<Session> sessions = GetAllMyCurrentSessions();
-            MySessions = new ObservableCollection<Session>(sessions);
+            GetAllMyCurrentSessions();
         }
 
         private void GetAllLecturers()
@@ -249,45 +250,69 @@ namespace HonorsProject.ViewModel
             SelectedSession = new Session();
         }
 
-        public List<Session> GetAllMyCurrentSessions()
+        public bool GetAllMyCurrentSessions()
         {
             try
             {
                 SessionsContext = SessionsContext.Active;
-                return User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
+                MySessions = new ObservableCollection<Session>();
+                List<Session> result = User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
+                if (result != null)
+                {
+                    MySessions = new ObservableCollection<Session>(result);
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
                 FeedbackMessage = ex.Message;
-                return null;
+                return false;
             }
         }
 
-        public List<Session> GetAllMyPreviousSessions()
+        public bool GetAllMyPreviousSessions()
         {
             try
             {
                 SessionsContext = SessionsContext.Previous;
-                return User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
+                MySessions = new ObservableCollection<Session>();
+                List<Session> result = User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
+                if (result != null)
+                {
+                    MySessions = new ObservableCollection<Session>(result);
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
                 FeedbackMessage = ex.Message;
-                return null;
+                return false;
             }
         }
 
-        public List<Session> GetAllMyFutureSessions()
+        public bool GetAllMyFutureSessions()
         {
             try
             {
                 SessionsContext = SessionsContext.Previous;
-                return User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
+                MySessions = new ObservableCollection<Session>();
+                List<Session> result = User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
+                if (result != null)
+                {
+                    MySessions = new ObservableCollection<Session>(result);
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
                 FeedbackMessage = ex.Message;
-                return null;
+                return false;
             }
         }
 

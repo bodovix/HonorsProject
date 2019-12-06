@@ -9,10 +9,10 @@ namespace HonorsProject.ViewModel.Commands.IComands
 {
     public interface ISessionSubgridCmd
     {
-        List<Session> GetAllMyCurrentSessions();
+        bool GetAllMyCurrentSessions();
 
-        List<Session> GetAllMyPreviousSessions();
+        bool GetAllMyPreviousSessions();
 
-        List<Session> GetAllMyFutureSessions();
+        bool GetAllMyFutureSessions();
     }
 }

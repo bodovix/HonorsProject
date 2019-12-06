@@ -160,17 +160,17 @@ namespace HonorsProject.ViewModel
             throw new NotImplementedException();
         }
 
-        public List<Session> GetAllMyCurrentSessions()
+        public bool GetAllMyCurrentSessions()
         {
             throw new NotImplementedException();
         }
 
-        public List<Session> GetAllMyPreviousSessions()
+        public bool GetAllMyPreviousSessions()
         {
             throw new NotImplementedException();
         }
 
-        public List<Session> GetAllMyFutureSessions()
+        public bool GetAllMyFutureSessions()
         {
             throw new NotImplementedException();
         }
