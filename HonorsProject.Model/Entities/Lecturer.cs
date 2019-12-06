@@ -97,19 +97,19 @@ namespace HonorsProject.Model.Entities
                 return false;
         }
 
-        public List<Session> GetAllMyCurrentSessions(IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
-            return unitOfWork.SessionRepository.GetCurrentSessions(this, DateTime.Now.Date);
+            return unitOfWork.SessionRepository.GetCurrentSessions(this, todaysDate);
         }
 
-        public List<Session> GetAllMyPreviousSessions(IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
-            return unitOfWork.SessionRepository.GetPreviousSessions(this, DateTime.Now.Date);
+            return unitOfWork.SessionRepository.GetPreviousSessions(this, todaysDate);
         }
 
-        public List<Session> GetAllMyFutureSessions(IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
-            return unitOfWork.SessionRepository.GetFutureSessions(this, DateTime.Now.Date);
+            return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate);
         }
     }
 }

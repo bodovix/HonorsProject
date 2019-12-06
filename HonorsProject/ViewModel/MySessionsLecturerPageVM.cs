@@ -174,7 +174,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.GetBaseException().Message;
+                FeedbackMessage = ex.Message;
             }
         }
 

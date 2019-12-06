@@ -22,10 +22,10 @@ namespace HonorsProject.Model.Core
 
         bool AddNewSession(Session selectedSession, IUnitOfWork unitOfWork);
 
-        List<Session> GetAllMyCurrentSessions(IUnitOfWork unitOfWork);
+        List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
 
-        List<Session> GetAllMyPreviousSessions(IUnitOfWork unitOfWork);
+        List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
 
-        List<Session> GetAllMyFutureSessions(IUnitOfWork unitOfWork);
+        List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
     }
 }

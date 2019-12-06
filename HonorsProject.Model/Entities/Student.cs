@@ -89,17 +89,17 @@ namespace HonorsProject.Model.Entities
             throw new NotImplementedException("Students Cannot Create New Sessions.");
         }
 
-        public List<Session> GetAllMyCurrentSessions(IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
             throw new NotImplementedException();
         }
 
-        public List<Session> GetAllMyPreviousSessions(IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
             throw new NotImplementedException();
         }
 
-        public List<Session> GetAllMyFutureSessions(IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
             throw new NotImplementedException();
         }
