@@ -191,5 +191,9 @@
       <Name>HonorsProject.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\delete64Icon.png" />
+    <Resource Include="View\Images\magnifyingGlass64Img.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

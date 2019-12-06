@@ -230,6 +230,26 @@
                         <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" />
                         <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>
+                                        <Image Source="../Images/magnifyingGlass64Img.png"
+                                Style="{StaticResource IconImage}" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button>
+                                        <Image Source="../Images/delete64Icon.png"
+                                Style="{StaticResource IconImage}" />
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
