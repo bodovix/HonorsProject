@@ -181,6 +181,7 @@
                     <Button Name="ActiveSessionsBtn"
                             Content="Active"
                             Style="{StaticResource InfoButton}"
+                            Command="{Binding GetActiveSessionsCmd}"
                             Background="{Binding SessionsContext,
                                                 Converter={StaticResource SessionsContextToColourConverter},
                                             ConverterParameter={x:Static enums:SessionsContext.Active}}" />
@@ -188,12 +189,14 @@
                     <Button Name="FutureSessionsBtn"
                             Content="Future"
                             Style="{StaticResource InfoButton}"
+                            Command="{Binding GetFutureSessionsCmd}"
                             Background="{Binding SessionsContext,
                                                 Converter={StaticResource SessionsContextToColourConverter},
                                             ConverterParameter={x:Static enums:SessionsContext.Future}}" />
                     <Button Name="Previous"
                             Content="Previous"
                             Style="{StaticResource InfoButton}"
+                            Command="{Binding GetPreviousSessionsCmd}"
                             Background="{Binding SessionsContext,
                                                 Converter={StaticResource SessionsContextToColourConverter},
                                             ConverterParameter={x:Static enums:SessionsContext.Previous}}" />

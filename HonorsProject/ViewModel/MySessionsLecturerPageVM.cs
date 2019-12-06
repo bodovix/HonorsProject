@@ -305,7 +305,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionsContext = SessionsContext.Previous;
+                SessionsContext = SessionsContext.Future;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
                 if (result != null)
