@@ -189,12 +189,13 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
+            bool result;
             try
             {
                 if (FormContext == FormContext.Create)
                 {
                     //Create New
-                    bool result = User.AddNewSession(SelectedSession, UnitOfWork);
+                    result = User.AddNewSession(SelectedSession, UnitOfWork);
                     if (result)
                         MySessions.Add(SelectedSession);
                     return result;
@@ -202,7 +203,10 @@ namespace HonorsProject.ViewModel
                 else
                 {
                     //Update
-                    throw new NotImplementedException("Not worked on update yet");
+                    result = SelectedSession.ValidateSession();
+                    if (result)
+                        UnitOfWork.Complete();
+                    return result;
                 }
             }
             catch (Exception ex)

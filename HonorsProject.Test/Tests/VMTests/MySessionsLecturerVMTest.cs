@@ -75,11 +75,6 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-
-            ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
-            LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 444).FirstOrDefault());
-            Group group = VM.Groups.Where(g => g.Id == 1).FirstOrDefault();
-
             //Act - update session details
             //select a session
             VM.SelectedSession = VM.MySessions.Where(s => s.Id == 1).FirstOrDefault();
@@ -92,11 +87,11 @@ namespace HonorsProject.Test
             bool result = VM.Save();
             //Assert
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
-            Assert.IsTrue(VM.FormContext == FormContext.Create, "FormContext in wrong initial mode");
-            Assert.IsTrue(VM.UserRole == Role.Lecturer, "UserRole in wrong initial mode for lecturer");
-            Assert.IsTrue(VM.MySessions.Count == 2, $"VM Sessions Count Wrong {VM.MySessions.Count} : should be {2}");
-            Assert.IsTrue(VM.AvailableLecturers.Count == 1, "VM Lecturer Count Wrong");
-            Assert.IsTrue(VM.Groups.Count == 2, "VM Groups Count Wrong");//one null and the test one(s)
+            Assert.AreEqual(FormContext.Update, VM.FormContext, "FormContext in wrong initial mode");
+            Assert.AreEqual(Role.Lecturer, VM.UserRole, "UserRole in wrong initial mode for lecturer");
+            Assert.AreEqual(1, VM.MySessions.Count, $"VM Sessions Count Wrong {VM.MySessions.Count} : should be {2}");
+            Assert.AreEqual(2, VM.AvailableLecturers.Count, "VM Lecturer Count Wrong");
+            Assert.AreEqual(3, VM.Groups.Count, "VM Groups Count Wrong");//one null and the test one(s)
         }
     }
 }
