@@ -8,7 +8,7 @@ namespace HonorsProject.Model.Enums
 {
     public enum SessionsContext
     {
-        Current,
+        Active,
         Future,
         Previous
     }

@@ -31,13 +31,13 @@ namespace HonorsProject.ViewModel
 
         private SessionsContext _sessionsContext;
 
-        public SessionsContext SessionContext
+        public SessionsContext SessionsContext
         {
             get { return _sessionsContext; }
             set
             {
                 _sessionsContext = value;
-                OnPropertyChanged(nameof(SessionContext));
+                OnPropertyChanged(nameof(SessionsContext));
             }
         }
 
@@ -253,7 +253,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionContext = SessionsContext.Current;
+                SessionsContext = SessionsContext.Active;
                 return User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
             }
             catch (Exception ex)
@@ -267,7 +267,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionContext = SessionsContext.Previous;
+                SessionsContext = SessionsContext.Previous;
                 return User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
             }
             catch (Exception ex)
@@ -281,7 +281,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionContext = SessionsContext.Previous;
+                SessionsContext = SessionsContext.Previous;
                 return User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
             }
             catch (Exception ex)

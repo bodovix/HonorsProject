@@ -69,6 +69,7 @@
     <Compile Include="ViewModel\Commands\AddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\NewModeCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
+    <Compile Include="ViewModel\Converters\SessionsContextToColourConverter.cs" />
     <Compile Include="ViewModel\Converters\EnumToItemsSource.cs" />
     <Compile Include="ViewModel\Converters\FormContextToTextConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToVisibleConverter.cs" />

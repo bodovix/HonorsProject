@@ -38,13 +38,13 @@ namespace HonorsProject.ViewModel
 
         private SessionsContext _sessionsContext;
 
-        public SessionsContext SessionContext
+        public SessionsContext SessionsContext
         {
             get { return _sessionsContext; }
             set
             {
                 _sessionsContext = value;
-                OnPropertyChanged(nameof(SessionContext));
+                OnPropertyChanged(nameof(SessionsContext));
             }
         }
 

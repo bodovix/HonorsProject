@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
+      xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -11,6 +12,7 @@
     <Page.Resources>
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
+        <cv:SessionsContextToColourConverter x:Key="SessionsContextToColourConverter" />
     </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
         <Button Name="NewSessionBtn"
@@ -176,9 +178,25 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="My Sessions" Grid.Column="0" Grid.Row="0" Style="{StaticResource FormTitleText}" />
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-                    <Button Name="ActiveSessionsBtn" Content="Active" Style="{StaticResource InfoButton}" />
-                    <Button Name="FutureSessionsBtn" Content="Future" Style="{StaticResource InfoButton}" />
-                    <Button Name="Previous" Content="Previous" Style="{StaticResource InfoButton}" />
+                    <Button Name="ActiveSessionsBtn"
+                            Content="Active"
+                            Style="{StaticResource InfoButton}"
+                            Background="{Binding SessionsContext,
+                                                Converter={StaticResource SessionsContextToColourConverter},
+                                            ConverterParameter={x:Static enums:SessionsContext.Active}}" />
+
+                    <Button Name="FutureSessionsBtn"
+                            Content="Future"
+                            Style="{StaticResource InfoButton}"
+                            Background="{Binding SessionsContext,
+                                                Converter={StaticResource SessionsContextToColourConverter},
+                                            ConverterParameter={x:Static enums:SessionsContext.Future}}" />
+                    <Button Name="Previous"
+                            Content="Previous"
+                            Style="{StaticResource InfoButton}"
+                            Background="{Binding SessionsContext,
+                                                Converter={StaticResource SessionsContextToColourConverter},
+                                            ConverterParameter={x:Static enums:SessionsContext.Previous}}" />
                 </StackPanel>
                 <ListView  Grid.Column="0" Grid.Row="2">
                 </ListView>
