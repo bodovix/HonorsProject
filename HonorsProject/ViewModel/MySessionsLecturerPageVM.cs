@@ -160,30 +160,44 @@ namespace HonorsProject.ViewModel
 
         private void GetAllLecturers()
         {
-            AvailableLecturers = new ObservableCollection<Lecturer>();
-            List<Lecturer> results = UnitOfWork.LecturerRepo.GetAll().ToList();
-            if (results != null)
+            try
             {
-                foreach (Lecturer l in results)
+                AvailableLecturers = new ObservableCollection<Lecturer>();
+                List<Lecturer> results = UnitOfWork.LecturerRepo.GetAll().ToList();
+                if (results != null)
                 {
-                    AvailableLecturers.Add(l);
+                    foreach (Lecturer l in results)
+                    {
+                        AvailableLecturers.Add(l);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.GetBaseException().Message;
             }
         }
 
         private void GetAllGroups(string dbcontextName)
         {
-            Groups = new ObservableCollection<Group>();
-            Groups.Add(new Group());
-            List<Group> results;
-
-            results = UnitOfWork.GroupRepository.GetAll().ToList();
-            if (results != null)
+            try
             {
-                foreach (Group g in results)
+                Groups = new ObservableCollection<Group>();
+                Groups.Add(new Group());
+                List<Group> results;
+
+                results = UnitOfWork.GroupRepository.GetAll().ToList();
+                if (results != null)
                 {
-                    Groups.Add(g);
+                    foreach (Group g in results)
+                    {
+                        Groups.Add(g);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.GetBaseException().Message;
             }
         }
 
@@ -272,17 +286,20 @@ namespace HonorsProject.ViewModel
         public bool RemoveLecturer(Lecturer lecturer)
         {
             FeedbackMessage = "";
-            //Saving done on update Save button clicked
-            if (SelectedSession.Lecturers.Contains(lecturer))
-            {
-                SelectedSession.Lecturers.Remove(lecturer);
-                return true;
-            }
+            if (SelectedSession.Lecturers != null)
+                //Saving done on update Save button clicked
+                if (SelectedSession.Lecturers.Contains(lecturer))
+                {
+                    SelectedSession.Lecturers.Remove(lecturer);
+                    return true;
+                }
+                else
+                {
+                    FeedbackMessage = "Lecturer not found in session.";
+                    return false;
+                }
             else
-            {
-                FeedbackMessage = "Lecturer not found in session.";
                 return false;
-            }
         }
     }
 }
