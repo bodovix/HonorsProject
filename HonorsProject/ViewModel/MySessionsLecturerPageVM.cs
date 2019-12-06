@@ -240,7 +240,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                return User.GetAllMyCurrentSessions(UnitOfWork);
+                return User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
             }
             catch (Exception ex)
             {

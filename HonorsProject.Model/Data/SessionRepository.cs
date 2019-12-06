@@ -16,11 +16,12 @@ namespace HonorsProject.Model.Data
 
         public List<Session> GetCurrentSessions(Lecturer lecturer, DateTime date)
         {
+            DateTime dateDate = date.Date;
             //get sessions belonging to this lecturer
             //where inputted date is between the start and end dates of the session
             List<Session> results = _entities.Where(s => s.Lecturers.Any(l => l.Id == lecturer.Id)
-                                                && s.StartTime <= date
-                                                && s.EndTime >= date)
+                                                && s.StartTime <= dateDate
+                                                && s.EndTime >= dateDate)
                                                     .ToList();
             return results;
         }
@@ -34,8 +35,9 @@ namespace HonorsProject.Model.Data
         {
             //get sessions belonging to this lecturer
             //and start date is ahead of inputted date
+            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(s => s.Lecturers.Any(l => l.Id == lecturer.Id)
-                                                && s.StartTime > date)
+                                                && s.StartTime > dateDate)
                                                     .ToList();
             return results;
         }
@@ -49,8 +51,9 @@ namespace HonorsProject.Model.Data
         {
             //get sessions belonging to this lecturer
             //and end date is behind inputted date
+            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(s => s.Lecturers.Any(l => l.Id == lecturer.Id)
-                                                && s.EndTime < date)
+                                                && s.EndTime < dateDate)
                                                     .ToList();
             return results;
         }
