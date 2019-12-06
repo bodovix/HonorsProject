@@ -73,10 +73,10 @@ namespace HonorsProject.Test
                 u.GroupRepository.Add(g2);
                 //session added with group
                 //active session
-                Session todaysSesh = new Session("Todays Sesh", DateTime.Now, DateTime.Now, lecL, g, null, DateTime.Now, 444);
-                Session longTermSesh = new Session("Long term Sesh", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), lecL, g, null, DateTime.Now, 444);
-                Session previousSesh = new Session("Previous Sesh", DateTime.Now.AddMonths(-1), DateTime.Now.AddMonths(-1), lecL, g, null, DateTime.Now.AddMonths(-2), 444);
-                Session futureSesh = new Session("Future Sesh", DateTime.Now.AddMonths(1), DateTime.Now.AddMonths(1), lecL, g, null, DateTime.Now, 444);
+                Session todaysSesh = new Session("Todays Sesh", DateTime.Now.Date, DateTime.Now.Date, lecL, g, null, DateTime.Now, 444);
+                Session longTermSesh = new Session("Long term Sesh", DateTime.Now.AddDays(-1).Date, DateTime.Now.AddDays(1).Date, lecL, g, null, DateTime.Now, 444);
+                Session previousSesh = new Session("Previous Sesh", DateTime.Now.AddMonths(-1).Date, DateTime.Now.AddMonths(-1).Date, lecL, g, null, DateTime.Now.AddMonths(-2), 444);
+                Session futureSesh = new Session("Future Sesh", DateTime.Now.AddMonths(1).Date, DateTime.Now.AddMonths(1).Date, lecL, g, null, DateTime.Now, 444);
                 u.SessionRepository.Add(todaysSesh);
                 u.SessionRepository.Add(longTermSesh);
                 u.SessionRepository.Add(previousSesh);
