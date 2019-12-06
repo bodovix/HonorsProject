@@ -36,6 +36,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private SessionsContext _sessionsContext;
+
+        public SessionsContext SessionContext
+        {
+            get { return _sessionsContext; }
+            set
+            {
+                _sessionsContext = value;
+                OnPropertyChanged(nameof(SessionContext));
+            }
+        }
+
         private Role _userRole;
 
         public Role UserRole

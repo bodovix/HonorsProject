@@ -15,6 +15,7 @@ namespace HonorsProject.ViewModel.CoreVM
     {
         string FeedbackMessage { get; set; }
         FormContext FormContext { get; set; }
+        SessionsContext SessionContext { get; set; }
         Role UserRole { get; set; }
         ISystemUser User { get; set; }
         Session SelectedSession { get; set; }
