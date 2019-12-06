@@ -151,6 +151,9 @@ namespace HonorsProject.ViewModel
         public SaveCmd SaveFormCmd { get; set; }
         public AddLecturerCmd AddLecturerCmd { get; set; }
         public RemoveLecturerCmd RemoveLecturerCmd { get; set; }
+        public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
+        public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
+        public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
 
         #endregion CommandProperties
 
@@ -161,6 +164,10 @@ namespace HonorsProject.ViewModel
             SaveFormCmd = new SaveCmd(this);
             AddLecturerCmd = new AddLecturerCmd(this);
             RemoveLecturerCmd = new RemoveLecturerCmd(this);
+            GetActiveSessionsCmd = new GetActiveSessionsCmd(this);
+            GetFutureSessionsCmd = new GetFutureSessionsCmd(this);
+            GetPreviousSessionsCmd = new GetPreviousSessionsCmd(this);
+
             //initial setup
             User = (Lecturer)appUser;
             GetAllLecturers();

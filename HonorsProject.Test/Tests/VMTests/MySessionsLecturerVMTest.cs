@@ -32,11 +32,14 @@ namespace HonorsProject.Test
             //Act
             // -- VM constructor is Act
             //Assert
-            Assert.IsTrue(VM.FormContext == FormContext.Create, "FormContext in wrong initial mode");
-            Assert.IsTrue(VM.UserRole == Role.Lecturer, "UserRole in wrong initial mode for lecturer");
-            Assert.IsTrue(VM.MySessions.Count == 1, "VM Sessions Count Wrong");
-            Assert.AreEqual(3, VM.Groups.Count, "VM Groups Count Wrong");//one null and the test one(s)
-            Assert.AreEqual(2, VM.AvailableLecturers.Count);
+            int expectedSessions = 2;
+            int expectedGroups = 3;
+            int expectedLecturers = 2;
+            Assert.AreEqual(FormContext.Create, VM.FormContext, "FormContext in wrong initial mode");
+            Assert.AreEqual(Role.Lecturer, VM.UserRole, "UserRole in wrong initial mode for lecturer");
+            Assert.AreEqual(expectedSessions, VM.MySessions.Count, $"VM Sessions Count Wrong expected {expectedSessions}  : actual {VM.MySessions.Count}");
+            Assert.AreEqual(expectedGroups, VM.Groups.Count, $"VM Groups Count Wrong. Expected {expectedGroups}   : actual {VM.Groups.Count}");//one null and the test one(s)
+            Assert.AreEqual(expectedLecturers, VM.AvailableLecturers.Count);
         }
 
         [TestMethod]

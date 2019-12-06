@@ -141,11 +141,19 @@ namespace HonorsProject.ViewModel
         public SaveCmd SaveFormCmd { get; set; }
         public AddLecturerCmd AddLecturerCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public RemoveLecturerCmd RemoveLecturerCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
+        public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
+        public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
 
         #endregion Commands
 
         public MySessionsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
+            //register commands
+            GetActiveSessionsCmd = new GetActiveSessionsCmd(this);
+            GetFutureSessionsCmd = new GetFutureSessionsCmd(this);
+            GetPreviousSessionsCmd = new GetPreviousSessionsCmd(this);
+
             User = (Student)appUser;
             UserRole = Role.Student;
         }

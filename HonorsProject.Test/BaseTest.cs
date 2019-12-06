@@ -56,8 +56,8 @@ namespace HonorsProject.Test
             {
                 //test data cleared each test - need to re  register users
                 Lecturer l = lecturer;
-                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", new DateTime(2010, 01, 01), 444);
-                Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", new DateTime(2019, 11, 28, 12, 05, 09, 200), 444);
+                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", DateTime.Now.AddYears(-2), 444);
+                Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", DateTime.Now.AddYears(-1), 444);
                 l.Register(u);
                 l2.Register(u);
                 s.Register(u);
@@ -67,14 +67,20 @@ namespace HonorsProject.Test
                 List<Student> stL = new List<Student>();
                 stL.Add(s);
                 //group added before session
-                Group g = new Group("Computing 19/20", stL, null, new DateTime(2019, 12, 3), 444);
-                Group g2 = new Group("Ethical Hacking 19/20", stL, null, new DateTime(2019, 10, 3), 555);
+                Group g = new Group("Computing 19/20", stL, null, DateTime.Now.AddMonths(-6), 444);
+                Group g2 = new Group("Ethical Hacking 19/20", stL, null, DateTime.Now.AddMonths(-5), 555);
                 u.GroupRepository.Add(g);
                 u.GroupRepository.Add(g2);
                 //session added with group
-
-                Session sesh = new Session("Week 1", new DateTime(2019, 12, 3), new DateTime(2019, 12, 3), lecL, g, null, new DateTime(2019, 12, 1), 444);
-                u.SessionRepository.Add(sesh);
+                //active session
+                Session todaysSesh = new Session("Todays Sesh", DateTime.Now, DateTime.Now, lecL, g, null, DateTime.Now, 444);
+                Session longTermSesh = new Session("Long term Sesh", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), lecL, g, null, DateTime.Now, 444);
+                Session previousSesh = new Session("Previous Sesh", DateTime.Now.AddMonths(-1), DateTime.Now.AddMonths(-1), lecL, g, null, DateTime.Now.AddMonths(-2), 444);
+                Session futureSesh = new Session("Future Sesh", DateTime.Now.AddMonths(1), DateTime.Now.AddMonths(1), lecL, g, null, DateTime.Now, 444);
+                u.SessionRepository.Add(todaysSesh);
+                u.SessionRepository.Add(longTermSesh);
+                u.SessionRepository.Add(previousSesh);
+                u.SessionRepository.Add(futureSesh);
                 u.Complete();
             }
         }
