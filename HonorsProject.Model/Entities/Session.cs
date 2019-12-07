@@ -76,6 +76,8 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("End time required.");
             if (Group == null)
                 throw new ArgumentException("Sessions must belong to a group.");
+            if (Group.Id == 0)
+                throw new ArgumentException("Sessions must belong to a group.");
             if (CreatedByLecturerId == 0)
                 throw new ArgumentException("Session created by Id required.");
             if (Lecturers == null)

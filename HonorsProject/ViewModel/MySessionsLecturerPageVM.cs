@@ -235,7 +235,23 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = User.AddNewSession(SelectedSession, UnitOfWork);
                     if (result)
-                        MySessions.Add(SelectedSession);
+                        switch (SessionsContext)
+                        {
+                            case SessionsContext.Active:
+                                GetAllMyCurrentSessions();
+                                break;
+
+                            case SessionsContext.Future:
+                                GetAllMyFutureSessions();
+                                break;
+
+                            case SessionsContext.Previous:
+                                GetAllMyPreviousSessions();
+                                break;
+
+                            default:
+                                break;
+                        }
                     return result;
                 }
                 else
@@ -256,9 +272,21 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(object objToDelete)
         {
-            Session sessionToDelte = (Session)objToDelete;
-
-            throw new NotImplementedException();
+            Session sessionToDelte = objToDelete as Session;
+            if (sessionToDelte == null)
+            {
+                FeedbackMessage = "No session selected.";
+                return false;
+            }
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
         public void EnterNewMode()
