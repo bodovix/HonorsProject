@@ -79,9 +79,9 @@ namespace HonorsProject.Model.Entities
             if (CreatedByLecturerId == 0)
                 throw new ArgumentException("Session created by Id required.");
             if (Lecturers == null)
-                throw new Exception("Session must have lecturers");
+                throw new ArgumentException("Session must have lecturers");
             if (Lecturers.Count == 0)
-                throw new Exception("Session must have lecturers");
+                throw new ArgumentException("Session must have lecturers");
             return true;
         }
     }
