@@ -61,7 +61,17 @@
                         BorderThickness="0"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}">
                         <Image Source="../Images/plusIcon.png"
-                                Style="{StaticResource IconImage}" />
+                                Style="{StaticResource IconImage}">
+                            <Image.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Add to session</TextBlock>
+                                        <TextBlock>Adds Lecturer to selected session.</TextBlock>
+                                        <TextBlock>Changes must be saved.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </Image.ToolTip>
+                        </Image>
                     </Button>
                 </StackPanel>
                 <ListView Name="LecutersInSessonLV"
@@ -235,7 +245,17 @@
                                 <DataTemplate>
                                     <Button>
                                         <Image Source="../Images/magnifyingGlass64Img.png"
-                                Style="{StaticResource IconImage}" />
+                                Style="{StaticResource IconImage}">
+                                            <Image.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <TextBlock FontWeight="Bold">Go to session</TextBlock>
+                                                        <TextBlock>View the selected session.</TextBlock>
+                                                        <TextBlock>Unsaved changes will be lost.</TextBlock>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Image.ToolTip>
+                                        </Image>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -243,9 +263,20 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button>
+                                    <Button
+                                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}">
                                         <Image Source="../Images/delete64Icon.png"
-                                Style="{StaticResource IconImage}" />
+                                Style="{StaticResource IconImage}">
+                                            <Image.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <TextBlock FontWeight="Bold">Delete session</TextBlock>
+                                                        <TextBlock>This session will be deleted.</TextBlock>
+                                                        <TextBlock>This action cannot be undone.</TextBlock>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Image.ToolTip>
+                                        </Image>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
