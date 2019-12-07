@@ -78,6 +78,8 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Sessions must belong to a group.");
             if (CreatedByLecturerId == 0)
                 throw new ArgumentException("Session created by Id required.");
+            if (Lecturers.Count == 0)
+                throw new Exception("Session must have lecturers");
             return true;
         }
     }
