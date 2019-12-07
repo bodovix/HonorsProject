@@ -139,8 +139,8 @@ namespace HonorsProject.ViewModel
 
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
-        public AddLecturerCmd AddLecturerCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public RemoveLecturerCmd RemoveLecturerCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public AddLecturerCmd AddLecturerCmd { get; set; }
+        public RemoveLecturerCmd RemoveLecturerCmd { get; set; }
         public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
         public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
         public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
