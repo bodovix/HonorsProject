@@ -256,6 +256,8 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(object objToDelete)
         {
+            Session sessionToDelte = (Session)objToDelete;
+
             throw new NotImplementedException();
         }
 

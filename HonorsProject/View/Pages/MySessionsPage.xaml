@@ -91,7 +91,7 @@
                     <ListView.ContextMenu>
                         <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
                             <MenuItem  Header="Remove"
-                                           Command="{Binding DataContext.RemoveLecturerCmd}"
+                                           Command="{Binding RemoveLecturerCmd}"
                                            CommandParameter="{Binding SelectedItem}">
                                 <MenuItem.ToolTip>
                                     <ToolTip>
@@ -177,7 +177,7 @@
                        Style="{StaticResource UserInputError}" />
             </Grid>
             <!--Sub Grid Container-->
-            <Grid Grid.Column="1" Grid.Row="1">
+            <Grid Name="SessionsGV" Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
@@ -265,7 +265,8 @@
                                 <DataTemplate>
                                     <Button
                                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
-                                        Command="{Binding DeleteCmd}">
+                                        Command="{Binding DataContext.DeleteCmd, ElementName=SessionsGV}"
+                                        CommandParameter="{Binding}">
                                         <Image Source="../Images/delete64Icon.png"
                                         Style="{StaticResource IconImage}">
                                             <Image.ToolTip>
