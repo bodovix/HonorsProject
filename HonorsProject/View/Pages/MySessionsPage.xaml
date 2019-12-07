@@ -90,7 +90,7 @@
                     </ListView.ItemTemplate>
                     <ListView.ContextMenu>
                         <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
-                            <MenuItem  Header="Delete"
+                            <MenuItem  Header="Remove"
                                            Command="{Binding DataContext.RemoveLecturerCmd}"
                                            CommandParameter="{Binding SelectedItem}">
                                 <MenuItem.ToolTip>
@@ -264,9 +264,10 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}">
+                                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
+                                        Command="{Binding DeleteCmd}">
                                         <Image Source="../Images/delete64Icon.png"
-                                Style="{StaticResource IconImage}">
+                                        Style="{StaticResource IconImage}">
                                             <Image.ToolTip>
                                                 <ToolTip>
                                                     <StackPanel>

@@ -144,6 +144,7 @@ namespace HonorsProject.ViewModel
         public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
         public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
         public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
+        public DeleteCmd DeleteCmd { get; set; }
 
         #endregion Commands
 
@@ -159,6 +160,11 @@ namespace HonorsProject.ViewModel
         }
 
         public bool Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(object objectToDelete)
         {
             throw new NotImplementedException();
         }

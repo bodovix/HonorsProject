@@ -154,6 +154,7 @@ namespace HonorsProject.ViewModel
         public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
         public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
         public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
+        public DeleteCmd DeleteCmd { get; set; }
 
         #endregion CommandProperties
 
@@ -167,6 +168,7 @@ namespace HonorsProject.ViewModel
             GetActiveSessionsCmd = new GetActiveSessionsCmd(this);
             GetFutureSessionsCmd = new GetFutureSessionsCmd(this);
             GetPreviousSessionsCmd = new GetPreviousSessionsCmd(this);
+            DeleteCmd = new DeleteCmd(this);
 
             //initial setup
             User = (Lecturer)appUser;
@@ -224,6 +226,7 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
+            FeedbackMessage = "";
             bool result;
             try
             {
@@ -249,6 +252,11 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.GetBaseException().Message;
                 return false;
             }
+        }
+
+        public bool Delete(object objToDelete)
+        {
+            throw new NotImplementedException();
         }
 
         public void EnterNewMode()

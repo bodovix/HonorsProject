@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public interface IMySessionsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, ISessionSubgridCmd, IAddLecturerCmd, IRemoveLecturerCmd
+    public interface IMySessionsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, ISessionSubgridCmd, IAddLecturerCmd, IRemoveLecturerCmd, IDeleteCmd
     {
         string FeedbackMessage { get; set; }
         FormContext FormContext { get; set; }
