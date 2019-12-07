@@ -86,8 +86,6 @@ namespace HonorsProject.Model.Entities
         {
             session.CreatedByLecturerId = Id;
             session.CreatedOn = DateTime.Now;
-            //add this lecturer to s
-
             //creating session this way so constructor can validate it
             if (session.ValidateSession())
             {
