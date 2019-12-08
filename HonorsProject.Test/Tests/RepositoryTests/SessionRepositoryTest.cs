@@ -92,7 +92,7 @@ namespace HonorsProject.Test.Repositorytests
         public void GetFutureSessionsForLecturer_Success()
         {
             //arrange
-            int expected = 1;
+            int expected = 2;
             //act
             List<Session> results = sessionRepo.GetFutureSessions(_lecturer, DateTime.Now.Date);
             //assert
