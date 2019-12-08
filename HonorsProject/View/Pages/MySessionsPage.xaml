@@ -36,13 +36,14 @@
             <!--Lecturers Panel-->
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="NoFollowComboBox"
-                              Height="23"
+                    <ComboBox Height="23"
                               Width="178"
                               Margin="0"
                               ItemsSource="{Binding AvailableLecturers}"
                               SelectedItem="{Binding SelectedLecturer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="NoFollowup">
+                              SelectedValuePath="NoFollowup"
+                              Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="Height" Value="20" />
@@ -128,7 +129,7 @@
                             Content="{Binding SelectedSession.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <TextBox    Name="NameTxt" 
+                    <TextBox    Name="NameTxt"
                                 TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -139,6 +140,8 @@
                     <ComboBox x:Name="GroupComboBox"
                               Height="23"
                               ItemsSource="{Binding Groups}"
+                              IsEnabled="{Binding Path=UserRole, Converter={StaticResource RoleToEnabledConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}"
                               SelectedItem="{Binding SelectedSession.Group,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               DisplayMemberPath="Name">
                         <ComboBox.ItemContainerStyle>
@@ -156,7 +159,9 @@
                 </GroupBox>
                 <GroupBox Header="End Time" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                     <DatePicker SelectedDate="{Binding SelectedSession.EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           Style="{StaticResource UserInputDate}" />
+                           Style="{StaticResource UserInputDate}"
+                                IsEnabled="{Binding Path=UserRole, Converter={StaticResource RoleToEnabledConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}" />
                 </GroupBox>
                 <Button Name="SaveBtn"
                         Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
