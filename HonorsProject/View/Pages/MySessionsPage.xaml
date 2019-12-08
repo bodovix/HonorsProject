@@ -95,7 +95,7 @@
                     <ListView.ContextMenu>
                         <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
                             <MenuItem  Header="Remove"
-                                           Command="{Binding RemoveLecturerCmd}"
+                                           Command="{Binding DataContext.RemoveLecturerCmd}"
                                            CommandParameter="{Binding SelectedItem}">
                                 <MenuItem.ToolTip>
                                     <ToolTip>
