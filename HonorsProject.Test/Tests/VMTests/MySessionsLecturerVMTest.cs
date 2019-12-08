@@ -42,6 +42,8 @@ namespace HonorsProject.Test
             Assert.AreEqual(expectedLecturers, VM.AvailableLecturers.Count);
         }
 
+        #region SaveSessons
+
         [TestMethod]
         public void Save_AddNew_Active_Success()
         {
@@ -128,7 +130,7 @@ namespace HonorsProject.Test
             //Act
             bool result = VM.Save();
             //Assert
-            int expectedSessions = 2;
+            int expectedSessions = 3;
             int expectedLecturers = 2;
             int expectedGroups = 3;
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
@@ -161,7 +163,7 @@ namespace HonorsProject.Test
             //Act
             bool result = VM.Save();
             //Assert
-            int expectedSessions = 2;
+            int expectedSessions = 3;
             int expectedLecturers = 2;
             int expectedGroups = 3;
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
@@ -267,5 +269,26 @@ namespace HonorsProject.Test
             Assert.AreEqual(expectedLecturers, VM.AvailableLecturers.Count, "VM Lecturer Count Wrong");
             Assert.AreEqual(expectedGroups, VM.Groups.Count, "VM Groups Count Wrong");//one null and the test one(s)
         }
+
+        #endregion SaveSessons
+
+        #region DeleteSessions
+
+        [TestMethod]
+        public void Delete_Confirm_Success()
+        {
+        }
+
+        [TestMethod]
+        public void Delete_MissingObject_Fail()
+        {
+        }
+
+        [TestMethod]
+        public void Delete_Cancel_Fail()
+        {
+        }
+
+        #endregion DeleteSessions
     }
 }

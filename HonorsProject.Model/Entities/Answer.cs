@@ -22,5 +22,16 @@ namespace HonorsProject.Model.Entities
         public Answer()
         {
         }
+
+        public Answer(string name, string answerTest, bool wasHelpfull, Lecturer answeredBy, Question question, DateTime createdOn)
+        {
+            //ID handled by EF
+            Name = name;
+            AnswerTest = answerTest;
+            WasHelpfull = wasHelpfull;
+            AnsweredBy = answeredBy;
+            Question = question;
+            CreatedOn = createdOn;
+        }
     }
 }
