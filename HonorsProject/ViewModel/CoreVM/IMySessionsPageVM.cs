@@ -23,5 +23,6 @@ namespace HonorsProject.ViewModel.CoreVM
         ObservableCollection<Group> Groups { get; set; }
         ObservableCollection<Lecturer> AvailableLecturers { get; set; }
         Lecturer SelectedLecturer { get; set; }
+        bool IsConfirmationAccepted { get; set; }
     }
 }

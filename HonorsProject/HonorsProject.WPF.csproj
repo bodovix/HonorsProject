@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\Commands\IComands\ISaveVMFormCmd.cs" />
     <Compile Include="ViewModel\CoreVM\IMySessionsPageVM.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />
+    <Compile Include="ViewModel\MyGroupsLecturerPageVM.cs" />
     <Compile Include="ViewModel\MySessionsLecturerPageVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\MySessionsStudentPageVM.cs" />

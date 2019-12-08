@@ -18,6 +18,7 @@ using HonorsProject.ViewModel;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
+using HonorsProject.Model.HelperClasses;
 
 namespace HonorsProject.View.Pages
 {
@@ -34,6 +35,17 @@ namespace HonorsProject.View.Pages
             CreateMySesoinVM();
             InitializeComponent();
             MainContainer.DataContext = VM;
+            Mediator.Register(MediatorChannels.DeleteSessionConfirmation.ToString(), ShowDeleteConfMessage);
+        }
+
+        private void ShowDeleteConfMessage(object obj)
+        {
+            MessageBoxResult dialogResult = MessageBox.Show("Deleting Sessions cannot be undone. \nAll questions and answers for this session will also be deleted.", "Are you sure?", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)  // error is here
+                VM.IsConfirmationAccepted = true;
+            else
+                VM.IsConfirmationAccepted = false;
         }
 
         private void CreateMySesoinVM()

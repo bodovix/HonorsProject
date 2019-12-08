@@ -8,6 +8,7 @@ using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
 
@@ -64,6 +65,8 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(User));
             }
         }
+
+        public bool IsConfirmationAccepted { get; set; }
 
         private Session _selectedSession;
 
@@ -273,10 +276,16 @@ namespace HonorsProject.ViewModel
             }
             try
             {
-                UnitOfWork.SessionRepository.Remove(sessionToDelte);
-                UnitOfWork.Complete();
-                UpdateMySessionsList();
-                return true;
+                Mediator.NotifyColleagues(MediatorChannels.DeleteSessionConfirmation.ToString(), null);
+                if (IsConfirmationAccepted)
+                {
+                    UnitOfWork.SessionRepository.Remove(sessionToDelte);
+                    UnitOfWork.Complete();
+                    UpdateMySessionsList();
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
             {
