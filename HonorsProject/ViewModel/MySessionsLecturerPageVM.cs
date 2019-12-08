@@ -17,18 +17,6 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
-        private string _feedbackMessage;
-
-        public string FeedbackMessage
-        {
-            get { return _feedbackMessage; }
-            set
-            {
-                _feedbackMessage = value;
-                OnPropertyChanged(nameof(FeedbackMessage));
-            }
-        }
-
         private SessionsContext _sessionsContext;
 
         public SessionsContext SessionsContext

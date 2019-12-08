@@ -13,9 +13,9 @@ namespace HonorsProject.ViewModel.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string errorMsg = value.ToString();
+            string feedbackMessage = value.ToString();
 
-            if (errorMsg == string.Empty || errorMsg == null)
+            if (feedbackMessage == string.Empty || feedbackMessage == null)
                 return Visibility.Collapsed;
             return Visibility.Visible;
         }

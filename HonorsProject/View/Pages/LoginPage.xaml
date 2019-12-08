@@ -28,8 +28,8 @@
                     Command="{Binding LoginCmd}"
                     Style="{StaticResource FormSubmitButton}" />
 
-        <TextBlock Text="{Binding ErrorMessage}"
+        <TextBlock Text="{Binding FeedbackMessage}"
                    Style="{StaticResource UserInputError}"
-                   Visibility="{Binding Path=ErrorMessage, Converter={StaticResource ErrorMessageToVisibleConverter}}" />
+                   Visibility="{Binding Path=FeedbackMessage, Converter={StaticResource ErrorMessageToVisibleConverter}}" />
     </StackPanel>
 </Page>

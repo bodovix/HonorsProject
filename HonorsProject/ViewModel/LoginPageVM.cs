@@ -21,18 +21,6 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
-        private string _errorMessage;
-
-        public string ErrorMessage
-        {
-            get { return _errorMessage; }
-            set
-            {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-            }
-        }
-
         private string _password;
 
         public string Password
@@ -62,7 +50,7 @@ namespace HonorsProject.ViewModel
 
         public LoginPageVM(string dbContextName) : base(dbContextName)
         {
-            ErrorMessage = "";
+            FeedbackMessage = "";
             LoginCmd = new LoginCmd(this);
         }
 
@@ -94,14 +82,14 @@ namespace HonorsProject.ViewModel
                         }
                         else
                         {
-                            ErrorMessage = "Invalid Login Credentials.";
+                            FeedbackMessage = "Invalid Login Credentials.";
                             return false;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    ErrorMessage = ex.GetBaseException().Message;
+                    FeedbackMessage = ex.GetBaseException().Message;
                     return false;
                 }
             }
@@ -111,15 +99,15 @@ namespace HonorsProject.ViewModel
 
         private bool ValidateLogin(int? userId, string password)
         {
-            ErrorMessage = "";
+            FeedbackMessage = "";
             if (userId == null || userId == 0)
             {
-                ErrorMessage = "ID Required";
+                FeedbackMessage = "ID Required";
                 return false;
             }
             if (String.IsNullOrEmpty(password))
             {
-                ErrorMessage = "Password Required";
+                FeedbackMessage = "Password Required";
                 return false;
             }
 
