@@ -12,10 +12,11 @@ namespace HonorsProject.ViewModel.Converters
 {
     internal class RoleToVisibleConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object userRole, Type targetType, object parameter, CultureInfo culture)
         {
-            //if lecturer make the item visible
-            if ((Role)value == Role.Lecturer)
+            Role paramiterToMach = (Role)parameter;
+            //if roles match required make the item visible
+            if ((Role)userRole == Role.Lecturer)
                 return Visibility.Visible;
             return Visibility.Collapsed;
         }

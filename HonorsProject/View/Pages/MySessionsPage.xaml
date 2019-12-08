@@ -21,7 +21,8 @@
                 Width="100"
                 HorizontalAlignment="Left"
                 Command="{Binding NewModeCmd}"
-                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}" />
+                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}" />
         <Grid Style="{StaticResource ContainerGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -59,7 +60,8 @@
                             Command="{Binding AddLecturerCmd}"
                         Margin="0"
                         BorderThickness="0"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}">
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}">
                         <Image Source="../Images/plusIcon.png"
                                 Style="{StaticResource IconImage}">
                             <Image.ToolTip>
@@ -155,7 +157,8 @@
                         Command="{Binding SaveFormCmd}"
                         Grid.Row="2"
                         Grid.Column="1"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormSaveButton}" />
                 <GroupBox Header="Created On" Grid.Row="0" Grid.Column="2" Style="{StaticResource FormGroupBox}">
                     <Label Content="{Binding SelectedSession.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -169,7 +172,8 @@
                         Content="Cancel"
                         Grid.Row="2"
                         Grid.Column="3"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormCancelButton}" />
                 <TextBlock Grid.Row="3"
                        Grid.Column="1"
@@ -264,7 +268,8 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter}}"
+                                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}"
                                         Command="{Binding DataContext.DeleteCmd, ElementName=SessionsGV}"
                                         CommandParameter="{Binding}">
                                         <Image Source="../Images/delete64Icon.png"

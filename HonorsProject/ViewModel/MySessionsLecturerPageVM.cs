@@ -235,23 +235,7 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = User.AddNewSession(SelectedSession, UnitOfWork);
                     if (result)
-                        switch (SessionsContext)
-                        {
-                            case SessionsContext.Active:
-                                GetAllMyCurrentSessions();
-                                break;
-
-                            case SessionsContext.Future:
-                                GetAllMyFutureSessions();
-                                break;
-
-                            case SessionsContext.Previous:
-                                GetAllMyPreviousSessions();
-                                break;
-
-                            default:
-                                break;
-                        }
+                        UpdateMySessionsList();
                     return result;
                 }
                 else
@@ -270,6 +254,27 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private void UpdateMySessionsList()
+        {
+            switch (SessionsContext)
+            {
+                case SessionsContext.Active:
+                    GetAllMyCurrentSessions();
+                    break;
+
+                case SessionsContext.Future:
+                    GetAllMyFutureSessions();
+                    break;
+
+                case SessionsContext.Previous:
+                    GetAllMyPreviousSessions();
+                    break;
+
+                default:
+                    throw new Exception("Invalid Case statement operation. Please contact support");
+            }
+        }
+
         public bool Delete(object objToDelete)
         {
             Session sessionToDelte = objToDelete as Session;
@@ -280,6 +285,9 @@ namespace HonorsProject.ViewModel
             }
             try
             {
+                UnitOfWork.SessionRepository.Remove(sessionToDelte);
+                UnitOfWork.Complete();
+                UpdateMySessionsList();
                 return true;
             }
             catch (Exception ex)
