@@ -42,7 +42,7 @@ namespace HonorsProject.View.Pages
         {
             MessageBoxResult dialogResult = MessageBox.Show("Deleting Sessions cannot be undone. \nAll questions and answers for this session will also be deleted.", "Are you sure?", MessageBoxButton.YesNo);
 
-            if (dialogResult == MessageBoxResult.Yes)  // error is here
+            if (dialogResult == MessageBoxResult.Yes)
                 VM.IsConfirmationAccepted = true;
             else
                 VM.IsConfirmationAccepted = false;
