@@ -49,5 +49,10 @@ namespace HonorsProject.Model.Data
         {
             _entities.RemoveRange(entities);
         }
+
+        public int Count()
+        {
+            return _entities.Count();
+        }
     }
 }

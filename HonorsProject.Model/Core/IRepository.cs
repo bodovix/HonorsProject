@@ -13,9 +13,6 @@ namespace HonorsProject.Model.Core
 
         IEnumerable<T> GetAll();
 
-        //IEnumerable<IEntity> Find(Expression<Func<IEntity, bool>> predicaIEntitye);
-        //IEnumerable<IEntity> SingleOrDefault(Expression<Func<IEntity, bool>> predicaIEntitye);
-
         void Add(T enIEntityiIEntityy);
 
         void AddRange(IEnumerable<T> eniIEntityies);
@@ -23,5 +20,7 @@ namespace HonorsProject.Model.Core
         void Remove(T enIEntityiIEntityy);
 
         void RemoveRange(IEnumerable<T> enIEntityiIEntityies);
+
+        int Count();
     }
 }

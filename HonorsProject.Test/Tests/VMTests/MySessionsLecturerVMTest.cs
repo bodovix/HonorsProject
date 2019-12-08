@@ -277,16 +277,141 @@ namespace HonorsProject.Test
         [TestMethod]
         public void Delete_Confirm_Success()
         {
+            //Arrange
+            //questions answers should cascade  - nothing else
+            int expectedQuestionCount = 4;
+            int expectedAnswerCount = 1;
+            int expectedStudentCount = 3;
+            int expectedGroupCount = 2;
+            int expectedLectuerCount = 2;
+            int expectedSessionCount = 4;
+
+            ClearDatabase();
+            CreateMySessionTestData(_lecturer);
+            VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
+            VM.SessionsContext = SessionsContext.Future;// were going to work with the future sessions
+            VM.GetAllMyFutureSessions();
+            VM.SelectedSession = VM.MySessions.Where(s => s.Name.Equals("Delete Sesh")).FirstOrDefault();
+            //delete message box confirmed
+            VM.IsConfirmationAccepted = true;
+            //Act
+            var result = VM.Delete(VM.SelectedSession);
+            //Assert
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                Assert.IsTrue(result);
+                Assert.AreEqual(expectedQuestionCount, u.QuestionRepository.Count(), "Question Count Wrong");
+                Assert.AreEqual(expectedAnswerCount, u.AnswerRepository.Count(), "Answer count wrong");
+                Assert.AreEqual(expectedStudentCount, u.StudentRepo.Count(), "Student count wrong");
+                Assert.AreEqual(expectedGroupCount, u.GroupRepository.Count(), "Group count wrong");
+                Assert.AreEqual(expectedLectuerCount, u.LecturerRepo.Count(), "Lecturer count wrong");
+                Assert.AreEqual(expectedSessionCount, u.SessionRepository.Count(), "Session count wrong");
+            }
+        }
+
+        [TestMethod]
+        public void Delete_Confirm_DeletePreviousSesh_Success()
+        {
+            //Arrange
+            //questions answers should cascade  - nothing else
+            int expectedQuestionCount = 4;
+            int expectedAnswerCount = 4;
+            int expectedStudentCount = 3;
+            int expectedGroupCount = 2;
+            int expectedLectuerCount = 2;
+            int expectedSessionCount = 4;
+
+            ClearDatabase();
+            CreateMySessionTestData(_lecturer);
+            VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
+            VM.SessionsContext = SessionsContext.Previous;// were going to work with the future sessions
+            VM.GetAllMyPreviousSessions();
+            VM.SelectedSession = VM.MySessions.Where(s => s.Name.Equals("Previous Sesh")).FirstOrDefault();
+            //delete message box confirmed
+            VM.IsConfirmationAccepted = true;
+            //Act
+            var result = VM.Delete(VM.SelectedSession);
+            //Assert
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                Assert.IsTrue(result, VM.FeedbackMessage);
+                Assert.AreEqual(expectedQuestionCount, u.QuestionRepository.Count(), "Question Count Wrong");
+                Assert.AreEqual(expectedAnswerCount, u.AnswerRepository.Count(), "Answer count wrong");
+                Assert.AreEqual(expectedStudentCount, u.StudentRepo.Count(), "Student count wrong");
+                Assert.AreEqual(expectedGroupCount, u.GroupRepository.Count(), "Group count wrong");
+                Assert.AreEqual(expectedLectuerCount, u.LecturerRepo.Count(), "Lecturer count wrong");
+                Assert.AreEqual(expectedSessionCount, u.SessionRepository.Count(), "Session count wrong");
+            }
         }
 
         [TestMethod]
         public void Delete_MissingObject_Fail()
         {
+            //Arrange
+            //nothing changes since no delete
+            int expectedQuestionCount = 6;
+            int expectedAnswerCount = 4;
+            int expectedStudentCount = 3;
+            int expectedGroupCount = 2;
+            int expectedLectuerCount = 2;
+            int expectedSessionCount = 5;
+
+            ClearDatabase();
+            CreateMySessionTestData(_lecturer);
+            VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
+            VM.SessionsContext = SessionsContext.Future;// were going to work with the future sessions
+            VM.GetAllMyFutureSessions();
+            VM.SelectedSession = VM.MySessions.Where(s => s.Id == 0).FirstOrDefault();
+            //delete message box confirmed
+            VM.IsConfirmationAccepted = true;
+            //Act
+            var result = VM.Delete(VM.SelectedSession);
+            //Assert
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                Assert.IsFalse(result);
+                Assert.AreEqual(expectedQuestionCount, u.QuestionRepository.Count(), "Question Count Wrong");
+                Assert.AreEqual(expectedAnswerCount, u.AnswerRepository.Count(), "Answer count wrong");
+                Assert.AreEqual(expectedStudentCount, u.StudentRepo.Count(), "Student count wrong");
+                Assert.AreEqual(expectedGroupCount, u.GroupRepository.Count(), "Group count wrong");
+                Assert.AreEqual(expectedLectuerCount, u.LecturerRepo.Count(), "Lecturer count wrong");
+                Assert.AreEqual(expectedSessionCount, u.SessionRepository.Count(), "Session count wrong");
+            }
         }
 
         [TestMethod]
         public void Delete_Cancel_Fail()
         {
+            //Arrange
+            //nothing changes since no delete
+            int expectedQuestionCount = 6;
+            int expectedAnswerCount = 4;
+            int expectedStudentCount = 3;
+            int expectedGroupCount = 2;
+            int expectedLectuerCount = 2;
+            int expectedSessionCount = 5;
+
+            ClearDatabase();
+            CreateMySessionTestData(_lecturer);
+            VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
+            VM.SessionsContext = SessionsContext.Future;// were going to work with the future sessions
+            VM.GetAllMyFutureSessions();
+            VM.SelectedSession = VM.MySessions.Where(s => s.Name.Equals("Delete Sesh")).FirstOrDefault();
+            //delete message box CANCELED - NO DELETE
+            VM.IsConfirmationAccepted = false;
+            //Act
+            var result = VM.Delete(VM.SelectedSession);
+            //Assert
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                Assert.IsFalse(result);
+                Assert.AreEqual(expectedQuestionCount, u.QuestionRepository.Count(), "Question Count Wrong");
+                Assert.AreEqual(expectedAnswerCount, u.AnswerRepository.Count(), "Answer count wrong");
+                Assert.AreEqual(expectedStudentCount, u.StudentRepo.Count(), "Student count wrong");
+                Assert.AreEqual(expectedGroupCount, u.GroupRepository.Count(), "Group count wrong");
+                Assert.AreEqual(expectedLectuerCount, u.LecturerRepo.Count(), "Lecturer count wrong");
+                Assert.AreEqual(expectedSessionCount, u.SessionRepository.Count(), "Session count wrong");
+            }
         }
 
         #endregion DeleteSessions

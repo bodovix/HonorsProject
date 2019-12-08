@@ -63,6 +63,8 @@ namespace HonorsProject.Test
                 l.Register(u);
                 l2.Register(u);
                 s.Register(u);
+                s2.Register(u);
+                s3.Register(u);
                 ObservableCollection<Lecturer> lecL = new ObservableCollection<Lecturer>();
                 lecL.Add(l);
                 lecL.Add(l2);
