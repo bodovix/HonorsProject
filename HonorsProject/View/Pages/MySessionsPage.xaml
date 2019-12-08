@@ -268,10 +268,10 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button
-                                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                    ConverterParameter={x:Static enums:Role.Lecturer}}"
                                         Command="{Binding DataContext.DeleteCmd, ElementName=SessionsGV}"
-                                        CommandParameter="{Binding}">
+                                        CommandParameter="{Binding}"
+                                        Visibility="{Binding DataContext.UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}">
                                         <Image Source="../Images/delete64Icon.png"
                                         Style="{StaticResource IconImage}">
                                             <Image.ToolTip>

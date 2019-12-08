@@ -303,7 +303,8 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(object objectToDelete)
         {
-            throw new NotImplementedException("Students Cannot Delete Sessions");
+            FeedbackMessage = "Students Cannot Delete Sessions";
+            return false;
         }
 
         public void EnterNewMode()
