@@ -91,17 +91,17 @@ namespace HonorsProject.Model.Entities
 
         public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            return unitOfWork.SessionRepository.GetCurrentSessions(this, todaysDate.Date);
         }
 
         public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            return unitOfWork.SessionRepository.GetPreviousSessions(this, todaysDate.Date);
         }
 
         public List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate.Date);
         }
     }
 }

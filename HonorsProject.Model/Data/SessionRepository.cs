@@ -26,9 +26,16 @@ namespace HonorsProject.Model.Data
             return results;
         }
 
-        public List<Session> GetCurrentSessions(Group studentGroup, DateTime date)
+        public List<Session> GetCurrentSessions(Student student, DateTime date)
         {
-            throw new NotImplementedException();
+            DateTime dateDate = date.Date;
+            //get sessions belonging to this student from the sessions group
+            //where inputted date is between the start and end dates of the session
+            List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
+                                                && sesh.StartTime <= dateDate
+                                                && sesh.EndTime >= dateDate)
+                                                    .ToList();
+            return results;
         }
 
         public List<Session> GetFutureSessions(Lecturer lecturer, DateTime date)
@@ -42,9 +49,15 @@ namespace HonorsProject.Model.Data
             return results;
         }
 
-        public List<Session> GetFutureSessions(Group studentGroup, DateTime date)
+        public List<Session> GetFutureSessions(Student student, DateTime date)
         {
-            throw new NotImplementedException();
+            //get sessions belonging to this student from the sessions group
+            //and start date is ahead of inputted date
+            DateTime dateDate = date.Date;
+            List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
+                                                && sesh.StartTime > dateDate)
+                                                    .ToList();
+            return results;
         }
 
         public List<Session> GetPreviousSessions(Lecturer lecturer, DateTime date)
@@ -58,9 +71,15 @@ namespace HonorsProject.Model.Data
             return results;
         }
 
-        public List<Session> GetPreviousSessions(Group studentGroup, DateTime date)
+        public List<Session> GetPreviousSessions(Student student, DateTime date)
         {
-            throw new NotImplementedException();
+            //get sessions belonging to this student from the sessions group
+            //and end date is behind inputted date
+            DateTime dateDate = date.Date;
+            List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
+                                                && sesh.EndTime < dateDate)
+                                                    .ToList();
+            return results;
         }
     }
 }

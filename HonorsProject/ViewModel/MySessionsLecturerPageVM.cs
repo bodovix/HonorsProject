@@ -162,10 +162,10 @@ namespace HonorsProject.ViewModel
             DeleteCmd = new DeleteCmd(this);
 
             //initial setup
+            UserRole = Role.Lecturer;
             User = (Lecturer)appUser;
             GetAllLecturers();
             SelectedSession = new Session();
-            UserRole = Role.Lecturer;
             FormContext = FormContext.Create;
             GetAllGroups(dbcontextName);
             //initially loads current sessions

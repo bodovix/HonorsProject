@@ -145,52 +145,180 @@ namespace HonorsProject.ViewModel
         public MySessionsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
             //register commands
+            NewModeCmd = new NewModeCmd(this);
+            SaveFormCmd = new SaveCmd(this);
+            AddLecturerCmd = new AddLecturerCmd(this);
+            RemoveLecturerCmd = new RemoveLecturerCmd(this);
             GetActiveSessionsCmd = new GetActiveSessionsCmd(this);
             GetFutureSessionsCmd = new GetFutureSessionsCmd(this);
             GetPreviousSessionsCmd = new GetPreviousSessionsCmd(this);
+            DeleteCmd = new DeleteCmd(this);
 
+            //initial setup
             User = (Student)appUser;
             UserRole = Role.Student;
+
+            GetAllLecturers();
+            SelectedSession = new Session();
+            FormContext = FormContext.Create;
+            GetAllGroups(dbcontextName);
+            //initially loads current sessions
+            GetAllMyCurrentSessions();
         }
 
-        public bool Save()
+        private void GetAllLecturers()
         {
-            throw new NotImplementedException();
+            try
+            {
+                AvailableLecturers = new ObservableCollection<Lecturer>();
+                List<Lecturer> results = UnitOfWork.LecturerRepo.GetAll().ToList();
+                if (results != null)
+                {
+                    foreach (Lecturer l in results)
+                    {
+                        AvailableLecturers.Add(l);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+            }
         }
 
-        public bool Delete(object objectToDelete)
+        private void GetAllGroups(string dbcontextName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Groups = new ObservableCollection<Group>();
+                Groups.Add(new Group());
+                List<Group> results;
+
+                results = UnitOfWork.GroupRepository.GetAll().ToList();
+                if (results != null)
+                {
+                    foreach (Group g in results)
+                    {
+                        Groups.Add(g);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.GetBaseException().Message;
+            }
         }
 
-        public void EnterNewMode()
+        private void UpdateMySessionsList()
         {
-            throw new NotImplementedException();
+            switch (SessionsContext)
+            {
+                case SessionsContext.Active:
+                    GetAllMyCurrentSessions();
+                    break;
+
+                case SessionsContext.Future:
+                    GetAllMyFutureSessions();
+                    break;
+
+                case SessionsContext.Previous:
+                    GetAllMyPreviousSessions();
+                    break;
+
+                default:
+                    throw new Exception("Invalid Case statement operation. Please contact support");
+            }
         }
 
         public bool GetAllMyCurrentSessions()
         {
-            throw new NotImplementedException();
+            try
+            {
+                SessionsContext = SessionsContext.Active;
+                MySessions = new ObservableCollection<Session>();
+                List<Session> result = User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
+                if (result != null)
+                {
+                    MySessions = new ObservableCollection<Session>(result);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
         public bool GetAllMyPreviousSessions()
         {
-            throw new NotImplementedException();
+            try
+            {
+                SessionsContext = SessionsContext.Previous;
+                MySessions = new ObservableCollection<Session>();
+                List<Session> result = User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
+                if (result != null)
+                {
+                    MySessions = new ObservableCollection<Session>(result);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
         public bool GetAllMyFutureSessions()
         {
-            throw new NotImplementedException();
+            try
+            {
+                SessionsContext = SessionsContext.Future;
+                MySessions = new ObservableCollection<Session>();
+                List<Session> result = User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
+                if (result != null)
+                {
+                    MySessions = new ObservableCollection<Session>(result);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
+        }
+
+        public bool Save()
+        {
+            throw new NotImplementedException("Students Cannot Save Sessions.");
+        }
+
+        public bool Delete(object objectToDelete)
+        {
+            throw new NotImplementedException("Students Cannot Delete Sessions");
+        }
+
+        public void EnterNewMode()
+        {
+            throw new NotImplementedException("Students Cannot Create New Sessions");
         }
 
         public bool AddLecturer()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Students cannot add lecturers to sessions");
         }
 
         public bool RemoveLecturer(Lecturer lecturerToRemove)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Students cannot remove lecturers from sessions");
         }
     }
 }

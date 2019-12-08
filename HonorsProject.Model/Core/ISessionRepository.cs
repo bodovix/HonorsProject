@@ -15,10 +15,10 @@ namespace HonorsProject.Model.Core
 
         List<Session> GetPreviousSessions(Lecturer lecturer, DateTime date);
 
-        List<Session> GetCurrentSessions(Group studentGroup, DateTime date);
+        List<Session> GetCurrentSessions(Student studentGroup, DateTime date);
 
-        List<Session> GetFutureSessions(Group studentGroup, DateTime date);
+        List<Session> GetFutureSessions(Student studentGroup, DateTime date);
 
-        List<Session> GetPreviousSessions(Group studentGroup, DateTime date);
+        List<Session> GetPreviousSessions(Student studentGroup, DateTime date);
     }
 }
