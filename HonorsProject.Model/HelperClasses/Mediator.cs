@@ -10,35 +10,37 @@ namespace HonorsProject.Model.HelperClasses
     {
         private static IDictionary<string, List<Action<object>>> mediatorDictionary = new Dictionary<string, List<Action<object>>>();
 
-        static public void Register(string token, Action<object> callback)
+        static public void Register(string channel, Action<object> callback)
         {
-            if (!mediatorDictionary.ContainsKey(token))
+            if (!mediatorDictionary.ContainsKey(channel))
             {
+                //if new channel simply add it
                 var list = new List<Action<object>>();
                 list.Add(callback);
-                mediatorDictionary.Add(token, list);
+                mediatorDictionary.Add(channel, list);
             }
             else
             {
                 bool found = false;
-                foreach (var item in mediatorDictionary[token])
+                //if channel with method call already exists don't add it again
+                foreach (var item in mediatorDictionary[channel])
                     if (item.Method.ToString() == callback.Method.ToString())
                         found = true;
                 if (!found)
-                    mediatorDictionary[token].Add(callback);
+                    mediatorDictionary[channel].Add(callback);
             }
         }
 
-        static public void Unregister(string token, Action<object> callback)
+        static public void Unregister(string channel, Action<object> callback)
         {
-            if (mediatorDictionary.ContainsKey(token))
-                mediatorDictionary[token].Remove(callback);
+            if (mediatorDictionary.ContainsKey(channel))
+                mediatorDictionary[channel].Remove(callback);
         }
 
-        static public void NotifyColleagues(string token, object args)
+        static public void NotifyColleagues(string channel, object args)
         {
-            if (mediatorDictionary.ContainsKey(token))
-                foreach (var callback in mediatorDictionary[token].ToArray())
+            if (mediatorDictionary.ContainsKey(channel))
+                foreach (var callback in mediatorDictionary[channel].ToArray())
                     callback(args);
         }
     }
