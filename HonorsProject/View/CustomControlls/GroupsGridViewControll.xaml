@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="HonorsProject.View.CustomControlls.GroupsGridViewControll"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HonorsProject.View.CustomControlls"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <DataGrid Name="GroupDataGrid"
+                            Grid.Column="0"
+                          Grid.Row="3"
+                          AutoGenerateColumns="False"
+                          SelectionMode="Single"
+                          SelectionUnit="FullRow"
+                          CanUserReorderColumns="True"
+                          CanUserResizeColumns="True"
+                          CanUserResizeRows="False"
+                          CanUserSortColumns="True"
+                          IsReadOnly="True">
+            <!--HeadingStyle-->
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="Gray" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="BorderThickness" Value="0,0,1,2" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                </Style>
+            </DataGrid.Resources>
+            <!--Column header and text bindings-->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Created On" Width="*" Binding="{Binding CreatedOn, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Created By" Width="*" Binding="{Binding CreatedByLecturerId}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button>
+                                <Image Source="../Images/magnifyingGlass64Img.png"
+                                Style="{StaticResource IconImage}">
+                                    <Image.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold">Go to group</TextBlock>
+                                                <TextBlock>View the selected group.</TextBlock>
+                                                <TextBlock>Unsaved changes will be lost.</TextBlock>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Image.ToolTip>
+                                </Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                        Background="Red"
+                                        Command="{Binding DataContext.DeleteCmd, ElementName=SessionsGV}"
+                                        CommandParameter="{Binding}">
+                                <Image Source="../Images/removeUser.png"
+                                        Style="{StaticResource IconImage}">
+                                    <Image.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold">Remove.</TextBlock>
+                                                <TextBlock>Remove selected user from this group.</TextBlock>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Image.ToolTip>
+                                </Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</UserControl>
