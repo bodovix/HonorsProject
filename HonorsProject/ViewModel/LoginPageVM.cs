@@ -67,7 +67,7 @@ namespace HonorsProject.ViewModel
                     if (student != null)
                     {
                         appUser = student;
-                        Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Student);
+                        Mediator.NotifyColleagues(MediatorChannels.LoginAsUserX.ToString(), Role.Student);
                         return true;
                     }
                     else
@@ -77,7 +77,7 @@ namespace HonorsProject.ViewModel
                         if (lecturer != null)
                         {
                             appUser = lecturer;
-                            Mediator.NotifyColleagues("GoToMyScenarioPage", Role.Lecturer);
+                            Mediator.NotifyColleagues(MediatorChannels.LoginAsUserX.ToString(), Role.Lecturer);
                             return true;
                         }
                         else

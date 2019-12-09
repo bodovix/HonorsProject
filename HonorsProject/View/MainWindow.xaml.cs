@@ -34,14 +34,56 @@ namespace HonorsProject.View
             VM = new MainWindowVM(ConnectionConfigs.LiveConfig);
             InitializeComponent();
             ContainerDockPannel.DataContext = VM;
+            InitiallyHideNavigation();
 
-            Mediator.Register("GoToMyScenarioPage", GoToMyScenarioPage);
+            Mediator.Register(MediatorChannels.LoginAsUserX.ToString(), LoggInAsX);
         }
 
-        private void GoToMyScenarioPage(object obj)
+        private void InitiallyHideNavigation()
+        {
+            StudentsBtn.Visibility = Visibility.Collapsed;
+            GroupsBtn.Visibility = Visibility.Collapsed;
+            MySessionsBtn.Visibility = Visibility.Collapsed;
+            MyQuestoins.Visibility = Visibility.Collapsed;
+            MyAnswers.Visibility = Visibility.Collapsed;
+            DataAnalysisBtn.Visibility = Visibility.Collapsed;
+            MyAccountBtn.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowAppropriateNavigation()
+        {
+            switch (App.LoggedInAs)
+            {
+                case Role.Student:
+                    StudentsBtn.Visibility = Visibility.Collapsed;
+                    GroupsBtn.Visibility = Visibility.Visible;
+                    MySessionsBtn.Visibility = Visibility.Visible;
+                    MyQuestoins.Visibility = Visibility.Visible;
+                    MyAnswers.Visibility = Visibility.Visible;
+                    DataAnalysisBtn.Visibility = Visibility.Visible;
+                    MyAccountBtn.Visibility = Visibility.Visible;
+                    break;
+
+                case Role.Lecturer:
+                    StudentsBtn.Visibility = Visibility.Visible;
+                    GroupsBtn.Visibility = Visibility.Visible;
+                    MySessionsBtn.Visibility = Visibility.Visible;
+                    MyQuestoins.Visibility = Visibility.Visible;
+                    MyAnswers.Visibility = Visibility.Visible;
+                    DataAnalysisBtn.Visibility = Visibility.Visible;
+                    MyAccountBtn.Visibility = Visibility.Visible;
+                    break;
+
+                default:
+                    throw new Exception("log in as Role not accounted for");
+            }
+        }
+
+        private void LoggInAsX(object obj)
         {
             Role userRole = (Role)obj;
             App.LoggedInAs = userRole;
+            ShowAppropriateNavigation();
             MainContent.Content = new MySessionsPage();
         }
 
