@@ -21,14 +21,17 @@
             <Button Name="NewStudentBtn" Content="New Student" Style="{StaticResource FormSubmitButton}" />
             <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
-            <TextBox Name="SearchTxtBox" />
+            <TextBox Name="SearchTxtBox"
+                     Text="{Binding SearchStudentTxt, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             <ListView  x:Name="searchResultsList"
+                       ItemsSource="{Binding Students, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedStudent, Mode=TwoWay}"
                        Height="390">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="" />
-                            <TextBlock Text="" />
+                            <TextBlock Text="{Binding Id}" />
+                            <TextBlock Text="{Binding Name}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -59,37 +62,52 @@
                     <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedStudent.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Email" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedStudent.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedStudent.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Password" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <TextBox TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="" />
+                        <!--password kept as label for the time being-->
+                        <Label
+                                 Style="{StaticResource UserFormLbl}"
+                                 Content="{Binding SelectedStudent.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Created On" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                        <Label Content="" Style="{StaticResource UserFormLbl}" />
+                        <Label Content="{Binding SelectedStudent.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <GroupBox Header="Created By" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <Label Content="" Style="{StaticResource UserFormLbl}" />
+                        <Label Content="{Binding SelectedStudent.CreatedByLecturerId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
-                    <TextBlock Text="{Binding FeedbackMessage}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource UserInputError}" />
-                    <Button Name="SaveStudentBtn" Content="Save" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormSaveButton}" />
-                    <Button Name="CancelStudentBtn" Content="Cancel" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormCancelButton}" />
+                    <TextBlock Text="{Binding FeedbackMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Grid.Row="4"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource UserInputError}" />
+                    <Button Name="SaveStudentBtn"
+                            Content="Save"
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Style="{StaticResource FormSaveButton}" />
+                    <Button Name="CancelStudentBtn"
+                            Content="Cancel"
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Style="{StaticResource FormCancelButton}" />
                 </Grid>
                 <!--Add To Group Form-->
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch">
                     <Label Content="Add To Group:" />
-                    <GroupBox Header="Role" Style="{StaticResource FormGroupBox}">
+                    <GroupBox Header="Group" Style="{StaticResource FormGroupBox}">
                         <ComboBox x:Name="RoleComboBox"
                               Height="23"
                               SelectedValuePath="Role">

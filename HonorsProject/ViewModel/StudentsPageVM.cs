@@ -1,7 +1,9 @@
 ﻿using HonorsProject.Model.Entities;
+using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,18 @@ namespace HonorsProject.ViewModel
 {
     public class StudentsPageVM : BaseViewModel
     {
+        private FormContext _formContext;
+
+        public FormContext FormContext
+        {
+            get { return _formContext; }
+            set
+            {
+                _formContext = value;
+                OnPropertyChanged(nameof(FormContext));
+            }
+        }
+
         private Lecturer _lecturer;
 
         public Lecturer Lecturer
@@ -46,9 +60,9 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private List<Student> _students;
+        private ObservableCollection<Student> _students;
 
-        public List<Student> Students
+        public ObservableCollection<Student> Students
         {
             get { return _students; }
             set
@@ -60,6 +74,22 @@ namespace HonorsProject.ViewModel
 
         public StudentsPageVM(string dbcontextName) : base(dbcontextName)
         {
+            try
+            {
+                //TODO: will likely need to attach lecturer to the DbContext..
+                Lecturer = (Lecturer)App.AppUser;
+                SearchStudentTxt = "";
+                FormContext = FormContext.Create;
+                SelectedStudent = new Student();
+
+                //TODO: figure out Async with EF and Pagination/ limit the results (limit probably best)
+                List<Student> results = UnitOfWork.StudentRepo.GetAll().ToList();
+                Students = new ObservableCollection<Student>(results);
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+            }
         }
     }
 }
