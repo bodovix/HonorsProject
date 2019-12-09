@@ -34,7 +34,9 @@
             <Button Name="GroupsBtn"
                     Content="Groups"
                     Click="GroupsBtn_Click"
-                    Style="{StaticResource InfoButton}" />
+                    Style="{StaticResource InfoButton}"
+                    Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}" />
             <Button Name="MySessionsBtn"
                     Content="My Sessions"
                     Click="MySessionsBtn_Click"
