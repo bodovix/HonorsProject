@@ -3,9 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
+        xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
         xmlns:local="clr-namespace:HonorsProject.View"
         mc:Ignorable="d"
  Title="MainWindow" MinHeight="450" MinWidth="800" WindowState="Maximized">
+    <Window.Resources>
+        <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
+    </Window.Resources>
     <DockPanel Name="ContainerDockPannel">
         <!--menu bar-->
         <Menu DockPanel.Dock="Top">
@@ -22,7 +27,9 @@
             <Button Name="StudentsBtn"
                     Content="Students"
                     Click="StudentsBtn_Click"
-                    Style="{StaticResource InfoButton}" />
+                    Style="{StaticResource InfoButton}"
+                    Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    ConverterParameter={x:Static enums:Role.Lecturer}}" />
             <Button Name="GroupsBtn"
                     Content="Groups"
                     Click="GroupsBtn_Click"
