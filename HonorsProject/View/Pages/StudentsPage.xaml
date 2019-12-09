@@ -54,6 +54,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
@@ -81,8 +82,9 @@
                     <GroupBox Header="Created By" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <Label Content="" Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
-                    <Button Name="SaveStudentBtn" Content="Save" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormSaveButton}" />
-                    <Button Name="CancelStudentBtn" Content="Cancel" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormCancelButton}" />
+                    <TextBlock Text="{Binding FeedbackMessage}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource UserInputError}" />
+                    <Button Name="SaveStudentBtn" Content="Save" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormSaveButton}" />
+                    <Button Name="CancelStudentBtn" Content="Cancel" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormCancelButton}" />
                 </Grid>
                 <!--Add To Group Form-->
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch">

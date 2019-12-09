@@ -8,6 +8,7 @@ using HonorsProject.Model.Core;
 using HonorsProject.Model.HelperClasses;
 using System.Security.Cryptography;
 using System.Security.Authentication;
+using System.Collections.ObjectModel;
 
 namespace HonorsProject.Model.Entities
 {
@@ -19,8 +20,8 @@ namespace HonorsProject.Model.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public virtual List<Group> Groups { get; set; }
-        public virtual List<Question> Questions { get; set; }
+        public virtual ObservableCollection<Group> Groups { get; set; }
+        public virtual ObservableCollection<Question> Questions { get; set; }
         public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerId { get; set; }
 
@@ -28,8 +29,8 @@ namespace HonorsProject.Model.Entities
 
         public Student()
         {
-            Groups = new List<Group>();
-            Questions = new List<Question>();
+            Groups = new ObservableCollection<Group>();
+            Questions = new ObservableCollection<Question>();
         }
 
         public Student(int id, string name, string email, string password, DateTime createdOn, int createdByLecturerID)
@@ -40,8 +41,8 @@ namespace HonorsProject.Model.Entities
             Password = password;
             CreatedOn = createdOn;
             CreatedByLecturerId = createdByLecturerID;
-            Groups = new List<Group>();
-            Questions = new List<Question>();
+            Groups = new ObservableCollection<Group>();
+            Questions = new ObservableCollection<Question>();
         }
 
         public ISystemUser Login(int userId, string password, string conName)

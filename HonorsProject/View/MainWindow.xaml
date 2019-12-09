@@ -28,7 +28,7 @@
                     Content="Students"
                     Click="StudentsBtn_Click"
                     Style="{StaticResource InfoButton}"
-                    Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                    Visibility="{Binding Path=UserRole,Mode=TwoWay, Converter={StaticResource RoleToVisibleConverter},
                     ConverterParameter={x:Static enums:Role.Lecturer}}" />
             <Button Name="GroupsBtn"
                     Content="Groups"
