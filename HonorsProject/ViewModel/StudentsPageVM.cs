@@ -60,6 +60,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private ObservableCollection<Group> _availableGroups;
+
+        public ObservableCollection<Group> AvailableGroups
+        {
+            get { return _availableGroups; }
+            set
+            {
+                _availableGroups = value;
+                OnPropertyChanged(nameof(AvailableGroups));
+            }
+        }
+
         private ObservableCollection<Student> _students;
 
         public ObservableCollection<Student> Students
@@ -83,6 +95,8 @@ namespace HonorsProject.ViewModel
                 SelectedStudent = new Student();
 
                 //TODO: figure out Async with EF and Pagination/ limit the results (limit probably best)
+                List<Group> groups = UnitOfWork.GroupRepository.GetAll().ToList();
+                AvailableGroups = new ObservableCollection<Group>(groups);
                 List<Student> results = UnitOfWork.StudentRepo.GetAll().ToList();
                 Students = new ObservableCollection<Student>(results);
             }
