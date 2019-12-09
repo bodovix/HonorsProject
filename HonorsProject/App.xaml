@@ -38,7 +38,26 @@
         <Style TargetType="DatePicker" x:Key="UserInputDate">
             <Setter Property="Margin" Value="10" />
             <Setter Property="Height" Value="30" />
+            <!--following to stop default fade when disabled-->
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <TextBlock Text="{Binding Path=SelectedDate,
+                                 StringFormat={}{0:d},
+                                 RelativeSource={RelativeSource TemplatedParent}}"
+                                 VerticalAlignment="Center" HorizontalAlignment="Left"
+                                 Padding="4,0,0,0" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
         </Style>
+
         <Style TargetType="PasswordBox" x:Key="UserInputPassword">
             <Setter Property="Margin" Value="10" />
             <Setter Property="MaxLength" Value="100" />
