@@ -18,7 +18,11 @@ namespace HonorsProject.ViewModel
         public Role UserRole
         {
             get { return _userRole; }
-            set { _userRole = value; }
+            set
+            {
+                _userRole = value;
+                OnPropertyChanged(nameof(UserRole));
+            }
         }
 
         public MainWindowVM(string dbContextName) : base(dbContextName)
