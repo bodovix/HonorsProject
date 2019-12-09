@@ -91,6 +91,7 @@
     <Compile Include="ViewModel\MySessionsLecturerPageVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\MySessionsStudentPageVM.cs" />
+    <Compile Include="ViewModel\StudentsPageVM.cs" />
     <Compile Include="View\Pages\DataAnalysisPage.xaml.cs">
       <DependentUpon>DataAnalysisPage.xaml</DependentUpon>
     </Compile>
