@@ -1,5 +1,8 @@
-﻿using HonorsProject.Model.Entities;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.Commands;
+using HonorsProject.ViewModel.Commands.IComands;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -10,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd
     {
         private FormContext _formContext;
 
@@ -96,10 +99,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        #region Commands
+
+        public RemoveEntityCmd RemoveEntityCmd { get; set; }
+
+        #endregion Commands
+
         public StudentsPageVM(string dbcontextName) : base(dbcontextName)
         {
             try
             {
+                //commands
+                RemoveEntityCmd = new RemoveEntityCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)App.AppUser;
                 SearchStudentTxt = "";
@@ -116,6 +127,11 @@ namespace HonorsProject.ViewModel
             {
                 FeedbackMessage = ex.Message;
             }
+        }
+
+        public bool Remove(BaseEntity entity)
+        {
+            FeedbackMessage = "Not implemented remove from grup yet";
         }
     }
 }

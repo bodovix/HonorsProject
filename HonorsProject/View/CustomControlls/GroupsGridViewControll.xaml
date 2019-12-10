@@ -59,7 +59,7 @@
                         <DataTemplate>
                             <Button
                                         Background="Red"
-                                        Command="{Binding DataContext.DeleteCmd, ElementName=SessionsGV}"
+                                        Command="{Binding DataContext.RemoveEntityCmd, ElementName=GroupDataGrid}"
                                         CommandParameter="{Binding}">
                                 <Image Source="../Images/removeUser.png"
                                         Style="{StaticResource IconImage}">

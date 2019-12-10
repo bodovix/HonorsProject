@@ -1,4 +1,5 @@
 ﻿using HonorsProject.Model.Entities;
+using HonorsProject.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,16 @@ namespace HonorsProject.View.CustomControlls
     /// </summary>
     public partial class GroupsGridViewControll : UserControl
     {
+        public RemoveEntityCmd RemoveEntityCmd
+        {
+            get { return (RemoveEntityCmd)GetValue(GroupToRemoveProperty); }
+            set { SetValue(GroupToRemoveProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for GroupToRemove.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GroupToRemoveProperty =
+            DependencyProperty.Register(nameof(RemoveEntityCmd), typeof(RemoveEntityCmd), typeof(GroupsGridViewControll), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public Group SelectedGroup
         {
             get { return (Group)GetValue(groupSeleProperty); }
