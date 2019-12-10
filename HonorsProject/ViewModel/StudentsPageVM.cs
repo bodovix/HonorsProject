@@ -131,7 +131,10 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
-            FeedbackMessage = "Not implemented remove from grup yet";
+            FeedbackMessage = "";
+            Group group = (Group)entity;
+            FeedbackMessage = $"Not implemented remove from group yet: {group.Name}";
+            return true;
         }
     }
 }

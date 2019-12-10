@@ -90,7 +90,7 @@
                                Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                               Grid.Row="4"
+                               Grid.Row="3"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                Style="{StaticResource UserInputError}" />
