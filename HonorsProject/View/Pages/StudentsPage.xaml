@@ -169,7 +169,10 @@
                 </StackPanel>
                 <Frame Grid.Column="0" Grid.Row="1">
                 </Frame>
-                <uc:GroupsGridViewControll Groups="{Binding AvailableGroups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <uc:GroupsGridViewControll
+                                        Grid.Column="0" Grid.Row="1"
+                                        Groups="{Binding SelectedStudent.Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           SelectedGroup="{Binding SelectedGroup,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </StackPanel>
     </Grid>

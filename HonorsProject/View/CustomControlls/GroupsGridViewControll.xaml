@@ -11,6 +11,7 @@
                             Grid.Column="0"
                           Grid.Row="3"
                           AutoGenerateColumns="False"
+                            SelectedItem="{Binding SelectedGroup}"
                           SelectionMode="Single"
                           SelectionUnit="FullRow"
                           CanUserReorderColumns="True"

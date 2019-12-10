@@ -22,6 +22,16 @@ namespace HonorsProject.View.CustomControlls
     /// </summary>
     public partial class GroupsGridViewControll : UserControl
     {
+        public Group SelectedGroup
+        {
+            get { return (Group)GetValue(groupSeleProperty); }
+            set { SetValue(groupSeleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for groupSele.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty groupSeleProperty =
+            DependencyProperty.Register(nameof(SelectedGroup), typeof(Group), typeof(GroupsGridViewControll), new FrameworkPropertyMetadata(new Group(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public ObservableCollection<Group> Groups
         {
             get { return (ObservableCollection<Group>)GetValue(GroupsProperty); }

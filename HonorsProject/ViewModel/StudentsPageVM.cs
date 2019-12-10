@@ -72,6 +72,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private Group _group;
+
+        public Group SelectedGroup
+        {
+            get { return _group; }
+            set
+            {
+                _group = value;
+                OnPropertyChanged(nameof(SelectedGroup));
+            }
+        }
+
         private ObservableCollection<Student> _students;
 
         public ObservableCollection<Student> Students
