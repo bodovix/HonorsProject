@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd
     {
         #region Properties
 
@@ -106,6 +106,7 @@ namespace HonorsProject.ViewModel
         #region Commands
 
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
+        public NewModeCmd NewModeCmd { get; set; }
 
         #endregion Commands
 
@@ -115,6 +116,7 @@ namespace HonorsProject.ViewModel
             {
                 //commands
                 RemoveEntityCmd = new RemoveEntityCmd(this);
+                NewModeCmd = new NewModeCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)App.AppUser;
                 SearchStudentTxt = "";
@@ -148,6 +150,12 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public void EnterNewMode()
+        {
+            FormContext = FormContext.Create;
+            SelectedStudent = new Student();
         }
     }
 }

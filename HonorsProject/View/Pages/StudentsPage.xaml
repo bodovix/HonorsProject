@@ -21,6 +21,7 @@
         <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
             <Button Name="NewStudentBtn"
                     Content="New Student"
+                    Command="{Binding NewModeCmd}"
                     Style="{StaticResource FormSubmitButton}" />
             <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
@@ -56,11 +57,11 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="96" />
+                        <RowDefinition Height="24*" />
+                        <RowDefinition Height="19*" />
+                        <RowDefinition Height="9*" />
+                        <RowDefinition Height="15*" />
                     </Grid.RowDefinitions>
                     <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
