@@ -131,10 +131,27 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
-            FeedbackMessage = "";
-            Group group = (Group)entity;
-            FeedbackMessage = $"Not implemented remove from group yet: {group.Name}";
-            return true;
+            try
+            {
+                FeedbackMessage = "";
+                Group group = (Group)entity;
+                if (SelectedStudent.Groups.Contains(group))
+                {
+                    SelectedStudent.Groups.Remove(group);
+                    UnitOfWork.Complete();
+                    return true;
+                }
+                else
+                {
+                    FeedbackMessage = "Student Not in Selected Group. Refresh and try again.";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
     }
 }
