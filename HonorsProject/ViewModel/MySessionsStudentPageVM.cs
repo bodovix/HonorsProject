@@ -134,7 +134,7 @@ namespace HonorsProject.ViewModel
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
         public AddLecturerCmd AddLecturerCmd { get; set; }
-        public RemoveLecturerCmd RemoveLecturerCmd { get; set; }
+        public RemoveEntityCmd RemoveEntityCmd { get; set; }
         public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
         public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
         public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
@@ -148,7 +148,7 @@ namespace HonorsProject.ViewModel
             NewModeCmd = new NewModeCmd(this);
             SaveFormCmd = new SaveCmd(this);
             AddLecturerCmd = new AddLecturerCmd(this);
-            RemoveLecturerCmd = new RemoveLecturerCmd(this);
+            RemoveEntityCmd = new RemoveEntityCmd(this);
             GetActiveSessionsCmd = new GetActiveSessionsCmd(this);
             GetFutureSessionsCmd = new GetFutureSessionsCmd(this);
             GetPreviousSessionsCmd = new GetPreviousSessionsCmd(this);
@@ -317,7 +317,7 @@ namespace HonorsProject.ViewModel
             throw new NotImplementedException("Students cannot add lecturers to sessions");
         }
 
-        public bool RemoveLecturer(Lecturer lecturerToRemove)
+        public bool Remove(BaseEntity entityToRemove)
         {
             throw new NotImplementedException("Students cannot remove lecturers from sessions");
         }

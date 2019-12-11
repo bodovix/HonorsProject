@@ -19,7 +19,9 @@
         </Grid.RowDefinitions>
         <!--Search Panel-->
         <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
-            <Button Name="NewStudentBtn" Content="New Student" Style="{StaticResource FormSubmitButton}" />
+            <Button Name="NewStudentBtn"
+                    Content="New Student"
+                    Style="{StaticResource FormSubmitButton}" />
             <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
             <TextBox Name="SearchTxtBox"

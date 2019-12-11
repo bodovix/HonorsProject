@@ -65,9 +65,7 @@
     <Compile Include="ViewModel\Commands\DeleteCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IDeleteCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IRemoveEntity.cs" />
-    <Compile Include="ViewModel\Commands\IComands\IRemoveLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\RemoveEntityCmd.cs" />
-    <Compile Include="ViewModel\Commands\RemoveLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IAddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\ISessionSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\AddLecturerCmd.cs" />
