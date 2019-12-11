@@ -1,4 +1,6 @@
 ﻿using HonorsProject.Model.Data;
+using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,25 @@ namespace HonorsProject.View.Pages
         {
             VM = new StudentsPageVM(ConnectionConfigs.LiveConfig);
             InitializeComponent();
+            Mediator.Register(MediatorChannels.StudentsPageGeneratePasswordCheck.ToString(), ShowPasswordConfBox);
+            Mediator.Register(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), ShowPasswordDisplay);
             DataContext = VM;
+        }
+
+        private void ShowPasswordDisplay(object obj)
+        {
+            string pass = obj as string;
+            MessageBox.Show(pass + "\n Keep this password safe.");
+        }
+
+        private void ShowPasswordConfBox(object obj)
+        {
+            MessageBoxResult dialogResult = MessageBox.Show("Generate new password for user? \nThis action must be saved with rest of form", "Are you sure?", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)
+                VM.IsConfirmed = true;
+            else
+                VM.IsConfirmed = false;
         }
     }
 }

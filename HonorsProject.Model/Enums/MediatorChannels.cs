@@ -9,6 +9,8 @@ namespace HonorsProject.Model.Enums
     public enum MediatorChannels
     {
         DeleteSessionConfirmation,
-        LoginAsUserX
+        LoginAsUserX,
+        StudentsPageGeneratePasswordCheck,
+        StudentsPageNewPasswordDisplay
     }
 }

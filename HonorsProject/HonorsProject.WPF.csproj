@@ -63,7 +63,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\Commands\DeleteCmd.cs" />
+    <Compile Include="ViewModel\Commands\NewPassHashCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IDeleteCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\INewPassHashCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IRemoveEntity.cs" />
     <Compile Include="ViewModel\Commands\RemoveEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IAddLecturerCmd.cs" />

@@ -87,8 +87,8 @@
                             <Label
                                  Style="{StaticResource UserFormLbl}"
                                  Content="{Binding SelectedStudent.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                            <Button Content="Generate Password"
-                                    Command="" />
+                            <Button Content="Generate New Password"
+                                    Command="{Binding NewPassHashCmd}" />
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Created On" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">

@@ -27,5 +27,7 @@ namespace HonorsProject.Model.Core
         List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
 
         List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
+
+        bool GenerateNewPasswordHash(ref string optionalPassword);
     }
 }

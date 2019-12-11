@@ -1,6 +1,7 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.Commands.IComands;
 using HonorsProject.ViewModel.CoreVM;
@@ -13,9 +14,11 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd
     {
         #region Properties
+
+        public bool IsConfirmed { get; set; }
 
         private FormContext _formContext;
 
@@ -112,6 +115,7 @@ namespace HonorsProject.ViewModel
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
+        public NewPassHashCmd NewPassHashCmd { get; set; }
 
         #endregion Commands
 
@@ -119,10 +123,12 @@ namespace HonorsProject.ViewModel
         {
             try
             {
+                IsConfirmed = false;
                 //commands
                 RemoveEntityCmd = new RemoveEntityCmd(this);
                 NewModeCmd = new NewModeCmd(this);
                 SaveFormCmd = new SaveCmd(this);
+                NewPassHashCmd = new NewPassHashCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)App.AppUser;
                 SearchStudentTxt = "";
@@ -197,6 +203,32 @@ namespace HonorsProject.ViewModel
         {
             int rows = 10;
             Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetTopXFromSearch(SearchStudentTxt, rows));
+        }
+
+        public bool GenerateNewPasswordHash(string optionalNewPassword)
+        {
+            try
+            {
+                IsConfirmed = false;
+                //Confirmation Check
+                Mediator.NotifyColleagues(MediatorChannels.StudentsPageGeneratePasswordCheck.ToString(), null);
+                if (IsConfirmed)
+                {
+                    //randomly generate
+                    SelectedStudent.GenerateNewPasswordHash(ref optionalNewPassword);
+                    SelectedStudent = SelectedStudent;
+                    //Temporary display new password
+                    Mediator.NotifyColleagues(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), optionalNewPassword);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
     }
 }

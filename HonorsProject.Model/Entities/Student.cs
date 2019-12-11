@@ -92,6 +92,8 @@ namespace HonorsProject.Model.Entities
 
         public bool Validate()
         {
+            if (Id <= 0)
+                throw new ArgumentException("Student ID required");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Name required.");
             if (String.IsNullOrEmpty(Email))
@@ -137,6 +139,28 @@ namespace HonorsProject.Model.Entities
             {
                 feedackMsg = "Student Not in Selected Group. Refresh and try again.";
                 return false;
+            }
+        }
+
+        public bool GenerateNewPasswordHash(ref string optionalPassword)
+        {
+            if (String.IsNullOrEmpty(optionalPassword))
+            {
+                string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                char[] stringChars = new char[8];
+                Random random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++)
+                    stringChars[i] = chars[random.Next(chars.Length)];
+
+                optionalPassword = new string(stringChars);
+                Password = Cryptography.Hash(optionalPassword);
+                return true;
+            }
+            else
+            {
+                Cryptography.Hash(optionalPassword);
+                return true;
             }
         }
     }
