@@ -60,6 +60,10 @@ namespace HonorsProject.ViewModel
             get { return _selectedStudent; }
             set
             {
+                if (value == null)
+                    value = new Student();
+                //if selected.id == 0 create else update
+                FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedStudent = value;
                 OnPropertyChanged(nameof(SelectedStudent));
             }

@@ -5,10 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       xmlns:uc="clr-namespace:HonorsProject.View.CustomControlls"
+      xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StudentsPage">
-
+    <Page.Resources>
+        <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -98,7 +101,7 @@
                                Grid.ColumnSpan="2"
                                Style="{StaticResource UserInputError}" />
                     <Button Name="SaveStudentBtn"
-                            Content="Save"
+                            Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
                             Grid.Row="4"
                             Grid.Column="0"
                             Style="{StaticResource FormSaveButton}" />
