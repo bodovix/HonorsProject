@@ -104,5 +104,20 @@ namespace HonorsProject.Model.Entities
         {
             return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate.Date);
         }
+
+        public bool RemoveGroup(Group groupToRemve, UnitOfWork u, ref string feedackMsg)
+        {
+            if (Groups.Contains(groupToRemve))
+            {
+                Groups.Remove(groupToRemve);
+                u.Complete();
+                return true;
+            }
+            else
+            {
+                feedackMsg = "Student Not in Selected Group. Refresh and try again.";
+                return false;
+            }
+        }
     }
 }

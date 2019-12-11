@@ -15,6 +15,8 @@ namespace HonorsProject.ViewModel
 {
     public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd
     {
+        #region Properties
+
         private FormContext _formContext;
 
         public FormContext FormContext
@@ -99,6 +101,8 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        #endregion Properties
+
         #region Commands
 
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
@@ -134,18 +138,10 @@ namespace HonorsProject.ViewModel
             try
             {
                 FeedbackMessage = "";
-                Group group = (Group)entity;
-                if (SelectedStudent.Groups.Contains(group))
-                {
-                    SelectedStudent.Groups.Remove(group);
-                    UnitOfWork.Complete();
-                    return true;
-                }
-                else
-                {
-                    FeedbackMessage = "Student Not in Selected Group. Refresh and try again.";
-                    return false;
-                }
+                string msg = "";
+                SelectedStudent.RemoveGroup((Group)entity, UnitOfWork, ref msg);
+                FeedbackMessage = msg;
+                return true;
             }
             catch (Exception ex)
             {
