@@ -111,5 +111,18 @@ namespace HonorsProject.Model.Entities
         {
             return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate);
         }
+
+        public bool AddNewStudent(Student selectedStudent, UnitOfWork unitOfWork)
+        {
+            selectedStudent.CreatedByLecturerId = Id;
+            selectedStudent.CreatedOn = DateTime.Now.Date;
+            if (selectedStudent.Validate())
+            {
+                unitOfWork.StudentRepo.Add(selectedStudent);
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

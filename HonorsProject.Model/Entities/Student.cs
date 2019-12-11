@@ -69,20 +69,40 @@ namespace HonorsProject.Model.Entities
 
         public bool Register(IUnitOfWork UoW)
         {
-            //check id free
-            if (UoW.LecturerRepo.Get(Id) != null)
-                throw new Exception("ID already owned by Lecturer");
-            if (UoW.StudentRepo.Get(Id) != null)
-                throw new Exception("ID already owned by Student");
-            //hash password
-            Password = Cryptography.Hash(Password);
-            //save to DB
-            UoW.StudentRepo.Add(this);
-            int result = UoW.Complete();
-            if (result != 0)
-                return true;
+            if (Validate())
+            {
+                //check id free
+                if (UoW.LecturerRepo.Get(Id) != null)
+                    throw new Exception("ID already owned by Lecturer");
+                if (UoW.StudentRepo.Get(Id) != null)
+                    throw new Exception("ID already owned by Student");
+                //hash password
+                Password = Cryptography.Hash(Password);
+                //save to DB
+                UoW.StudentRepo.Add(this);
+                int result = UoW.Complete();
+                if (result != 0)
+                    return true;
+                else
+                    return false;
+            }
             else
                 return false;
+        }
+
+        public bool Validate()
+        {
+            if (String.IsNullOrEmpty(Name))
+                throw new ArgumentException("Name required.");
+            if (String.IsNullOrEmpty(Email))
+                throw new ArgumentException("Start time required.");
+            if (String.IsNullOrEmpty(Password))
+                throw new ArgumentException("Password required.");
+            if (CreatedOn == null)
+                throw new ArgumentException("Created on date not set.");
+            if (CreatedByLecturerId == 0)
+                throw new ArgumentException("Created by id not set.");
+            return true;
         }
 
         public bool AddNewSession(Session selectedSession, IUnitOfWork u)

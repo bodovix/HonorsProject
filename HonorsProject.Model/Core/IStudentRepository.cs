@@ -1,6 +1,7 @@
 ﻿using HonorsProject.Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -11,5 +12,7 @@ namespace HonorsProject.Model.Core
     public interface IStudentRepository : IRepository<Student>
     {
         Student FindById(int id);
+
+        List<Student> GetTopXFromSearch(string searchStudentTxt, int rows);
     }
 }

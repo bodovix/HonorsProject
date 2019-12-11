@@ -83,9 +83,13 @@
                     </GroupBox>
                     <GroupBox Header="Password" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <!--password kept as label for the time being-->
-                        <Label
+                        <StackPanel>
+                            <Label
                                  Style="{StaticResource UserFormLbl}"
                                  Content="{Binding SelectedStudent.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Content="Generate Password"
+                                    Command="" />
+                        </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Created On" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <Label Content="{Binding SelectedStudent.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -101,6 +105,7 @@
                                Grid.ColumnSpan="2"
                                Style="{StaticResource UserInputError}" />
                     <Button Name="SaveStudentBtn"
+                            Command="{Binding SaveFormCmd}"
                             Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
                             Grid.Row="4"
                             Grid.Column="0"

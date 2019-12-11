@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd
     {
         #region Properties
 
@@ -111,6 +111,7 @@ namespace HonorsProject.ViewModel
 
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
+        public SaveCmd SaveFormCmd { get; set; }
 
         #endregion Commands
 
@@ -121,6 +122,7 @@ namespace HonorsProject.ViewModel
                 //commands
                 RemoveEntityCmd = new RemoveEntityCmd(this);
                 NewModeCmd = new NewModeCmd(this);
+                SaveFormCmd = new SaveCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)App.AppUser;
                 SearchStudentTxt = "";
@@ -160,6 +162,41 @@ namespace HonorsProject.ViewModel
         {
             FormContext = FormContext.Create;
             SelectedStudent = new Student();
+        }
+
+        public bool Save()
+        {
+            FeedbackMessage = "";
+            bool result;
+            try
+            {
+                if (FormContext == FormContext.Create)
+                {
+                    //Create New
+                    result = Lecturer.AddNewStudent(SelectedStudent, UnitOfWork);
+                    if (result)
+                        UpdateMyStudentsList();
+                }
+                else
+                {
+                    //Update
+                    result = SelectedStudent.Validate();
+                    if (result)
+                        UnitOfWork.Complete();
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.GetBaseException().Message;
+                return false;
+            }
+        }
+
+        private void UpdateMyStudentsList()
+        {
+            int rows = 10;
+            Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetTopXFromSearch(SearchStudentTxt, rows));
         }
     }
 }
