@@ -1,5 +1,8 @@
-﻿using System;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.ViewModel.Commands;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +23,92 @@ namespace HonorsProject.View.CustomControlls
     /// </summary>
     public partial class InOrOutControl : UserControl
     {
+        public string AvailableTxt
+        {
+            get { return (string)GetValue(AvailableTxtProperty); }
+            set { SetValue(AvailableTxtProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AvailableTxt.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AvailableTxtProperty =
+            DependencyProperty.Register(nameof(AvailableTxt), typeof(string), typeof(InOrOutControl), new PropertyMetadata("", SetAvailableTxt));
+
+        private static void SetAvailableTxt(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            InOrOutControl controll = d as InOrOutControl;
+            if (controll != null)
+            {
+                controll.AvailableTxtBlock.Text = e.NewValue as string;
+            }
+        }
+
+        public string ContainsTxt
+        {
+            get { return (string)GetValue(ContainsTxtProperty); }
+            set { SetValue(ContainsTxtProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AvailableTxt.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContainsTxtProperty =
+            DependencyProperty.Register(nameof(ContainsTxt), typeof(string), typeof(InOrOutControl), new PropertyMetadata("", SetContainsTxt));
+
+        private static void SetContainsTxt(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            InOrOutControl controll = d as InOrOutControl;
+            if (controll != null)
+            {
+                controll.ContainsTxtBlock.Text = e.NewValue as string;
+            }
+        }
+
+        public ObservableCollection<BaseEntity> EntitiesAvailable
+        {
+            get { return (ObservableCollection<BaseEntity>)GetValue(EntitiesAvailableProperty); }
+            set { SetValue(EntitiesAvailableProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Entities.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EntitiesAvailableProperty =
+            DependencyProperty.Register(nameof(EntitiesAvailable), typeof(ObservableCollection<BaseEntity>), typeof(InOrOutControl), new PropertyMetadata(new ObservableCollection<BaseEntity>(), SetAvailableItemsSource));
+
+        public ObservableCollection<BaseEntity> EntitiesOwned
+        {
+            get { return (ObservableCollection<BaseEntity>)GetValue(EntitiesOwnedProperty); }
+            set { SetValue(EntitiesOwnedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Entities.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EntitiesOwnedProperty =
+            DependencyProperty.Register(nameof(EntitiesOwned), typeof(ObservableCollection<BaseEntity>), typeof(InOrOutControl), new PropertyMetadata(new ObservableCollection<BaseEntity>(), SetOwnedItemsSource));
+
+        private static void SetAvailableItemsSource(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            InOrOutControl controll = d as InOrOutControl;
+            if (controll != null)
+            {
+                controll.OutItemsLV.ItemsSource = e.NewValue as ObservableCollection<BaseEntity>;
+            }
+        }
+
+        private static void SetOwnedItemsSource(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            InOrOutControl controll = d as InOrOutControl;
+            if (controll != null)
+            {
+                controll.InItemsLV.ItemsSource = e.NewValue as ObservableCollection<BaseEntity>;
+            }
+        }
+
+        //public SaveCmd SaveCmd
+        //{
+        //    get { return (SaveCmd)GetValue(SaveCmdProperty); }
+        //    set { SetValue(SaveCmdProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty SaveCmdProperty =
+        //    DependencyProperty.Register(nameof(SaveCmd), typeof(int), typeof(InOrOutControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public InOrOutControl()
         {
             InitializeComponent();

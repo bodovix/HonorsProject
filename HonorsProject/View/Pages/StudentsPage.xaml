@@ -47,7 +47,7 @@
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -121,7 +121,7 @@
                     <Label Content="Add To Group:" />
                     <GroupBox Header="Group" Style="{StaticResource FormGroupBox}">
                         <StackPanel Orientation="Vertical">
-                            <Button Name="AddToGroupBtn" Content="Add To Group" Style="{StaticResource FormSubmitButton}" />
+                            <Button Name="AddToGroupBtn" Content="Manage Groups" Style="{StaticResource FormSubmitButton}" />
                             <ComboBox x:Name="RoleComboBox"
                               Height="23"
                               ItemsSource="{Binding AvailableGroups}"
@@ -132,6 +132,11 @@
                                     </Style>
                                 </ComboBox.ItemContainerStyle>
                             </ComboBox>
+                            <uc:InOrOutControl x:Name="InOrOutControl"
+                                                EntitiesAvailable="{Binding AvailableGroups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               AvailableTxt="Available"
+                                               EntitiesOwned="{Binding SelectedStudent.Groups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               ContainsTxt="Contains" />
                             <ListView
                                 ItemsSource="{Binding SelectedStudent.Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,10,0,0">
