@@ -15,13 +15,10 @@ namespace HonorsProject.Model.Entities
     {
         #region Properties
 
-        public int Id { get; set; }
-        public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public virtual List<Session> Sessions { get; set; }
         public virtual List<Answer> Answers { get; set; }
-        public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerId { get; set; }
 
         #endregion Properties

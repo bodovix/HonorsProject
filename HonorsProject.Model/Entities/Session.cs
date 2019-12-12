@@ -11,9 +11,6 @@ namespace HonorsProject.Model.Entities
 {
     public class Session : BaseEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
         private DateTime _startTime;
 
         public DateTime StartTime
@@ -36,7 +33,6 @@ namespace HonorsProject.Model.Entities
         public virtual ObservableCollection<Lecturer> Lecturers { get; set; }
         public virtual Group Group { get; set; }
         public virtual List<Question> Questions { get; set; }
-        public DateTime CreatedOn { get; set; }
         public int CreatedByLecturerId { get; set; }
 
         public Session()

@@ -10,15 +10,12 @@ namespace HonorsProject.Model.Entities
 {
     public class Question : BaseEntity
     {
-        public int Id { get; set; }
         public DateTime TimeAsked { get; set; }
-        public string Name { get; set; }
         public string QuestionText { get; set; }
         public bool IsResolved { get; set; }
         public virtual Session Session { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public virtual Student AskedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
 
         public Question()
         {
