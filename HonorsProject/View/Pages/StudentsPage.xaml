@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       xmlns:uc="clr-namespace:HonorsProject.View.CustomControlls"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
+      x:Name="StudentsPageN"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StudentsPage">
@@ -133,9 +134,9 @@
                                 </ComboBox.ItemContainerStyle>
                             </ComboBox>
                             <uc:InOrOutControl x:Name="InOrOutControl"
-                                                EntitiesAvailable="{Binding AvailableGroups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                EntitiesAvailable="{Binding Path=AvailableGroups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                AvailableTxt="Available"
-                                               EntitiesOwned="{Binding SelectedStudent.Groups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               EntitiesOwned="{Binding Path=SelectedStudent.Groups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                ContainsTxt="Contains" />
                             <ListView
                                 ItemsSource="{Binding SelectedStudent.Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

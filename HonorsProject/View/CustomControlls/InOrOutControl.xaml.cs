@@ -1,4 +1,5 @@
 ﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Entities;
 using HonorsProject.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -69,17 +70,17 @@ namespace HonorsProject.View.CustomControlls
 
         // Using a DependencyProperty as the backing store for Entities.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EntitiesAvailableProperty =
-            DependencyProperty.Register(nameof(EntitiesAvailable), typeof(ObservableCollection<BaseEntity>), typeof(InOrOutControl), new PropertyMetadata(new ObservableCollection<BaseEntity>(), SetAvailableItemsSource));
+            DependencyProperty.Register(nameof(EntitiesAvailable), typeof(ObservableCollection<BaseEntity>), typeof(InOrOutControl));
 
-        public ObservableCollection<BaseEntity> EntitiesOwned
+        public IEnumerable<BaseEntity> EntitiesOwned
         {
-            get { return (ObservableCollection<BaseEntity>)GetValue(EntitiesOwnedProperty); }
+            get { return (IEnumerable<BaseEntity>)GetValue(EntitiesOwnedProperty); }
             set { SetValue(EntitiesOwnedProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Entities.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EntitiesOwnedProperty =
-            DependencyProperty.Register(nameof(EntitiesOwned), typeof(ObservableCollection<BaseEntity>), typeof(InOrOutControl), new PropertyMetadata(new ObservableCollection<BaseEntity>(), SetOwnedItemsSource));
+            DependencyProperty.Register(nameof(EntitiesOwned), typeof(IEnumerable<BaseEntity>), typeof(InOrOutControl), new PropertyMetadata(SetOwnedItemsSource));
 
         private static void SetAvailableItemsSource(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -95,7 +96,7 @@ namespace HonorsProject.View.CustomControlls
             InOrOutControl controll = d as InOrOutControl;
             if (controll != null)
             {
-                controll.InItemsLV.ItemsSource = e.NewValue as ObservableCollection<BaseEntity>;
+                controll.InItemsLV.ItemsSource = e.NewValue as IEnumerable<BaseEntity>;
             }
         }
 
