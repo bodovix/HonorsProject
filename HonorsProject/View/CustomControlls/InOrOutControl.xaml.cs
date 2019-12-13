@@ -62,15 +62,15 @@ namespace HonorsProject.View.CustomControlls
             }
         }
 
-        public ObservableCollection<BaseEntity> EntitiesAvailable
+        public IEnumerable<BaseEntity> EntitiesAvailable
         {
-            get { return (ObservableCollection<BaseEntity>)GetValue(EntitiesAvailableProperty); }
+            get { return (IEnumerable<BaseEntity>)GetValue(EntitiesAvailableProperty); }
             set { SetValue(EntitiesAvailableProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Entities.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EntitiesAvailableProperty =
-            DependencyProperty.Register(nameof(EntitiesAvailable), typeof(ObservableCollection<BaseEntity>), typeof(InOrOutControl));
+            DependencyProperty.Register(nameof(EntitiesAvailable), typeof(IEnumerable<BaseEntity>), typeof(InOrOutControl));
 
         public IEnumerable<BaseEntity> EntitiesOwned
         {
@@ -87,7 +87,7 @@ namespace HonorsProject.View.CustomControlls
             InOrOutControl controll = d as InOrOutControl;
             if (controll != null)
             {
-                controll.OutItemsLV.ItemsSource = e.NewValue as ObservableCollection<BaseEntity>;
+                controll.OutItemsLV.ItemsSource = e.NewValue as IEnumerable<BaseEntity>;
             }
         }
 

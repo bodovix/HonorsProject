@@ -32,7 +32,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="text" />
+                        <TextBlock Text="{Binding Id}" />
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>
                 </DataTemplate>
@@ -51,7 +51,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="text" />
+                        <TextBlock Text="{Binding Id}" />
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>
                 </DataTemplate>
