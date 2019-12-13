@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
              xmlns:local="clr-namespace:HonorsProject.View.CustomControlls"
              xmlns:appCore="clr-namespace:HonorsProject.Model.Core;assembly=HonorsProject.Model"
              mc:Ignorable="d"
@@ -31,10 +32,12 @@
                   Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Id}" />
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
+                    <Button Command="{Binding DataContext.SaveFormCmd, ElementName=OutItemsLV, diag:PresentationTraceSources.TraceLevel=High}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Id}" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </Button>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

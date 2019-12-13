@@ -100,15 +100,15 @@ namespace HonorsProject.View.CustomControlls
             }
         }
 
-        //public SaveCmd SaveCmd
-        //{
-        //    get { return (SaveCmd)GetValue(SaveCmdProperty); }
-        //    set { SetValue(SaveCmdProperty, value); }
-        //}
+        public SaveCmd SaveFormCmd
+        {
+            get { return (SaveCmd)GetValue(SaveCmdProperty); }
+            set { SetValue(SaveCmdProperty, value); }
+        }
 
-        //// Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SaveCmdProperty =
-        //    DependencyProperty.Register(nameof(SaveCmd), typeof(int), typeof(InOrOutControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SaveCmdProperty =
+            DependencyProperty.Register(nameof(SaveFormCmd), typeof(SaveCmd), typeof(InOrOutControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public InOrOutControl()
         {

@@ -137,7 +137,8 @@
                                                 EntitiesAvailable="{Binding Path=AvailableGroups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                AvailableTxt="Available"
                                                EntitiesOwned="{Binding Path=SelectedStudent.Groups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                               ContainsTxt="Contains" />
+                                               ContainsTxt="Contains"
+                                               SaveFormCmd="{Binding DataContext.SaveFormCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                             <ListView
                                 ItemsSource="{Binding SelectedStudent.Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                 Margin="0,10,0,0">
