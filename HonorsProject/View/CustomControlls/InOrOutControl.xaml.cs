@@ -100,15 +100,35 @@ namespace HonorsProject.View.CustomControlls
             }
         }
 
-        public SaveCmd SaveFormCmd
+        //public SaveCmd SaveFormCmd
+        //{
+        //    get { return (SaveCmd)GetValue(SaveCmdProperty); }
+        //    set { SetValue(SaveCmdProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty SaveCmdProperty =
+        //    DependencyProperty.Register(nameof(SaveFormCmd), typeof(SaveCmd), typeof(InOrOutControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public MoveEntityOutOfListCmd MoveEntityOutOfListCmd
         {
-            get { return (SaveCmd)GetValue(SaveCmdProperty); }
-            set { SetValue(SaveCmdProperty, value); }
+            get { return (MoveEntityOutOfListCmd)GetValue(MoveEntityOutOfListCmdProperty); }
+            set { SetValue(MoveEntityOutOfListCmdProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SaveCmdProperty =
-            DependencyProperty.Register(nameof(SaveFormCmd), typeof(SaveCmd), typeof(InOrOutControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty MoveEntityOutOfListCmdProperty =
+            DependencyProperty.Register(nameof(MoveEntityOutOfListCmd), typeof(MoveEntityOutOfListCmd), typeof(InOrOutControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public MoveEntityInToListCmd MoveEntityInToListCmd
+        {
+            get { return (MoveEntityInToListCmd)GetValue(MoveEntityInToListCmdProperty); }
+            set { SetValue(MoveEntityInToListCmdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MoveEntityInToListCmdProperty =
+            DependencyProperty.Register(nameof(MoveEntityInToListCmd), typeof(MoveEntityInToListCmd), typeof(InOrOutControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public InOrOutControl()
         {

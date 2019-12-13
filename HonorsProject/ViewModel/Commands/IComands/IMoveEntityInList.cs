@@ -13,7 +13,7 @@ namespace HonorsProject.ViewModel.Commands.IComands
 
         bool MoveEntityOutOfList(BaseEntity entityToRemove);
 
-        MoveEntityOutOfListCmd MoveEntityInToListCmd { get; set; }
+        MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
 
         bool MoveEntityInToList(BaseEntity entityToAdd);
     }

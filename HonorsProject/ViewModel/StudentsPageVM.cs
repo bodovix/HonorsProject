@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList
     {
         #region Properties
 
@@ -116,6 +116,8 @@ namespace HonorsProject.ViewModel
         public NewModeCmd NewModeCmd { get; set; }
         public SaveCmd SaveFormCmd { get; set; }
         public NewPassHashCmd NewPassHashCmd { get; set; }
+        public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get; set; }
+        public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
 
         #endregion Commands
 
@@ -129,6 +131,9 @@ namespace HonorsProject.ViewModel
                 NewModeCmd = new NewModeCmd(this);
                 SaveFormCmd = new SaveCmd(this);
                 NewPassHashCmd = new NewPassHashCmd(this);
+                MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
+                MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
+
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)App.AppUser;
                 SearchStudentTxt = "";
@@ -229,6 +234,18 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public bool MoveEntityOutOfList(BaseEntity entityToRemove)
+        {
+            Group group = entityToRemove as Group;
+            return true;
+        }
+
+        public bool MoveEntityInToList(BaseEntity entityToAdd)
+        {
+            Group group = entityToAdd as Group;
+            return true;
         }
     }
 }

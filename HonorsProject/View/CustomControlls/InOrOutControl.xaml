@@ -32,7 +32,7 @@
                   Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding DataContext.SaveFormCmd, ElementName=OutItemsLV, diag:PresentationTraceSources.TraceLevel=High}"
+                    <Button Command="{Binding DataContext.MoveEntityInToListCmd, ElementName=OutItemsLV, diag:PresentationTraceSources.TraceLevel=High}"
                             Background="Transparent" BorderBrush="Transparent">
                         <StackPanel>
                             <TextBlock Text="{Binding Id}" />
@@ -54,7 +54,7 @@
                   Grid.Column="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding DataContext.SaveFormCmd, ElementName=OutItemsLV, diag:PresentationTraceSources.TraceLevel=High}"
+                    <Button Command="{Binding DataContext.MoveEntityOutOfListCmd, ElementName=OutItemsLV, diag:PresentationTraceSources.TraceLevel=High}"
                             Background="Transparent" BorderBrush="Transparent">
                         <StackPanel>
                             <TextBlock Text="{Binding Id}" />
