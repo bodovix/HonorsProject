@@ -238,14 +238,42 @@ namespace HonorsProject.ViewModel
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
-            Group group = entityToRemove as Group;
-            return true;
+            try
+            {
+                bool result = false;
+                if (entityToRemove is Group group)
+                {
+                    SelectedStudent.Groups.Remove(group);
+                    UnitOfWork.Complete();
+                    return true;
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
-            Group group = entityToAdd as Group;
-            return true;
+            try
+            {
+                bool result = false;
+                if (entityToAdd is Group group)
+                {
+                    SelectedStudent.Groups.Add(group);
+                    UnitOfWork.Complete();
+                    return true;
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
     }
 }
