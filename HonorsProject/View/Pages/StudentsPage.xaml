@@ -122,17 +122,7 @@
                     <Label Content="Add To Group:" />
                     <GroupBox Header="Group" Style="{StaticResource FormGroupBox}">
                         <StackPanel Orientation="Vertical">
-                            <Button Name="AddToGroupBtn" Content="Manage Groups" Style="{StaticResource FormSubmitButton}" />
-                            <ComboBox x:Name="RoleComboBox"
-                              Height="23"
-                              ItemsSource="{Binding AvailableGroups}"
-                              DisplayMemberPath="Name">
-                                <ComboBox.ItemContainerStyle>
-                                    <Style TargetType="ComboBoxItem">
-                                        <Setter Property="Height" Value="20" />
-                                    </Style>
-                                </ComboBox.ItemContainerStyle>
-                            </ComboBox>
+                            <TextBlock Text="Manage Groups" Style="{StaticResource FormTitleText}" />
                             <uc:InOrOutControl x:Name="InOrOutControl"
                                                 EntitiesAvailable="{Binding Path=AvailableGroups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                AvailableTxt="Available"

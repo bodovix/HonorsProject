@@ -68,6 +68,7 @@ namespace HonorsProject.ViewModel
                 //if selected.id == 0 create else update
                 FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedStudent = value;
+                RefreshAvailableGroups(SelectedStudent);
                 OnPropertyChanged(nameof(SelectedStudent));
             }
         }
@@ -141,8 +142,7 @@ namespace HonorsProject.ViewModel
                 SelectedStudent = new Student();
 
                 //TODO: figure out Async with EF and Pagination/ limit the results (limit probably best)
-                List<Group> groups = UnitOfWork.GroupRepository.GetAll().ToList();
-                AvailableGroups = new ObservableCollection<Group>(groups);
+                RefreshAvailableGroups(SelectedStudent);
                 List<Student> results = UnitOfWork.StudentRepo.GetAll().ToList();
                 Students = new ObservableCollection<Student>(results);
             }
@@ -150,6 +150,16 @@ namespace HonorsProject.ViewModel
             {
                 FeedbackMessage = ex.Message;
             }
+        }
+
+        private void RefreshAvailableGroups(Student student)
+        {
+            List<Group> groups;
+            if (student == null || student.Id == 0)
+                groups = UnitOfWork.GroupRepository.GetAll().ToList();
+            else
+                groups = UnitOfWork.GroupRepository.GetGroupsNotContainingStudent(student).ToList();
+            AvailableGroups = new ObservableCollection<Group>(groups);
         }
 
         public bool Remove(BaseEntity entity)
@@ -173,6 +183,7 @@ namespace HonorsProject.ViewModel
         {
             FormContext = FormContext.Create;
             SelectedStudent = new Student();
+            RefreshAvailableGroups(SelectedStudent);
         }
 
         public bool Save()
@@ -245,6 +256,7 @@ namespace HonorsProject.ViewModel
                 {
                     SelectedStudent.Groups.Remove(group);
                     UnitOfWork.Complete();
+                    RefreshAvailableGroups(SelectedStudent);
                     return true;
                 }
                 return result;
@@ -265,6 +277,7 @@ namespace HonorsProject.ViewModel
                 {
                     SelectedStudent.Groups.Add(group);
                     UnitOfWork.Complete();
+                    RefreshAvailableGroups(SelectedStudent);
                     return true;
                 }
                 return result;

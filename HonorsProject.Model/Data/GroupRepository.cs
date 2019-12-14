@@ -13,5 +13,10 @@ namespace HonorsProject.Model.Data
         public GroupRepository(LabAssistantContext context) : base(context)
         {
         }
+
+        public List<Group> GetGroupsNotContainingStudent(Student student)
+        {
+            return _entities.Where(g => !g.Students.Any(s => s.Id == student.Id)).ToList();
+        }
     }
 }
