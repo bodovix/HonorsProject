@@ -216,7 +216,14 @@ namespace HonorsProject.ViewModel
                     //Update
                     result = SelectedStudent.Validate();
                     if (result)
-                        UnitOfWork.Complete();
+                    {
+                        int rowsChanged = UnitOfWork.Complete();
+                        if (rowsChanged == 0)
+                        {
+                            FeedbackMessage = $"Unable to Update Student {SelectedStudent.Id}";
+                            result = false;
+                        }
+                    }
                 }
                 return result;
             }
@@ -235,6 +242,7 @@ namespace HonorsProject.ViewModel
 
         public bool GenerateNewPasswordHash(string optionalNewPassword)
         {
+            FeedbackMessage = "";
             try
             {
                 IsConfirmed = false;
@@ -244,13 +252,24 @@ namespace HonorsProject.ViewModel
                 {
                     //randomly generate
                     SelectedStudent.GenerateNewPasswordHash(ref optionalNewPassword);
-                    SelectedStudent = SelectedStudent;
+                    //have to set form context back when in create as this updates the id
+                    if (FormContext == FormContext.Create)
+                    {
+                        //have to update at property level so view updates....
+                        SelectedStudent = SelectedStudent;
+                        FormContext = FormContext.Create;
+                    }
+                    else
+                        SelectedStudent = SelectedStudent;
                     //Temporary display new password
                     Mediator.NotifyColleagues(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), optionalNewPassword);
                     return true;
                 }
                 else
+                {
+                    FeedbackMessage = "Generation of new password Canceled.";
                     return false;
+                }
             }
             catch (Exception ex)
             {
