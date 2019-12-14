@@ -8,10 +8,12 @@ namespace HonorsProject.Model.Enums
 {
     public enum SubgridContext
     {
+        ActiveSessions,
+        FutureSessions,
+        PreviousSessions,
         Groups,
         Questions,
         Answers,
         Students,
-        Sessions
     }
 }

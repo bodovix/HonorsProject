@@ -30,9 +30,9 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private SessionsContext _sessionsContext;
+        private SubgridContext _sessionsContext;
 
-        public SessionsContext SessionsContext
+        public SubgridContext SessionsContext
         {
             get { return _sessionsContext; }
             set
@@ -213,15 +213,15 @@ namespace HonorsProject.ViewModel
         {
             switch (SessionsContext)
             {
-                case SessionsContext.Active:
+                case SubgridContext.ActiveSessions:
                     GetAllMyCurrentSessions();
                     break;
 
-                case SessionsContext.Future:
+                case SubgridContext.FutureSessions:
                     GetAllMyFutureSessions();
                     break;
 
-                case SessionsContext.Previous:
+                case SubgridContext.PreviousSessions:
                     GetAllMyPreviousSessions();
                     break;
 
@@ -234,7 +234,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionsContext = SessionsContext.Active;
+                SessionsContext = SubgridContext.ActiveSessions;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
                 if (result != null)
@@ -256,7 +256,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionsContext = SessionsContext.Previous;
+                SessionsContext = SubgridContext.PreviousSessions;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
                 if (result != null)
@@ -278,7 +278,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionsContext = SessionsContext.Future;
+                SessionsContext = SubgridContext.FutureSessions;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
                 if (result != null)

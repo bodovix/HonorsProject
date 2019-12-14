@@ -209,7 +209,7 @@
                             Command="{Binding GetActiveSessionsCmd}"
                             Background="{Binding SessionsContext,
                                                 Converter={StaticResource SessionsContextToColourConverter},
-                                            ConverterParameter={x:Static enums:SessionsContext.Active}}" />
+                                            ConverterParameter={x:Static enums:SubgridContext.ActiveSessions}}" />
 
                     <Button Name="FutureSessionsBtn"
                             Content="Future"
@@ -217,14 +217,14 @@
                             Command="{Binding GetFutureSessionsCmd}"
                             Background="{Binding SessionsContext,
                                                 Converter={StaticResource SessionsContextToColourConverter},
-                                            ConverterParameter={x:Static enums:SessionsContext.Future}}" />
+                                            ConverterParameter={x:Static enums:SubgridContext.FutureSessions}}" />
                     <Button Name="Previous"
                             Content="Previous"
                             Style="{StaticResource InfoButton}"
                             Command="{Binding GetPreviousSessionsCmd}"
                             Background="{Binding SessionsContext,
                                                 Converter={StaticResource SessionsContextToColourConverter},
-                                            ConverterParameter={x:Static enums:SessionsContext.Previous}}" />
+                                            ConverterParameter={x:Static enums:SubgridContext.PreviousSessions}}" />
                 </StackPanel>
                 <ListView  Grid.Column="0" Grid.Row="2">
                 </ListView>

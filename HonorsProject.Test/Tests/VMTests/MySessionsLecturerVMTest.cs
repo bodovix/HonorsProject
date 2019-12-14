@@ -52,7 +52,7 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-            VM.SessionsContext = SessionsContext.Active;
+            VM.SessionsContext = SubgridContext.ActiveSessions;
 
             ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 444).FirstOrDefault());
@@ -84,7 +84,7 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-            VM.SessionsContext = SessionsContext.Active;
+            VM.SessionsContext = SubgridContext.ActiveSessions;
 
             ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 555).FirstOrDefault());
@@ -116,7 +116,7 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-            VM.SessionsContext = SessionsContext.Future;
+            VM.SessionsContext = SubgridContext.FutureSessions;
 
             ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 555).FirstOrDefault());
@@ -149,7 +149,7 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-            VM.SessionsContext = SessionsContext.Future;
+            VM.SessionsContext = SubgridContext.FutureSessions;
 
             ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 444).FirstOrDefault());
@@ -182,7 +182,7 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-            VM.SessionsContext = SessionsContext.Previous;
+            VM.SessionsContext = SubgridContext.PreviousSessions;
 
             ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 555).FirstOrDefault());
@@ -215,7 +215,7 @@ namespace HonorsProject.Test
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
             VM.FormContext = FormContext.Create;
-            VM.SessionsContext = SessionsContext.Previous;
+            VM.SessionsContext = SubgridContext.PreviousSessions;
 
             ObservableCollection<Lecturer> LecLst = new ObservableCollection<Lecturer>();
             LecLst.Add(VM.AvailableLecturers.Where(l => l.Id == 444).FirstOrDefault());
@@ -289,7 +289,7 @@ namespace HonorsProject.Test
             ClearDatabase();
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
-            VM.SessionsContext = SessionsContext.Future;// were going to work with the future sessions
+            VM.SessionsContext = SubgridContext.FutureSessions;// were going to work with the future sessions
             VM.GetAllMyFutureSessions();
             VM.SelectedSession = VM.MySessions.Where(s => s.Name.Equals("Delete Sesh")).FirstOrDefault();
             //delete message box confirmed
@@ -324,7 +324,7 @@ namespace HonorsProject.Test
             ClearDatabase();
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
-            VM.SessionsContext = SessionsContext.Previous;// were going to work with the future sessions
+            VM.SessionsContext = SubgridContext.PreviousSessions;// were going to work with the future sessions
             VM.GetAllMyPreviousSessions();
             VM.SelectedSession = VM.MySessions.Where(s => s.Name.Equals("Previous Sesh")).FirstOrDefault();
             //delete message box confirmed
@@ -359,7 +359,7 @@ namespace HonorsProject.Test
             ClearDatabase();
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
-            VM.SessionsContext = SessionsContext.Future;// were going to work with the future sessions
+            VM.SessionsContext = SubgridContext.FutureSessions;// were going to work with the future sessions
             VM.GetAllMyFutureSessions();
             VM.SelectedSession = VM.MySessions.Where(s => s.Id == 0).FirstOrDefault();
             //delete message box confirmed
@@ -394,7 +394,7 @@ namespace HonorsProject.Test
             ClearDatabase();
             CreateMySessionTestData(_lecturer);
             VM = new MySessionsLecturerPageVM(_lecturer, dbConName);
-            VM.SessionsContext = SessionsContext.Future;// were going to work with the future sessions
+            VM.SessionsContext = SubgridContext.FutureSessions;// were going to work with the future sessions
             VM.GetAllMyFutureSessions();
             VM.SelectedSession = VM.MySessions.Where(s => s.Name.Equals("Delete Sesh")).FirstOrDefault();
             //delete message box CANCELED - NO DELETE

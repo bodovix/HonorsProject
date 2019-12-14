@@ -15,8 +15,8 @@ namespace HonorsProject.ViewModel.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SessionsContext sessionsContext = (SessionsContext)value;
-            SessionsContext controlContext = (SessionsContext)parameter;
+            SubgridContext sessionsContext = (SubgridContext)value;
+            SubgridContext controlContext = (SubgridContext)parameter;
             //if the context is the same as the button set its colour to active
             if (sessionsContext == controlContext)
                 return new SolidColorBrush(Colors.Green);
