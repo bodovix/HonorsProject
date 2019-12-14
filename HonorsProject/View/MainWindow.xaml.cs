@@ -26,17 +26,19 @@ namespace HonorsProject.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        //TODO: implement these into main window navigation - might cause problems with references /garbage collector.
-        //TODO: take time and test properly
         public MainWindowVM VM { get; set; }
 
-        private StudentsPage studentsPage = new StudentsPage();
-        private GroupPage groupPage = new GroupPage();
-        private MySessionsPage sessionsPage = new MySessionsPage();
-        private QandAPage questionsPage = new QandAPage();
-        private QandAPage answerPage = new QandAPage();
-        private DataAnalysisPage dataAnalysisPage = new DataAnalysisPage();
-        private MyAccountPage accountPage = new MyAccountPage();
+        //TODO: implement these into main window navigation - might cause problems with references /garbage collector.
+        //TODO: take time and test properly
+        //TODO: OR UNREGISTER ON PAGE NAVIGATION ---- PROBABLY THAT
+
+        //private StudentsPage studentsPage = new StudentsPage();
+        //private GroupPage groupPage = new GroupPage();
+        //private MySessionsPage sessionsPage = new MySessionsPage();
+        //private QandAPage questionsPage = new QandAPage();
+        //private QandAPage answerPage = new QandAPage();
+        //private DataAnalysisPage dataAnalysisPage = new DataAnalysisPage();
+        //private MyAccountPage accountPage = new MyAccountPage();
 
         public MainWindow()
         {
