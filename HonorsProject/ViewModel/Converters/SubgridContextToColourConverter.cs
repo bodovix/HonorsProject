@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace HonorsProject.ViewModel.Converters
 {
-    internal class SessionsContextToColourConverter : IValueConverter
+    internal class SubgridContextToColourConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

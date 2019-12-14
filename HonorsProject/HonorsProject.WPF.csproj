@@ -80,7 +80,7 @@
     <Compile Include="ViewModel\Commands\GetPreviousSessionsCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
     <Compile Include="ViewModel\Converters\RoleToEditableConverter.cs" />
-    <Compile Include="ViewModel\Converters\SessionsContextToColourConverter.cs" />
+    <Compile Include="ViewModel\Converters\SubgridContextToColourConverter.cs" />
     <Compile Include="ViewModel\Converters\EnumToItemsSource.cs" />
     <Compile Include="ViewModel\Converters\FormContextToTextConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToVisibleConverter.cs" />

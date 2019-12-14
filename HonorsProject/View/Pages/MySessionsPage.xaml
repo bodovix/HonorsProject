@@ -12,7 +12,7 @@
     <Page.Resources>
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
-        <cv:SessionsContextToColourConverter x:Key="SessionsContextToColourConverter" />
+        <cv:SubgridContextToColourConverter x:Key="SessionsContextToColourConverter" />
         <cv:RoleToEnabledConverter x:Key="RoleToEnabledConverter" />
     </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
