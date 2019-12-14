@@ -19,6 +19,17 @@ namespace HonorsProject.ViewModel
         #region Properties
 
         public bool IsConfirmed { get; set; }
+        private SubgridContext _subgridContext;
+
+        public SubgridContext SubgridContext
+        {
+            get { return _subgridContext; }
+            set
+            {
+                _subgridContext = value;
+                OnPropertyChanged(nameof(SubgridContext));
+            }
+        }
 
         private FormContext _formContext;
 
@@ -127,6 +138,7 @@ namespace HonorsProject.ViewModel
             try
             {
                 IsConfirmed = false;
+                SubgridContext = SubgridContext.Groups;
                 //commands
                 RemoveEntityCmd = new RemoveEntityCmd(this);
                 NewModeCmd = new NewModeCmd(this);

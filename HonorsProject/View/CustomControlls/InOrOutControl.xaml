@@ -25,15 +25,18 @@
                    Grid.Column="0"
                    Style="{StaticResource FormTitleText}" />
         <ListView Name="OutItemsLV"
+                  HorizontalContentAlignment="Stretch"
                   ItemsSource="{Binding Path=EntitiesAvailable, ElementName=InOrOutCtrl}"
                   Grid.Row="1"
                   Height="100"
                   Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding DataContext.MoveEntityInToListCmd, ElementName=OutItemsLV, diag:PresentationTraceSources.TraceLevel=High}"
+                    <Button Command="{Binding DataContext.MoveEntityInToListCmd, ElementName=OutItemsLV}"
                             CommandParameter="{Binding}"
-                            Background="Transparent" BorderBrush="Transparent">
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            HorizontalContentAlignment="Left">
                         <StackPanel>
                             <TextBlock Text="{Binding Id}" />
                             <TextBlock Text="{Binding Name}" />
@@ -56,7 +59,9 @@
                 <DataTemplate>
                     <Button Command="{Binding DataContext.MoveEntityOutOfListCmd, ElementName=OutItemsLV, diag:PresentationTraceSources.TraceLevel=High}"
                             CommandParameter="{Binding}"
-                            Background="Transparent" BorderBrush="Transparent">
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            HorizontalContentAlignment="Left">
                         <StackPanel>
                             <TextBlock Text="{Binding Id}" />
                             <TextBlock Text="{Binding Name}" />
