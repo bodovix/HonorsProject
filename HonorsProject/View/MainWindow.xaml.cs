@@ -28,18 +28,6 @@ namespace HonorsProject.View
     {
         public MainWindowVM VM { get; set; }
 
-        //TODO: implement these into main window navigation - might cause problems with references /garbage collector.
-        //TODO: take time and test properly
-        //TODO: OR UNREGISTER ON PAGE NAVIGATION ---- PROBABLY THAT
-
-        //private StudentsPage studentsPage = new StudentsPage();
-        //private GroupPage groupPage = new GroupPage();
-        //private MySessionsPage sessionsPage = new MySessionsPage();
-        //private QandAPage questionsPage = new QandAPage();
-        //private QandAPage answerPage = new QandAPage();
-        //private DataAnalysisPage dataAnalysisPage = new DataAnalysisPage();
-        //private MyAccountPage accountPage = new MyAccountPage();
-
         public MainWindow()
         {
             //Initialize window with View Model
@@ -101,36 +89,43 @@ namespace HonorsProject.View
 
         private void StudentsBtn_Click(object sender, RoutedEventArgs e)
         {
+            Mediator.ClearMediator();
             MainContent.Content = new StudentsPage();
         }
 
         private void GroupsBtn_Click(object sender, RoutedEventArgs e)
         {
+            Mediator.ClearMediator();
             MainContent.Content = new GroupPage();
         }
 
         private void MySessionsBtn_Click(object sender, RoutedEventArgs e)
         {
+            Mediator.ClearMediator();
             MainContent.Content = new MySessionsPage();
         }
 
         private void MyQuestoins_Click(object sender, RoutedEventArgs e)
         {
+            Mediator.ClearMediator();
             MainContent.Content = new QandAPage();
         }
 
         private void MyAnswers_Click(object sender, RoutedEventArgs e)
         {
+            Mediator.ClearMediator();
             MainContent.Content = new QandAPage();
         }
 
         private void DataAnalysisBtn_Click(object sender, RoutedEventArgs e)
         {
+            Mediator.ClearMediator();
             MainContent.Content = new DataAnalysisPage();
         }
 
         private void MyAccountBtn_Click(object sender, RoutedEventArgs e)
         {
+            Mediator.ClearMediator();
             MainContent.Content = new MyAccountPage();
         }
     }

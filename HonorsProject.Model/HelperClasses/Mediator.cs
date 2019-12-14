@@ -43,5 +43,10 @@ namespace HonorsProject.Model.HelperClasses
                 foreach (var callback in mediatorDictionary[channel].ToArray())
                     callback(args);
         }
+
+        static public void ClearMediator()
+        {
+            mediatorDictionary = new Dictionary<string, List<Action<object>>>();
+        }
     }
 }
