@@ -18,15 +18,15 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
-        private SubgridContext _sessionsContext;
+        private SubgridContext _subgridContext;
 
-        public SubgridContext SessionsContext
+        public SubgridContext SubgridContext
         {
-            get { return _sessionsContext; }
+            get { return _subgridContext; }
             set
             {
-                _sessionsContext = value;
-                OnPropertyChanged(nameof(SessionsContext));
+                _subgridContext = value;
+                OnPropertyChanged(nameof(SubgridContext));
             }
         }
 
@@ -247,7 +247,7 @@ namespace HonorsProject.ViewModel
 
         private void UpdateMySessionsList()
         {
-            switch (SessionsContext)
+            switch (SubgridContext)
             {
                 case SubgridContext.ActiveSessions:
                     GetAllMyCurrentSessions();
@@ -304,7 +304,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionsContext = SubgridContext.ActiveSessions;
+                SubgridContext = SubgridContext.ActiveSessions;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
                 if (result != null)
@@ -326,7 +326,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionsContext = SubgridContext.PreviousSessions;
+                SubgridContext = SubgridContext.PreviousSessions;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
                 if (result != null)
@@ -348,7 +348,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                SessionsContext = SubgridContext.FutureSessions;
+                SubgridContext = SubgridContext.FutureSessions;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
                 if (result != null)

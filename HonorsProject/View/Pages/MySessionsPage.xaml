@@ -12,7 +12,7 @@
     <Page.Resources>
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
-        <cv:SubgridContextToColourConverter x:Key="SessionsContextToColourConverter" />
+        <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
         <cv:RoleToEnabledConverter x:Key="RoleToEnabledConverter" />
     </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
@@ -207,23 +207,23 @@
                             Content="Active"
                             Style="{StaticResource InfoButton}"
                             Command="{Binding GetActiveSessionsCmd}"
-                            Background="{Binding SessionsContext,
-                                                Converter={StaticResource SessionsContextToColourConverter},
+                            Background="{Binding SubgridContext,
+                                                Converter={StaticResource SubgridContextToColourConverter},
                                             ConverterParameter={x:Static enums:SubgridContext.ActiveSessions}}" />
 
                     <Button Name="FutureSessionsBtn"
                             Content="Future"
                             Style="{StaticResource InfoButton}"
                             Command="{Binding GetFutureSessionsCmd}"
-                            Background="{Binding SessionsContext,
-                                                Converter={StaticResource SessionsContextToColourConverter},
+                            Background="{Binding SubgridContext,
+                                                Converter={StaticResource SubgridContextToColourConverter},
                                             ConverterParameter={x:Static enums:SubgridContext.FutureSessions}}" />
                     <Button Name="Previous"
                             Content="Previous"
                             Style="{StaticResource InfoButton}"
                             Command="{Binding GetPreviousSessionsCmd}"
-                            Background="{Binding SessionsContext,
-                                                Converter={StaticResource SessionsContextToColourConverter},
+                            Background="{Binding SubgridContext,
+                                                Converter={StaticResource SubgridContextToColourConverter},
                                             ConverterParameter={x:Static enums:SubgridContext.PreviousSessions}}" />
                 </StackPanel>
                 <ListView  Grid.Column="0" Grid.Row="2">
