@@ -81,6 +81,7 @@
     <Compile Include="Enums\SessionsContext.cs" />
     <Compile Include="Enums\FormContext.cs" />
     <Compile Include="Enums\Role.cs" />
+    <Compile Include="Enums\SubgridContext.cs" />
     <Compile Include="HelperClasses\Cryptography.cs" />
     <Compile Include="HelperClasses\Mediator.cs" />
     <Compile Include="Migrations\201910081704152_InitialModel.cs" />
