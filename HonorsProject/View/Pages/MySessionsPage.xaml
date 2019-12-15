@@ -232,14 +232,7 @@
                           Grid.Row="3"
                           ItemsSource="{Binding MySessions}"
                           SelectedItem="{Binding SelectedSession, Mode=TwoWay}"
-                          AutoGenerateColumns="False"
-                          SelectionMode="Single"
-                          SelectionUnit="FullRow"
-                          CanUserReorderColumns="True"
-                          CanUserResizeColumns="True"
-                          CanUserResizeRows="False"
-                          CanUserSortColumns="True"
-                          IsReadOnly="True">
+                          Style="{StaticResource SubgridControlStyle}">
                     <!--HeadingStyle-->
                     <DataGrid.Resources>
                         <Style TargetType="DataGridColumnHeader">

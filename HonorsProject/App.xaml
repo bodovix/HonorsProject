@@ -126,7 +126,7 @@
             <Setter Property="CanUserResizeRows" Value="False" />
             <Setter Property="CanUserSortColumns" Value="True" />
             <Setter Property="IsReadOnly" Value="True" />
-            <Setter Property="Height" Value="350" />
+            <Setter Property="MaxHeight" Value="350" />
             <Setter Property="Margin" Value="10,0,10,0" />
             <Setter Property="AutoGenerateColumns" Value="False" />
         </Style>
