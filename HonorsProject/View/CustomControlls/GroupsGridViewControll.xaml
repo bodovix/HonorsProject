@@ -8,17 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <DataGrid Name="GroupDataGrid"
-                            Grid.Column="0"
-                          Grid.Row="3"
-                          AutoGenerateColumns="False"
-                            SelectedItem="{Binding SelectedGroup}"
-                          SelectionMode="Single"
-                          SelectionUnit="FullRow"
-                          CanUserReorderColumns="True"
-                          CanUserResizeColumns="True"
-                          CanUserResizeRows="False"
-                          CanUserSortColumns="True"
-                          IsReadOnly="True">
+                     Grid.Column="0"
+                     Grid.Row="3"
+                     SelectedItem="{Binding SelectedGroup}"
+                     Style="{StaticResource SubgridControlStyle}">
             <!--HeadingStyle-->
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
