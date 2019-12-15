@@ -170,9 +170,9 @@ namespace HonorsProject.ViewModel
         private void RefreshAvailableGroups(Student student)
         {
             List<Group> groups;
-            if (student == null || student.Id == 0)
+            if (student == null || student.Id == 0) // If in New Mode
                 groups = UnitOfWork.GroupRepository.GetAll().ToList();
-            else
+            else // if student already selected
                 groups = UnitOfWork.GroupRepository.GetGroupsNotContainingStudent(student).ToList();
             AvailableGroups = new ObservableCollection<Group>(groups);
         }
@@ -336,11 +336,17 @@ namespace HonorsProject.ViewModel
             switch (context)
             {
                 case SubgridContext.Groups:
-                    FeedbackMessage = "Not implemented Groups subgrid navigation yet";
+                    FeedbackMessage = "Not implemented Groups sub-grid navigation yet";
+                    //Student Groups should be lazy loaded into form
+
+                    //TODO: Load Groups GridView (Mediator Call)
                     break;
 
                 case SubgridContext.Questions:
-                    FeedbackMessage = "Not implemented Questions subgrid navigation yet";
+                    FeedbackMessage = "Not implemented Questions sub-grid navigation yet";
+                    //Student Questions should be lazy loaded into form
+
+                    // TODO:Load Questions GridView (Mediator Call)
                     break;
 
                 default:
