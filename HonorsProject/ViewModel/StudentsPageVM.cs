@@ -76,6 +76,7 @@ namespace HonorsProject.ViewModel
             {
                 if (value == null)
                     value = new Student();
+                FeedbackMessage = "";
                 //if selected.id == 0 create else update
                 FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedStudent = value;
@@ -220,7 +221,7 @@ namespace HonorsProject.ViewModel
                         int rowsChanged = UnitOfWork.Complete();
                         if (rowsChanged == 0)
                         {
-                            FeedbackMessage = $"Unable to Update Student {SelectedStudent.Id}";
+                            FeedbackMessage = $"Student not updated: {SelectedStudent.Id}.";
                             result = false;
                         }
                     }
