@@ -309,6 +309,11 @@ namespace HonorsProject.ViewModel
                 bool result = false;
                 if (entityToAdd is Group group)
                 {
+                    if (SelectedStudent.Groups.Contains(entityToAdd))
+                    {
+                        FeedbackMessage = $"Student already belongs to group: {entityToAdd.Name}";
+                        return false;
+                    }
                     SelectedStudent.Groups.Add(group);
                     UnitOfWork.Complete();
                     RefreshAvailableGroups(SelectedStudent);
