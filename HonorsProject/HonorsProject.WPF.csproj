@@ -62,7 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\ChangeSubgridContextCmd.cs" />
     <Compile Include="ViewModel\Commands\DeleteCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\IChangeSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IMoveEntityInList.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityInToListCmd.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityOutOfListCmd.cs" />
