@@ -103,6 +103,9 @@
     <Compile Include="View\CustomControlls\InOrOutControl.xaml.cs">
       <DependentUpon>InOrOutControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomControlls\QuestionsGridViewControl.xaml.cs">
+      <DependentUpon>QuestionsGridViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\DataAnalysisPage.xaml.cs">
       <DependentUpon>DataAnalysisPage.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomControlls\InOrOutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomControlls\QuestionsGridViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
