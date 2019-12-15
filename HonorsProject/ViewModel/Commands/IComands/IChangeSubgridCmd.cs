@@ -9,7 +9,7 @@ namespace HonorsProject.ViewModel.Commands.IComands
 {
     public interface IChangeSubgridCmd
     {
-        ChangeSubgridContextCmd GetChangeSubgridContextCmd { get; set; };
+        ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
 
         bool ChangeSubgridContext(SubgridContext context);
     }

@@ -135,10 +135,8 @@ namespace HonorsProject.ViewModel
         public SaveCmd SaveFormCmd { get; set; }
         public AddLecturerCmd AddLecturerCmd { get; set; }
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
-        public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
-        public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
-        public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
+        public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
 
         #endregion Commands
 
@@ -149,11 +147,8 @@ namespace HonorsProject.ViewModel
             SaveFormCmd = new SaveCmd(this);
             AddLecturerCmd = new AddLecturerCmd(this);
             RemoveEntityCmd = new RemoveEntityCmd(this);
-            GetActiveSessionsCmd = new GetActiveSessionsCmd(this);
-            GetFutureSessionsCmd = new GetFutureSessionsCmd(this);
-            GetPreviousSessionsCmd = new GetPreviousSessionsCmd(this);
             DeleteCmd = new DeleteCmd(this);
-
+            ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
             //initial setup
             User = (Student)appUser;
             UserRole = Role.Student;
@@ -230,6 +225,56 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        public bool Save()
+        {
+            throw new NotImplementedException("Students Cannot Save Sessions.");
+        }
+
+        public bool Delete(object objectToDelete)
+        {
+            FeedbackMessage = "Students Cannot Delete Sessions";
+            return false;
+        }
+
+        public void EnterNewMode()
+        {
+            throw new NotImplementedException("Students Cannot Create New Sessions");
+        }
+
+        public bool AddLecturer()
+        {
+            throw new NotImplementedException("Students cannot add lecturers to sessions");
+        }
+
+        public bool Remove(BaseEntity entityToRemove)
+        {
+            throw new NotImplementedException("Students cannot remove lecturers from sessions");
+        }
+
+        public bool ChangeSubgridContext(SubgridContext subgridContext)
+        {
+            bool result = false;
+            switch (subgridContext)
+            {
+                case SubgridContext.ActiveSessions:
+                    GetAllMyCurrentSessions();
+                    break;
+
+                case SubgridContext.FutureSessions:
+                    GetAllMyFutureSessions();
+                    break;
+
+                case SubgridContext.PreviousSessions:
+                    GetAllMyPreviousSessions();
+                    break;
+
+                default:
+                    FeedbackMessage = "Sub-grid type not supported. Contact support.";
+                    break;
+            }
+            return result;
+        }
+
         public bool GetAllMyCurrentSessions()
         {
             try
@@ -294,32 +339,6 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
-        }
-
-        public bool Save()
-        {
-            throw new NotImplementedException("Students Cannot Save Sessions.");
-        }
-
-        public bool Delete(object objectToDelete)
-        {
-            FeedbackMessage = "Students Cannot Delete Sessions";
-            return false;
-        }
-
-        public void EnterNewMode()
-        {
-            throw new NotImplementedException("Students Cannot Create New Sessions");
-        }
-
-        public bool AddLecturer()
-        {
-            throw new NotImplementedException("Students cannot add lecturers to sessions");
-        }
-
-        public bool Remove(BaseEntity entityToRemove)
-        {
-            throw new NotImplementedException("Students cannot remove lecturers from sessions");
         }
     }
 }

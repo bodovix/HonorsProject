@@ -74,12 +74,8 @@
     <Compile Include="ViewModel\Commands\IComands\IRemoveEntity.cs" />
     <Compile Include="ViewModel\Commands\RemoveEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IAddLecturerCmd.cs" />
-    <Compile Include="ViewModel\Commands\IComands\ISessionSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\AddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\NewModeCmd.cs" />
-    <Compile Include="ViewModel\Commands\GetFutureSessionsCmd.cs" />
-    <Compile Include="ViewModel\Commands\GetActiveSessionsCmd.cs" />
-    <Compile Include="ViewModel\Commands\GetPreviousSessionsCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
     <Compile Include="ViewModel\Converters\RoleToEditableConverter.cs" />
     <Compile Include="ViewModel\Converters\SubgridContextToColourConverter.cs" />

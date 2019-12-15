@@ -142,10 +142,8 @@ namespace HonorsProject.ViewModel
         public SaveCmd SaveFormCmd { get; set; }
         public AddLecturerCmd AddLecturerCmd { get; set; }
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
-        public GetActiveSessionsCmd GetActiveSessionsCmd { get; set; }
-        public GetFutureSessionsCmd GetFutureSessionsCmd { get; set; }
-        public GetPreviousSessionsCmd GetPreviousSessionsCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
+        public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
 
         #endregion CommandProperties
 
@@ -156,11 +154,8 @@ namespace HonorsProject.ViewModel
             SaveFormCmd = new SaveCmd(this);
             AddLecturerCmd = new AddLecturerCmd(this);
             RemoveEntityCmd = new RemoveEntityCmd(this);
-            GetActiveSessionsCmd = new GetActiveSessionsCmd(this);
-            GetFutureSessionsCmd = new GetFutureSessionsCmd(this);
-            GetPreviousSessionsCmd = new GetPreviousSessionsCmd(this);
             DeleteCmd = new DeleteCmd(this);
-
+            ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
             //initial setup
             UserRole = Role.Lecturer;
             User = (Lecturer)appUser;
@@ -300,6 +295,74 @@ namespace HonorsProject.ViewModel
             SelectedSession = new Session();
         }
 
+        public bool AddLecturer()
+        {
+            FeedbackMessage = "";
+            try
+            {
+                //is lecturer selected
+                if (SelectedLecturer == null)
+                    throw new Exception("No lecturer selected.");
+                //check if lecture already in session
+                if (SelectedSession.Lecturers.Contains(SelectedLecturer))
+                    throw new Exception("Lecturer already in session.");
+                else
+                {
+                    SelectedSession.Lecturers.Add(SelectedLecturer);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
+        }
+
+        public bool Remove(BaseEntity entityToRemove)
+        {
+            FeedbackMessage = "";
+            Lecturer lecturer = (Lecturer)entityToRemove;
+            if (SelectedSession.Lecturers != null)
+                //Saving done on update Save button clicked
+                if (SelectedSession.Lecturers.Contains(lecturer))
+                {
+                    SelectedSession.Lecturers.Remove(lecturer);
+                    return true;
+                }
+                else
+                {
+                    FeedbackMessage = "Lecturer not found in session.";
+                    return false;
+                }
+            else
+                return false;
+        }
+
+        public bool ChangeSubgridContext(SubgridContext subgridContext)
+        {
+            bool result = false;
+            switch (subgridContext)
+            {
+                case SubgridContext.ActiveSessions:
+                    result = GetAllMyCurrentSessions();
+                    break;
+
+                case SubgridContext.FutureSessions:
+                    result = GetAllMyFutureSessions();
+                    break;
+
+                case SubgridContext.PreviousSessions:
+                    result = GetAllMyPreviousSessions();
+                    break;
+
+                default:
+                    FeedbackMessage = "Sub-grid type not supported. Contact support.";
+                    break;
+            }
+            return result;
+        }
+
         public bool GetAllMyCurrentSessions()
         {
             try
@@ -364,50 +427,6 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
-        }
-
-        public bool AddLecturer()
-        {
-            FeedbackMessage = "";
-            try
-            {
-                //is lecturer selected
-                if (SelectedLecturer == null)
-                    throw new Exception("No lecturer selected.");
-                //check if lecture already in session
-                if (SelectedSession.Lecturers.Contains(SelectedLecturer))
-                    throw new Exception("Lecturer already in session.");
-                else
-                {
-                    SelectedSession.Lecturers.Add(SelectedLecturer);
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                FeedbackMessage = ex.Message;
-                return false;
-            }
-        }
-
-        public bool Remove(BaseEntity entityToRemove)
-        {
-            FeedbackMessage = "";
-            Lecturer lecturer = (Lecturer)entityToRemove;
-            if (SelectedSession.Lecturers != null)
-                //Saving done on update Save button clicked
-                if (SelectedSession.Lecturers.Contains(lecturer))
-                {
-                    SelectedSession.Lecturers.Remove(lecturer);
-                    return true;
-                }
-                else
-                {
-                    FeedbackMessage = "Lecturer not found in session.";
-                    return false;
-                }
-            else
-                return false;
         }
     }
 }
