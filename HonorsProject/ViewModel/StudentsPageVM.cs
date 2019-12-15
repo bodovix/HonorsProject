@@ -281,6 +281,7 @@ namespace HonorsProject.ViewModel
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
+            FeedbackMessage = "";
             try
             {
                 bool result = false;
@@ -302,6 +303,7 @@ namespace HonorsProject.ViewModel
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
+            FeedbackMessage = "";
             try
             {
                 bool result = false;
