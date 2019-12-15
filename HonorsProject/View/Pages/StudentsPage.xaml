@@ -151,12 +151,16 @@
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
                     <Button Name="StudentsGroupsBtn"
                             Content="Groups"
+                            Command="{Binding ChangeSubgridContextCmd}"
+                            CommandParameter="{x:Static enums:SubgridContext.Groups}"
                             Style="{StaticResource InfoButton}"
                             Background="{Binding Path=SubgridContext,
                                                 Converter={StaticResource SubgridContextToColourConverter},
                                                 ConverterParameter={x:Static enums:SubgridContext.Groups }}" />
                     <Button Name="StudentQuestionsBTn"
                             Content="Questions"
+                            Command="{Binding ChangeSubgridContextCmd}"
+                            CommandParameter="{x:Static enums:SubgridContext.Questions}"
                             Style="{StaticResource InfoButton}"
                             Background="{Binding Path=SubgridContext,
                                                 Converter={StaticResource SubgridContextToColourConverter},

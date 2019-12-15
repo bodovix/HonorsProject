@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd
     {
         #region Properties
 
@@ -131,6 +131,7 @@ namespace HonorsProject.ViewModel
         public NewPassHashCmd NewPassHashCmd { get; set; }
         public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get; set; }
         public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
+        public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
 
         #endregion Commands
 
@@ -147,6 +148,7 @@ namespace HonorsProject.ViewModel
                 NewPassHashCmd = new NewPassHashCmd(this);
                 MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
                 MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
+                ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
 
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)App.AppUser;
@@ -326,6 +328,26 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public bool ChangeSubgridContext(SubgridContext context)
+        {
+            bool result = false;
+            switch (context)
+            {
+                case SubgridContext.Groups:
+                    FeedbackMessage = "Not implemented Groups subgrid navigation yet";
+                    break;
+
+                case SubgridContext.Questions:
+                    FeedbackMessage = "Not implemented Questions subgrid navigation yet";
+                    break;
+
+                default:
+                    FeedbackMessage = "Sub-grid type not supported. Contact support.";
+                    break;
+            }
+            return result;
         }
     }
 }
