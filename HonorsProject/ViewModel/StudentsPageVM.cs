@@ -63,6 +63,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _searchStudentTxt = value;
+                UpdateMyStudentsList(10);
                 OnPropertyChanged(nameof(SearchStudentTxt));
             }
         }
@@ -234,7 +235,7 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = Lecturer.AddNewStudent(SelectedStudent, UnitOfWork);
                     if (result)
-                        UpdateMyStudentsList();
+                        UpdateMyStudentsList(10);
                 }
                 else
                 {
@@ -259,9 +260,8 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private void UpdateMyStudentsList()
+        private void UpdateMyStudentsList(int rows)
         {
-            int rows = 10;
             Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetTopXFromSearch(SearchStudentTxt, rows));
         }
 

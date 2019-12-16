@@ -23,13 +23,14 @@ namespace HonorsProject.Model.Data
 
         public List<Student> GetTopXFromSearch(string searchStudentTxt, int rows)
         {
+            //if no search return all
             if (String.IsNullOrEmpty(searchStudentTxt))
-                return _entities.ToList();
+                return _entities.Take(rows).ToList();
             else
                 return _entities.Where(s =>
                         s.Name.Contains(searchStudentTxt)
                         || s.Email.Contains(searchStudentTxt)
-                        || s.Id.ToString() == searchStudentTxt).ToList();
+                        || s.Id.ToString().Contains(searchStudentTxt)).Take(rows).ToList();
         }
     }
 }
