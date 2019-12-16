@@ -228,5 +228,41 @@ namespace HonorsProject.Test.VMTest
             Assert.IsFalse(result);
             Assert.AreEqual(newScount, VM.Students.Count);
         }
+
+        [TestMethod]
+        public void GenerateNewPasswordHash_Create_Random_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Create;
+            VM.IsConfirmed = true;
+            //Act
+            bool result = VM.GenerateNewPasswordHash("");//randomly generate it
+            //Assert
+            Assert.IsTrue(result);
+            Assert.IsTrue(VM.SelectedStudent.Password.Contains("HASH"));
+        }
+
+        [TestMethod]
+        public void GenerateNewPasswordHash_Update_Random_Success()
+        {
+        }
+
+        [TestMethod]
+        public void GenerateNewPasswordHash_Rejected_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Create;
+            VM.IsConfirmed = false;
+            //Act
+            bool result = VM.GenerateNewPasswordHash("");//randomly generate it
+            //Assert
+            Assert.IsFalse(result);
+        }
     }
 }
