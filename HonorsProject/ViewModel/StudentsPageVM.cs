@@ -195,6 +195,11 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
+            if (entity == null)
+            {
+                FeedbackMessage = "No valid group selected. Canceling.";
+                return false;
+            }
             try
             {
                 FeedbackMessage = "";

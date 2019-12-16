@@ -69,13 +69,14 @@ namespace HonorsProject.Test
                 lecL.Add(l);
                 lecL.Add(l2);
                 List<Student> stL = new List<Student>();
+                List<Student> stLEmpty = new List<Student>();
                 stL.Add(s);
                 //group added before session
                 Group g = new Group("Computing 19/20", stL, null, DateTime.Now.AddMonths(-6), 444);
-                g.Students.Add(s);
                 g.Students.Add(s2);
-                Group g2 = new Group("Ethical Hacking 19/20", stL, null, DateTime.Now.AddMonths(-5), 555);
+                Group g2 = new Group("Ethical Hacking 19/20", stLEmpty, null, DateTime.Now.AddMonths(-5), 555);
                 g2.Students.Add(s3);
+                g2.Students.Add(s);
                 u.GroupRepository.Add(g);
                 u.GroupRepository.Add(g2);
 

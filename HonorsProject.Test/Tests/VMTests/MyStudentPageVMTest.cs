@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
@@ -43,6 +44,40 @@ namespace HonorsProject.Test.VMTest
             Assert.AreEqual(lecId, VM.Lecturer.Id);
             Assert.AreEqual(availableGroupCount, VM.AvailableGroups.Count);
             Assert.AreEqual(studentCount, VM.Students.Count);
+        }
+
+        [TestMethod]
+        public void Remove_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            Group studentsGroup = VM.SelectedStudent.Groups.Where(g => g.Name.Equals("Computing 19/20")).FirstOrDefault();
+            //Act
+            bool result = VM.Remove(studentsGroup);
+            //Assert
+            int remaingStudentGroupsCount = 1;
+            int availableGroupsCount = 1;//was in 2, we removed 1
+            Assert.IsTrue(result);
+            Assert.AreEqual(remaingStudentGroupsCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(availableGroupsCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void Remove_GroupNotFound_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 12345678).FirstOrDefault();
+            Group studentsGroup = VM.SelectedStudent.Groups.Where(g => g.Name.Equals("NonExitstantGroup")).FirstOrDefault();
+            //Act
+            bool result = VM.Remove(studentsGroup);
+            //Assert
+            int availableGroupsCount = 1;//nothing removed
+            Assert.IsFalse(result);
+            Assert.AreEqual(availableGroupsCount, VM.AvailableGroups.Count);
         }
     }
 }
