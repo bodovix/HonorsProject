@@ -2,10 +2,11 @@
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
+using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HonorsProject.Test
+namespace HonorsProject.Test.VMTest
 {
     [TestClass]
     public class MyStudentPageVMTest : BaseTest
@@ -20,13 +21,28 @@ namespace HonorsProject.Test
         }
 
         [TestMethod]
-        public void LoginStudentSuccess()
+        public void MyStudentPageVMInitialize_Success()
         {
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
             //Act
+            //VM initialize is the act
             //Assert
+            FormContext formContext = FormContext.Create;
+            SubgridContext subgridContext = SubgridContext.Groups;
+            bool isConfirmed = false;
+            int ssId = 0;
+            int lecId = 444;
+            int availableGroupCount = 2;
+            int studentCount = 3;
+            Assert.AreEqual(formContext, VM.FormContext);
+            Assert.AreEqual(isConfirmed, VM.IsConfirmed);
+            Assert.AreEqual(subgridContext, VM.SubgridContext);
+            Assert.AreEqual(ssId, VM.SelectedStudent.Id);
+            Assert.AreEqual(lecId, VM.Lecturer.Id);
+            Assert.AreEqual(availableGroupCount, VM.AvailableGroups.Count);
+            Assert.AreEqual(studentCount, VM.Students.Count);
         }
     }
 }
