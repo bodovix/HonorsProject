@@ -151,7 +151,7 @@ namespace HonorsProject.ViewModel
 
         #endregion Commands
 
-        public StudentsPageVM(string dbcontextName) : base(dbcontextName)
+        public StudentsPageVM(string dbcontextName, ISystemUser loggedInLectuer) : base(dbcontextName)
         {
             try
             {
@@ -167,7 +167,7 @@ namespace HonorsProject.ViewModel
                 ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
 
                 //TODO: will likely need to attach lecturer to the DbContext..
-                Lecturer = (Lecturer)App.AppUser;
+                Lecturer = (Lecturer)loggedInLectuer;
                 SearchStudentTxt = "";
                 FormContext = FormContext.Create;
                 SelectedStudent = new Student();

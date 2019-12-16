@@ -1,6 +1,7 @@
 ﻿using System;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
+using HonorsProject.Model.Entities;
 using HonorsProject.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,12 +11,12 @@ namespace HonorsProject.Test
     public class MyStudentPageVMTest : BaseTest
     {
         private StudentsPageVM VM;
-        private ISystemUser _appUser;
+        private Lecturer _appUser;
 
         public MyStudentPageVMTest() : base()
         {
-            _appUser = null;
-            VM = new StudentsPageVM(dbConName);
+            _appUser = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234); ;
+            VM = new StudentsPageVM(dbConName, _appUser);
         }
 
         [TestMethod]
@@ -23,12 +24,9 @@ namespace HonorsProject.Test
         {
             //Arrange
             ClearDatabase();
-            CreateMySessionTestData();
-            Lecturer lecturer =
-
+            CreateMySessionTestData(_appUser);
             //Act
             //Assert
-            Assert.IsTrue(result);
         }
     }
 }
