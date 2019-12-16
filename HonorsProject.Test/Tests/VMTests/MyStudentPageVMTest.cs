@@ -119,7 +119,7 @@ namespace HonorsProject.Test.VMTest
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
-            VM.SelectedStudent = new Student(999, "Student", "Student@uad.ac.uk", "", DateTime.Now.Date, 444);
+            VM.SelectedStudent = new Student(999, "Student", "Student@uad.ac.uk", null, DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             //Act
             bool result = VM.Save();
@@ -151,7 +151,7 @@ namespace HonorsProject.Test.VMTest
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
-            VM.SelectedStudent = new Student(999, "Student", "", "password", DateTime.Now.Date, 444);
+            VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             //Act
             bool result = VM.Save();
