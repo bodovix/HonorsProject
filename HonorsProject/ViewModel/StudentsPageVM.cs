@@ -18,6 +18,7 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        private int studentRowsToReturn;
         public bool IsConfirmed { get; set; }
         private SubgridContext _subgridContext;
 
@@ -63,7 +64,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _searchStudentTxt = value;
-                UpdateMyStudentsList(10);
+                UpdateMyStudentsList(studentRowsToReturn);
                 OnPropertyChanged(nameof(SearchStudentTxt));
             }
         }
@@ -156,6 +157,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
+                studentRowsToReturn = 10;
                 IsConfirmed = false;
                 SubgridContext = SubgridContext.Groups;
                 //commands
@@ -235,7 +237,7 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = Lecturer.AddNewStudent(SelectedStudent, UnitOfWork);
                     if (result)
-                        UpdateMyStudentsList(10);
+                        UpdateMyStudentsList(studentRowsToReturn);
                 }
                 else
                 {
