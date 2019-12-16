@@ -96,5 +96,69 @@ namespace HonorsProject.Test.VMTest
             Assert.AreEqual(ssId, VM.SelectedStudent.Id);
             Assert.AreEqual(availableGroupCount, VM.AvailableGroups.Count);
         }
+
+        [TestMethod]
+        public void Save_New_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "Student", "Student@uad.ac.uk", "Password", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Create;
+            //Act
+            bool result = VM.Save();
+            int newScount = 4;
+            //Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+        }
+
+        [TestMethod]
+        public void Save_New_InvalidStudent_NoPassword_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "Student", "Student@uad.ac.uk", "", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Create;
+            //Act
+            bool result = VM.Save();
+            int newScount = 3;
+            //Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+        }
+
+        [TestMethod]
+        public void Save_New_InvalidStudent_NoName_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "", "Student@uad.ac.uk", "password", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Create;
+            //Act
+            bool result = VM.Save();
+            int newScount = 3;
+            //Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+        }
+
+        [TestMethod]
+        public void Save_New_InvalidStudent_NoEmail_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "Student", "", "password", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Create;
+            //Act
+            bool result = VM.Save();
+            int newScount = 3;
+            //Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+        }
     }
 }
