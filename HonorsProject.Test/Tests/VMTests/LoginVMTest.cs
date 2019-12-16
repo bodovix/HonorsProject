@@ -4,7 +4,7 @@ using HonorsProject.Model.Data;
 using HonorsProject.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HonorsProject.Test
+namespace HonorsProject.Test.VMTest
 {
     [TestClass]
     public class LoginVMTest : BaseTest
