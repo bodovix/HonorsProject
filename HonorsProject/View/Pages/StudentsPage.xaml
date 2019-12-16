@@ -166,12 +166,23 @@
                                                 Converter={StaticResource SubgridContextToColourConverter},
                                                 ConverterParameter={x:Static enums:SubgridContext.Questions }}" />
                 </StackPanel>
-                <Frame Name="SubgridContainer" Grid.Column="0" Grid.Row="1">
-                </Frame>
+                <Frame Name="SubgridContainer"
+                       Grid.Column="0"
+                       Grid.Row="1">
+                </Frame> 
                 <uc:GroupsGridViewControll
+                                        x:Name="GroupsGV"
                                         Grid.Column="0" Grid.Row="1"
+                                        Visibility="Visible"
                                         Groups="{Binding SelectedStudent.Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                           SelectedGroup="{Binding SelectedGroup,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedGroup="{Binding SelectedGroup,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <uc:QuestionsGridViewControl
+                                        x:Name="QuestionsGV"
+                                        Grid.Column="0" Grid.Row="1"
+                                        Visibility="Collapsed"
+                                        Questions="{Binding SelectedStudent.Questions, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedQuestion="{Binding SelectedQuestion,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </StackPanel>

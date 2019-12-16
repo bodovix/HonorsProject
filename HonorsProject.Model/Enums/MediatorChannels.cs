@@ -11,6 +11,8 @@ namespace HonorsProject.Model.Enums
         DeleteSessionConfirmation,
         LoginAsUserX,
         StudentsPageGeneratePasswordCheck,
-        StudentsPageNewPasswordDisplay
+        StudentsPageNewPasswordDisplay,
+        LoadGroupsSubgridForStudents,
+        LoadQuestionsSubgridForStudents
     }
 }

@@ -97,15 +97,31 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private Group _group;
+        private Group _selectedGroup;
 
         public Group SelectedGroup
         {
-            get { return _group; }
+            get
+            {
+                return _selectedGroup
+;
+            }
             set
             {
-                _group = value;
+                _selectedGroup = value;
                 OnPropertyChanged(nameof(SelectedGroup));
+            }
+        }
+
+        private Question _selectedQuestion;
+
+        public Question SelectedQuestion
+        {
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
+                OnPropertyChanged(nameof(SelectedQuestion));
             }
         }
 
@@ -333,20 +349,21 @@ namespace HonorsProject.ViewModel
         public bool ChangeSubgridContext(SubgridContext context)
         {
             bool result = false;
+            FeedbackMessage = "";
+
             switch (context)
             {
                 case SubgridContext.Groups:
-                    FeedbackMessage = "Not implemented Groups sub-grid navigation yet";
                     //Student Groups should be lazy loaded into form
-
-                    //TODO: Load Groups GridView (Mediator Call)
+                    SubgridContext = SubgridContext.Groups;
+                    Mediator.NotifyColleagues(MediatorChannels.LoadGroupsSubgridForStudents.ToString(), null);
                     break;
 
                 case SubgridContext.Questions:
-                    FeedbackMessage = "Not implemented Questions sub-grid navigation yet";
                     //Student Questions should be lazy loaded into form
+                    SubgridContext = SubgridContext.Questions;
+                    Mediator.NotifyColleagues(MediatorChannels.LoadQuestionsSubgridForStudents.ToString(), null);
 
-                    // TODO:Load Questions GridView (Mediator Call)
                     break;
 
                 default:

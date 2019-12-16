@@ -32,7 +32,21 @@ namespace HonorsProject.View.Pages
             InitializeComponent();
             Mediator.Register(MediatorChannels.StudentsPageGeneratePasswordCheck.ToString(), ShowPasswordConfBox);
             Mediator.Register(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), ShowPasswordDisplay);
+            Mediator.Register(MediatorChannels.LoadGroupsSubgridForStudents.ToString(), ShowStudentsGroups);
+            Mediator.Register(MediatorChannels.LoadQuestionsSubgridForStudents.ToString(), ShowStudentsQuestions);
             DataContext = VM;
+        }
+
+        private void ShowStudentsQuestions(object obj)
+        {
+            QuestionsGV.Visibility = Visibility.Visible;
+            GroupsGV.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowStudentsGroups(object obj)
+        {
+            GroupsGV.Visibility = Visibility.Visible;
+            QuestionsGV.Visibility = Visibility.Collapsed;
         }
 
         private void ShowPasswordDisplay(object obj)
