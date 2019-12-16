@@ -79,5 +79,22 @@ namespace HonorsProject.Test.VMTest
             Assert.IsFalse(result);
             Assert.AreEqual(availableGroupsCount, VM.AvailableGroups.Count);
         }
+
+        [TestMethod]
+        public void EnterNewMode_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 12345678).FirstOrDefault();
+            //Act
+            VM.EnterNewMode();
+            //Assert
+            int ssId = 0;
+            int availableGroupCount = 2;
+            Assert.AreEqual(FormContext.Create, VM.FormContext);
+            Assert.AreEqual(ssId, VM.SelectedStudent.Id);
+            Assert.AreEqual(availableGroupCount, VM.AvailableGroups.Count);
+        }
     }
 }
