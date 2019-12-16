@@ -200,6 +200,7 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = "";
                 string msg = "";
                 SelectedStudent.RemoveGroup((Group)entity, UnitOfWork, ref msg);
+                RefreshAvailableGroups(SelectedStudent);
                 FeedbackMessage = msg;
                 return true;
             }
