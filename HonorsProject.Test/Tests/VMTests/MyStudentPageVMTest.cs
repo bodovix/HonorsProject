@@ -160,5 +160,73 @@ namespace HonorsProject.Test.VMTest
             Assert.IsFalse(result);
             Assert.AreEqual(newScount, VM.Students.Count);
         }
+
+        [TestMethod]
+        public void Save_Update_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Update;
+            //Act
+            VM.SelectedStudent.Name = "UpdatedValue";
+            bool result = VM.Save();
+            int newScount = 3;
+            string newName = "UpdatedValue";
+            //Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+            Assert.IsTrue(newName.Equals(VM.SelectedStudent.Name));
+        }
+
+        [TestMethod]
+        public void Save_Update_InvalidStudent_NoPassword_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Update;
+            //Act
+            VM.SelectedStudent.Password = null;
+            bool result = VM.Save();
+            int newScount = 3;
+            //Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+        }
+
+        [TestMethod]
+        public void Save_Update_InvalidStudent_NoName_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "", "Student@uad.ac.uk", "password", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Update;
+            //Act
+            bool result = VM.Save();
+            int newScount = 3;
+            //Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+        }
+
+        [TestMethod]
+        public void Save_Update_InvalidStudent_NoEmail_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
+            VM.FormContext = FormContext.Update;
+            //Act
+            bool result = VM.Save();
+            int newScount = 3;
+            //Assert
+            Assert.IsFalse(result);
+            Assert.AreEqual(newScount, VM.Students.Count);
+        }
     }
 }
