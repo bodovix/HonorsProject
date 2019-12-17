@@ -16,6 +16,7 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        private int rowLimit;
         private Group _selectedGroup;
 
         public Group SelectedGroup
@@ -52,10 +53,47 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private FormContext _formContext;
+
+        public FormContext FormContext
+        {
+            get { return _formContext; }
+            set
+            {
+                _formContext = value;
+                OnPropertyChanged(nameof(FormContext));
+            }
+        }
+
+        private SubgridContext _subgridContext;
+
+        public SubgridContext SubgridContext
+        {
+            get { return _subgridContext; }
+            set
+            {
+                _subgridContext = value;
+                OnPropertyChanged(nameof(SubgridContext));
+            }
+        }
+
         #endregion Properties
 
         public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
+            try
+            {
+                rowLimit = 10;
+                SelectedGroup = new Group();
+                FormContext = FormContext.Create;
+                SubgridContext = SubgridContext.Students;
+                GroupSearchTxt = "";
+                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTop(rowLimit).ToList());
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+            }
         }
     }
 }

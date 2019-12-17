@@ -13,6 +13,8 @@ namespace HonorsProject.Model.Core
 
         IEnumerable<T> GetAll();
 
+        IEnumerable<T> GetTop(int rowCount);
+
         void Add(T enIEntityiIEntityy);
 
         void AddRange(IEnumerable<T> eniIEntityies);

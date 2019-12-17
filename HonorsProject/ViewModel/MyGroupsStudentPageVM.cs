@@ -52,6 +52,30 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private FormContext _formContext;
+
+        public FormContext FormContext
+        {
+            get { return _formContext; }
+            set
+            {
+                _formContext = value;
+                OnPropertyChanged(nameof(FormContext));
+            }
+        }
+
+        private SubgridContext _subgridContext;
+
+        public SubgridContext SubgridContext
+        {
+            get { return _subgridContext; }
+            set
+            {
+                _subgridContext = value;
+                OnPropertyChanged(nameof(SubgridContext));
+            }
+        }
+
         #endregion Properties
 
         public MyGroupsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)

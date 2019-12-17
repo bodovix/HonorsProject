@@ -30,6 +30,11 @@ namespace HonorsProject.Model.Data
             return _entities.ToList();
         }
 
+        public IEnumerable<T> GetTop(int rowCount)
+        {
+            return _entities.Take(rowCount).ToList();
+        }
+
         public void Add(T entity)
         {
             _entities.Add(entity);

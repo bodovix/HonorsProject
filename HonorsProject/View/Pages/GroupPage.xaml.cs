@@ -28,6 +28,7 @@ namespace HonorsProject.View.Pages
 
         public GroupPage()
         {
+            CreateMyGroupsVM();
             InitializeComponent();
             DataContext = VM;
         }

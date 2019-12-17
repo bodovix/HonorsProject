@@ -1,4 +1,5 @@
 ﻿using HonorsProject.Model.Entities;
+using HonorsProject.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,5 +14,7 @@ namespace HonorsProject.ViewModel.CoreVM
         Group SelectedGroup { get; set; }
         ObservableCollection<Group> Groups { get; set; }
         string GroupSearchTxt { get; set; }
+        FormContext FormContext { get; set; }
+        SubgridContext SubgridContext { get; set; }
     }
 }
