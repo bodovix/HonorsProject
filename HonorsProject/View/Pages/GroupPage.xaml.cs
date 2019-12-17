@@ -1,4 +1,7 @@
-﻿using HonorsProject.ViewModel;
+﻿using HonorsProject.Model.Data;
+using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel;
+using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +24,20 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class GroupPage : Page
     {
+        private IMyGroupsPageVM VM;
+
         public GroupPage()
         {
             InitializeComponent();
-            MyGroupsLecturerPageVM VM = new MyGroupsLecturerPageVM();
             DataContext = VM;
+        }
+
+        private void CreateMyGroupsVM()
+        {
+            if (App.LoggedInAs == Role.Lecturer)
+                VM = new MyGroupsLecturerPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
+            else
+                VM = new MyGroupsStudentPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
         }
     }
 }

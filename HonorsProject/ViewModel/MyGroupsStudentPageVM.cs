@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    internal class MyGroupsLecturerPageVM : BaseViewModel, IMyGroupsPageVM
+    internal class MyGroupsStudentPageVM : BaseViewModel, IMyGroupsPageVM
     {
-        public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
+        public MyGroupsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
         }
     }
