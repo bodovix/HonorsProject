@@ -159,7 +159,7 @@ namespace HonorsProject.ViewModel
             try
             {
                 studentRowsToReturn = 10;
-                IsConfirmed = false;
+                IsConfirmed = SetFalse();
                 SubgridContext = SubgridContext.Groups;
                 //commands
                 RemoveEntityCmd = new RemoveEntityCmd(this);
@@ -383,7 +383,7 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(object objToDelete)
         {
-            IsConfirmed = false;
+            IsConfirmed = SetFalse();
             FeedbackMessage = "";
             Student studentToDelete = objToDelete as Student;
             if (studentToDelete == null)
@@ -393,7 +393,7 @@ namespace HonorsProject.ViewModel
             }
             try
             {
-                Mediator.NotifyColleagues(MediatorChannels.DeleteStudentConfirmation.ToString(), null);
+                Mediator.NotifyColleagues(MediatorChannels.DeleteStudentConfirmation.ToString(), studentToDelete);
                 if (IsConfirmed)
                 {
                     UnitOfWork.StudentRepo.Remove(studentToDelete);
@@ -409,6 +409,11 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public bool SetFalse()
+        {
+            return false;
         }
     }
 }

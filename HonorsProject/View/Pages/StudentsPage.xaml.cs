@@ -1,4 +1,5 @@
 ﻿using HonorsProject.Model.Data;
+using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel;
@@ -40,7 +41,8 @@ namespace HonorsProject.View.Pages
 
         private void DeleteStudentConfrimation(object obj)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Delete student? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
+            Student s = obj as Student;
+            MessageBoxResult dialogResult = MessageBox.Show($"Delete student {s.Name}? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
 
             if (dialogResult == MessageBoxResult.Yes)
                 VM.IsConfirmed = true;
