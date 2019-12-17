@@ -264,5 +264,143 @@ namespace HonorsProject.Test.VMTest
             //Assert
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void MoveEntityOutOfList_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityOutOfList(VM.SelectedStudent.Groups.First());
+            //Assert
+            int inCount = 1;
+            int outCount = 1;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void MoveEntityOutOfListTwice_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityOutOfList(VM.SelectedStudent.Groups.First());
+            VM.MoveEntityOutOfList(VM.SelectedStudent.Groups.First());
+            //Assert
+            int inCount = 0;
+            int outCount = 2;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void MoveEntityOutOfList_GroupNotInList_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityOutOfList(new Group());
+            //Assert
+            int inCount = 2;
+            int outCount = 0;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void MoveEntityOutOfList_NullGroup_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityOutOfList(null);
+            //Assert
+            int inCount = 2;
+            int outCount = 0;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void MoveEntityInToList_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityInToList(VM.SelectedStudent.Groups.First());
+            //Assert
+            int inCount = 2;
+            int outCount = 0;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void MoveEntityInToListTwice_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityInToList(VM.SelectedStudent.Groups.First());
+            VM.MoveEntityInToList(VM.SelectedStudent.Groups.First());
+            //Assert
+            int inCount = 2;
+            int outCount = 0;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void MoveEntityInToList_GroupAlreadyInList_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityInToList(VM.SelectedStudent.Groups.First());
+            //Assert
+            int inCount = 2;
+            int outCount = 0;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
+
+        [TestMethod]
+        public void MoveEntityInToList_NullGroup_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            VM.FormContext = FormContext.Create;
+            //Act
+            VM.MoveEntityInToList(null);
+            //Assert
+            int inCount = 2;
+            int outCount = 0;
+            Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
+            Assert.AreEqual(outCount, VM.AvailableGroups.Count);
+        }
     }
 }

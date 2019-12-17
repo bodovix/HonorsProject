@@ -371,7 +371,6 @@ namespace HonorsProject.ViewModel
                     //Student Questions should be lazy loaded into form
                     SubgridContext = SubgridContext.Questions;
                     Mediator.NotifyColleagues(MediatorChannels.LoadQuestionsSubgridForStudents.ToString(), null);
-
                     break;
 
                 default:
