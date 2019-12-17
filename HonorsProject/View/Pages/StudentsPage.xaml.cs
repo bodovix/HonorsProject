@@ -34,7 +34,18 @@ namespace HonorsProject.View.Pages
             Mediator.Register(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), ShowPasswordDisplay);
             Mediator.Register(MediatorChannels.LoadGroupsSubgridForStudents.ToString(), ShowStudentsGroups);
             Mediator.Register(MediatorChannels.LoadQuestionsSubgridForStudents.ToString(), ShowStudentsQuestions);
+            Mediator.Register(MediatorChannels.DeleteStudentConfirmation.ToString(), DeleteStudentConfrimation);
             DataContext = VM;
+        }
+
+        private void DeleteStudentConfrimation(object obj)
+        {
+            MessageBoxResult dialogResult = MessageBox.Show("Delete student? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)
+                VM.IsConfirmed = true;
+            else
+                VM.IsConfirmed = false;
         }
 
         private void ShowStudentsQuestions(object obj)

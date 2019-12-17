@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd
     {
         #region Properties
 
@@ -150,6 +150,7 @@ namespace HonorsProject.ViewModel
         public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get; set; }
         public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
+        public DeleteCmd DeleteCmd { get; set; }
 
         #endregion Commands
 
@@ -168,7 +169,7 @@ namespace HonorsProject.ViewModel
                 MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
                 MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
                 ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
-
+                DeleteCmd = new DeleteCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)loggedInLectuer;
                 SearchStudentTxt = "";
@@ -378,6 +379,36 @@ namespace HonorsProject.ViewModel
                     break;
             }
             return result;
+        }
+
+        public bool Delete(object objToDelete)
+        {
+            IsConfirmed = false;
+            FeedbackMessage = "";
+            Student studentToDelete = objToDelete as Student;
+            if (studentToDelete == null)
+            {
+                FeedbackMessage = "No student selected.";
+                return false;
+            }
+            try
+            {
+                Mediator.NotifyColleagues(MediatorChannels.DeleteStudentConfirmation.ToString(), null);
+                if (IsConfirmed)
+                {
+                    UnitOfWork.StudentRepo.Remove(studentToDelete);
+                    UnitOfWork.Complete();
+                    UpdateMyStudentsList(studentRowsToReturn);
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
     }
 }

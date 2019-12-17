@@ -45,6 +45,23 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ContextMenu>
+                    <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                        <MenuItem  Header="Delete"
+                                           Command="{Binding DataContext.DeleteCmd}"
+                                           CommandParameter="{Binding SelectedItem}">
+                            <MenuItem.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Delete</TextBlock>
+                                        <TextBlock>Deletes student form system.</TextBlock>
+                                        <TextBlock>This action cannot be undone.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </MenuItem.ToolTip>
+                        </MenuItem>
+                    </ContextMenu>
+                </ListView.ContextMenu>
             </ListView>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
@@ -169,7 +186,7 @@
                 <Frame Name="SubgridContainer"
                        Grid.Column="0"
                        Grid.Row="1">
-                </Frame> 
+                </Frame>
                 <uc:GroupsGridViewControll
                                         x:Name="GroupsGV"
                                         Grid.Column="0" Grid.Row="1"

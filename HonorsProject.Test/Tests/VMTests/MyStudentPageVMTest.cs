@@ -402,5 +402,19 @@ namespace HonorsProject.Test.VMTest
             Assert.AreEqual(inCount, VM.SelectedStudent.Groups.Count);
             Assert.AreEqual(outCount, VM.AvailableGroups.Count);
         }
+
+        [TestMethod]
+        public void Delete_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateMySessionTestData(_appUser);
+            VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
+            //Act
+            VM.Remove(VM.SelectedStudent);
+            //Assert
+            int studentCount = 2;
+            Assert.AreEqual(studentCount, VM.Students.Count);
+        }
     }
 }
