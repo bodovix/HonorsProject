@@ -20,14 +20,17 @@
             <Button Name="NewGroupBtn" Content="New Group" Style="{StaticResource FormSubmitButton}" />
             <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
-            <TextBox Name="SearchTxtBox" />
+            <TextBox Name="SearchTxtBox"
+                     Text="{Binding GroupSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             <ListView  x:Name="searchResultsList"
-                       Height="390">
+                       Height="390"
+                       ItemsSource="{Binding Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                       SelectedItem="{Binding SelectedGroup, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="" />
-                            <TextBlock Text="" />
+                            <TextBlock Text="{Binding Id}" />
+                            <TextBlock Text="{Binding Name}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -56,10 +59,11 @@
                 <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedGroup.Id}" />
                 </GroupBox>
                 <GroupBox Header="Created On" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Height="30" />
+                    <Label Content="{Binding SelectedGroup.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           Height="30" />
                 </GroupBox>
                 <Button Name="AddStudentsBtn"
                         Content="Add Students"
@@ -69,10 +73,10 @@
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedGroup.Name}" />
                 </GroupBox>
                 <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content=""
+                    <Label Content="{Binding SelectedGroup.CreatedByLecturerId, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Height="30" />
                 </GroupBox>
                 <Button Name="AddSessionBtn"
