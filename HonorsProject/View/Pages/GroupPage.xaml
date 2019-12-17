@@ -101,8 +101,8 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                    <Button Name="StudentsGroupsBtn" Content="Groups" Style="{StaticResource InfoButton}" />
-                    <Button Name="StudentQuestionsBTn" Content="Questions" Style="{StaticResource InfoButton}" />
+                    <Button Name="GroupStudentsBtn" Content="Students" Style="{StaticResource InfoButton}" />
+                    <Button Name="GroupSessionsBTn" Content="Sessions" Style="{StaticResource InfoButton}" />
                 </StackPanel>
                 <Frame Grid.Column="0" Grid.Row="1">
                 </Frame>
