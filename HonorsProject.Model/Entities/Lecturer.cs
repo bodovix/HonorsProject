@@ -94,6 +94,24 @@ namespace HonorsProject.Model.Entities
                 return false;
         }
 
+        public bool AddNewGroup(Group groupToAdd, UnitOfWork unitOfWork)
+        {
+            groupToAdd.CreatedByLecturerId = Id;
+            groupToAdd.CreatedOn = DateTime.Now;
+            //creating session this way so constructor can validate it
+            if (groupToAdd.ValidateGroup())
+            {
+                unitOfWork.GroupRepository.Add(groupToAdd);
+                int rowCount = unitOfWork.Complete();
+                if (rowCount > 0)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
         public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
         {
             return unitOfWork.SessionRepository.GetCurrentSessions(this, todaysDate);

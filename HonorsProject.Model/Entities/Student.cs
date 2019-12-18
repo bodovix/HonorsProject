@@ -160,5 +160,10 @@ namespace HonorsProject.Model.Entities
                 return true;
             }
         }
+
+        public bool AddNewGroup(Group selectedGroup, UnitOfWork unitOfWork)
+        {
+            throw new NotImplementedException("Students Cant Create new groups.");
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 
 namespace HonorsProject.Model.Core
@@ -29,5 +30,6 @@ namespace HonorsProject.Model.Core
         List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
 
         bool GenerateNewPasswordHash(ref string optionalPassword);
+        bool AddNewGroup(Group selectedGroup, UnitOfWork unitOfWork);
     }
 }

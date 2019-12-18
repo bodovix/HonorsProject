@@ -78,6 +78,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private ISystemUser _user;
+
+        public ISystemUser User
+        {
+            get { return _user; }
+            set
+            {
+                _user = (Student)value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+
         public SaveCmd SaveFormCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
@@ -109,12 +121,39 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            FeedbackMessage = "";
+            bool result = false;
+            try
+            {
+                if (FormContext == FormContext.Create)
+                {
+                    //Create New
+                    result = User.AddNewGroup(SelectedGroup, UnitOfWork);
+                    if (result)
+                    {
+                        //UpdateMyGroupsList(); -- TODO: need to see how refreshing all works in group page
+                    }
+                }
+                else
+                {
+                    //Update
+                    result = SelectedGroup.ValidateGroup();
+                    if (result)
+                        UnitOfWork.Complete();
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.GetBaseException().Message;
+                return false;
+            }
         }
 
         public void EnterNewMode()
         {
-            throw new NotImplementedException();
+            SelectedGroup = new Group();
+            FormContext = FormContext.Create;
         }
 
         public bool ChangeSubgridContext(SubgridContext context)

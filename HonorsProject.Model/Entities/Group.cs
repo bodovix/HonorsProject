@@ -28,5 +28,18 @@ namespace HonorsProject.Model.Entities
             CreatedOn = createdOn;
             CreatedByLecturerId = createdByLecturerId;
         }
+
+        public bool ValidateGroup()
+        {
+            //ID auto incremented by EF
+            if (String.IsNullOrEmpty(Name))
+                throw new ArgumentException("Group name required.");
+            if (CreatedOn == null)
+                throw new ArgumentException("Group created on date required.");
+            if (CreatedByLecturerId == 0)
+                throw new ArgumentException("Group created by Id required.");
+
+            return true;
+        }
     }
 }

@@ -77,6 +77,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private ISystemUser _user;
+
+        public ISystemUser User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+
         public SaveCmd SaveFormCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }

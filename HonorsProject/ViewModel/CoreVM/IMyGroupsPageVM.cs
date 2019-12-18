@@ -1,4 +1,5 @@
-﻿using HonorsProject.Model.Entities;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel.Commands.IComands;
 using System;
@@ -17,5 +18,6 @@ namespace HonorsProject.ViewModel.CoreVM
         string GroupSearchTxt { get; set; }
         FormContext FormContext { get; set; }
         SubgridContext SubgridContext { get; set; }
+        ISystemUser User { get; set; }
     }
 }
