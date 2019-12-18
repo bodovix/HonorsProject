@@ -85,7 +85,7 @@ namespace HonorsProject.ViewModel
             get { return _user; }
             set
             {
-                _user = (Student)value;
+                _user = (Lecturer)value;
                 OnPropertyChanged(nameof(User));
             }
         }
@@ -106,6 +106,7 @@ namespace HonorsProject.ViewModel
             //Initial Setup
             try
             {
+                User = (Lecturer)appUser;
                 rowLimit = 10;
                 SelectedGroup = new Group();
                 FormContext = FormContext.Create;
@@ -129,6 +130,7 @@ namespace HonorsProject.ViewModel
                 {
                     //Create New
                     result = User.AddNewGroup(SelectedGroup, UnitOfWork);
+                    Groups.Add(SelectedGroup);
                     if (result)
                     {
                         //UpdateMyGroupsList(); -- TODO: need to see how refreshing all works in group page
