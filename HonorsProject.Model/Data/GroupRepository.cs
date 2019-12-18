@@ -18,5 +18,16 @@ namespace HonorsProject.Model.Data
         {
             return _entities.Where(g => !g.Students.Any(s => s.Id == student.Id)).ToList();
         }
+
+        public List<Group> GetTopXFromSearch(string searchGroupTxt, int rows)
+        {
+            //if no search return all
+            if (String.IsNullOrEmpty(searchGroupTxt))
+                return _entities.Take(rows).ToList();
+            else
+                return _entities.Where(g =>
+                        g.Name.Contains(searchGroupTxt)
+                        || g.Id.ToString().Contains(searchGroupTxt)).Take(rows).ToList();
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using HonorsProject.Model.Data;
+using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel;
 using HonorsProject.ViewModel.CoreVM;
 using System;
@@ -30,7 +32,20 @@ namespace HonorsProject.View.Pages
         {
             CreateMyGroupsVM();
             InitializeComponent();
+            Mediator.Register(MediatorChannels.DeleteGroupConfirmation.ToString(), DeleteGroupConfirmation);
+
             DataContext = VM;
+        }
+
+        private void DeleteGroupConfirmation(object obj)
+        {
+            Group g = obj as Group;
+            MessageBoxResult dialogResult = MessageBox.Show($"Delete group: {g.Name}? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)
+                VM.IsConfirmed = true;
+            else
+                VM.IsConfirmed = false;
         }
 
         private void CreateMyGroupsVM()

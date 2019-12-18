@@ -17,6 +17,7 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        public bool IsConfirmed { get; set; }
         private int rowLimit;
         private Group _selectedGroup;
 
@@ -112,6 +113,7 @@ namespace HonorsProject.ViewModel
             //Initial Setup
             try
             {
+                IsConfirmed = false;
                 User = (Lecturer)appUser;
                 rowLimit = 10;
                 SelectedGroup = new Group();
@@ -136,7 +138,7 @@ namespace HonorsProject.ViewModel
                 {
                     //Create New
                     result = User.AddNewGroup(SelectedGroup, UnitOfWork);
-                    Groups.Add(SelectedGroup);
+                    UpdateMyGroupsList();
                 }
                 else
                 {
@@ -160,12 +162,45 @@ namespace HonorsProject.ViewModel
             FormContext = FormContext.Create;
         }
 
-        public bool ChangeSubgridContext(SubgridContext context)
+        public bool Delete(object objToDelete)
         {
-            throw new NotImplementedException();
+            Group groupToDelete = objToDelete as Group;
+            if (groupToDelete == null)
+            {
+                FeedbackMessage = "No group selected.";
+                return false;
+            }
+            try
+            {
+                Mediator.NotifyColleagues(MediatorChannels.DeleteGroupConfirmation.ToString(), null);
+                if (IsConfirmed)
+                {
+                    UnitOfWork.GroupRepository.Remove(groupToDelete);
+                    int count = UnitOfWork.Complete();
+                    if (count > 0)
+                    {
+                        UpdateMyGroupsList();
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
-        public bool Delete(object objToDelete)
+        private void UpdateMyGroupsList()
+        {
+            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rowLimit));
+        }
+
+        public bool ChangeSubgridContext(SubgridContext context)
         {
             throw new NotImplementedException();
         }

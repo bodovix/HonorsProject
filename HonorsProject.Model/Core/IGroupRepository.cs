@@ -10,5 +10,7 @@ namespace HonorsProject.Model.Core
     public interface IGroupRepository : IRepository<Group>
     {
         List<Group> GetGroupsNotContainingStudent(Student student);
+
+        List<Group> GetTopXFromSearch(string searchGroupTxt, int rows);
     }
 }

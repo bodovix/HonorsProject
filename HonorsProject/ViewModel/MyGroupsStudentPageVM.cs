@@ -17,6 +17,8 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        public bool IsConfirmed { get; set; }
+
         private Group _selectedGroup;
 
         public Group SelectedGroup
