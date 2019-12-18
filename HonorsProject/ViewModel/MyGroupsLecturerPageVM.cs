@@ -25,7 +25,12 @@ namespace HonorsProject.ViewModel
             get { return _selectedGroup; }
             set
             {
+                if (value == null)
+                    value = new Group();
+                //if selected.id == 0 create else update
+                FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedGroup = value;
+
                 OnPropertyChanged(nameof(SelectedGroup));
             }
         }
@@ -131,10 +136,6 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = User.AddNewGroup(SelectedGroup, UnitOfWork);
                     Groups.Add(SelectedGroup);
-                    if (result)
-                    {
-                        //UpdateMyGroupsList(); -- TODO: need to see how refreshing all works in group page
-                    }
                 }
                 else
                 {
