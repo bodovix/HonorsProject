@@ -25,32 +25,32 @@ namespace HonorsProject.View.CustomControlls
     {
         public RemoveEntityCmd RemoveEntityCmd
         {
-            get { return (RemoveEntityCmd)GetValue(GroupToRemoveProperty); }
-            set { SetValue(GroupToRemoveProperty, value); }
+            get { return (RemoveEntityCmd)GetValue(StudentToRemoveProperty); }
+            set { SetValue(StudentToRemoveProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for GroupToRemove.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty GroupToRemoveProperty =
+        public static readonly DependencyProperty StudentToRemoveProperty =
             DependencyProperty.Register(nameof(RemoveEntityCmd), typeof(RemoveEntityCmd), typeof(StudentsGridViewControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public Student SelectedStudent
         {
-            get { return (Student)GetValue(selectedStudentProperty); }
-            set { SetValue(selectedStudentProperty, value); }
+            get { return (Student)GetValue(SelectedStudentProperty); }
+            set { SetValue(SelectedStudentProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for groupSele.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty selectedStudentProperty =
+        public static readonly DependencyProperty SelectedStudentProperty =
             DependencyProperty.Register(nameof(SelectedStudent), typeof(Student), typeof(StudentsGridViewControl), new FrameworkPropertyMetadata(new Student(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public IEnumerable<Student> Students
         {
-            get { return (IEnumerable<Student>)GetValue(GroupsProperty); }
-            set { SetValue(GroupsProperty, value); }
+            get { return (IEnumerable<Student>)GetValue(StudentsProperty); }
+            set { SetValue(StudentsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Groups.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty GroupsProperty =
+        public static readonly DependencyProperty StudentsProperty =
             DependencyProperty.Register(nameof(Students), typeof(IEnumerable<Student>), typeof(StudentsGridViewControl));
 
         public StudentsGridViewControl()
