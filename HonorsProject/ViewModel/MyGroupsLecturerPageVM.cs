@@ -172,7 +172,7 @@ namespace HonorsProject.ViewModel
             }
             try
             {
-                Mediator.NotifyColleagues(MediatorChannels.DeleteGroupConfirmation.ToString(), null);
+                Mediator.NotifyColleagues(MediatorChannels.DeleteGroupConfirmation.ToString(), groupToDelete);
                 if (IsConfirmed)
                 {
                     UnitOfWork.GroupRepository.Remove(groupToDelete);

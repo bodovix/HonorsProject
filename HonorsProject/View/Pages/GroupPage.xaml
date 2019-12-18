@@ -11,6 +11,7 @@
       Title="GroupPage">
     <Page.Resources>
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
+        <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -119,7 +120,7 @@
                         Grid.Row="1"
                         Style="{StaticResource InfoButton}" />
                 <Button Name="SaveBtn"
-                        Content="Save"
+                        Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
                         Command="{Binding SaveFormCmd}"
                         Grid.Column="0"
                         Grid.Row="3"
