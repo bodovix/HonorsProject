@@ -42,6 +42,25 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ContextMenu>
+                    <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                        <MenuItem  Header="Delete"
+                                           Command="{Binding DataContext.DeleteCmd}"
+                                           CommandParameter="{Binding SelectedItem}">
+                            <MenuItem.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Delete</TextBlock>
+                                        <TextBlock>Delete this group form system.</TextBlock>
+                                        <TextBlock>All sessions will also be deleted.</TextBlock>
+                                        <TextBlock>Students will remain.</TextBlock>
+                                        <TextBlock>This action cannot be undone.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </MenuItem.ToolTip>
+                        </MenuItem>
+                    </ContextMenu>
+                </ListView.ContextMenu>
             </ListView>
         </StackPanel>
         <Grid Grid.Column="1" Grid.Row="0">

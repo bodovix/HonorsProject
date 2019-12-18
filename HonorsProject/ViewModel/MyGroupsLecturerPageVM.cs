@@ -98,6 +98,7 @@ namespace HonorsProject.ViewModel
         public SaveCmd SaveFormCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
+        public DeleteCmd DeleteCmd { get; set; }
 
         #endregion Properties
 
@@ -107,7 +108,7 @@ namespace HonorsProject.ViewModel
             SaveFormCmd = new SaveCmd(this);
             NewModeCmd = new NewModeCmd(this);
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
-
+            DeleteCmd = new DeleteCmd(this);
             //Initial Setup
             try
             {
@@ -160,6 +161,11 @@ namespace HonorsProject.ViewModel
         }
 
         public bool ChangeSubgridContext(SubgridContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(object objToDelete)
         {
             throw new NotImplementedException();
         }

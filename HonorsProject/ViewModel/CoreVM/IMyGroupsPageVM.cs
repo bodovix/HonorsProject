@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public interface IMyGroupsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd
+    public interface IMyGroupsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IDeleteCmd
     {
         Group SelectedGroup { get; set; }
         ObservableCollection<Group> Groups { get; set; }
