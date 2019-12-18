@@ -57,6 +57,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -87,6 +88,12 @@
                     <Label Content="{Binding SelectedGroup.CreatedByLecturerId, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Height="30" />
                 </GroupBox>
+                <TextBlock Text="{Binding FeedbackMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource UserInputError}" />
+
                 <Button Name="AddSessionBtn"
                         Content="Add Session"
                         Grid.Column="2"
@@ -96,12 +103,12 @@
                         Content="Save"
                         Command="{Binding SaveFormCmd}"
                         Grid.Column="0"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Style="{StaticResource FormSaveButton}" />
                 <Button Name="CancelBtn"
                         Content="Cancel"
                         Grid.Column="1"
-                        Grid.Row="2"
+                        Grid.Row="3"
                         Style="{StaticResource FormCancelButton}" />
             </Grid>
             <!--sub-grid section-->
