@@ -196,14 +196,14 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private void UpdateMyGroupsList(int rows)
-        {
-            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rows));
-        }
-
         public bool ChangeSubgridContext(SubgridContext context)
         {
             throw new NotImplementedException();
+        }
+
+        private void UpdateMyGroupsList(int rows)
+        {
+            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rows));
         }
     }
 }

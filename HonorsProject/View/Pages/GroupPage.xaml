@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
+      xmlns:uc="clr-namespace:HonorsProject.View.CustomControlls"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
