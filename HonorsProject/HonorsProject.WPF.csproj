@@ -97,6 +97,9 @@
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\MySessionsStudentPageVM.cs" />
     <Compile Include="ViewModel\StudentsPageVM.cs" />
+    <Compile Include="View\CustomControlls\StudentsGridViewControl.xaml.cs">
+      <DependentUpon>StudentsGridViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomControlls\GroupsGridViewControll.xaml.cs">
       <DependentUpon>GroupsGridViewControll.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
     <Compile Include="View\Pages\StudentsPage.xaml.cs">
       <DependentUpon>StudentsPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\CustomControlls\StudentsGridViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\CustomControlls\GroupsGridViewControll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
