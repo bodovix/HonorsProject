@@ -18,7 +18,7 @@ namespace HonorsProject.ViewModel
         #region Properties
 
         public bool IsConfirmed { get; set; }
-        private int rowLimit;
+        public int RowLimit { get; set; }
         private Group _selectedGroup;
 
         public Group SelectedGroup
@@ -56,6 +56,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _groupSearchTxt = value;
+                UpdateMyGroupsList(RowLimit);
                 OnPropertyChanged(nameof(GroupSearchTxt));
             }
         }
@@ -115,12 +116,12 @@ namespace HonorsProject.ViewModel
             {
                 IsConfirmed = false;
                 User = (Lecturer)appUser;
-                rowLimit = 10;
+                RowLimit = 10;
                 SelectedGroup = new Group();
                 FormContext = FormContext.Create;
                 SubgridContext = SubgridContext.Students;
                 GroupSearchTxt = "";
-                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTop(rowLimit).ToList());
+                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTop(RowLimit).ToList());
             }
             catch (Exception ex)
             {
@@ -138,7 +139,7 @@ namespace HonorsProject.ViewModel
                 {
                     //Create New
                     result = User.AddNewGroup(SelectedGroup, UnitOfWork);
-                    UpdateMyGroupsList();
+                    UpdateMyGroupsList(RowLimit);
                 }
                 else
                 {
@@ -179,7 +180,7 @@ namespace HonorsProject.ViewModel
                     int count = UnitOfWork.Complete();
                     if (count > 0)
                     {
-                        UpdateMyGroupsList();
+                        UpdateMyGroupsList(RowLimit);
                         return true;
                     }
                     else
@@ -195,9 +196,9 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private void UpdateMyGroupsList()
+        private void UpdateMyGroupsList(int rows)
         {
-            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rowLimit));
+            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rows));
         }
 
         public bool ChangeSubgridContext(SubgridContext context)

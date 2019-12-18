@@ -17,6 +17,7 @@ namespace HonorsProject.ViewModel
     {
         #region Properties
 
+        public int RowLimit { get; set; }
         public bool IsConfirmed { get; set; }
 
         private Group _selectedGroup;

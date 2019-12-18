@@ -14,6 +14,7 @@ namespace HonorsProject.ViewModel.CoreVM
     public interface IMyGroupsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IDeleteCmd
     {
         bool IsConfirmed { get; set; }
+        int RowLimit { get; set; }
         Group SelectedGroup { get; set; }
         ObservableCollection<Group> Groups { get; set; }
         string GroupSearchTxt { get; set; }
