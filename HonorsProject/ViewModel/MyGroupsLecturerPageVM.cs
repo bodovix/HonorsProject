@@ -2,6 +2,7 @@
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -77,10 +78,20 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        public SaveCmd SaveFormCmd { get; set; }
+        public NewModeCmd NewModeCmd { get; set; }
+        public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
+
         #endregion Properties
 
         public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
+            //Commands
+            SaveFormCmd = new SaveCmd(this);
+            NewModeCmd = new NewModeCmd(this);
+            ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
+
+            //Initial Setup
             try
             {
                 rowLimit = 10;
@@ -94,6 +105,21 @@ namespace HonorsProject.ViewModel
             {
                 FeedbackMessage = ex.Message;
             }
+        }
+
+        public bool Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EnterNewMode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ChangeSubgridContext(SubgridContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

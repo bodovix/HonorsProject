@@ -1,5 +1,6 @@
 ﻿using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.Commands.IComands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public interface IMyGroupsPageVM
+    public interface IMyGroupsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd
     {
         Group SelectedGroup { get; set; }
         ObservableCollection<Group> Groups { get; set; }
