@@ -15,6 +15,10 @@ namespace HonorsProject.Model.Enums
         LoadGroupsSubgridForStudents,
         LoadQuestionsSubgridForStudents,
         DeleteStudentConfirmation,
-        DeleteGroupConfirmation
+        DeleteGroupConfirmation,
+        LoadActiveSessionsSubgrid,
+        LoadFutureSessionsSubgrid,
+        LoadPreviousSessionsSubgrid,
+        LoadStudentsSubgrid
     }
 }

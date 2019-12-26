@@ -230,7 +230,42 @@ namespace HonorsProject.ViewModel
 
         public bool ChangeSubgridContext(SubgridContext context)
         {
-            throw new NotImplementedException();
+            bool result = true;
+            SubgridContext = context;
+
+            switch (context)
+            {
+                case SubgridContext.ActiveSessions:
+                    //load required Sessions..
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetCurrentSessions((Lecturer)User, DateTime.Now.Date));
+                    Mediator.NotifyColleagues(MediatorChannels.LoadActiveSessionsSubgrid.ToString(),null);
+                    break;
+                case SubgridContext.FutureSessions:
+                    //load required Sessions..
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetFutureSessions((Lecturer)User, DateTime.Now.Date));
+                    //update the view to show future sessions
+                    Mediator.NotifyColleagues(MediatorChannels.LoadFutureSessionsSubgrid.ToString(), null);
+                    break;
+                case SubgridContext.PreviousSessions:
+                    //load required Sessions..
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetPreviousSessions((Lecturer)User, DateTime.Now.Date));
+                    //update the view to show previous
+                    Mediator.NotifyColleagues(MediatorChannels.LoadPreviousSessionsSubgrid.ToString(), null);
+                    break;
+                case SubgridContext.Groups:
+                    throw new NotImplementedException("Groups subgrid not required. Contact Support.");
+                case SubgridContext.Questions:
+                    throw new NotImplementedException("Questions subgrid not required. Contact Support.");
+                case SubgridContext.Answers:
+                    throw new NotImplementedException("Ansers subgrid not required. Contact Support.");
+                case SubgridContext.Students:
+                    //update the view to show Students Subgrid
+                    Mediator.NotifyColleagues(MediatorChannels.LoadStudentsSubgrid.ToString(), null);
+                    break;
+                default:
+                    break;
+            }
+            return result;
         }
 
         private void UpdateMyGroupsList(int rows)

@@ -33,8 +33,36 @@ namespace HonorsProject.View.Pages
             CreateMyGroupsVM();
             InitializeComponent();
             Mediator.Register(MediatorChannels.DeleteGroupConfirmation.ToString(), DeleteGroupConfirmation);
+            Mediator.Register(MediatorChannels.LoadActiveSessionsSubgrid.ToString(), LoadActiveSessionsSubgrid);
+            Mediator.Register(MediatorChannels.LoadPreviousSessionsSubgrid.ToString(), LoadPreviousSessionsSubgrid);
+            Mediator.Register(MediatorChannels.LoadFutureSessionsSubgrid.ToString(), LoadFutureSessionsSubgrid);
+            Mediator.Register(MediatorChannels.LoadStudentsSubgrid.ToString(), LoadStudentsSubgrid);
 
             DataContext = VM;
+        }
+
+        private void LoadStudentsSubgrid(object obj)
+        {
+            StudentsGridViewControl.Visibility = Visibility.Visible;
+            SessionsGridViewControl.Visibility = Visibility.Collapsed;
+        }
+
+        private void LoadFutureSessionsSubgrid(object obj)
+        {
+            StudentsGridViewControl.Visibility = Visibility.Collapsed;
+            SessionsGridViewControl.Visibility = Visibility.Visible;
+        }
+
+        private void LoadPreviousSessionsSubgrid(object obj)
+        {
+            StudentsGridViewControl.Visibility = Visibility.Collapsed;
+            SessionsGridViewControl.Visibility = Visibility.Visible;
+        }
+
+        private void LoadActiveSessionsSubgrid(object obj)
+        {
+            StudentsGridViewControl.Visibility = Visibility.Collapsed;
+            SessionsGridViewControl.Visibility = Visibility.Visible;
         }
 
         private void DeleteGroupConfirmation(object obj)

@@ -13,6 +13,7 @@
     <Page.Resources>
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
+        <cv:SubgridContextToVisibleConverter x:Key="SubgridContextToVisibleConverter"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -145,11 +146,11 @@
                     <Button Name="GroupStudentsBtn"
                             Content="Students"
                             Command="{Binding ChangeSubgridContextCmd}"
-                            CommandParameter="{x:Static enums:SubgridContext.Groups}"
+                            CommandParameter="{x:Static enums:SubgridContext.Students}"
                             Style="{StaticResource InfoButton}"
                             Background="{Binding SubgridContext,
                                                 Converter={StaticResource SubgridContextToColourConverter},
-                                            ConverterParameter={x:Static enums:SubgridContext.Groups}}" />
+                                            ConverterParameter={x:Static enums:SubgridContext.Students}}" />
                     <Button Name="GroupActiveSessionsBtn"
                             Content="Active Sessions"
                             Command="{Binding ChangeSubgridContextCmd}"
@@ -178,10 +179,12 @@
                 <Frame Grid.Column="0" Grid.Row="1">
                 </Frame>
                 <StackPanel Grid.Column="0" Grid.Row="1">
-                    <uc:StudentsGridViewControl Students="{Binding SelectedGroup.Students ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    <uc:StudentsGridViewControl x:Name="StudentsGridViewControl"
+                                                Students="{Binding SelectedGroup.Students ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedStudent="{Binding SelectedStudent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                 RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <uc:SessionsGridViewControl Sessions="{Binding FilteredSessions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    <uc:SessionsGridViewControl x:Name="SessionsGridViewControl"
+                                            Sessions="{Binding FilteredSessions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             SelectedSession="{Binding SelectedSession, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             UserRole="{Binding UserRole,UpdateSourceTrigger=PropertyChanged}"/>
