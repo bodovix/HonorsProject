@@ -54,6 +54,30 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(FilteredSessions));
             }
         }
+        private Session _selectedSession;
+
+        public Session SelectedSession
+        {
+            get { return _selectedSession; }
+            set
+            {
+                _selectedSession = value;
+                OnPropertyChanged(nameof(SelectedSession));
+            }
+        }
+
+        private Student _selectedStudent;
+
+        public Student SelectedStudent
+        {
+            get { return _selectedStudent; }
+            set
+            {
+                _selectedStudent = value;
+                OnPropertyChanged(nameof(SelectedSession));
+            }
+        }
+
         private string _groupSearchTxt;
 
         public string GroupSearchTxt
@@ -106,6 +130,7 @@ namespace HonorsProject.ViewModel
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
+        public RemoveEntityCmd RemoveEntityCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         #endregion Properties
 
@@ -134,6 +159,11 @@ namespace HonorsProject.ViewModel
         }
 
         public bool Delete(object objToDelete)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(BaseEntity entity)
         {
             throw new NotImplementedException();
         }

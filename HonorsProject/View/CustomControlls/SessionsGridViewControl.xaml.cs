@@ -44,7 +44,7 @@ namespace HonorsProject.View.CustomControlls
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty UserRoleProperty =
-            DependencyProperty.Register("MyProperty", typeof(Role), typeof(SessionsGridViewControl), new PropertyMetadata(0));
+            DependencyProperty.Register(nameof(UserRole), typeof(Role), typeof(SessionsGridViewControl), new PropertyMetadata(Role.Student));
 
 
         public Student SelectedSession

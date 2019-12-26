@@ -177,10 +177,16 @@
                 </StackPanel>
                 <Frame Grid.Column="0" Grid.Row="1">
                 </Frame>
-                <uc:SessionsGridViewControl Sessions="{Binding FilteredSessions}"
-                                            SelectedSession=""
-                                            RemoveEntityCmd=""
-                                            UserRole=""/>
+                <StackPanel Grid.Column="0" Grid.Row="1">
+                    <uc:StudentsGridViewControl Students="{Binding SelectedGroup.Students ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedStudent="{Binding SelectedStudent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <uc:SessionsGridViewControl Sessions="{Binding FilteredSessions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            SelectedSession="{Binding SelectedSession, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            UserRole="{Binding UserRole,UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                
             </Grid>
         </Grid>
     </Grid>

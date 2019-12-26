@@ -56,6 +56,25 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(FilteredSessions));
             }
         }
+        private Session _selectedSession;
+
+        public Session SelectedSession
+        {
+            get { return _selectedSession; }
+            set { _selectedSession = value;
+                OnPropertyChanged(nameof(SelectedSession));
+            }
+        }
+        private Student _selectedStudent;
+
+        public Student SelectedStudent
+        {
+            get { return _selectedStudent; }
+            set { _selectedStudent = value;
+                OnPropertyChanged(nameof(SelectedSession));
+            }
+        }
+
 
         private string _groupSearchTxt;
 
@@ -113,6 +132,7 @@ namespace HonorsProject.ViewModel
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
+        public RemoveEntityCmd RemoveEntityCmd { get; set; }
         #endregion
 
         public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
@@ -122,6 +142,7 @@ namespace HonorsProject.ViewModel
             NewModeCmd = new NewModeCmd(this);
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
             DeleteCmd = new DeleteCmd(this);
+            RemoveEntityCmd = new RemoveEntityCmd(this);
             //Initial Setup
             try
             {
@@ -215,6 +236,11 @@ namespace HonorsProject.ViewModel
         private void UpdateMyGroupsList(int rows)
         {
             Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rows));
+        }
+
+        public bool Remove(BaseEntity entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
