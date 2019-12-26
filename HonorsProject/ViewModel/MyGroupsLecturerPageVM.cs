@@ -47,6 +47,15 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(Groups));
             }
         }
+        private ObservableCollection<Session> _filteredSessions;
+
+        public ObservableCollection<Session> FilteredSessions
+        {
+            get { return _filteredSessions; }
+            set { _filteredSessions = value;
+                OnPropertyChanged(nameof(FilteredSessions));
+            }
+        }
 
         private string _groupSearchTxt;
 
@@ -97,12 +106,14 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        #endregion Properties
+
+        #region Commands
         public SaveCmd SaveFormCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
-
-        #endregion Properties
+        #endregion
 
         public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {

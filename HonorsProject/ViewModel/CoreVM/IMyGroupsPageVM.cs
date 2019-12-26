@@ -17,6 +17,7 @@ namespace HonorsProject.ViewModel.CoreVM
         int RowLimit { get; set; }
         Group SelectedGroup { get; set; }
         ObservableCollection<Group> Groups { get; set; }
+        ObservableCollection<Session> FilteredSessions { get; set; }
         string GroupSearchTxt { get; set; }
         FormContext FormContext { get; set; }
         SubgridContext SubgridContext { get; set; }

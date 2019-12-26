@@ -43,7 +43,17 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(Groups));
             }
         }
+        private ObservableCollection<Session> _filteredSessions;
 
+        public ObservableCollection<Session> FilteredSessions
+        {
+            get { return _filteredSessions; }
+            set
+            {
+                _filteredSessions = value;
+                OnPropertyChanged(nameof(FilteredSessions));
+            }
+        }
         private string _groupSearchTxt;
 
         public string GroupSearchTxt
