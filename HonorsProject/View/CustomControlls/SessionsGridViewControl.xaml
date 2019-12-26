@@ -13,9 +13,10 @@
         <uc:RoleToVisibleConverter x:Key="RoleToVisibleConverter"/>
     </UserControl.Resources>
     <StackPanel>
-        <DataGrid Grid.Column="0"
+        <DataGrid       Name="SessionsDataGrid"   
+                        Grid.Column="0"
                           Grid.Row="3"
-                          ItemsSource="{Binding Sessions}"
+                          ItemsSource="{Binding Path=Sessions, ElementName=SessionsControl}"
                           SelectedItem="{Binding SelectedSession, Mode=TwoWay}"
                           Style="{StaticResource SubgridControlStyle}">
             <!--HeadingStyle-->
@@ -57,7 +58,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
-                                        Command="{Binding DataContext.DeleteCmd, ElementName=SessionsGV}"
+                                        Command="{Binding DataContext.DeleteCmd, ElementName=SessionsDataGrid}"
                                         CommandParameter="{Binding}"
                                         Visibility="{Binding DataContext.UserRole, Converter={StaticResource RoleToVisibleConverter},
                     ConverterParameter={x:Static enums:Role.Lecturer}}">
