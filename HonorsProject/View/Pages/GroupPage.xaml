@@ -177,7 +177,10 @@
                 </StackPanel>
                 <Frame Grid.Column="0" Grid.Row="1">
                 </Frame>
-                
+                <uc:SessionsGridViewControl Sessions="{Binding FilteredSessions}"
+                                            SelectedSession=""
+                                            RemoveEntityCmd=""
+                                            UserRole=""/>
             </Grid>
         </Grid>
     </Grid>
