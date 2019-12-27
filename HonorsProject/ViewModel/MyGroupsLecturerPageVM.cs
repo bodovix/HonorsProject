@@ -135,6 +135,8 @@ namespace HonorsProject.ViewModel
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
+        public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get; set; }
+        public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
         #endregion
 
         public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
@@ -145,6 +147,8 @@ namespace HonorsProject.ViewModel
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
             DeleteCmd = new DeleteCmd(this);
             RemoveEntityCmd = new RemoveEntityCmd(this);
+            MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
+            MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
             //Initial Setup
             try
             {
@@ -356,6 +360,16 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public bool MoveEntityOutOfList(BaseEntity entityToRemove)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MoveEntityInToList(BaseEntity entityToAdd)
+        {
+            throw new NotImplementedException();
         }
     }
 }

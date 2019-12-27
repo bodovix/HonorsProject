@@ -131,6 +131,8 @@ namespace HonorsProject.ViewModel
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
         public RemoveEntityCmd RemoveEntityCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public MoveEntityInToListCmd MoveEntityInToListCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         #endregion Properties
 
@@ -164,6 +166,16 @@ namespace HonorsProject.ViewModel
         }
 
         public bool Remove(BaseEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MoveEntityOutOfList(BaseEntity entityToRemove)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
             throw new NotImplementedException();
         }
