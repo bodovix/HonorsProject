@@ -42,18 +42,6 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private Role _userRole;
-
-        public Role UserRole
-        {
-            get { return _userRole; }
-            set
-            {
-                _userRole = value;
-                OnPropertyChanged(nameof(UserRole));
-            }
-        }
-
         private ISystemUser _user;
 
         public ISystemUser User

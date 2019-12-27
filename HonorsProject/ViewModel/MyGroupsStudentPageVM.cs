@@ -162,6 +162,7 @@ namespace HonorsProject.ViewModel
             {
                 IsConfirmed = false;
                 User = (Student)appUser;
+                UserRole = Role.Student;
                 RowLimit = 10;
                 SelectedGroup = new Group();
                 FormContext = FormContext.Create;
@@ -178,37 +179,73 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Students cannot update or create groups.");
         }
 
         public void EnterNewMode()
         {
-            throw new NotImplementedException();
+            SelectedGroup = new Group();
+            FormContext = FormContext.Create;
         }
 
         public bool ChangeSubgridContext(SubgridContext context)
         {
-            throw new NotImplementedException();
+            bool result = true;
+            SubgridContext = context;
+
+            switch (context)
+            {
+                case SubgridContext.ActiveSessions:
+                    //load required Sessions..
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetCurrentSessions(SelectedGroup, DateTime.Now.Date));
+                    Mediator.NotifyColleagues(MediatorChannels.LoadActiveSessionsSubgrid.ToString(), null);
+                    break;
+                case SubgridContext.FutureSessions:
+                    //load required Sessions..
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetFutureSessions(SelectedGroup, DateTime.Now.Date));
+                    //update the view to show future sessions
+                    Mediator.NotifyColleagues(MediatorChannels.LoadFutureSessionsSubgrid.ToString(), null);
+                    break;
+                case SubgridContext.PreviousSessions:
+                    //load required Sessions..
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetPreviousSessions(SelectedGroup, DateTime.Now.Date));
+                    //update the view to show previous
+                    Mediator.NotifyColleagues(MediatorChannels.LoadPreviousSessionsSubgrid.ToString(), null);
+                    break;
+                case SubgridContext.Groups:
+                    throw new NotImplementedException("Groups subgrid not required. Contact Support.");
+                case SubgridContext.Questions:
+                    throw new NotImplementedException("Questions subgrid not required. Contact Support.");
+                case SubgridContext.Answers:
+                    throw new NotImplementedException("Ansers subgrid not required. Contact Support.");
+                case SubgridContext.Students:
+                    //update the view to show Students Subgrid
+                    Mediator.NotifyColleagues(MediatorChannels.LoadStudentsSubgrid.ToString(), null);
+                    break;
+                default:
+                    break;
+            }
+            return result;
         }
 
         public bool Delete(BaseEntity objToDelete)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Students cannot delete groups.");
         }
 
         public bool Remove(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Studetns cannot remove students from groups.");
         }
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Students cannot remove students from grups.");
         }
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Students cannot add students to groups.");
         }
     }
 }

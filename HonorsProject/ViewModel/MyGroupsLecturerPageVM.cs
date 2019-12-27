@@ -162,6 +162,7 @@ namespace HonorsProject.ViewModel
             {
                 IsConfirmed = false;
                 User = (Lecturer)appUser;
+                UserRole = Role.Lecturer;
                 RowLimit = 10;
                 SelectedGroup = new Group();
                 FormContext = FormContext.Create;

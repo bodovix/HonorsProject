@@ -1,4 +1,5 @@
 ﻿using HonorsProject.Model.Data;
+using HonorsProject.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,19 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         public UnitOfWork UnitOfWork { get; set; }
+
+        private Role _userRole;
+
+        public Role UserRole
+        {
+            get { return _userRole; }
+            set
+            {
+                _userRole = value;
+                OnPropertyChanged(nameof(UserRole));
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
