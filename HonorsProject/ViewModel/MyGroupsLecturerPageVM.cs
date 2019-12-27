@@ -154,6 +154,7 @@ namespace HonorsProject.ViewModel
                 SelectedGroup = new Group();
                 FormContext = FormContext.Create;
                 SubgridContext = SubgridContext.Students;
+                ChangeSubgridContext(SubgridContext);
                 GroupSearchTxt = "";
                 Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTop(RowLimit).ToList());
             }
@@ -336,7 +337,25 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+            {
+                FeedbackMessage = "No valid group selected. Canceling.";
+                return false;
+            }
+            try
+            {
+                FeedbackMessage = "";
+                string msg = "";
+                SelectedGroup.RemoveStudent((Student)entity, UnitOfWork, ref msg);
+                UpdateMyGroupsList(RowLimit);
+                FeedbackMessage = msg;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
     }
 }

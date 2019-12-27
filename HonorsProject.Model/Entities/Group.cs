@@ -41,5 +41,26 @@ namespace HonorsProject.Model.Entities
 
             return true;
         }
+
+        public bool RemoveStudent(Student studentToRemove, UnitOfWork u, ref string msg)
+        {
+            if (Students.Contains(studentToRemove))
+            {
+                Students.Remove(studentToRemove);
+                int rows = u.Complete();
+                if(rows > 0)
+                    return true;
+                else
+                {
+                    msg = "No record found to delte in database. \nRefresh to try again or contact support.";
+                    return false;
+                }
+            }
+            else
+            {
+                msg = "Student Not in Selected Group. Refresh and try again.";
+                return false;
+            }
+        }
     }
 }
