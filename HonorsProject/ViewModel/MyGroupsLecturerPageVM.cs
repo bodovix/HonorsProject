@@ -380,12 +380,51 @@ namespace HonorsProject.ViewModel
         }
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
-            throw new NotImplementedException();
+            FeedbackMessage = "";
+            try
+            {
+                bool result = false;
+                if (entityToRemove is Student student)
+                {
+                    SelectedGroup.Students.Remove(student);
+                    UnitOfWork.Complete();
+                    RefreshAvailableStudents(SelectedGroup);
+                    return true;
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
-            throw new NotImplementedException();
+            FeedbackMessage = "";
+            try
+            {
+                bool result = false;
+                if (entityToAdd is Student student)
+                {
+                    if (SelectedGroup.Students.Contains(entityToAdd))
+                    {
+                        FeedbackMessage = $"Student already belongs to group: {entityToAdd.Name}";
+                        return false;
+                    }
+                    SelectedGroup.Students.Add(student);
+                    UnitOfWork.Complete();
+                    RefreshAvailableStudents(SelectedGroup);
+                    return true;
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
     }
 }
