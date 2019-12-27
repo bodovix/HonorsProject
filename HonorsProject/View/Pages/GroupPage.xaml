@@ -115,12 +115,6 @@
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                Style="{StaticResource UserInputError}" />
-
-                <Button Name="AddSessionBtn"
-                        Content="Add Session"
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        Style="{StaticResource InfoButton}" />
                 <Button Name="SaveBtn"
                         Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
                         Command="{Binding SaveFormCmd}"
@@ -184,6 +178,7 @@
                                                 SelectedStudent="{Binding SelectedStudent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                 RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <uc:SessionsGridViewControl x:Name="SessionsGridViewControl"
+                                                Visibility="Collapsed"
                                             Sessions="{Binding FilteredSessions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             SelectedSession="{Binding SelectedSession, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
