@@ -52,7 +52,9 @@
                     <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
                         <MenuItem  Header="Delete"
                                            Command="{Binding DataContext.DeleteCmd}"
-                                           CommandParameter="{Binding SelectedItem}">
+                                           CommandParameter="{Binding SelectedItem}"
+                                           Visibility="{Binding Path=DataContext.UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            ConverterParameter={x:Static enums:Role.Lecturer}}">
                             <MenuItem.ToolTip>
                                 <ToolTip>
                                     <StackPanel>

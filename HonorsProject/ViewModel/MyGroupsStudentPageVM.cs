@@ -235,7 +235,8 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
-            throw new NotImplementedException("Studetns cannot remove students from groups.");
+            FeedbackMessage="Students cannot remove students from groups.";
+            return false;
         }
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
