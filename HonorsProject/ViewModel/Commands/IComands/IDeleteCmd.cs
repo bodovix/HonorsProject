@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HonorsProject.Model.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace HonorsProject.ViewModel.Commands.IComands
     {
         DeleteCmd DeleteCmd { get; set; }
 
-        bool Delete(object objToDelete);
+        bool Delete(BaseEntity objToDelete);
     }
 }

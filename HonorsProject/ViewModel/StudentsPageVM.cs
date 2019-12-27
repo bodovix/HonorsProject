@@ -381,7 +381,7 @@ namespace HonorsProject.ViewModel
             return result;
         }
 
-        public bool Delete(object objToDelete)
+        public bool Delete(BaseEntity objToDelete)
         {
             IsConfirmed = SetFalse();
             FeedbackMessage = "";

@@ -32,6 +32,8 @@ namespace HonorsProject.ViewModel
                 FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedGroup = value;
 
+                ChangeSubgridContext(SubgridContext);//refresh the subgrid content
+
                 OnPropertyChanged(nameof(SelectedGroup));
             }
         }
@@ -195,7 +197,65 @@ namespace HonorsProject.ViewModel
             FormContext = FormContext.Create;
         }
 
-        public bool Delete(object objToDelete)
+        public bool Delete(BaseEntity objToDelete)
+        {
+            FeedbackMessage = "";
+            bool result;
+            if (objToDelete is Session)
+            {
+                //deleting session
+                result = DeleteSession(objToDelete);
+            }
+            else if (objToDelete is Group)
+            {
+                //Deleting group
+                result = DeleteGroup(objToDelete);
+            }
+            else
+            {
+                FeedbackMessage = $"Cannot delete object of type {objToDelete.GetType().ToString()}. Please contact support.";
+                result = false;
+            }
+            return result;
+        }
+
+        private bool DeleteSession(object objToDelete)
+        {
+            Session sessionToDelete = objToDelete as Session;
+            if (sessionToDelete == null)
+            {
+                FeedbackMessage = "No session selected.";
+                return false;
+            }
+            try
+            {
+                Mediator.NotifyColleagues(MediatorChannels.DeleteSessionConfirmation.ToString(), sessionToDelete);
+                if (IsConfirmed)
+                {
+                    UnitOfWork.SessionRepository.Remove(sessionToDelete);
+                    int count = UnitOfWork.Complete();
+                    if (count > 0)
+                    {
+                        UpdateMyGroupsList(RowLimit);
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                {
+                    FeedbackMessage = "Delete canceled.";
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
+        }
+
+        private bool DeleteGroup(object objToDelete)
         {
             Group groupToDelete = objToDelete as Group;
             if (groupToDelete == null)
@@ -237,18 +297,18 @@ namespace HonorsProject.ViewModel
             {
                 case SubgridContext.ActiveSessions:
                     //load required Sessions..
-                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetCurrentSessions((Lecturer)User, DateTime.Now.Date));
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetCurrentSessions(SelectedGroup, DateTime.Now.Date));
                     Mediator.NotifyColleagues(MediatorChannels.LoadActiveSessionsSubgrid.ToString(),null);
                     break;
                 case SubgridContext.FutureSessions:
                     //load required Sessions..
-                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetFutureSessions((Lecturer)User, DateTime.Now.Date));
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetFutureSessions(SelectedGroup, DateTime.Now.Date));
                     //update the view to show future sessions
                     Mediator.NotifyColleagues(MediatorChannels.LoadFutureSessionsSubgrid.ToString(), null);
                     break;
                 case SubgridContext.PreviousSessions:
                     //load required Sessions..
-                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetPreviousSessions((Lecturer)User, DateTime.Now.Date));
+                    FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetPreviousSessions(SelectedGroup, DateTime.Now.Date));
                     //update the view to show previous
                     Mediator.NotifyColleagues(MediatorChannels.LoadPreviousSessionsSubgrid.ToString(), null);
                     break;
@@ -271,6 +331,7 @@ namespace HonorsProject.ViewModel
         private void UpdateMyGroupsList(int rows)
         {
             Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rows));
+            ChangeSubgridContext(SubgridContext);//refresh the subgrid content
         }
 
         public bool Remove(BaseEntity entity)

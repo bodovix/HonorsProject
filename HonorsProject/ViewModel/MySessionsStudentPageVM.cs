@@ -230,7 +230,7 @@ namespace HonorsProject.ViewModel
             throw new NotImplementedException("Students Cannot Save Sessions.");
         }
 
-        public bool Delete(object objectToDelete)
+        public bool Delete(BaseEntity objectToDelete)
         {
             FeedbackMessage = "Students Cannot Delete Sessions";
             return false;

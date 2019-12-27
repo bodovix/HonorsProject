@@ -33,6 +33,7 @@ namespace HonorsProject.View.Pages
             CreateMyGroupsVM();
             InitializeComponent();
             Mediator.Register(MediatorChannels.DeleteGroupConfirmation.ToString(), DeleteGroupConfirmation);
+            Mediator.Register(MediatorChannels.DeleteSessionConfirmation.ToString(), DeleteSessionConfirmation);
             Mediator.Register(MediatorChannels.LoadActiveSessionsSubgrid.ToString(), LoadActiveSessionsSubgrid);
             Mediator.Register(MediatorChannels.LoadPreviousSessionsSubgrid.ToString(), LoadPreviousSessionsSubgrid);
             Mediator.Register(MediatorChannels.LoadFutureSessionsSubgrid.ToString(), LoadFutureSessionsSubgrid);
@@ -75,7 +76,16 @@ namespace HonorsProject.View.Pages
             else
                 VM.IsConfirmed = false;
         }
+        private void DeleteSessionConfirmation(object obj)
+        {
+            Session s = obj as Session;
+            MessageBoxResult dialogResult = MessageBox.Show($"Delete session: {s.Name}? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
 
+            if (dialogResult == MessageBoxResult.Yes)
+                VM.IsConfirmed = true;
+            else
+                VM.IsConfirmed = false;
+        }
         private void CreateMyGroupsVM()
         {
             if (App.LoggedInAs == Role.Lecturer)

@@ -158,7 +158,7 @@ namespace HonorsProject.ViewModel
             throw new NotImplementedException();
         }
 
-        public bool Delete(object objToDelete)
+        public bool Delete(BaseEntity objToDelete)
         {
             throw new NotImplementedException();
         }

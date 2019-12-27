@@ -1,4 +1,5 @@
-﻿using HonorsProject.ViewModel.Commands.IComands;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.ViewModel.Commands.IComands;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,8 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            VM.Delete(parameter);
+            BaseEntity entityToDelte = (BaseEntity)parameter;
+            VM.Delete(entityToDelte);
         }
     }
 }

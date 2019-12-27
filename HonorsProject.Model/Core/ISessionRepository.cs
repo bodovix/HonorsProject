@@ -9,6 +9,12 @@ namespace HonorsProject.Model.Core
 {
     public interface ISessionRepository : IRepository<Session>
     {
+        List<Session> GetCurrentSessions(Group group, DateTime date);
+
+        List<Session> GetFutureSessions(Group group, DateTime date);
+
+        List<Session> GetPreviousSessions(Group group, DateTime date);
+
         List<Session> GetCurrentSessions(Lecturer lecturer, DateTime date);
 
         List<Session> GetFutureSessions(Lecturer lecturer, DateTime date);
