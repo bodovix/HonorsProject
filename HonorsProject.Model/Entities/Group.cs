@@ -5,22 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HonorsProject.Model.Core;
+using System.Collections.ObjectModel;
 
 namespace HonorsProject.Model.Entities
 {
     public class Group : BaseEntity
     {
-        public virtual List<Student> Students { get; set; }
-        public virtual List<Session> Sessions { get; set; }
+        public virtual ObservableCollection<Student> Students { get; set; }
+        public virtual ObservableCollection<Session> Sessions { get; set; }
         public int CreatedByLecturerId { get; set; }
 
         public Group()
         {
-            Students = new List<Student>();
-            Sessions = new List<Session>();
+            Students = new ObservableCollection<Student>();
+            Sessions = new ObservableCollection<Session>();
         }
 
-        public Group(string name, List<Student> students, List<Session> sessions, DateTime createdOn, int createdByLecturerId)
+        public Group(string name, ObservableCollection<Student> students, ObservableCollection<Session> sessions, DateTime createdOn, int createdByLecturerId)
         {
             Name = name;
             Students = students;

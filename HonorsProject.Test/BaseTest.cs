@@ -68,8 +68,8 @@ namespace HonorsProject.Test
                 ObservableCollection<Lecturer> lecL = new ObservableCollection<Lecturer>();
                 lecL.Add(l);
                 lecL.Add(l2);
-                List<Student> stL = new List<Student>();
-                List<Student> stLEmpty = new List<Student>();
+                ObservableCollection<Student> stL = new ObservableCollection<Student>();
+                ObservableCollection<Student> stLEmpty = new ObservableCollection<Student>();
                 stL.Add(s);
                 //group added before session
                 Group g = new Group("Computing 19/20", stL, null, DateTime.Now.AddMonths(-6), 444);
