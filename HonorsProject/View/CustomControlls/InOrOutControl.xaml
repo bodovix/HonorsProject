@@ -51,6 +51,7 @@
                    Grid.Column="1"
                    Style="{StaticResource FormTitleText}" />
         <ListView Name="InItemsLV"
+                  HorizontalContentAlignment="Stretch"
                   ItemsSource="{Binding Path=EntitiesOwned, ElementName=InOrOutCtrl}"
                   Height="100"
                   Grid.Row="1"
