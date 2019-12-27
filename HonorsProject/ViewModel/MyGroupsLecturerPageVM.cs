@@ -31,7 +31,7 @@ namespace HonorsProject.ViewModel
                 //if selected.id == 0 create else update
                 FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedGroup = value;
-
+                RefreshAvailableStudents(SelectedGroup);
                 ChangeSubgridContext(SubgridContext);//refresh the subgrid content
 
                 OnPropertyChanged(nameof(SelectedGroup));
@@ -369,7 +369,15 @@ namespace HonorsProject.ViewModel
                 return false;
             }
         }
-
+        private void RefreshAvailableStudents(Group group)
+        {
+            List<Student> students;
+            if (group == null || group.Id == 0) // If in New Mode
+                students = UnitOfWork.StudentRepo.GetAll().ToList();
+            else // if student already selected
+                students = UnitOfWork.StudentRepo.GetStudentsNotInGroup(group).ToList();
+            StudentsNotInGroup = new ObservableCollection<Student>(students);
+        }
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
             throw new NotImplementedException();

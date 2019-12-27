@@ -21,6 +21,11 @@ namespace HonorsProject.Model.Data
             return _entities.FirstOrDefault(s => s.Id.Equals(id));
         }
 
+        public List<Student> GetStudentsNotInGroup(Group group)
+        {
+            return _entities.Where(s => !s.Groups.Any(g =>g.Id == group.Id)).ToList();
+        }
+
         public List<Student> GetTopXFromSearch(string searchStudentTxt, int rows)
         {
             //if no search return all

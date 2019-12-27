@@ -103,13 +103,13 @@
                 <uc:InOrOutControl 
                     Grid.Column="2"
                     Grid.Row="1"
-                        x:Name="InOrOutControl"
-                        EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        AvailableTxt="Students nsot in Group"
-                        EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        ContainsTxt="Students in Group"
-                        MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    x:Name="InOrOutControl"
+                    EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    AvailableTxt="Students nsot in Group"
+                    EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    ContainsTxt="Students in Group"
+                    MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
