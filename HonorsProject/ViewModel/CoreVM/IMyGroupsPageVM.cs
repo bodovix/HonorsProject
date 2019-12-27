@@ -20,6 +20,7 @@ namespace HonorsProject.ViewModel.CoreVM
         ObservableCollection<Session> FilteredSessions { get; set; }
         Session SelectedSession { get; set; }
         Student SelectedStudent { get; set; }
+        ObservableCollection<Student> StudentsNotInGroup { get; set; }
         string GroupSearchTxt { get; set; }
         FormContext FormContext { get; set; }
         SubgridContext SubgridContext { get; set; }

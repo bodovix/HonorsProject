@@ -76,7 +76,15 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(SelectedSession));
             }
         }
+        private ObservableCollection<Student> _studentsNotInGroup;
 
+        public ObservableCollection<Student> StudentsNotInGroup
+        {
+            get { return _studentsNotInGroup; }
+            set { _studentsNotInGroup = value;
+                OnPropertyChanged(nameof(StudentsNotInGroup));
+            }
+        }
 
         private string _groupSearchTxt;
 
