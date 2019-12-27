@@ -14,6 +14,7 @@
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
         <cv:SubgridContextToVisibleConverter x:Key="SubgridContextToVisibleConverter"/>
+        <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter"/>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,6 +29,8 @@
             <Button Name="NewGroupBtn"
                     Content="New Group"
                     Command="{Binding NewModeCmd}"
+                    Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            ConverterParameter={x:Static enums:Role.Lecturer}}"
                     Style="{StaticResource FormSubmitButton}" />
             <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
@@ -102,13 +105,15 @@
                         
                         Style="{StaticResource FormTitleText}" />
                     <uc:InOrOutControl 
-                    x:Name="InOrOutControl"
-                    EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                    AvailableTxt="Students nsot in Group"
-                    EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                    ContainsTxt="Students in Group"
-                    MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                    MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        x:Name="InOrOutControl"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            ConverterParameter={x:Static enums:Role.Lecturer}}"
+                        EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        AvailableTxt="Students nsot in Group"
+                        EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        ContainsTxt="Students in Group"
+                        MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
@@ -129,11 +134,15 @@
                         Command="{Binding SaveFormCmd}"
                         Grid.Column="0"
                         Grid.Row="3"
-                        Style="{StaticResource FormSaveButton}" />
+                        Style="{StaticResource FormSaveButton}"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            ConverterParameter={x:Static enums:Role.Lecturer}}"/>
                 <Button Name="CancelBtn"
                         Content="Cancel"
                         Grid.Column="1"
                         Grid.Row="3"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormCancelButton}" />
             </Grid>
             <!--sub-grid section-->

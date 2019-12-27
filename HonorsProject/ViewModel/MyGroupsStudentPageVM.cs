@@ -132,7 +132,7 @@ namespace HonorsProject.ViewModel
             get { return _user; }
             set
             {
-                _user = value;
+                _user = (Student)value;
                 OnPropertyChanged(nameof(User));
             }
         }
@@ -141,19 +141,39 @@ namespace HonorsProject.ViewModel
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
-        public RemoveEntityCmd RemoveEntityCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public MoveEntityInToListCmd MoveEntityInToListCmd { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public RemoveEntityCmd RemoveEntityCmd { get; set ; }
+        public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get; set; }
+        public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
 
         #endregion Properties
 
         public MyGroupsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
             //Commands
-            //Commands
             SaveFormCmd = new SaveCmd(this);
             NewModeCmd = new NewModeCmd(this);
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
+            DeleteCmd = new DeleteCmd(this);
+            RemoveEntityCmd = new RemoveEntityCmd(this);
+            MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
+            MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
+            //Initial Setup
+            try
+            {
+                IsConfirmed = false;
+                User = (Student)appUser;
+                RowLimit = 10;
+                SelectedGroup = new Group();
+                FormContext = FormContext.Create;
+                SubgridContext = SubgridContext.Students;
+                ChangeSubgridContext(SubgridContext);
+                GroupSearchTxt = "";
+                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTop(RowLimit).ToList());
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+            }
         }
 
         public bool Save()
