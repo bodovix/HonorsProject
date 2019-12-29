@@ -22,7 +22,7 @@ namespace HonorsProject.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            //no pre checks needed
+            //no checks needed
             return true;
         }
 
