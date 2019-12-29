@@ -1,6 +1,9 @@
 ﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Data;
+using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.ViewModel;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -26,8 +29,10 @@ namespace HonorsProject.View.Pages
     {
 
         public BaseQandAPageVM VM;
+        private BaseEntity entity;
         public QandAPage(BaseEntity entityToFocusOn)
         {
+            entity = entityToFocusOn;
             PickVM();
             InitializeComponent();
             MainContainer.DataContext = VM;
@@ -38,11 +43,41 @@ namespace HonorsProject.View.Pages
         {
             if (App.LoggedInAs == Role.Lecturer)
             {
+                if (entity is Session)
+                {
+                    VM = new InSessoinLecturerQandAVM(App.AppUser, ConnectionConfigs.LiveConfig);
+                }
+                else if (entity is Question)
+                {
 
+                }
+                else if (entity is Answer)
+                {
+
+                }
+                else
+                {
+                    throw new InvalidCastException("Invalid Cast exception in QandA Page. Please contact support.");
+                }
             }
             else
             {
+                if (entity is Session)
+                {
 
+                }
+                if (entity is Question)
+                {
+
+                }
+                if (entity is Answer)
+                {
+
+                }
+                else
+                {
+                    throw new InvalidCastException("Invalid Cast exception in QandA Page. Please contact support.");
+                }
             }
         }
     }

@@ -44,9 +44,7 @@ namespace HonorsProject.View.Pages
             Mediator.ClearMediator();
 
             BaseEntity entity = (BaseEntity)obj;
-            QandAPage qAndA = new QandAPage(entity);
-            Frame frame = (Frame)this.Parent;
-            frame.Content = qAndA;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GoToQandAWithEntity(entity);
         }
         private void ShowDeleteConfMessage(object obj)
         {

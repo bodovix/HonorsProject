@@ -88,7 +88,11 @@ namespace HonorsProject.View
             ShowAppropriateNavigation();
             MainContent.Content = new MySessionsPage();
         }
-
+        public void GoToQandAWithEntity(BaseEntity entityTofocusOn)
+        {
+            Mediator.ClearMediator();
+            MainContent.Content = new QandAPage(entityTofocusOn);
+        }
         private void StudentsBtn_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
