@@ -1,6 +1,7 @@
 ﻿using HonorsProject.ViewModel.Commands.IComands;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,13 @@ using System.Windows.Input;
 
 namespace HonorsProject.ViewModel.Commands
 {
-    public class UploadCmd : ICommand
+    public class UploadImageCmd : ICommand
     {
-        public IUploadCmd VM { get; set; }
+        public IUploadImageCmd VM { get; set; }
 
         public event EventHandler CanExecuteChanged;
 
-        public UploadCmd(IUploadCmd vm)
+        public UploadImageCmd(IUploadImageCmd vm)
         {
             VM = vm;
         }
@@ -27,7 +28,8 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            VM.Upload(parameter);
+            Image image = (Image)parameter;
+            VM.UploadImage(image);
         }
     }
 }

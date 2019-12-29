@@ -68,7 +68,7 @@
     <Compile Include="ViewModel\Commands\IComands\IChangeSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IMoveEntityInList.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkQCmd.cs" />
-    <Compile Include="ViewModel\Commands\IComands\IUploadCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\IUploadImageCmd.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityInToListCmd.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityOutOfListCmd.cs" />
     <Compile Include="ViewModel\Commands\NewPassHashCmd.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="ViewModel\Commands\AddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\NewModeCmd.cs" />
     <Compile Include="ViewModel\Commands\ToggleMarkQCmd.cs" />
-    <Compile Include="ViewModel\Commands\UploadCmd.cs" />
+    <Compile Include="ViewModel\Commands\UploadImageCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
     <Compile Include="ViewModel\Converters\RoleToEditableConverter.cs" />
     <Compile Include="ViewModel\Converters\SubgridContextToVisibleConverter.cs" />
