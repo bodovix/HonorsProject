@@ -104,6 +104,8 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(AnswerImage));
             }
         }
+        public bool IsConfirmed { get; set; }
+
         #endregion Properties
         #region Commands
         public SaveCmd SaveFormCmd { get; set; }
@@ -114,6 +116,13 @@ namespace HonorsProject.ViewModel.CoreVM
         #endregion Commands
         public BaseQandAPageVM(string dbcontextName) : base(dbcontextName)
         {
+            //Commands
+            SaveFormCmd = new SaveCmd(this);
+            DeleteCmd = new DeleteCmd(this);
+            UploadImageCmd = new UploadImageCmd(this);
+            ToggleMarkQCmd = new ToggleMarkQCmd(this);
+            CancelCmd = new CancelCmd(this);
+
         }
 
         public abstract bool Save();

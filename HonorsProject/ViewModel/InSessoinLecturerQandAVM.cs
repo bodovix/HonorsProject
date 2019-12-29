@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
+using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.ViewModel
@@ -13,9 +14,11 @@ namespace HonorsProject.ViewModel
     class InSessoinLecturerQandAVM : BaseQandAPageVM
     {
 
-        public InSessoinLecturerQandAVM(string dbcontextName) : base(dbcontextName)
+        public InSessoinLecturerQandAVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
-            
+            //Setup
+            User = (Lecturer)appUser;
+            IsConfirmed = false;
         }
 
         private ISystemUser _user;
