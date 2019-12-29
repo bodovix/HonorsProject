@@ -51,7 +51,12 @@ namespace HonorsProject.ViewModel.CoreVM
         public Question SelectedQuestion
         {
             get { return _selectedQuestion; }
-            set { _selectedQuestion = value;
+            set {
+                if (value == null)
+                    value = new Question();
+                //if selected.id == 0 create else update
+                FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
+                _selectedQuestion = value;
                 OnPropertyChanged(nameof(SelectedQuestion));
             }
         }

@@ -43,7 +43,7 @@ namespace HonorsProject.View.Pages
             {
                 if (entity is Session)
                 {
-                   VM = new InSessoinLecturerQandAVM(App.AppUser, ConnectionConfigs.LiveConfig);
+                   VM = new InSessoinLecturerQandAVM(App.AppUser,(Session)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity is Question)
                 {

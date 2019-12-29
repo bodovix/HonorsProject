@@ -24,12 +24,14 @@
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchQTxtBox" />
                 <ListView  x:Name="searchQResultsList"
-                       Height="390">
+                       Height="390"
+                           ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="" />
-                                <TextBlock Text="" />
+                                <TextBlock Text="{Binding Id}" />
+                                <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -65,7 +67,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!--Context Title-->
-            <TextBlock Text="CONTEXT NAME WILL  BIND HERE"
+            <TextBlock Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                        Grid.Column="0"
                        Grid.Row="0"
                        Style="{StaticResource FormTitleText}" />
@@ -83,7 +85,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Question {Name will get bound here}"
+                <TextBlock Text="Question: "
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
@@ -91,16 +93,16 @@
                 <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
-                <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding SelectedQuestion.AskedBy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
                 </GroupBox>
                 <GroupBox Header="Time Asked" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                    <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
                 </GroupBox>
                 <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="" Style="{StaticResource UserFormLbl}" />
+                    <Label Content="{Binding SelectedQuestion.IsResolved,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
                 </GroupBox>
                 <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
                     <TextBox TextWrapping="Wrap"
@@ -108,7 +110,7 @@
                          MaxLength="300"
                          Height="80"
                          Style="{StaticResource UserInput}"
-                         Text="" />
+                         Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
                 <Image Name="QuestionImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                 </Image>
