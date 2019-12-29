@@ -205,7 +205,6 @@
                                             GoToEntityCmd="{Binding GoToEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             UserRole="{Binding UserRole,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                
             </Grid>
         </Grid>
     </Grid>

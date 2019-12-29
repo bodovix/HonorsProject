@@ -27,7 +27,6 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class QandAPage : Page
     {
-
         public BaseQandAPageVM VM;
         private BaseEntity entity;
         public QandAPage(BaseEntity entityToFocusOn)
@@ -38,14 +37,13 @@ namespace HonorsProject.View.Pages
             MainContainer.DataContext = VM;
         }
 
-
         private void PickVM()
         {
             if (App.LoggedInAs == Role.Lecturer)
             {
                 if (entity is Session)
                 {
-                    VM = new InSessoinLecturerQandAVM(App.AppUser, ConnectionConfigs.LiveConfig);
+                   VM = new InSessoinLecturerQandAVM(App.AppUser, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity is Question)
                 {
@@ -54,6 +52,10 @@ namespace HonorsProject.View.Pages
                 else if (entity is Answer)
                 {
 
+                }
+                else if(entity == null)
+                {
+                    Console.WriteLine("null");
                 }
                 else
                 {
@@ -73,6 +75,10 @@ namespace HonorsProject.View.Pages
                 if (entity is Answer)
                 {
 
+                }
+                else if (entity == null)
+                {
+                    Console.WriteLine("null");
                 }
                 else
                 {
