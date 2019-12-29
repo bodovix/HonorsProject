@@ -99,7 +99,7 @@
     <Compile Include="ViewModel\CoreVM\IMyGroupsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\IMySessionsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseQandAPageVM.cs" />
-    <Compile Include="ViewModel\InSessoinQandAPageVM.cs" />
+    <Compile Include="ViewModel\InSessoinLecturerQandAVM.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />
     <Compile Include="ViewModel\MyGroupsStudentPageVM.cs" />
     <Compile Include="ViewModel\MyGroupsLecturerPageVM.cs" />
