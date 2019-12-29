@@ -9,6 +9,7 @@ namespace HonorsProject.ViewModel.Commands.IComands
 {
     public interface IToggleMarkQCmd
     {
+        ToggleMarkQCmd ToggleMarkQCmd { get; set; }
         bool MarkQuestion(Question questionToMark);
     }
 }

@@ -13,7 +13,7 @@ using HonorsProject.ViewModel.Commands;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd,IDeleteCmd
+    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd,IDeleteCmd,IUploadImageCmd,IToggleMarkQCmd
     {
         #region Properties
 
@@ -104,10 +104,13 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(AnswerImage));
             }
         }
-#endregion Properties
+        #endregion Properties
+        #region Commands
         public SaveCmd SaveFormCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set ; }
-
+        public UploadImageCmd UploadImageCmd { get; set; }
+        public ToggleMarkQCmd ToggleMarkQCmd { get; set ; }
+        #endregion Commands
         public BaseQandAPageVM(string dbcontextName) : base(dbcontextName)
         {
         }
@@ -115,5 +118,9 @@ namespace HonorsProject.ViewModel.CoreVM
         public abstract bool Save();
 
         public abstract bool Delete(BaseEntity objToDelete);
+
+        public abstract bool UploadImage(Image imageToUpload);
+
+        public abstract bool MarkQuestion(Question questionToMark);
     }
 }

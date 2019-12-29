@@ -10,6 +10,7 @@ namespace HonorsProject.ViewModel.Commands.IComands
 {
     public interface IUploadImageCmd
     {
+        UploadImageCmd UploadImageCmd { get; set; }
         bool UploadImage(Image imageToUpload);
     }
 }
