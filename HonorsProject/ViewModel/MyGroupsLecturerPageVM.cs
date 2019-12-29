@@ -145,6 +145,7 @@ namespace HonorsProject.ViewModel
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
         public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get; set; }
         public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
+        public GoToEntityCmd GoToEntityCmd { get; set; }
         #endregion
 
         public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
@@ -157,6 +158,7 @@ namespace HonorsProject.ViewModel
             RemoveEntityCmd = new RemoveEntityCmd(this);
             MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
             MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
+            GoToEntityCmd = new GoToEntityCmd(this);
             //Initial Setup
             try
             {
@@ -426,6 +428,12 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public bool GoToEntity(BaseEntity entity)
+        {
+            Mediator.NotifyColleagues(MediatorChannels.GoToThisSession.ToString(), entity);
+            return true;
         }
     }
 }
