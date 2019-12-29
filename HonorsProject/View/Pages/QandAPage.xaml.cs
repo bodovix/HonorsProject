@@ -35,6 +35,7 @@ namespace HonorsProject.View.Pages
         {
             if (App.LoggedInAs == Role.Lecturer)
             {
+
             }
             else
             {

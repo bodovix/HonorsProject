@@ -19,6 +19,7 @@ namespace HonorsProject.Model.Enums
         LoadActiveSessionsSubgrid,
         LoadFutureSessionsSubgrid,
         LoadPreviousSessionsSubgrid,
-        LoadStudentsSubgrid
+        LoadStudentsSubgrid,
+        GoToSession
     }
 }

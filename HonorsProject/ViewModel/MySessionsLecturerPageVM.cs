@@ -132,6 +132,7 @@ namespace HonorsProject.ViewModel
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
+        public GoToSessionCmd GoToSessionCmd { get; set; }
 
         #endregion CommandProperties
 
@@ -144,6 +145,7 @@ namespace HonorsProject.ViewModel
             RemoveEntityCmd = new RemoveEntityCmd(this);
             DeleteCmd = new DeleteCmd(this);
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
+            GoToSessionCmd = new GoToSessionCmd(this);
             //initial setup
             UserRole = Role.Lecturer;
             User = (Lecturer)appUser;
@@ -415,6 +417,11 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public bool GoToSession(Session session)
+        {
+            throw new NotImplementedException();
         }
     }
 }

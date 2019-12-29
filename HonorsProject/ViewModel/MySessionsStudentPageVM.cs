@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
 
@@ -125,6 +126,7 @@ namespace HonorsProject.ViewModel
         public RemoveEntityCmd RemoveEntityCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
+        public GoToSessionCmd GoToSessionCmd { get; set; }
 
         #endregion Commands
 
@@ -137,6 +139,7 @@ namespace HonorsProject.ViewModel
             RemoveEntityCmd = new RemoveEntityCmd(this);
             DeleteCmd = new DeleteCmd(this);
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
+            GoToSessionCmd = new GoToSessionCmd(this);
             //initial setup
             User = (Student)appUser;
             UserRole = Role.Student;
@@ -327,6 +330,12 @@ namespace HonorsProject.ViewModel
                 FeedbackMessage = ex.Message;
                 return false;
             }
+        }
+
+        public bool GoToSession(Session session)
+        {
+           // Mediator.NotifyColleagues(MediatorChannels.GoToSession.ToString(), null);
+            throw new NotImplementedException();
         }
     }
 }
