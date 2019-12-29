@@ -37,7 +37,8 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button>
+                            <Button Command="{Binding DataContext.GoToEntityCmd, ElementName=SessionsDataGrid}"
+                                    CommandParameter="{Binding}">
                                 <Image Source="../Images/magnifyingGlass64Img.png"
                                 Style="{StaticResource IconImage}">
                                     <Image.ToolTip>

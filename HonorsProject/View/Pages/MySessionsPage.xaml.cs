@@ -36,8 +36,18 @@ namespace HonorsProject.View.Pages
             InitializeComponent();
             MainContainer.DataContext = VM;
             Mediator.Register(MediatorChannels.DeleteSessionConfirmation.ToString(), ShowDeleteConfMessage);
+            Mediator.Register(MediatorChannels.GoToThisSession.ToString(), GoToSession);
         }
 
+        private void GoToSession(object obj)
+        {
+            Mediator.ClearMediator();
+
+            BaseEntity entity = (BaseEntity)obj;
+            QandAPage qAndA = new QandAPage(entity);
+            Frame frame = (Frame)this.Parent;
+            frame.Content = qAndA;
+        }
         private void ShowDeleteConfMessage(object obj)
         {
             MessageBoxResult dialogResult = MessageBox.Show("Deleting Sessions cannot be undone. \nAll questions and answers for this session will also be deleted.", "Are you sure?", MessageBoxButton.YesNo);

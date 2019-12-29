@@ -239,6 +239,7 @@
                                             Sessions="{Binding MySessions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             SelectedSession="{Binding SelectedSession, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            GoToEntityCmd="{Binding GoToEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             UserRole="{Binding UserRole,UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Grid>

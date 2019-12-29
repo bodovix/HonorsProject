@@ -27,6 +27,16 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(FormContext));
             }
         }
+        private Session _selectedSession;
+
+        public Session SelectedSession
+        {
+            get { return _selectedSession; }
+            set { _selectedSession = value;
+                OnPropertyChanged(nameof(SelectedSession));
+            }
+        }
+
         private ObservableCollection<Question> _questions;
 
         public ObservableCollection<Question> Questions

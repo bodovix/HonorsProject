@@ -1,5 +1,6 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
+using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
 using HonorsProject.View.Pages;
@@ -37,6 +38,7 @@ namespace HonorsProject.View
             InitiallyHideNavigation();
 
             Mediator.Register(MediatorChannels.LoginAsUserX.ToString(), LoggInAsX);
+
         }
 
         private void InitiallyHideNavigation()
@@ -108,13 +110,13 @@ namespace HonorsProject.View
         private void MyQuestoins_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new QandAPage();
+            MainContent.Content = new QandAPage(null);
         }
 
         private void MyAnswers_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new QandAPage();
+            MainContent.Content = new QandAPage(null);
         }
 
         private void DataAnalysisBtn_Click(object sender, RoutedEventArgs e)

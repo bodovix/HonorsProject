@@ -1,4 +1,5 @@
-﻿using HonorsProject.Model.Entities;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Entities;
 using HonorsProject.ViewModel.Commands.IComands;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ using System.Windows.Input;
 
 namespace HonorsProject.ViewModel.Commands
 {
-    public class GoToSessionCmd : ICommand
+    public class GoToEntityCmd : ICommand
     {
-        public IGoToSessionCmd VM { get; set; }
+        public IGoToEntityCmd VM { get; set; }
 
         public event EventHandler CanExecuteChanged;
 
-        public GoToSessionCmd(IGoToSessionCmd vm)
+        public GoToEntityCmd(IGoToEntityCmd vm)
         {
             VM = vm;
         }
@@ -28,8 +29,8 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            Session session = (Session)parameter;
-            VM.GoToSession(session);
+            BaseEntity entity = (BaseEntity)parameter;
+            VM.GoToEntity(entity);
         }
     }
 }

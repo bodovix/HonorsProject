@@ -1,4 +1,6 @@
-﻿using HonorsProject.Model.Enums;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -23,13 +25,14 @@ namespace HonorsProject.View.Pages
     public partial class QandAPage : Page
     {
 
-        private BaseQandAPageVM VM;
-        public QandAPage()
+        public BaseQandAPageVM VM;
+        public QandAPage(BaseEntity entityToFocusOn)
         {
             PickVM();
             InitializeComponent();
             MainContainer.DataContext = VM;
         }
+
 
         private void PickVM()
         {
