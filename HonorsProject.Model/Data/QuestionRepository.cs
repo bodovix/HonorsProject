@@ -13,5 +13,10 @@ namespace HonorsProject.Model.Data
         public QuestionRepository(LabAssistantContext context) : base(context)
         {
         }
+
+        public List<Question> GetFromSession(Session session)
+        {
+            return _entities.Where(q => q.Session.Id == session.Id).ToList();
+        }
     }
 }

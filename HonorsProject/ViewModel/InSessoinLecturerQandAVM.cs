@@ -8,6 +8,8 @@ using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
 using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
+using HonorsProject.Model.Enums;
+using System.Collections.ObjectModel;
 
 namespace HonorsProject.ViewModel
 {
@@ -26,11 +28,15 @@ namespace HonorsProject.ViewModel
         }
 
 
-        public InSessoinLecturerQandAVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
+        public InSessoinLecturerQandAVM(ISystemUser appUser,Session selectedSession ,string dbcontextName) : base(dbcontextName)
         {
             //Setup
             User = (Lecturer)appUser;
             IsConfirmed = false;
+            FormContext = FormContext.Create;
+            SelectedSession = selectedSession;
+            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
+            ///NEED TO LOAD ANSWERS FOR SELECTED QUESTION
         }
 
         public override bool Cancel()

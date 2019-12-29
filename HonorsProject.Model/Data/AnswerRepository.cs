@@ -13,5 +13,7 @@ namespace HonorsProject.Model.Data
         public AnswerRepository(LabAssistantContext context) : base(context)
         {
         }
+
+
     }
 }

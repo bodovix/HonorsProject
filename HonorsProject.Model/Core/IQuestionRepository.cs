@@ -9,5 +9,6 @@ namespace HonorsProject.Model.Core
 {
     public interface IQuestionRepository : IRepository<Question>
     {
+        List<Question> GetFromSession(Session session);
     }
 }
