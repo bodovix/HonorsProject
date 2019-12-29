@@ -65,6 +65,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\Commands\ChangeSubgridContextCmd.cs" />
     <Compile Include="ViewModel\Commands\DeleteCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\ICancelmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IChangeSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IMoveEntityInList.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkQCmd.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="ViewModel\Commands\IComands\IAddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\AddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\NewModeCmd.cs" />
+    <Compile Include="ViewModel\Commands\CancelCmd.cs" />
     <Compile Include="ViewModel\Commands\ToggleMarkQCmd.cs" />
     <Compile Include="ViewModel\Commands\UploadImageCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
