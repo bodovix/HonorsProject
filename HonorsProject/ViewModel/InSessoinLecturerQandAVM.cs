@@ -13,22 +13,24 @@ namespace HonorsProject.ViewModel
 {
     class InSessoinLecturerQandAVM : BaseQandAPageVM
     {
+        private ISystemUser _user;
+
+        public override ISystemUser User
+        {
+            get { return _user; }
+            set
+            {
+                _user = (Lecturer)value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+
 
         public InSessoinLecturerQandAVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
             //Setup
             User = (Lecturer)appUser;
             IsConfirmed = false;
-        }
-
-        private ISystemUser _user;
-
-        public override ISystemUser User
-        {
-            get { return _user; }
-            set { _user = (Lecturer)value;
-                OnPropertyChanged(nameof(User));
-            }
         }
 
         public override bool Cancel()

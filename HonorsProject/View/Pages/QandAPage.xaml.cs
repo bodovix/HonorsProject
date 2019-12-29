@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel.CoreVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,24 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class QandAPage : Page
     {
+
+        private BaseQandAPageVM VM;
         public QandAPage()
         {
+            PickVM();
             InitializeComponent();
+            MainContainer.DataContext = VM;
+        }
+
+        private void PickVM()
+        {
+            if (App.LoggedInAs == Role.Lecturer)
+            {
+            }
+            else
+            {
+
+            }
         }
     }
 }
