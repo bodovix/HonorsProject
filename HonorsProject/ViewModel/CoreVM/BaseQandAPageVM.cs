@@ -119,7 +119,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 //if selected.id == 0 create else update
                 FormContextAnswer = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedAnswer = value;
-                OnPropertyChanged(nameof(SelectedQuestion));
+                OnPropertyChanged(nameof(SelectedAnswer));
             }
         }
         private string _answerSearchTxt;
