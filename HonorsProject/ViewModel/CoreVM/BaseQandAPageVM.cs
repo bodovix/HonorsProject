@@ -75,7 +75,6 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(SelectedQuestion));
             }
         }
-
         private string _quesitonSearchTxt;
 
         public string QuestionSearchTxt
