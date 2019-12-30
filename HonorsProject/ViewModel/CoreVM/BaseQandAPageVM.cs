@@ -68,7 +68,10 @@ namespace HonorsProject.ViewModel.CoreVM
                 //if selected.id == 0 create else update
                 FormContextQuestion = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedQuestion = value;
-                Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSession(SelectedSession).ToList());
+                if (SelectedQuestion != null)
+                    Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSession(SelectedQuestion).ToList());
+                else
+                    Answers = new ObservableCollection<Answer>();
                 OnPropertyChanged(nameof(SelectedQuestion));
             }
         }

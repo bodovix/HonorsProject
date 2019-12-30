@@ -14,9 +14,9 @@ namespace HonorsProject.Model.Data
         {
         }
 
-        public List<Answer> GetFromSession(Session selectedSession)
+        public List<Answer> GetFromSession(Question question)
         {
-            return _entities.Where(a => a.Question.Id == selectedSession.Id).ToList();
+            return _entities.Where(a => a.Question.Id == question.Id).ToList();
         }
     }
 }

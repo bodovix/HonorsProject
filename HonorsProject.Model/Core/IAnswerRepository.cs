@@ -9,6 +9,6 @@ namespace HonorsProject.Model.Core
 {
     public interface IAnswerRepository : IRepository<Answer>
     {
-        List<Answer> GetFromSession(Session selectedSession);
+        List<Answer> GetFromSession(Question question);
     }
 }
