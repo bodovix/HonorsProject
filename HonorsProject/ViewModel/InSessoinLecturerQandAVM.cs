@@ -33,10 +33,10 @@ namespace HonorsProject.ViewModel
             //Setup
             User = (Lecturer)appUser;
             IsConfirmed = false;
-            FormContext = FormContext.Create;
-            SelectedSession = selectedSession;//Might need to attach this to hte UoW. not sure yet
+            FormContextQuestion = FormContext.Create;
+            SelectedSession = selectedSession;//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
-            ///NEED TO LOAD ANSWERS FOR SELECTED QUESTION
+            ///Answers loaded when question selected
         }
 
         public override bool Cancel()

@@ -18,13 +18,24 @@ namespace HonorsProject.ViewModel.CoreVM
         #region Properties
 
         public abstract ISystemUser User {get;set;}
-        private FormContext _formContext;
+        private FormContext _formContextQuestion;
 
-        public FormContext FormContext
+        public FormContext FormContextQuestion
         {
-            get { return _formContext; }
-            set { _formContext = value;
-                OnPropertyChanged(nameof(FormContext));
+            get { return _formContextQuestion; }
+            set { _formContextQuestion = value;
+                OnPropertyChanged(nameof(FormContextQuestion));
+            }
+        }
+        private FormContext _formContextAnswer;
+
+        public FormContext FormContextAnswer
+        {
+            get { return _formContextAnswer; }
+            set
+            {
+                _formContextAnswer = value;
+                OnPropertyChanged(nameof(FormContextAnswer));
             }
         }
         private Session _selectedSession;
@@ -55,8 +66,9 @@ namespace HonorsProject.ViewModel.CoreVM
                 if (value == null)
                     value = new Question();
                 //if selected.id == 0 create else update
-                FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
+                FormContextQuestion = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedQuestion = value;
+                Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSession(SelectedSession).ToList());
                 OnPropertyChanged(nameof(SelectedQuestion));
             }
         }
@@ -96,8 +108,14 @@ namespace HonorsProject.ViewModel.CoreVM
         public Answer SelectedAnswer
         {
             get { return _selectedAnswer; }
-            set { _selectedAnswer = value;
-                OnPropertyChanged(nameof(SelectedAnswer));
+            set
+            {
+                if (value == null)
+                    value = new Answer();
+                //if selected.id == 0 create else update
+                FormContextAnswer = (value.Id == 0) ? FormContext.Create : FormContext.Update;
+                _selectedAnswer = value;
+                OnPropertyChanged(nameof(SelectedQuestion));
             }
         }
         private string _answerSearchTxt;
@@ -149,5 +167,6 @@ namespace HonorsProject.ViewModel.CoreVM
         public abstract bool MarkQuestion(Question questionToMark);
 
         public abstract bool Cancel();
+        
     }
 }
