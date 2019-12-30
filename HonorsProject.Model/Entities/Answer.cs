@@ -10,7 +10,7 @@ namespace HonorsProject.Model.Entities
 {
     public class Answer : BaseEntity
     {
-        public string AnswerText { get; set; }
+        public string AnswerTest { get; set; }
         public bool WasHelpfull { get; set; }
         public virtual Lecturer AnsweredBy { get; set; }
         public virtual Question Question { get; set; }
@@ -23,7 +23,7 @@ namespace HonorsProject.Model.Entities
         {
             //ID handled by EF
             Name = name;
-            AnswerText = answerTest;
+            AnswerTest = answerTest;
             WasHelpfull = wasHelpfull;
             AnsweredBy = answeredBy;
             Question = question;

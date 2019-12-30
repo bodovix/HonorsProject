@@ -11,8 +11,8 @@ namespace HonorsProject.Model.Data
     {
         public LabAssistantContext Create()
         {
-            //return new LabAssistantContext("name=TestDBContext");
-           return new LabAssistantContext("name=LabAssistantContext");
+            return new LabAssistantContext("name=TestDBContext");
+           //return new LabAssistantContext("name=LabAssistantContext");
         }
     }
 }

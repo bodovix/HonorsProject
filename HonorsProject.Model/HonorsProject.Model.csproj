@@ -171,6 +171,10 @@
     <Compile Include="Migrations\201912301145020_AnsertypoFixed.Designer.cs">
       <DependentUpon>201912301145020_AnsertypoFixed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912301451420_BackToAsnwerTest.cs" />
+    <Compile Include="Migrations\201912301451420_BackToAsnwerTest.Designer.cs">
+      <DependentUpon>201912301451420_BackToAsnwerTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -245,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912301145020_AnsertypoFixed.resx">
       <DependentUpon>201912301145020_AnsertypoFixed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912301451420_BackToAsnwerTest.resx">
+      <DependentUpon>201912301451420_BackToAsnwerTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
