@@ -92,9 +92,8 @@ namespace HonorsProject.View.Pages
             Answer selectedAnswer =(Answer)(sender as ListView).SelectedItem;
             if (selectedAnswer != null)  
                 if(selectedAnswer.Id != 0) 
-                { 
-                    AnswerContainer.Visibility = Visibility.Visible;
-                    QuestionContainer.Visibility = Visibility.Collapsed;
+                {
+                    VM.QandAMode = QandAMode.Answer;
                 }
         }
 
@@ -104,8 +103,7 @@ namespace HonorsProject.View.Pages
             if (selectedQuestion != null)
                 if (selectedQuestion.Id != 0)
                 {
-                    AnswerContainer.Visibility = Visibility.Collapsed;
-                    QuestionContainer.Visibility = Visibility.Visible;
+                    VM.QandAMode = QandAMode.Question;
                 }
         }
     }

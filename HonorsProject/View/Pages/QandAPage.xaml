@@ -3,11 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
+      xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QandAPage">
-
+    <Page.Resources>
+        <cv:QandAModeToVisibleConverter x:Key="QandAModeToVisibleConverter"/>
+    </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -72,7 +76,9 @@
             <GroupBox Header="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       x:Name="QuestionContainer" 
                       Grid.Column="0" 
-                      Grid.Row="0">
+                      Grid.Row="0"
+                      Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
+                    ConverterParameter={x:Static enums:QandAMode.Question}}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -128,7 +134,9 @@
             <GroupBox Header="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       x:Name="AnswerContainer"
                       Grid.Column="0" 
-                      Grid.Row="0">
+                      Grid.Row="0"
+                      Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
+                    ConverterParameter={x:Static enums:QandAMode.Answer}}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

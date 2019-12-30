@@ -87,6 +87,7 @@
     <Compile Include="ViewModel\Commands\UploadImageCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
     <Compile Include="ViewModel\Converters\RoleToEditableConverter.cs" />
+    <Compile Include="ViewModel\Converters\QandAModeToVisibleConverter.cs" />
     <Compile Include="ViewModel\Converters\SubgridContextToVisibleConverter.cs" />
     <Compile Include="ViewModel\Converters\SubgridContextToColourConverter.cs" />
     <Compile Include="ViewModel\Converters\EnumToItemsSource.cs" />

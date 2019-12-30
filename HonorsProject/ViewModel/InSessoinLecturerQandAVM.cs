@@ -33,6 +33,7 @@ namespace HonorsProject.ViewModel
             //Setup
             User = (Lecturer)appUser;
             IsConfirmed = false;
+            QandAMode = QandAMode.Question;
             FormContextQuestion = FormContext.Create;
             SelectedSession = selectedSession;//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());

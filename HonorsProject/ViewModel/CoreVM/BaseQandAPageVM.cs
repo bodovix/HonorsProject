@@ -141,6 +141,17 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(AnswerImage));
             }
         }
+
+        private QandAMode _qandAMode;
+
+        public QandAMode QandAMode
+        {
+            get { return _qandAMode; }
+            set { _qandAMode = value;
+                OnPropertyChanged(nameof(QandAMode));
+            }
+        }
+
         public bool IsConfirmed { get; set; }
 
         #endregion Properties
