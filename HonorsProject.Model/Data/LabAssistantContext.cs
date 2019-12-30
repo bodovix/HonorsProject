@@ -51,7 +51,7 @@ namespace HonorsProject.Model.Data
                 .WillCascadeOnDelete(true);
             //Answer
             modelBuilder.Entity<Answer>()
-                .Property(q => q.AnswerTest)
+                .Property(q => q.AnswerText)
                 .IsRequired();
             //Lecturer
             modelBuilder.Entity<Lecturer>()
