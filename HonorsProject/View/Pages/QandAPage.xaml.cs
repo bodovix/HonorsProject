@@ -89,22 +89,24 @@ namespace HonorsProject.View.Pages
 
         private void searchAResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var item =(sender as ListView).SelectedItem;
-            if (item != null)
-            {
-                AnswerContainer.Visibility = Visibility.Visible;
-                QuestionContainer.Visibility = Visibility.Collapsed;
-            }
+            Answer selectedAnswer =(Answer)(sender as ListView).SelectedItem;
+            if (selectedAnswer != null)  
+                if(selectedAnswer.Id != 0) 
+                { 
+                    AnswerContainer.Visibility = Visibility.Visible;
+                    QuestionContainer.Visibility = Visibility.Collapsed;
+                }
         }
 
         private void searchQResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var item = (sender as ListView).SelectedItem;
-            if (item != null)
-            {
-                AnswerContainer.Visibility = Visibility.Collapsed;
-                QuestionContainer.Visibility = Visibility.Visible;
-            }
+            Question selectedQuestion =(Question) (sender as ListView).SelectedItem;
+            if (selectedQuestion != null)
+                if (selectedQuestion.Id != 0)
+                {
+                    AnswerContainer.Visibility = Visibility.Collapsed;
+                    QuestionContainer.Visibility = Visibility.Visible;
+                }
         }
     }
 }

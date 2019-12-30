@@ -66,16 +66,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <!--Context Title-->
-            <TextBlock Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                       Grid.Column="0"
-                       Grid.Row="0"
-                       Style="{StaticResource FormTitleText}" />
             <!--Questions Form-->
-            <GroupBox x:Name="QuestionContainer" Grid.Column="0" Grid.Row="1">
+            <GroupBox Header="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      x:Name="QuestionContainer" 
+                      Grid.Column="0" 
+                      Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -128,7 +125,10 @@
                 </Grid>
             </GroupBox>
             <!--Answer Form-->
-            <GroupBox x:Name="AnswerContainer" Grid.Column="0" Grid.Row="1">
+            <GroupBox Header="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      x:Name="AnswerContainer"
+                      Grid.Column="0" 
+                      Grid.Row="0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -142,7 +142,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Answer {Name will get bound here}"
+                    <TextBlock Text="Answer:"
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
@@ -182,7 +182,6 @@
                     </StackPanel>
                 </Grid>
             </GroupBox>
-            
         </Grid>
     </Grid>
 </Page>
