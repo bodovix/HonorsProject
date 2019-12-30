@@ -26,7 +26,8 @@
                 <ListView  x:Name="searchQResultsList"
                        Height="390"
                            ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                           SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           PreviewMouseLeftButtonUp="searchQResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -46,7 +47,8 @@
                 <ListView  x:Name="searchAResultsList"
                        Height="390"
                         ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        SelectedItem="{Binding SelectedAnswer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        SelectedItem="{Binding SelectedAnswer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -66,7 +68,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!--Context Title-->
             <TextBlock Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -74,109 +75,114 @@
                        Grid.Row="0"
                        Style="{StaticResource FormTitleText}" />
             <!--Questions Form-->
-            <Grid Grid.Column="0" Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="Question: "
+            <GroupBox x:Name="QuestionContainer" Grid.Column="0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Question: "
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Style="{StaticResource FormTitleText}" />
-                <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <TextBox TextWrapping="Wrap"
+                    <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                        <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </GroupBox>
-                <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="{Binding SelectedQuestion.AskedBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
-                </GroupBox>
-                <GroupBox Header="Time Asked" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
-                </GroupBox>
-                <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="{Binding SelectedQuestion.IsResolved,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
-                </GroupBox>
-                <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
-                    <TextBox TextWrapping="Wrap"
+                    </GroupBox>
+                    <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                        <Label Content="{Binding SelectedQuestion.AskedBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
+                    </GroupBox>
+                    <GroupBox Header="Time Asked" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                        <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
+                    </GroupBox>
+                    <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                        <Label Content="{Binding SelectedQuestion.IsResolved,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
+                    </GroupBox>
+                    <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
+                        <TextBox TextWrapping="Wrap"
                              AcceptsReturn="True"
                          MaxLength="300"
                          Height="80"
                          Style="{StaticResource UserInput}"
                          Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </GroupBox>
-                <Image Name="QuestionImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
-                </Image>
-                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
-                    <Button Name="QuestionSaveBtn" Content="Save" Style="{StaticResource FormSaveButton}" />
-                    <Button Name="QuestionCancelBtn" Content="Cancel" Style="{StaticResource FormCancelButton}" />
-                    <Button Name="QuestionDeleteBtn" Content="Delete" Style="{StaticResource FormCancelButton}" />
-                    <Button Name="QuestionResolvedBtn" Content="Resolved" Style="{StaticResource FormSubmitButton}" />
-                    <Button Name="QuestoinUploadBtn" Content="Upload" Style="{StaticResource InfoButton}" />
-                </StackPanel>
-            </Grid>
+                    </GroupBox>
+                    <Image Name="QuestionImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
+                    </Image>
+                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                        <Button Name="QuestionSaveBtn" Content="Save" Style="{StaticResource FormSaveButton}" />
+                        <Button Name="QuestionCancelBtn" Content="Cancel" Style="{StaticResource FormCancelButton}" />
+                        <Button Name="QuestionDeleteBtn" Content="Delete" Style="{StaticResource FormCancelButton}" />
+                        <Button Name="QuestionResolvedBtn" Content="Resolved" Style="{StaticResource FormSubmitButton}" />
+                        <Button Name="QuestoinUploadBtn" Content="Upload" Style="{StaticResource InfoButton}" />
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
             <!--Answer Form-->
-            <Grid Grid.Column="0" Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Text="Answer {Name will get bound here}"
+            <GroupBox x:Name="AnswerContainer" Grid.Column="0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Answer {Name will get bound here}"
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Style="{StaticResource FormTitleText}" />
-                <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <TextBox TextWrapping="Wrap"
+                    <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                        <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  Text="{Binding SelectedAnswer.Name}" />
-                </GroupBox>
-                <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="{Binding SelectedAnswer.AnsweredBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                    </GroupBox>
+                    <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                        <Label Content="{Binding SelectedAnswer.AnsweredBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource UserFormLbl}" />
-                </GroupBox>
-                <GroupBox Header="Created On" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <Label Content="{Binding SelectedAnswer.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                    </GroupBox>
+                    <GroupBox Header="Created On" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                        <Label Content="{Binding SelectedAnswer.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource UserFormLbl}" />
-                </GroupBox>
-                <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-                    <Image Source="../Images/starIcon.png" />
-                </StackPanel>
-                <GroupBox Header="Answer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
-                    <TextBox TextWrapping="Wrap"
+                    </GroupBox>
+                    <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+                        <Image Source="../Images/starIcon.png" />
+                    </StackPanel>
+                    <GroupBox Header="Answer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
+                        <TextBox TextWrapping="Wrap"
                              AcceptsReturn="True"
                              MaxLength="300"
                              Height="80"
                              Style="{StaticResource UserInput}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </GroupBox>
-                <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
-                </Image>
-                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
-                    <Button Name="AnswerSaveBtn" Content="Save" Style="{StaticResource FormSaveButton}" />
-                    <Button Name="AnswerCancelBtn" Content="Cancel" Style="{StaticResource FormCancelButton}" />
-                    <Button Name="AnswerDeleteBtn" Content="Delete" Style="{StaticResource FormCancelButton}" />
-                    <Button Name="AnswerResolvedBtn" Content="Resolved" Style="{StaticResource FormSubmitButton}" />
-                    <Button Name="AnswerUploadBtn" Content="Upload" Style="{StaticResource InfoButton}" />
-                </StackPanel>
-            </Grid>
+                    </GroupBox>
+                    <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
+                    </Image>
+                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                        <Button Name="AnswerSaveBtn" Content="Save" Style="{StaticResource FormSaveButton}" />
+                        <Button Name="AnswerCancelBtn" Content="Cancel" Style="{StaticResource FormCancelButton}" />
+                        <Button Name="AnswerDeleteBtn" Content="Delete" Style="{StaticResource FormCancelButton}" />
+                        <Button Name="AnswerResolvedBtn" Content="Resolved" Style="{StaticResource FormSubmitButton}" />
+                        <Button Name="AnswerUploadBtn" Content="Upload" Style="{StaticResource InfoButton}" />
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+            
         </Grid>
     </Grid>
 </Page>

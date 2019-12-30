@@ -86,5 +86,25 @@ namespace HonorsProject.View.Pages
                 }
             }
         }
+
+        private void searchAResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item =(sender as ListView).SelectedItem;
+            if (item != null)
+            {
+                AnswerContainer.Visibility = Visibility.Visible;
+                QuestionContainer.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void searchQResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item = (sender as ListView).SelectedItem;
+            if (item != null)
+            {
+                AnswerContainer.Visibility = Visibility.Collapsed;
+                QuestionContainer.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
