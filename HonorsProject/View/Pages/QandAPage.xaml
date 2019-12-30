@@ -160,8 +160,10 @@
                         <Label Content="{Binding SelectedAnswer.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
-                    <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-                        <Image Source="../Images/starIcon.png" />
+                    <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" >
+                        <GroupBox  Header="Was Helpful?" Style="{StaticResource FormGroupBox}">
+                            <Image Source="../Images/starIcon.png" />
+                        </GroupBox>
                     </StackPanel>
                     <GroupBox Header="Answer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
