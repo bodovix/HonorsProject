@@ -26,7 +26,8 @@
                 <Button Name="NewQuestionBtn" Content="New Question" Style="{StaticResource FormSubmitButton}" />
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
-                <TextBox Name="SearchQTxtBox" />
+                <TextBox Name="SearchQTxtBox"
+                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <ListView  x:Name="searchQResultsList"
                        Height="390"
                            ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -47,7 +48,8 @@
                 <Button Name="NewAnswerBtn" Content="New Answer" Style="{StaticResource FormSubmitButton}" />
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
-                <TextBox Name="SearchTxtBox" />
+                <TextBox Name="SearchTxtBox"
+                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 <ListView  x:Name="searchAResultsList"
                        Height="390"
                         ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

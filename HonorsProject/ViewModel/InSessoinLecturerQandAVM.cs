@@ -39,6 +39,29 @@ namespace HonorsProject.ViewModel
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
             ///Answers loaded when question selected
         }
+        protected override bool UpdateQuestionsList(Session SelectedSession,string QuestionSearchTxt)
+        {
+            if (SelectedSession != null)
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(SelectedSession, QuestionSearchTxt));
+            else
+                Questions = new ObservableCollection<Question>();
+            if (Questions.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
+        protected override bool UpdateAnswersList(Question selectedQuestion, string anserSearchTxt)
+        {
+            if (selectedQuestion != null)
+                Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSearchForQuestion(selectedQuestion, anserSearchTxt));
+            else
+                Answers = new ObservableCollection<Answer>();
+            if (Answers.Count > 0)
+                return true;
+            else
+                return false;
+        }
 
         public override bool Cancel()
         {

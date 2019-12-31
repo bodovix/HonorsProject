@@ -68,10 +68,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 //if selected.id == 0 create else update
                 FormContextQuestion = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedQuestion = value;
-                if (SelectedQuestion != null)
-                    Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSession(SelectedQuestion).ToList());
-                else
-                    Answers = new ObservableCollection<Answer>();
+                UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 OnPropertyChanged(nameof(SelectedQuestion));
             }
         }
@@ -82,6 +79,7 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             get { return _quesitonSearchTxt; }
             set { _quesitonSearchTxt = value;
+                UpdateQuestionsList( SelectedSession, QuestionSearchTxt);
                 OnPropertyChanged(nameof(QuestionSearchTxt));
             }
         }
@@ -128,6 +126,7 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             get { return _answerSearchTxt; }
             set { _answerSearchTxt = value;
+                UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 OnPropertyChanged(AnswerSearchTxt);
             }
         }
@@ -153,7 +152,6 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         public bool IsConfirmed { get; set; }
-
         #endregion Properties
         #region Commands
         public SaveCmd SaveFormCmd { get; set; }
@@ -171,7 +169,11 @@ namespace HonorsProject.ViewModel.CoreVM
             ToggleMarkQCmd = new ToggleMarkQCmd(this);
             CancelCmd = new CancelCmd(this);
 
+            AnswerSearchTxt = "";
+            QuestionSearchTxt = "";
         }
+        protected abstract bool UpdateQuestionsList(Session SelectedSession, string QuestionSearchTxt);
+        protected abstract bool UpdateAnswersList(Question SelectedQuestion, string AnswerSearchTxt);
 
         public abstract bool Save();
 

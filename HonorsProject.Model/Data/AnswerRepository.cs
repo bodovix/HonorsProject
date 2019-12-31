@@ -18,5 +18,16 @@ namespace HonorsProject.Model.Data
         {
             return _entities.Where(a => a.Question.Id == question.Id).ToList();
         }
+
+        public List<Answer> GetFromSearchForQuestion(Question question, string searchTxt)
+        {
+            if (String.IsNullOrEmpty(searchTxt))
+                return GetFromSession(question);
+            else
+                return _entities.Where(a => (a.Id.ToString().Contains(searchTxt)
+                            || a.Name.Contains(searchTxt)
+                            || a.AnswerTest.Contains(searchTxt))
+                            && a.Question.Id == question.Id).ToList();
+        }
     }
 }
