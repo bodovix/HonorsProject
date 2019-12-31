@@ -81,7 +81,29 @@ namespace HonorsProject.ViewModel
 
         public override bool Save()
         {
-            throw new NotImplementedException();
+            bool result = false;
+            try
+            {
+                if (FormContextAnswer == FormContext.Create)
+                {
+                    //create new  answer
+                   result =  User.AnswerQuestion(SelectedQuestion, UnitOfWork);
+                   UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                }
+                else
+                {
+                    //Update Selected Answer
+                    result = SelectedAnswer.ValidateAnswer();
+                    if (result)
+                       result = (UnitOfWork.Complete() >0)? true: false;
+                }
+            }
+            catch(Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+            }
+            
+            return result;
         }
 
         public override bool UploadImage(Image imageToUpload)

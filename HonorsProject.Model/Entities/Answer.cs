@@ -29,5 +29,22 @@ namespace HonorsProject.Model.Entities
             Question = question;
             CreatedOn = createdOn;
         }
+
+        public bool ValidateAnswer()
+        {
+            if (String.IsNullOrEmpty(Name))
+                throw new ArgumentException("Answer name required.");
+            if (String.IsNullOrEmpty(AnswerTest))
+                throw new ArgumentException("Answer text required.");
+            if (Question == null)
+                throw new ArgumentException("Answers must belong to a question.");
+             if (Question.Id == 0)
+                throw new ArgumentException("Answers must belong to a question.");
+            if (AnsweredBy == null)
+                throw new ArgumentException("Answered by required.");
+            if (CreatedOn == null)
+                throw new ArgumentException("Created on required.");
+            return true;
+        }
     }
 }
