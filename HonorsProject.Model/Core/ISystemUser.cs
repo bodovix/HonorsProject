@@ -31,5 +31,6 @@ namespace HonorsProject.Model.Core
 
         bool GenerateNewPasswordHash(ref string optionalPassword);
         bool AddNewGroup(Group selectedGroup, UnitOfWork unitOfWork);
+        bool AnswerQuestion(Answer selectedAnswer, UnitOfWork unitOfWork);
     }
 }

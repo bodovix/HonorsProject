@@ -140,6 +140,18 @@ namespace HonorsProject.Model.Entities
             else
                 return false;
         }
+        public bool AnswerQuestion(Answer selectedAnswer, UnitOfWork unitOfWork)
+        {
+            bool result = false;
+            selectedAnswer.CreatedOn = DateTime.Now;
+            selectedAnswer.AnsweredBy = this;
+            if (selectedAnswer.ValidateAnswer())
+            {
+                unitOfWork.AnswerRepository.Add(selectedAnswer);
+                result = (unitOfWork.Complete() > 0) ? true : false;
+            }
+            return result;
+        }
 
         public bool GenerateNewPasswordHash(ref string optionalPassword)
         {
@@ -162,5 +174,7 @@ namespace HonorsProject.Model.Entities
                 return true;
             }
         }
+
+        
     }
 }

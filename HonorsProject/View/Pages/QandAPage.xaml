@@ -105,6 +105,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock Text="Question: "
@@ -134,9 +135,14 @@
                          Style="{StaticResource UserInput}"
                          Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
+                    <TextBlock Text="{Binding FeedbackMessage}" 
+                               Grid.Row="4" 
+                               Grid.Column="0" 
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource UserInputError}"/>
                     <Image Name="QuestionImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>
-                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="QuestionSaveBtn" 
                                 Content="{Binding Path=FormContextQuestion, 
                                             Converter={StaticResource FormContextToTextConverter},
@@ -175,6 +181,7 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock Text="Answer:"
@@ -208,13 +215,19 @@
                              Style="{StaticResource UserInput}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
+                    <TextBlock Text="{Binding FeedbackMessage}" 
+                               Grid.Row="4" 
+                               Grid.Column="0" 
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource UserInputError}"/>
                     <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>
-                    <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="AnswerSaveBtn" 
                                 Content="{Binding Path=FormContextAnswer, 
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"
+                                Command="{Binding SaveFormCmd}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="AnswerCancelBtn" 
                                 Content="Cancel" 

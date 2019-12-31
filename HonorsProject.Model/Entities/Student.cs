@@ -165,5 +165,10 @@ namespace HonorsProject.Model.Entities
         {
             throw new NotImplementedException("Students Cant Create new groups.");
         }
+
+        public bool AnswerQuestion(Answer selectedAnswer, UnitOfWork unitOfWork)
+        {
+            throw new NotImplementedException("Students cannot answer questions.");
+        }
     }
 }

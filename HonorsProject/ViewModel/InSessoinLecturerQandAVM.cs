@@ -10,6 +10,8 @@ using HonorsProject.ViewModel.Commands;
 using HonorsProject.ViewModel.CoreVM;
 using HonorsProject.Model.Enums;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
 
 namespace HonorsProject.ViewModel
 {
@@ -81,13 +83,14 @@ namespace HonorsProject.ViewModel
 
         public override bool Save()
         {
+            FeedbackMessage = "";
             bool result = false;
             try
             {
                 if (FormContextAnswer == FormContext.Create)
                 {
                     //create new  answer
-                   result =  User.AnswerQuestion(SelectedQuestion, UnitOfWork);
+                   result =  User.AnswerQuestion(SelectedAnswer, UnitOfWork);
                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 }
                 else
@@ -98,7 +101,15 @@ namespace HonorsProject.ViewModel
                        result = (UnitOfWork.Complete() >0)? true: false;
                 }
             }
-            catch(Exception ex)
+            catch (DbUpdateException e)
+            {
+                FeedbackMessage = e.Message;
+            }
+            catch (SqlException e)
+            {
+                FeedbackMessage = e.Message;
+            }
+            catch (Exception ex)
             {
                 FeedbackMessage = ex.Message;
             }
@@ -113,9 +124,20 @@ namespace HonorsProject.ViewModel
 
         public override void EnterNewMode()
         {
+            if (SelectedQuestion == null)
+            {
+                FeedbackMessage = "Question not selected to answer.";
+                return;
+            }
+            if (SelectedQuestion.Id == 0)
+            { 
+                FeedbackMessage = "Question not selected to answer.";
+                return;
+            }
             //Lecturers can only create answers
             QandAMode = QandAMode.Answer;
             SelectedAnswer = new Answer();
+            SelectedAnswer.Question = SelectedQuestion;
             FormContextAnswer = FormContext.Create;
         }
     }
