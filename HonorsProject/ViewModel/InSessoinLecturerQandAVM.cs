@@ -76,11 +76,6 @@ namespace HonorsProject.ViewModel
             throw new NotImplementedException();
         }
 
-        public override bool MarkQuestion(Question questionToMark)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Save()
         {
             FeedbackMessage = "";

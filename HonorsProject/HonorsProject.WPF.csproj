@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\Commands\ToggleMarkQCmd.cs" />
     <Compile Include="ViewModel\Commands\UploadImageCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
+    <Compile Include="ViewModel\Converters\BoolToResolvedImgConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToEditableConverter.cs" />
     <Compile Include="ViewModel\Converters\QandAModeToVisibleConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToHiddenConverter.cs" />
@@ -256,6 +257,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Images\removeUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Images\crossIcon.png" />
+    <Resource Include="View\Images\tickIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

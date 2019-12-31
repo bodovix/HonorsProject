@@ -14,6 +14,7 @@
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter"/>
         <cv:RoleToHiddenConverter x:Key="RoleToHiddenConverter"/>
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter"/>
+        <cv:BoolToResolvedImgConverter x:Key="BoolToResolvedImgConverter"/>
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -125,7 +126,9 @@
                         <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <Label Content="{Binding SelectedQuestion.IsResolved,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
+                        <Image Source="{Binding SelectedQuestion.IsResolved,
+                            Converter={StaticResource BoolToResolvedImgConverter}}" 
+                               Style="{StaticResource IconImage}" />
                     </GroupBox>
                     <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"

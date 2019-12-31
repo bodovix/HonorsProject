@@ -183,8 +183,26 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public abstract bool UploadImage(Image imageToUpload);
 
-        public abstract bool MarkQuestion(Question questionToMark);
-
+        public bool MarkQuestion(Question questionToMark)
+        {
+            bool result = false;
+            if(questionToMark != null)
+            {
+                if(questionToMark.Id > 0)
+                {
+                    //toggle is Resolved for question
+                    questionToMark.IsResolved = !questionToMark.IsResolved;
+                    result = (UnitOfWork.Complete() > 0)? true : false;
+                    if (result == false)
+                        FeedbackMessage = "Unable to mark question as resolved.";
+                }
+                else
+                    FeedbackMessage = "No question selected.";
+            }
+            else
+                FeedbackMessage = "No question selected.";
+            return result;
+        }
         public abstract bool Cancel();
 
         public abstract void EnterNewMode();
