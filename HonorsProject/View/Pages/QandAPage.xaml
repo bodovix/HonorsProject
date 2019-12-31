@@ -41,12 +41,27 @@
                        Height="390"
                            ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           PreviewMouseLeftButtonUp="searchQResultsList_PreviewMouseLeftButtonUp">
+                           PreviewMouseLeftButtonUp="searchQResultsList_PreviewMouseLeftButtonUp"
+                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                           HorizontalContentAlignment="Stretch" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Id}" />
-                                <TextBlock Text="{Binding Name}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding IsResolved,
+                                        Converter={StaticResource BoolToResolvedImgConverter}}" 
+                                           HorizontalAlignment="Left"
+                                           Style="{StaticResource IconImage}" />
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding Id}"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="0"/>
+                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
+                                </Grid>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -71,7 +86,7 @@
                         PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" />
                                 <TextBlock Text="{Binding Id}" />
                             </StackPanel>
