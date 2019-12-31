@@ -32,6 +32,7 @@ namespace HonorsProject.ViewModel
         {
             //Setup
             User = (Lecturer)appUser;
+            UserRole = Role.Lecturer;
             IsConfirmed = false;
             QandAMode = QandAMode.Question;
             FormContextQuestion = FormContext.Create;
@@ -86,6 +87,14 @@ namespace HonorsProject.ViewModel
         public override bool UploadImage(Image imageToUpload)
         {
             throw new NotImplementedException();
+        }
+
+        public override void EnterNewMode()
+        {
+            //Lecturers can only create answers
+            QandAMode = QandAMode.Answer;
+            SelectedAnswer = new Answer();
+            FormContextAnswer = FormContext.Create;
         }
     }
 }

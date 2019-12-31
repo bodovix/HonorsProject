@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace HonorsProject.ViewModel.Converters
 {
-    internal class RoleToVisibleConverter : IValueConverter
+    internal class RoleToHiddenConverter : IValueConverter
     {
         public object Convert(object userRole, Type targetType, object parameter, CultureInfo culture)
         {
@@ -18,7 +18,7 @@ namespace HonorsProject.ViewModel.Converters
             //if roles match required make the item visible
             if ((Role)userRole == paramiterToMach)
                 return Visibility.Visible;
-            return Visibility.Collapsed;
+            return Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

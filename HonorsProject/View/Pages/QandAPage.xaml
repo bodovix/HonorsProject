@@ -11,6 +11,8 @@
       Title="QandAPage">
     <Page.Resources>
         <cv:QandAModeToVisibleConverter x:Key="QandAModeToVisibleConverter"/>
+        <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter"/>
+        <cv:RoleToHiddenConverter x:Key="RoleToHiddenConverter"/>
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -23,7 +25,12 @@
         <StackPanel Orientation="Horizontal">
             <!--Search Questions-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
-                <Button Name="NewQuestionBtn" Content="New Question" Style="{StaticResource FormSubmitButton}" />
+                <Button Name="NewQuestionBtn" 
+                        Content="New Question" 
+                        Command="{Binding NewModeCmd}"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
+                                ConverterParameter={x:Static enums:Role.Student}}"
+                        Style="{StaticResource FormSubmitButton}" />
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchQTxtBox"
@@ -45,7 +52,12 @@
             </StackPanel>
             <!--Answers Search bar-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
-                <Button Name="NewAnswerBtn" Content="New Answer" Style="{StaticResource FormSubmitButton}" />
+                <Button Name="NewAnswerBtn" 
+                        Content="New Answer" 
+                        Command="{Binding NewModeCmd}"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
+                                ConverterParameter={x:Static enums:Role.Lecturer}}"
+                        Style="{StaticResource FormSubmitButton}" />
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchTxtBox"
