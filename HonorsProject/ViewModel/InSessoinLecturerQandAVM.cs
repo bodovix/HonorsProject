@@ -33,7 +33,7 @@ namespace HonorsProject.ViewModel
         public InSessoinLecturerQandAVM(ISystemUser appUser,Session selectedSession ,string dbcontextName) : base(dbcontextName)
         {
             //Setup
-            User = (Lecturer)appUser;
+            User = UnitOfWork.LecturerRepo.Get(appUser.Id);
             UserRole = Role.Lecturer;
             IsConfirmed = false;
             QandAMode = QandAMode.Question;
@@ -124,6 +124,7 @@ namespace HonorsProject.ViewModel
 
         public override void EnterNewMode()
         {
+            FeedbackMessage = "";
             if (SelectedQuestion == null)
             {
                 FeedbackMessage = "Question not selected to answer.";
