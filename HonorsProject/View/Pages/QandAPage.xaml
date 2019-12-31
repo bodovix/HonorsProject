@@ -150,18 +150,28 @@
                                 Content="{Binding Path=FormContextQuestion, 
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Student}}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="QuestionCancelBtn"
                                 Content="Cancel" 
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Student}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionDeleteBtn" 
                                 Content="Delete" 
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Student}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionResolvedBtn" 
                                 Content="Resolved" 
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Student}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="QuestoinUploadBtn" 
                                 Content="Upload" 
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Student}}"
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>
@@ -231,18 +241,26 @@
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"
                                 Command="{Binding SaveFormCmd}"
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="AnswerCancelBtn" 
                                 Content="Cancel" 
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerDeleteBtn" 
                                 Content="Delete" 
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerResolvedBtn" 
                                 Content="Resolved" 
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="AnswerUploadBtn" 
                                 Content="Upload" 
+                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>
