@@ -13,6 +13,7 @@
         <cv:QandAModeToVisibleConverter x:Key="QandAModeToVisibleConverter"/>
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter"/>
         <cv:RoleToHiddenConverter x:Key="RoleToHiddenConverter"/>
+        <cv:FormContextToTextConverter x:Key="FormContextToTextConverter"/>
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -136,11 +137,23 @@
                     <Image Name="QuestionImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
-                        <Button Name="QuestionSaveBtn" Content="Save" Style="{StaticResource FormSaveButton}" />
-                        <Button Name="QuestionCancelBtn" Content="Cancel" Style="{StaticResource FormCancelButton}" />
-                        <Button Name="QuestionDeleteBtn" Content="Delete" Style="{StaticResource FormCancelButton}" />
-                        <Button Name="QuestionResolvedBtn" Content="Resolved" Style="{StaticResource FormSubmitButton}" />
-                        <Button Name="QuestoinUploadBtn" Content="Upload" Style="{StaticResource InfoButton}" />
+                        <Button Name="QuestionSaveBtn" 
+                                Content="{Binding Path=FormContextQuestion, 
+                                            Converter={StaticResource FormContextToTextConverter},
+                                            ConverterParameter='Add New|Update'}"
+                                Style="{StaticResource FormSaveButton}" />
+                        <Button Name="QuestionCancelBtn"
+                                Content="Cancel" 
+                                Style="{StaticResource FormCancelButton}" />
+                        <Button Name="QuestionDeleteBtn" 
+                                Content="Delete" 
+                                Style="{StaticResource FormCancelButton}" />
+                        <Button Name="QuestionResolvedBtn" 
+                                Content="Resolved" 
+                                Style="{StaticResource FormSubmitButton}" />
+                        <Button Name="QuestoinUploadBtn" 
+                                Content="Upload" 
+                                Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>
             </GroupBox>
@@ -198,11 +211,23 @@
                     <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
-                        <Button Name="AnswerSaveBtn" Content="Save" Style="{StaticResource FormSaveButton}" />
-                        <Button Name="AnswerCancelBtn" Content="Cancel" Style="{StaticResource FormCancelButton}" />
-                        <Button Name="AnswerDeleteBtn" Content="Delete" Style="{StaticResource FormCancelButton}" />
-                        <Button Name="AnswerResolvedBtn" Content="Resolved" Style="{StaticResource FormSubmitButton}" />
-                        <Button Name="AnswerUploadBtn" Content="Upload" Style="{StaticResource InfoButton}" />
+                        <Button Name="AnswerSaveBtn" 
+                                Content="{Binding Path=FormContextAnswer, 
+                                            Converter={StaticResource FormContextToTextConverter},
+                                            ConverterParameter='Add New|Update'}"
+                                Style="{StaticResource FormSaveButton}" />
+                        <Button Name="AnswerCancelBtn" 
+                                Content="Cancel" 
+                                Style="{StaticResource FormCancelButton}" />
+                        <Button Name="AnswerDeleteBtn" 
+                                Content="Delete" 
+                                Style="{StaticResource FormCancelButton}" />
+                        <Button Name="AnswerResolvedBtn" 
+                                Content="Resolved" 
+                                Style="{StaticResource FormSubmitButton}" />
+                        <Button Name="AnswerUploadBtn" 
+                                Content="Upload" 
+                                Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>
             </GroupBox>
