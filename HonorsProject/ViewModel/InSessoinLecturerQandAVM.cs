@@ -89,8 +89,8 @@ namespace HonorsProject.ViewModel
                     {
                         UnitOfWork.QuestionRepository.Remove(question);
                         result = (UnitOfWork.Complete() > 0)? true : false;
-                        if(result)
-                            UpdateQuestionsList(SelectedSession,QuestionSearchTxt)
+                        if (result)
+                            UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
                     }
                    
                 }
