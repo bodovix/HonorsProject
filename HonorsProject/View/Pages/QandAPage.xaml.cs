@@ -35,6 +35,30 @@ namespace HonorsProject.View.Pages
             PickVM();
             InitializeComponent();
             MainContainer.DataContext = VM;
+            Mediator.Register(MediatorChannels.DeleteAnswerConfirmation.ToString(), DeleteAnswerConfirmation);
+            Mediator.Register(MediatorChannels.DeleteQuestionConfirmation.ToString(), DeleteQuestionConfirmation);
+        }
+
+        private void DeleteQuestionConfirmation(object obj)
+        {
+            VM.IsConfirmed = false;
+            MessageBoxResult dialogResult = MessageBox.Show("Deleting Question cannot be undone. \nAll answers for this Question will also be deleted.", "Are you sure?", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)
+                VM.IsConfirmed = true;
+            else
+                VM.IsConfirmed = false;
+        }
+
+        private void DeleteAnswerConfirmation(object obj)
+        {
+            VM.IsConfirmed = false;
+            MessageBoxResult dialogResult = MessageBox.Show("Deleting Answers cannot be undone.", "Are you sure?", MessageBoxButton.YesNo);
+
+            if (dialogResult == MessageBoxResult.Yes)
+                VM.IsConfirmed = true;
+            else
+                VM.IsConfirmed = false;
         }
 
         private void PickVM()

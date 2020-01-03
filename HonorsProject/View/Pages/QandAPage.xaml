@@ -175,6 +175,8 @@
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionDeleteBtn" 
                                 Content="Delete" 
+                                Command="{Binding DeleteCmd}"
+                                CommandParameter="{Binding SelectedQuestion}"
                                 Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                                         ConverterParameter={x:Static enums:Role.Student}}"
                                 Style="{StaticResource FormCancelButton}" />
@@ -264,6 +266,8 @@
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerDeleteBtn" 
                                 Content="Delete" 
+                                Command="{Binding DeleteCmd}"
+                                CommandParameter="{Binding SelectedAnswer}"
                                 Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                                         ConverterParameter={x:Static enums:Role.Lecturer}}"
                                 Style="{StaticResource FormCancelButton}" />

@@ -20,6 +20,8 @@ namespace HonorsProject.Model.Enums
         LoadFutureSessionsSubgrid,
         LoadPreviousSessionsSubgrid,
         LoadStudentsSubgrid,
-        GoToThisSession
+        GoToThisSession,
+        DeleteQuestionConfirmation,
+        DeleteAnswerConfirmation
     }
 }

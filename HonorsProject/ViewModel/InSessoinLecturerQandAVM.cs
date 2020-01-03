@@ -12,6 +12,7 @@ using HonorsProject.Model.Enums;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
+using HonorsProject.Model.HelperClasses;
 
 namespace HonorsProject.ViewModel
 {
@@ -73,7 +74,49 @@ namespace HonorsProject.ViewModel
 
         public override bool Delete(BaseEntity objToDelete)
         {
-            throw new NotImplementedException();
+            //IsConfirmed is set to false in code behind for testability
+            bool result = false;
+            try
+            {
+                if (objToDelete is Question question)
+                {
+                    //check they can delete it.
+                    //-- any lecturer can delete questions - since this is lecture VM -done.
+                    //Run delete confirmation message
+                    Mediator.NotifyColleagues(MediatorChannels.DeleteQuestionConfirmation.ToString(), null);
+                    //delete it
+                    if (IsConfirmed)
+                    {
+                        UnitOfWork.QuestionRepository.Remove(question);
+                        result = (UnitOfWork.Complete() > 0)? true : false;
+                        if(result)
+                            UpdateQuestionsList(SelectedSession,QuestionSearchTxt)
+                    }
+                   
+                }
+                else if (objToDelete is Answer answer)
+                {
+                    //check they can delete it
+                    if (answer.AnsweredBy != User)
+                        throw new Exception("Only the answerer can delete this answer");
+                    //run delete confirmation message
+                    Mediator.NotifyColleagues(MediatorChannels.DeleteAnswerConfirmation.ToString(), null);
+                    //delete it
+                    if (IsConfirmed)
+                    {
+                        UnitOfWork.AnswerRepository.Remove(answer);
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                        if (result)
+                            UpdateAnswersList(SelectedQuestion,AnswerSearchTxt);
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
         public override bool Save()
