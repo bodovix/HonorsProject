@@ -15,6 +15,7 @@
         <cv:RoleToHiddenConverter x:Key="RoleToHiddenConverter"/>
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter"/>
         <cv:BoolToResolvedImgConverter x:Key="BoolToResolvedImgConverter"/>
+        <cv:QuestionIdToUserOrAdminVisConverter x:Key="QuestionIdToUserOrAdminVisConverter"/>
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -177,8 +178,7 @@
                                 Content="Delete" 
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Student}}"
+                                Visibility="{Binding Path=VisConverterDTO, Converter={StaticResource QuestionIdToUserOrAdminVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionResolvedBtn" 
                                 Content="Resolved" 
@@ -272,7 +272,7 @@
                                         ConverterParameter={x:Static enums:Role.Lecturer}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerResolvedBtn" 
-                                Content="Resolved" 
+                                Content="Was Helpful" 
                                 Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                                         ConverterParameter={x:Static enums:Role.Lecturer}}"
                                 Style="{StaticResource FormSubmitButton}" />

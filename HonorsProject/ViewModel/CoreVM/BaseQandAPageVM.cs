@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using HonorsProject.ViewModel.Commands.IComands;
 using HonorsProject.ViewModel.Commands;
+using HonorsProject.Model.DTO;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
@@ -17,7 +18,8 @@ namespace HonorsProject.ViewModel.CoreVM
     {
         #region Properties
 
-        public abstract ISystemUser User {get;set;}
+        public abstract ISystemUser User { get; set; }
+
         private FormContext _formContextQuestion;
 
         public FormContext FormContextQuestion
@@ -70,6 +72,8 @@ namespace HonorsProject.ViewModel.CoreVM
                 _selectedQuestion = value;
                 UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 OnPropertyChanged(nameof(SelectedQuestion));
+                VisConverterDTO.Question = value;
+                OnPropertyChanged(nameof(VisConverterDTO));
             }
         }
 
@@ -148,6 +152,18 @@ namespace HonorsProject.ViewModel.CoreVM
             get { return _qandAMode; }
             set { _qandAMode = value;
                 OnPropertyChanged(nameof(QandAMode));
+            }
+        }
+
+        private QuestionVisConverterDTO _visConverterDTO;
+
+        public QuestionVisConverterDTO VisConverterDTO
+        {
+            get { return _visConverterDTO; }
+            set
+            {
+                _visConverterDTO = value;
+                OnPropertyChanged(nameof(VisConverterDTO));
             }
         }
 

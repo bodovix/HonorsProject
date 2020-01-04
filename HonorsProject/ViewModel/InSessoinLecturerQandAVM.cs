@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.Model.DTO;
 
 namespace HonorsProject.ViewModel
 {
@@ -26,6 +27,8 @@ namespace HonorsProject.ViewModel
             set
             {
                 _user = (Lecturer)value;
+                VisConverterDTO.User = value;
+                OnPropertyChanged(nameof(VisConverterDTO));
                 OnPropertyChanged(nameof(User));
             }
         }
@@ -34,6 +37,7 @@ namespace HonorsProject.ViewModel
         public InSessoinLecturerQandAVM(ISystemUser appUser,Session selectedSession ,string dbcontextName) : base(dbcontextName)
         {
             //Setup
+            VisConverterDTO = new QuestionVisConverterDTO();
             User = UnitOfWork.LecturerRepo.Get(appUser.Id);
             UserRole = Role.Lecturer;
             IsConfirmed = false;
