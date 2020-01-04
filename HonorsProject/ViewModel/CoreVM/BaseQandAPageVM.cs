@@ -206,8 +206,8 @@ namespace HonorsProject.ViewModel.CoreVM
             AnswerSearchTxt = "";
             QuestionSearchTxt = "";
         }
-        protected abstract bool UpdateQuestionsList(Session SelectedSession, string QuestionSearchTxt);
-        protected abstract bool UpdateAnswersList(Question SelectedQuestion, string AnswerSearchTxt);
+        protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string QuestionSearchTxt);
+        protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string AnswerSearchTxt);
 
         public abstract bool Save();
 

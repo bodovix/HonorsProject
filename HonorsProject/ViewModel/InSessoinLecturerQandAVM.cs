@@ -50,10 +50,11 @@ namespace HonorsProject.ViewModel
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
             ///Answers loaded when question selected
         }
-        protected override bool UpdateQuestionsList(Session SelectedSession,string QuestionSearchTxt)
+        protected override bool UpdateQuestionsList(BaseEntity sSession,string QuestionSearchTxt)
         {
-            if (SelectedSession != null)
-                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(SelectedSession, QuestionSearchTxt));
+            Session selectedSession = (Session)sSession;
+            if (selectedSession != null)
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(selectedSession, QuestionSearchTxt));
             else
                 Questions = new ObservableCollection<Question>();
             if (Questions.Count > 0)
@@ -62,8 +63,9 @@ namespace HonorsProject.ViewModel
                 return false;
         }
 
-        protected override bool UpdateAnswersList(Question selectedQuestion, string anserSearchTxt)
+        protected override bool UpdateAnswersList(BaseEntity sQuestion, string anserSearchTxt)
         {
+            Question selectedQuestion = (Question)sQuestion;
             if (selectedQuestion != null)
                 Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSearchForQuestion(selectedQuestion, anserSearchTxt));
             else
