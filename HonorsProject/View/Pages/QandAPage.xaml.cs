@@ -90,13 +90,14 @@ namespace HonorsProject.View.Pages
             {
                 if (entity is Session)
                 {
+                    VM = new InSessionStudentQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
 
                 }
-                if (entity is Question)
+                else if (entity is Question)
                 {
 
                 }
-                if (entity is Answer)
+                else if (entity is Answer)
                 {
 
                 }
