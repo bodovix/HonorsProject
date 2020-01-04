@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    class InSessionStudentQandAVM : BaseQandAPageVM
+    internal class InSessionStudentQandAVM : BaseQandAPageVM
     {
         public InSessionStudentQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(dbcontextName)
         {
@@ -32,7 +32,9 @@ namespace HonorsProject.ViewModel
         public override ISystemUser User
         {
             get { return _user; }
-            set { _user = value;
+            set
+            {
+                _user = value;
                 _user = (Student)value;
                 QVisConDTO.User = value;
                 AVisConDTO.User = value;
