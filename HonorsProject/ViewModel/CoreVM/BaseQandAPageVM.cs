@@ -217,6 +217,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool ToggleMarkQuestion(Question questionToMark)
         {
+            FeedbackMessage = "";
             try
             {
                 bool result = false;
@@ -227,11 +228,12 @@ namespace HonorsProject.ViewModel.CoreVM
                         //toggle is Resolved for question
                         questionToMark.IsResolved = !questionToMark.IsResolved;
                         result = (UnitOfWork.Complete() > 0) ? true : false;
+                        string output = (questionToMark.IsResolved) ? "resolved" : "still open";
                         if (result == false)
-                            FeedbackMessage = "Unable to mark question as resolved.";
+                            FeedbackMessage = $"Unable to mark question as {output}.";
                     }
                     else
-                        FeedbackMessage = "No question selected.";
+                        FeedbackMessage = "New questions cannot be marked.";
                 }
                 else
                     FeedbackMessage = "No question selected.";
@@ -245,7 +247,33 @@ namespace HonorsProject.ViewModel.CoreVM
         }
         public bool ToggleMarkAnswer(Answer answer)
         {
-            throw new NotImplementedException();
+            FeedbackMessage = "";
+            try
+            {
+                bool result = false;
+                if (answer != null)
+                {
+                    if (answer.Id > 0)
+                    {
+                        //toggle is Resolved for question
+                        answer.WasHelpfull = !answer.WasHelpfull;
+                        string output = (answer.WasHelpfull) ? "helpful" : "unhelpful";
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                        if (result == false)
+                            FeedbackMessage = $"Unable to mark answer as {output}.";
+                    }
+                    else
+                        FeedbackMessage = "New answers cannot be marked.";
+                }
+                else
+                    FeedbackMessage = "No answer selected.";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
 
         public abstract bool Cancel();
