@@ -158,9 +158,9 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private QuestionVisConverterDTO _qVisConDTO;
+        private QuestionStateConverterDTO _qVisConDTO;
 
-        public QuestionVisConverterDTO QVisConDTO
+        public QuestionStateConverterDTO QVisConDTO
         {
             get { return _qVisConDTO; }
             set
@@ -169,9 +169,9 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(QVisConDTO));
             }
         }
-        private AnswerVisConverterDTO _aVisConDTO;
+        private AnswerStateConverterDTO _aVisConDTO;
 
-        public AnswerVisConverterDTO AVisConDTO
+        public AnswerStateConverterDTO AVisConDTO
         {
             get { return _aVisConDTO; }
             set { _aVisConDTO = value;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.Model.DTO
 {
-    public class AnswerVisConverterDTO 
+    public class AnswerStateConverterDTO 
     {
 		private ISystemUser _user;
 
@@ -26,7 +26,7 @@ namespace HonorsProject.Model.DTO
 			get { return _answer; }
 			set { _answer = value; }
 		}
-		public AnswerVisConverterDTO()
+		public AnswerStateConverterDTO()
 		{
 
 		}

@@ -39,8 +39,8 @@ namespace HonorsProject.ViewModel
         public InSessoinLecturerQandAVM(ISystemUser appUser,Session selectedSession ,string dbcontextName) : base(dbcontextName)
         {
             //Setup
-            QVisConDTO = new QuestionVisConverterDTO();
-            AVisConDTO = new AnswerVisConverterDTO();
+            QVisConDTO = new QuestionStateConverterDTO();
+            AVisConDTO = new AnswerStateConverterDTO();
             User = UnitOfWork.LecturerRepo.Get(appUser.Id);
             UserRole = Role.Lecturer;
             IsConfirmed = false;

@@ -16,7 +16,7 @@ namespace HonorsProject.ViewModel.Converters
     {
         public object Convert(object obj, Type targetType, object parameter, CultureInfo culture)
         {
-            AnswerVisConverterDTO dto = (AnswerVisConverterDTO)obj;
+            AnswerStateConverterDTO dto = (AnswerStateConverterDTO)obj;
             if(dto.Answer == null || dto.User == null)
                 return Visibility.Collapsed;
             if(dto.Answer.AnsweredBy == null)
