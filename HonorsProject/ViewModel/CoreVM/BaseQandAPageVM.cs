@@ -202,12 +202,14 @@ namespace HonorsProject.ViewModel.CoreVM
             ToggleMarkACmd = new ToggleMarkACmd(this);
             CancelCmd = new CancelCmd(this);
             NewModeCmd = new NewModeCmd(this);
-
+            //setup
+            QVisConDTO = new QuestionStateConverterDTO();
+            AVisConDTO = new AnswerStateConverterDTO();
             AnswerSearchTxt = "";
             QuestionSearchTxt = "";
         }
-        protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string QuestionSearchTxt);
-        protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string AnswerSearchTxt);
+        protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+        protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string answerSearchTxt);
 
         public abstract bool Save();
 
@@ -231,6 +233,8 @@ namespace HonorsProject.ViewModel.CoreVM
                         string output = (questionToMark.IsResolved) ? "resolved" : "still open";
                         if (result == false)
                             FeedbackMessage = $"Unable to mark question as {output}.";
+                        else
+                            UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
                     }
                     else
                         FeedbackMessage = "New questions cannot be marked.";
@@ -262,6 +266,8 @@ namespace HonorsProject.ViewModel.CoreVM
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result == false)
                             FeedbackMessage = $"Unable to mark answer as {output}.";
+                        else
+                            UpdateAnswersList(SelectedQuestion,AnswerSearchTxt);
                     }
                     else
                         FeedbackMessage = "New answers cannot be marked.";

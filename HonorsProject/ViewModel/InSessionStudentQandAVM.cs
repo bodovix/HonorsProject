@@ -1,8 +1,10 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
+using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,15 @@ namespace HonorsProject.ViewModel
     {
         public InSessionStudentQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(dbcontextName)
         {
+            //Setup
+            User = UnitOfWork.StudentRepo.Get(appUser.Id);
+            UserRole = Role.Student;
+            IsConfirmed = false;
+            QandAMode = QandAMode.Question;
+            FormContextQuestion = FormContext.Create;
+            SelectedSession = selectedSession;//Might need to attach this to the UoW. not sure yet
+            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
+            ///Answers loaded when question selected
         }
 
         private ISystemUser _user;
@@ -22,7 +33,13 @@ namespace HonorsProject.ViewModel
         {
             get { return _user; }
             set { _user = value;
-                OnPropertyChanged(nameof(User)); }
+                _user = (Student)value;
+                QVisConDTO.User = value;
+                AVisConDTO.User = value;
+                OnPropertyChanged(nameof(QVisConDTO));
+                OnPropertyChanged(nameof(AVisConDTO));
+                OnPropertyChanged(nameof(User));
+            }
         }
 
         public override bool Cancel()
@@ -50,14 +67,30 @@ namespace HonorsProject.ViewModel
             throw new NotImplementedException();
         }
 
-        protected override bool UpdateAnswersList(BaseEntity entToSearchFrom, string AnswerSearchTxt)
+        protected override bool UpdateAnswersList(BaseEntity sQuestion, string answerSearchTxt)
         {
-            throw new NotImplementedException();
+            Question selectedQuestion = (Question)sQuestion;
+            if (selectedQuestion != null)
+                Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSearchForQuestion(selectedQuestion, answerSearchTxt));
+            else
+                Answers = new ObservableCollection<Answer>();
+            if (Answers.Count > 0)
+                return true;
+            else
+                return false;
         }
 
-        protected override bool UpdateQuestionsList(BaseEntity entToSearchFrom, string QuestionSearchTxt)
+        protected override bool UpdateQuestionsList(BaseEntity sSession, string questionSearchTxt)
         {
-            throw new NotImplementedException();
+            Session selectedSession = (Session)sSession;
+            if (selectedSession != null)
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(selectedSession, questionSearchTxt));
+            else
+                Questions = new ObservableCollection<Question>();
+            if (Questions.Count > 0)
+                return true;
+            else
+                return false;
         }
     }
 }
