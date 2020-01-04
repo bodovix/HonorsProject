@@ -234,10 +234,13 @@ namespace HonorsProject.ViewModel.CoreVM
                         if (result == false)
                             FeedbackMessage = $"Unable to mark question as {output}.";
                         else
+                        {
                             UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                            OnPropertyChanged(nameof(SelectedQuestion));
+                        } 
                     }
-                    else
-                        FeedbackMessage = "New questions cannot be marked.";
+                else
+                    FeedbackMessage = "New questions cannot be marked.";
                 }
                 else
                     FeedbackMessage = "No question selected.";
@@ -267,7 +270,10 @@ namespace HonorsProject.ViewModel.CoreVM
                         if (result == false)
                             FeedbackMessage = $"Unable to mark answer as {output}.";
                         else
-                            UpdateAnswersList(SelectedQuestion,AnswerSearchTxt);
+                        {
+                            UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                            OnPropertyChanged(nameof(SelectedAnswer));
+                        }
                     }
                     else
                         FeedbackMessage = "New answers cannot be marked.";
