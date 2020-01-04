@@ -71,6 +71,7 @@
     <Compile Include="Data\SessionRepository.cs" />
     <Compile Include="Data\StudentRepository.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
+    <Compile Include="DTO\AnswerVisConverterDTO.cs" />
     <Compile Include="Entities\Answer.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Lecturer.cs" />
