@@ -16,6 +16,8 @@
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter"/>
         <cv:BoolToResolvedImgConverter x:Key="BoolToResolvedImgConverter"/>
         <cv:QuestionIdToUserOrAdminVisConverter x:Key="QuestionIdToUserOrAdminVisConverter"/>
+        <cv:QuestionToUserVisConverter x:Key="QuestionToUserVisConverter"/>
+        <cv:AnswerToUserVisConverter x:Key="AnswerToUserVisConverter"/>
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -43,7 +45,6 @@
                            ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            PreviewMouseLeftButtonUp="searchQResultsList_PreviewMouseLeftButtonUp"
-                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                            HorizontalContentAlignment="Stretch" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -166,29 +167,25 @@
                                 Content="{Binding Path=FormContextQuestion, 
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Student}}"
+                                Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="QuestionCancelBtn"
                                 Content="Cancel" 
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Student}}"
+                                Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionDeleteBtn" 
                                 Content="Delete" 
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
-                                Visibility="{Binding Path=VisConverterDTO, Converter={StaticResource QuestionIdToUserOrAdminVisConverter}}"
+                                Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionIdToUserOrAdminVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionResolvedBtn" 
                                 Content="Resolved" 
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Student}}"
+                                Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="QuestoinUploadBtn" 
                                 Content="Upload" 
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Student}}"
+                                Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>
@@ -258,28 +255,25 @@
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"
                                 Command="{Binding SaveFormCmd}"
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
+                                Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="AnswerCancelBtn" 
                                 Content="Cancel" 
+                                Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerDeleteBtn" 
                                 Content="Delete" 
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedAnswer}"
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
+                                Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerResolvedBtn" 
                                 Content="Was Helpful" 
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
+                                Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="AnswerUploadBtn" 
                                 Content="Upload" 
-                                Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                                        ConverterParameter={x:Static enums:Role.Lecturer}}"
+                                Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>

@@ -19,6 +19,8 @@ namespace HonorsProject.ViewModel.Converters
             QuestionVisConverterDTO dto = (QuestionVisConverterDTO)obj;
             if(dto.Question == null || dto.User == null)
                 return Visibility.Collapsed;
+            if(dto.Question.AskedBy == null)
+                return Visibility.Collapsed;
             //if roles match required make the item visible
             if (dto.User.Id == dto.Question.AskedBy.Id)
                 return Visibility.Visible;

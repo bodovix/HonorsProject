@@ -19,9 +19,9 @@ namespace HonorsProject.Model.DTO
 			set { _user = value;
 			}
 		}
-		private Question _answer;
+		private Answer _answer;
 
-		public Question Answer
+		public Answer Answer
 		{
 			get { return _answer; }
 			set { _answer = value; }

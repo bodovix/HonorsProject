@@ -27,8 +27,10 @@ namespace HonorsProject.ViewModel
             set
             {
                 _user = (Lecturer)value;
-                VisConverterDTO.User = value;
-                OnPropertyChanged(nameof(VisConverterDTO));
+                QVisConDTO.User = value;
+                AVisConDTO.User = value;
+                OnPropertyChanged(nameof(QVisConDTO));
+                OnPropertyChanged(nameof(AVisConDTO));
                 OnPropertyChanged(nameof(User));
             }
         }
@@ -37,7 +39,8 @@ namespace HonorsProject.ViewModel
         public InSessoinLecturerQandAVM(ISystemUser appUser,Session selectedSession ,string dbcontextName) : base(dbcontextName)
         {
             //Setup
-            VisConverterDTO = new QuestionVisConverterDTO();
+            QVisConDTO = new QuestionVisConverterDTO();
+            AVisConDTO = new AnswerVisConverterDTO();
             User = UnitOfWork.LecturerRepo.Get(appUser.Id);
             UserRole = Role.Lecturer;
             IsConfirmed = false;
@@ -179,7 +182,7 @@ namespace HonorsProject.ViewModel
             }
             //Lecturers can only create answers
             QandAMode = QandAMode.Answer;
-            SelectedAnswer = new Answer();
+            SelectedAnswer = new Answer((Lecturer)User);
             SelectedAnswer.Question = SelectedQuestion;
             FormContextAnswer = FormContext.Create;
         }

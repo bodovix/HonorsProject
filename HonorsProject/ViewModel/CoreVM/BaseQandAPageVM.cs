@@ -72,8 +72,8 @@ namespace HonorsProject.ViewModel.CoreVM
                 _selectedQuestion = value;
                 UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 OnPropertyChanged(nameof(SelectedQuestion));
-                VisConverterDTO.Question = value;
-                OnPropertyChanged(nameof(VisConverterDTO));
+                QVisConDTO.Question = value;
+                OnPropertyChanged(nameof(QVisConDTO));
             }
         }
 
@@ -122,6 +122,9 @@ namespace HonorsProject.ViewModel.CoreVM
                 FormContextAnswer = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedAnswer = value;
                 OnPropertyChanged(nameof(SelectedAnswer));
+                AVisConDTO.Answer = value;
+                OnPropertyChanged(nameof(AVisConDTO));
+
             }
         }
         private string _answerSearchTxt;
@@ -155,17 +158,27 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private QuestionVisConverterDTO _visConverterDTO;
+        private QuestionVisConverterDTO _qVisConDTO;
 
-        public QuestionVisConverterDTO VisConverterDTO
+        public QuestionVisConverterDTO QVisConDTO
         {
-            get { return _visConverterDTO; }
+            get { return _qVisConDTO; }
             set
             {
-                _visConverterDTO = value;
-                OnPropertyChanged(nameof(VisConverterDTO));
+                _qVisConDTO = value;
+                OnPropertyChanged(nameof(QVisConDTO));
             }
         }
+        private AnswerVisConverterDTO _aVisConDTO;
+
+        public AnswerVisConverterDTO AVisConDTO
+        {
+            get { return _aVisConDTO; }
+            set { _aVisConDTO = value;
+                OnPropertyChanged(nameof(AVisConDTO));
+            }
+        }
+
 
         public bool IsConfirmed { get; set; }
         #endregion Properties

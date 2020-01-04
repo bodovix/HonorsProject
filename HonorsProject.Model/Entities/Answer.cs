@@ -18,6 +18,10 @@ namespace HonorsProject.Model.Entities
         public Answer()
         {
         }
+        public Answer(Lecturer lecturer)
+        {
+            AnsweredBy = lecturer;
+        }
 
         public Answer(string name, string answerTest, bool wasHelpfull, Lecturer answeredBy, Question question, DateTime createdOn)
         {
