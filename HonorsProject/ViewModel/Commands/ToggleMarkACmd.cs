@@ -9,13 +9,13 @@ using System.Windows.Input;
 
 namespace HonorsProject.ViewModel.Commands
 {
-    public class ToggleMarkQCmd : ICommand
+    public class ToggleMarkACmd : ICommand
     {
-        public IToggleMarkQCmd VM { get; set; }
+        public IToggleMarkACmd VM { get; set; }
 
         public event EventHandler CanExecuteChanged;
 
-        public ToggleMarkQCmd(IToggleMarkQCmd vm)
+        public ToggleMarkACmd(IToggleMarkACmd vm)
         {
             VM = vm;
         }
@@ -28,8 +28,8 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            Question question = (Question)parameter;
-            VM.ToggleMarkQuestion(question);
+            Answer answer = (Answer)parameter;
+            VM.ToggleMarkAnswer(answer);
         }
     }
 }

@@ -14,7 +14,7 @@ using HonorsProject.Model.DTO;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd,IDeleteCmd,IUploadImageCmd,IToggleMarkQCmd,ICancelmd,IEnterNewModeCmd
+    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd,IDeleteCmd,IUploadImageCmd,IToggleMarkQCmd, IToggleMarkACmd, ICancelmd,IEnterNewModeCmd
     {
         #region Properties
 
@@ -187,9 +187,11 @@ namespace HonorsProject.ViewModel.CoreVM
         public DeleteCmd DeleteCmd { get; set ; }
         public UploadImageCmd UploadImageCmd { get; set; }
         public ToggleMarkQCmd ToggleMarkQCmd { get; set ; }
+        public ToggleMarkACmd ToggleMarkACmd { get; set; }
         public CancelCmd CancelCmd { get ; set; }
         public NewModeCmd NewModeCmd { get; set; }
         #endregion Commands
+
         public BaseQandAPageVM(string dbcontextName) : base(dbcontextName)
         {
             //Commands
@@ -197,6 +199,7 @@ namespace HonorsProject.ViewModel.CoreVM
             DeleteCmd = new DeleteCmd(this);
             UploadImageCmd = new UploadImageCmd(this);
             ToggleMarkQCmd = new ToggleMarkQCmd(this);
+            ToggleMarkACmd = new ToggleMarkACmd(this);
             CancelCmd = new CancelCmd(this);
             NewModeCmd = new NewModeCmd(this);
 
@@ -212,29 +215,43 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public abstract bool UploadImage(Image imageToUpload);
 
-        public bool MarkQuestion(Question questionToMark)
+        public bool ToggleMarkQuestion(Question questionToMark)
         {
-            bool result = false;
-            if(questionToMark != null)
+            try
             {
-                if(questionToMark.Id > 0)
+                bool result = false;
+                if (questionToMark != null)
                 {
-                    //toggle is Resolved for question
-                    questionToMark.IsResolved = !questionToMark.IsResolved;
-                    result = (UnitOfWork.Complete() > 0)? true : false;
-                    if (result == false)
-                        FeedbackMessage = "Unable to mark question as resolved.";
+                    if (questionToMark.Id > 0)
+                    {
+                        //toggle is Resolved for question
+                        questionToMark.IsResolved = !questionToMark.IsResolved;
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                        if (result == false)
+                            FeedbackMessage = "Unable to mark question as resolved.";
+                    }
+                    else
+                        FeedbackMessage = "No question selected.";
                 }
                 else
                     FeedbackMessage = "No question selected.";
+                return result;
             }
-            else
-                FeedbackMessage = "No question selected.";
-            return result;
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+                return false;
+            }
         }
+        public bool ToggleMarkAnswer(Answer answer)
+        {
+            throw new NotImplementedException();
+        }
+
         public abstract bool Cancel();
 
         public abstract void EnterNewMode();
-        
+
+       
     }
 }

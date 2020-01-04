@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.Commands.IComands
 {
-    public interface IToggleMarkQCmd
+    public interface IToggleMarkACmd
     {
-        ToggleMarkQCmd ToggleMarkQCmd { get; set; }
-        bool ToggleMarkQuestion(Question questionToMark);
+        ToggleMarkACmd ToggleMarkACmd { get; set; }
+        bool ToggleMarkAnswer(Answer answer);
     }
 }
