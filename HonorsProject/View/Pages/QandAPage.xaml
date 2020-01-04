@@ -18,6 +18,7 @@
         <cv:QuestionIdToUserOrAdminVisConverter x:Key="QuestionIdToUserOrAdminVisConverter"/>
         <cv:QuestionToUserVisConverter x:Key="QuestionToUserVisConverter"/>
         <cv:AnswerToUserVisConverter x:Key="AnswerToUserVisConverter"/>
+        <cv:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -231,7 +232,8 @@
                     </GroupBox>
                     <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" >
                         <GroupBox  Header="Was Helpful?" Style="{StaticResource FormGroupBox}">
-                            <Image Source="../Images/starIcon.png" />
+                            <Image Source="../Images/starIcon.png" 
+                                   Visibility="{Binding Path=SelectedAnswer.WasHelpfull, Converter={StaticResource BoolToVisibleConverter} }"/>
                         </GroupBox>
                     </StackPanel>
                     <GroupBox Header="Answer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
@@ -269,7 +271,9 @@
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerResolvedBtn" 
                                 Content="Was Helpful" 
-                                Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
+                                Command="{Binding ToggleMarkACmd}"
+                                CommandParameter="{Binding SelectedAnswer}"
+                                Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="AnswerUploadBtn" 
                                 Content="Upload" 

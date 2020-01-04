@@ -245,6 +245,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 return false;
             }
         }
+
         public bool ToggleMarkAnswer(Answer answer)
         {
             FeedbackMessage = "";
