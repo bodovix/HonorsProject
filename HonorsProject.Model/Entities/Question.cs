@@ -34,5 +34,26 @@ namespace HonorsProject.Model.Entities
             AskedBy = askedBy;
             CreatedOn = createdOn;
         }
+
+        public bool Validate()
+        {
+            if (TimeAsked == null)
+                throw new ArgumentException("Time asked required.");
+            if (String.IsNullOrEmpty(Name))
+                throw new ArgumentException("Name required.");
+            if (String.IsNullOrEmpty(QuestionText))
+                throw new ArgumentException("Question text required.");
+            if (Session == null)
+                throw new ArgumentException("Session required.");
+            if (Session.Id == 0)
+                throw new ArgumentException("Session required.");
+            if (AskedBy == null)
+                throw new ArgumentException("Asked by required.");
+            if (AskedBy.Id == 0)
+                throw new ArgumentException("Asked by required.");
+            if (CreatedOn == null)
+                throw new ArgumentException("Created on required.");
+            return true;
+        }
     }
 }

@@ -170,5 +170,18 @@ namespace HonorsProject.Model.Entities
         {
             throw new NotImplementedException("Students cannot answer questions.");
         }
+
+        public bool AskQuestion(Question selectedQuestion, UnitOfWork unitOfWork)
+        {
+            bool result = false;
+            selectedQuestion.CreatedOn = DateTime.Now;
+            selectedQuestion.AskedBy = this;
+            if (selectedQuestion.Validate())
+            {
+                unitOfWork.QuestionRepository.Add(selectedQuestion);
+                result = (unitOfWork.Complete() > 0) ? true : false;
+            }
+            return result;
+        }
     }
 }

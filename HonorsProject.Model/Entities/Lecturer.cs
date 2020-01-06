@@ -140,6 +140,7 @@ namespace HonorsProject.Model.Entities
             else
                 return false;
         }
+
         public bool AnswerQuestion(Answer selectedAnswer, UnitOfWork unitOfWork)
         {
             bool result = false;
@@ -175,6 +176,9 @@ namespace HonorsProject.Model.Entities
             }
         }
 
-        
+        public bool AskQuestion(Question selectedQuestion, UnitOfWork unitOfWork)
+        {
+            throw new NotImplementedException("Lecturers cannot ask questions. Please contact support.");
+        }
     }
 }

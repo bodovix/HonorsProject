@@ -5,6 +5,8 @@ using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -61,7 +63,37 @@ namespace HonorsProject.ViewModel
 
         public override bool Save()
         {
-            throw new NotImplementedException();
+            FeedbackMessage = "";
+            bool result = false;
+            try
+            {
+                if (FormContextAnswer == FormContext.Create)
+                {
+                    //create new  answer
+                    result = User.AskQuestion(SelectedQuestion, UnitOfWork);
+                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                }
+                else
+                {
+                    //Update Selected Answer
+                    result = SelectedQuestion.Validate();
+                    if (result)
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                }
+            }
+            catch (DbUpdateException e)
+            {
+                FeedbackMessage = e.Message;
+            }
+            catch (SqlException e)
+            {
+                FeedbackMessage = e.Message;
+            }
+            catch (Exception ex)
+            {
+                FeedbackMessage = ex.Message;
+            }
+            return result;
         }
 
         public override bool UploadImage(Image imageToUpload)
