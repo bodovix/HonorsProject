@@ -1,6 +1,7 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,34 @@ namespace HonorsProject.ViewModel
 
         public override bool Delete(BaseEntity objToDelete)
         {
-            throw new NotImplementedException();
+            if (objToDelete is Question question)
+            {
+                bool result = false;
+                try
+                {
+                    //check they can delete it.
+                    if (question.AskedBy.Id != User.Id)
+                        throw new Exception("Can only delete your question.");
+                    //Run delete confirmation message
+                    Mediator.NotifyColleagues(MediatorChannels.DeleteAnswerConfirmation.ToString(), null);
+                    //delete it
+                    if (IsConfirmed)
+                    {
+                        UnitOfWork.QuestionRepository.Remove(question);
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                        if (result)
+                            UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                    }
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    FeedbackMessage = ex.Message;
+                    return false;
+                }
+            }
+            else
+                return false;
         }
 
         public override void EnterNewMode()

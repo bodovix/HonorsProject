@@ -29,6 +29,7 @@ namespace HonorsProject.View.Pages
     {
         public BaseQandAPageVM VM;
         private BaseEntity entity;
+
         public QandAPage(BaseEntity entityToFocusOn)
         {
             entity = entityToFocusOn;
@@ -67,17 +68,15 @@ namespace HonorsProject.View.Pages
             {
                 if (entity is Session)
                 {
-                   VM = new InSessoinLecturerQandAVM(App.AppUser,(Session)entity, ConnectionConfigs.LiveConfig);
+                    VM = new InSessoinLecturerQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity is Question)
                 {
-
                 }
                 else if (entity is Answer)
                 {
-
                 }
-                else if(entity == null)
+                else if (entity == null)
                 {
                     Console.WriteLine("null");
                 }
@@ -91,15 +90,12 @@ namespace HonorsProject.View.Pages
                 if (entity is Session)
                 {
                     VM = new InSessionStudentQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
-
                 }
                 else if (entity is Question)
                 {
-
                 }
                 else if (entity is Answer)
                 {
-
                 }
                 else if (entity == null)
                 {
@@ -114,9 +110,9 @@ namespace HonorsProject.View.Pages
 
         private void searchAResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Answer selectedAnswer =(Answer)(sender as ListView).SelectedItem;
-            if (selectedAnswer != null)  
-                if(selectedAnswer.Id != 0) 
+            Answer selectedAnswer = (Answer)(sender as ListView).SelectedItem;
+            if (selectedAnswer != null)
+                if (selectedAnswer.Id != 0)
                 {
                     VM.QandAMode = QandAMode.Answer;
                 }
@@ -124,7 +120,7 @@ namespace HonorsProject.View.Pages
 
         private void searchQResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Question selectedQuestion =(Question) (sender as ListView).SelectedItem;
+            Question selectedQuestion = (Question)(sender as ListView).SelectedItem;
             if (selectedQuestion != null)
                 if (selectedQuestion.Id != 0)
                 {
