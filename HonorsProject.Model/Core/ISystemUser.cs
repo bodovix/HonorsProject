@@ -30,8 +30,11 @@ namespace HonorsProject.Model.Core
         List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
 
         bool GenerateNewPasswordHash(ref string optionalPassword);
+
         bool AddNewGroup(Group selectedGroup, UnitOfWork unitOfWork);
+
         bool AnswerQuestion(Answer selectedAnswer, UnitOfWork unitOfWork);
+
         bool AskQuestion(Question selectedQuestion, UnitOfWork unitOfWork);
     }
 }

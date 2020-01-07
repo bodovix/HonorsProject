@@ -165,6 +165,7 @@
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="QuestionSaveBtn" 
+                                Command="{Binding SaveFormCmd}"
                                 Content="{Binding Path=FormContextQuestion, 
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"

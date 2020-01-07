@@ -24,7 +24,7 @@ namespace HonorsProject.ViewModel
             IsConfirmed = false;
             QandAMode = QandAMode.Question;
             FormContextQuestion = FormContext.Create;
-            SelectedSession = selectedSession;//Might need to attach this to the UoW. not sure yet
+            SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
             ///Answers loaded when question selected
         }
@@ -58,7 +58,12 @@ namespace HonorsProject.ViewModel
 
         public override void EnterNewMode()
         {
-            throw new NotImplementedException();
+            FeedbackMessage = "";
+            //Lecturers can only create answers
+            QandAMode = QandAMode.Question;
+            SelectedQuestion = new Question((Student)User);
+            SelectedQuestion.Session = SelectedSession;
+            FormContextQuestion = FormContext.Create;
         }
 
         public override bool Save()
@@ -67,11 +72,11 @@ namespace HonorsProject.ViewModel
             bool result = false;
             try
             {
-                if (FormContextAnswer == FormContext.Create)
+                if (FormContextQuestion == FormContext.Create)
                 {
                     //create new  answer
                     result = User.AskQuestion(SelectedQuestion, UnitOfWork);
-                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
                 }
                 else
                 {

@@ -22,6 +22,11 @@ namespace HonorsProject.Model.Entities
             Answers = new List<Answer>();
         }
 
+        public Question(Student student)
+        {
+            AskedBy = student;
+        }
+
         public Question(DateTime timeAsked, string name, string questionText, Session session, Student askedBy, DateTime createdOn)
         {
             //id and Answers list are sorted by EF. created/asked dates injected for testability

@@ -176,6 +176,7 @@ namespace HonorsProject.Model.Entities
             bool result = false;
             selectedQuestion.CreatedOn = DateTime.Now;
             selectedQuestion.AskedBy = this;
+            selectedQuestion.TimeAsked = DateTime.Now;
             if (selectedQuestion.Validate())
             {
                 unitOfWork.QuestionRepository.Add(selectedQuestion);
