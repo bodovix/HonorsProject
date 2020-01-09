@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201912301451420_BackToAsnwerTest.Designer.cs">
       <DependentUpon>201912301451420_BackToAsnwerTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001090833329_AddedImageLocatonColumns.cs" />
+    <Compile Include="Migrations\202001090833329_AddedImageLocatonColumns.Designer.cs">
+      <DependentUpon>202001090833329_AddedImageLocatonColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -255,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912301451420_BackToAsnwerTest.resx">
       <DependentUpon>201912301451420_BackToAsnwerTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001090833329_AddedImageLocatonColumns.resx">
+      <DependentUpon>202001090833329_AddedImageLocatonColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

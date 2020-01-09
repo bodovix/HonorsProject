@@ -16,6 +16,7 @@ namespace HonorsProject.Model.Entities
         public virtual Session Session { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public virtual Student AskedBy { get; set; }
+        public string ImageLocation { get; set; }
 
         public Question()
         {

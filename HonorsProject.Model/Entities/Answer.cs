@@ -14,10 +14,12 @@ namespace HonorsProject.Model.Entities
         public bool WasHelpfull { get; set; }
         public virtual Lecturer AnsweredBy { get; set; }
         public virtual Question Question { get; set; }
+        public string ImageLocation { get; set; }
 
         public Answer()
         {
         }
+
         public Answer(Lecturer lecturer)
         {
             AnsweredBy = lecturer;
@@ -42,7 +44,7 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Answer text required.");
             if (Question == null)
                 throw new ArgumentException("Answers must belong to a question.");
-             if (Question.Id == 0)
+            if (Question.Id == 0)
                 throw new ArgumentException("Answers must belong to a question.");
             if (AnsweredBy == null)
                 throw new ArgumentException("Answered by required.");

@@ -19,6 +19,8 @@ namespace HonorsProject.Model.Data
         public LabAssistantContext(string conectionName)
             : base(conectionName)
         {
+            //Database.SetInitializer<LabAssistantContext>(new DropCreateDatabaseIfModelChanges<LabAssistantContext>());
+            //Database.SetInitializer<LabAssistantContext>(new DropCreateDatabaseAlways<LabAssistantContext>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
