@@ -273,7 +273,6 @@ namespace HonorsProject.ViewModel
             FeedbackMessage = "";
             try
             {
-                IsConfirmed = false;
                 //Confirmation Check
                 Mediator.NotifyColleagues(MediatorChannels.StudentsPageGeneratePasswordCheck.ToString(), null);
                 if (IsConfirmed)

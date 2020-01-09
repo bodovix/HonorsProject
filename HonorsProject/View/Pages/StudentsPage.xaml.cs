@@ -71,6 +71,7 @@ namespace HonorsProject.View.Pages
 
         private void ShowPasswordConfBox(object obj)
         {
+            VM.IsConfirmed = false;
             MessageBoxResult dialogResult = MessageBox.Show("Generate new password for user? \nThis action must be saved with rest of form", "Are you sure?", MessageBoxButton.YesNo);
 
             if (dialogResult == MessageBoxResult.Yes)
