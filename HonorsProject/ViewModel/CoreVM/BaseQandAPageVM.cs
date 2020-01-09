@@ -243,7 +243,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public abstract bool Delete(BaseEntity objToDelete);
 
-        public abstract bool UploadImage(Image imageToUpload);
+        public abstract Task<bool> UploadImage(Image imageToUpload);
 
         public bool ToggleMarkQuestion(Question questionToMark)
         {

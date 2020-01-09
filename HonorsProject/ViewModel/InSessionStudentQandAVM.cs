@@ -135,11 +135,13 @@ namespace HonorsProject.ViewModel
             return result;
         }
 
-        public override bool UploadImage(Image imageToUpload)
+        public async override Task<bool> UploadImage(Image imageToUpload)
         {
-            bool result = false;
-            ImageConverter converter = new ImageConverter();
-
+            bool ftpResult;
+            bool dbResult;
+            bool finalResult = false;
+            //try
+            //{
             if (SelectedQuestion.AskedBy == User)
             {
                 if (SelectedQuestion != null)
@@ -150,6 +152,25 @@ namespace HonorsProject.ViewModel
                         QuestionImage = OpenImageFromDisk();
                         if (QuestionImage != null)
                         {
+                            //Save the file in FTP
+                            SelectedQuestion.ImageLocation = String.Concat(SelectedQuestion.Id, "-", SelectedQuestion.AskedBy.Id);
+                            ftpResult = await SaveImageToFTPServer(SelectedQuestion.ImageLocation);
+                            if (!ftpResult)
+                            {
+                                //if FTP fails undo everything and run away.
+                                SelectedQuestion.ImageLocation = null;
+                            }
+                            else
+                            {
+                                //Then Save the file location to the database
+                                dbResult = (UnitOfWork.Complete() > 0) ? true : false;
+                                if (!dbResult)
+                                {
+                                    //undo Image location and FTP Step
+                                    DeleteImageFromFTPServer(SelectedQuestion.ImageLocation);
+                                    SelectedQuestion.ImageLocation = null;
+                                }
+                            }
                         }
                     }
                     else
@@ -160,33 +181,72 @@ namespace HonorsProject.ViewModel
                 else
                     FeedbackMessage = "You can only add an image you a question you proposed.";
             }
-            return result;
+            return finalResult;
+            //}
+            //catch (Exception ex)
+            //{
+            //    FeedbackMessage = ex.Message;
+            //    return finalResult;
+            //}
         }
 
-        //private async void DeleteImageFromFTPServer(string fileLocation)
-        //{
-        //    FtpWebRequest Request = (FtpWebRequest)WebRequest.Create("sftp://1701267@mayar.abertay.ac.uk/home/UAD/1701267/" + fileLocation);
-        //    Request.Method = WebRequestMethods.Ftp.DeleteFile;
-        //    string userName = "barrierSystem@foxcoparkingsolution.co.uk";
-        //    string password = "VzNpOw?U];yR";
-        //    Request.Credentials = new NetworkCredential(userName, password);
-        //    try
-        //    {
-        //        var ResponseTask = await Request.GetResponseAsync();
-        //        FtpWebResponse Response = (FtpWebResponse)ResponseTask;
-        //        Stream Stream = Response.GetResponseStream();
+        private async Task<bool> SaveImageToFTPServer(string fileLocation)
+        {
+            if (fileLocation == null)
+                fileLocation = "";
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("sftp://1701267@mayar.abertay.ac.uk/home/UAD/1701267/public_html/honors/" + fileLocation);
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            string userName = "1701267";
+            string password = "123Haggis0nToast123$";
+            request.Credentials = new NetworkCredential(userName, password);
+            try
+            {
+                var ResponseTask = await request.GetResponseAsync();
+                FtpWebResponse Response = (FtpWebResponse)ResponseTask;
+                Stream Stream = Response.GetResponseStream();
 
-        //        StreamReader Reader = new StreamReader(Stream);
+                StreamReader Reader = new StreamReader(Stream);
 
-        //        Reader.Close();
-        //        Stream.Close();
-        //    }
-        //    catch (WebException e)
-        //    {
-        //        FeedbackMessage = ((FtpWebResponse)e.Response).StatusDescription;
-        //    }
-        //    catch (Exception) { FeedbackMessage = "Error deleting image. Please contact support."; }
-        //}
+                Reader.Close();
+                Stream.Close();
+                return true;
+            }
+            catch (WebException e)
+            {
+                FeedbackMessage = ((FtpWebResponse)e.Response).StatusDescription;
+                return false;
+            }
+            catch (Exception)
+            {
+                FeedbackMessage = "Error saving image. Please contact support.";
+                return false;
+            }
+        }
+
+        private async void DeleteImageFromFTPServer(string fileLocation)
+        {
+            FtpWebRequest Request = (FtpWebRequest)WebRequest.Create("sftp://1701267@mayar.abertay.ac.uk/home/UAD/1701267/" + fileLocation);
+            Request.Method = WebRequestMethods.Ftp.DeleteFile;
+            string userName = "barrierSystem@foxcoparkingsolution.co.uk";
+            string password = "VzNpOw?U];yR";
+            Request.Credentials = new NetworkCredential(userName, password);
+            try
+            {
+                var ResponseTask = await Request.GetResponseAsync();
+                FtpWebResponse Response = (FtpWebResponse)ResponseTask;
+                Stream Stream = Response.GetResponseStream();
+
+                StreamReader Reader = new StreamReader(Stream);
+
+                Reader.Close();
+                Stream.Close();
+            }
+            catch (WebException e)
+            {
+                FeedbackMessage = ((FtpWebResponse)e.Response).StatusDescription;
+            }
+            catch (Exception) { FeedbackMessage = "Error deleting image. Please contact support."; }
+        }
 
         protected override bool UpdateAnswersList(BaseEntity sQuestion, string answerSearchTxt)
         {

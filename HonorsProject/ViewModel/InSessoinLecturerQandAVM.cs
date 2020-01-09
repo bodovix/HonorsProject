@@ -17,7 +17,7 @@ using HonorsProject.Model.DTO;
 
 namespace HonorsProject.ViewModel
 {
-    class InSessoinLecturerQandAVM : BaseQandAPageVM
+    internal class InSessoinLecturerQandAVM : BaseQandAPageVM
     {
         private ISystemUser _user;
 
@@ -35,8 +35,7 @@ namespace HonorsProject.ViewModel
             }
         }
 
-
-        public InSessoinLecturerQandAVM(ISystemUser appUser,Session selectedSession ,string dbcontextName) : base(dbcontextName)
+        public InSessoinLecturerQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(dbcontextName)
         {
             //Setup
             User = UnitOfWork.LecturerRepo.Get(appUser.Id);
@@ -48,7 +47,8 @@ namespace HonorsProject.ViewModel
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
             ///Answers loaded when question selected
         }
-        protected override bool UpdateQuestionsList(BaseEntity sSession,string QuestionSearchTxt)
+
+        protected override bool UpdateQuestionsList(BaseEntity sSession, string QuestionSearchTxt)
         {
             Session selectedSession = (Session)sSession;
             if (selectedSession != null)
@@ -95,11 +95,10 @@ namespace HonorsProject.ViewModel
                     if (IsConfirmed)
                     {
                         UnitOfWork.QuestionRepository.Remove(question);
-                        result = (UnitOfWork.Complete() > 0)? true : false;
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result)
                             UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
                     }
-                   
                 }
                 else if (objToDelete is Answer answer)
                 {
@@ -114,7 +113,7 @@ namespace HonorsProject.ViewModel
                         UnitOfWork.AnswerRepository.Remove(answer);
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result)
-                            UpdateAnswersList(SelectedQuestion,AnswerSearchTxt);
+                            UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                     }
                 }
                 return result;
@@ -135,15 +134,15 @@ namespace HonorsProject.ViewModel
                 if (FormContextAnswer == FormContext.Create)
                 {
                     //create new  answer
-                   result =  User.AnswerQuestion(SelectedAnswer, UnitOfWork);
-                   UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    result = User.AnswerQuestion(SelectedAnswer, UnitOfWork);
+                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 }
                 else
                 {
                     //Update Selected Answer
                     result = SelectedAnswer.ValidateAnswer();
                     if (result)
-                       result = (UnitOfWork.Complete() >0)? true: false;
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
                 }
             }
             catch (DbUpdateException e)
@@ -158,11 +157,11 @@ namespace HonorsProject.ViewModel
             {
                 FeedbackMessage = ex.Message;
             }
-            
+
             return result;
         }
 
-        public override bool UploadImage(Image imageToUpload)
+        public override Task<bool> UploadImage(Image imageToUpload)
         {
             throw new NotImplementedException();
         }
@@ -176,7 +175,7 @@ namespace HonorsProject.ViewModel
                 return;
             }
             if (SelectedQuestion.Id == 0)
-            { 
+            {
                 FeedbackMessage = "Question not selected to answer.";
                 return;
             }
