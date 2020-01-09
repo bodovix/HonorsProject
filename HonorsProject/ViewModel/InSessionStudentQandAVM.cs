@@ -53,11 +53,6 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        public override bool Cancel()
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Delete(BaseEntity objToDelete)
         {
             if (objToDelete is Question question)
@@ -272,6 +267,28 @@ namespace HonorsProject.ViewModel
                 return true;
             else
                 return false;
+        }
+
+        public override bool Cancel()
+        {
+            if (FormContextQuestion == FormContext.Create)
+                EnterNewMode();
+            else
+            {
+                try
+                {
+                    UnitOfWork.Reload(SelectedQuestion);
+                    UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                    OnPropertyChanged(nameof(SelectedQuestion));
+                }
+                catch
+                {
+                    EnterNewMode();
+                    FeedbackMessage = "Unable to re-load selected Question. \n Going back to new mode.";
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

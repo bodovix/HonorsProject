@@ -177,6 +177,7 @@
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="QuestionCancelBtn"
                                 Content="Cancel"
+                                Command="{Binding CancelCmd}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionDeleteBtn"
@@ -269,6 +270,7 @@
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="AnswerCancelBtn"
                                 Content="Cancel"
+                                Command="{Binding CancelCmd}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerDeleteBtn"

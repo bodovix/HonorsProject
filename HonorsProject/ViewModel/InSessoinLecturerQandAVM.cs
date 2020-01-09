@@ -74,11 +74,6 @@ namespace HonorsProject.ViewModel
                 return false;
         }
 
-        public override bool Cancel()
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Delete(BaseEntity objToDelete)
         {
             //IsConfirmed is set to false in code behind for testability
@@ -184,6 +179,28 @@ namespace HonorsProject.ViewModel
             SelectedAnswer = new Answer((Lecturer)User);
             SelectedAnswer.Question = SelectedQuestion;
             FormContextAnswer = FormContext.Create;
+        }
+
+        public override bool Cancel()
+        {
+            if (FormContextAnswer == FormContext.Create)
+                EnterNewMode();
+            else
+            {
+                try
+                {
+                    UnitOfWork.Reload(SelectedAnswer);
+                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    OnPropertyChanged(nameof(SelectedAnswer));
+                }
+                catch
+                {
+                    EnterNewMode();
+                    FeedbackMessage = "Unable to re-load selected Answer. \n Going back to new mode.";
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
