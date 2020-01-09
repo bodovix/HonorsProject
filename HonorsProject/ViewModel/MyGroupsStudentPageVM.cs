@@ -289,4 +289,11 @@ namespace HonorsProject.ViewModel
             }
             return true;
         }
+
+        private void UpdateMyGroupsList(int rows)
+        {
+            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rows));
+            ChangeSubgridContext(SubgridContext);//refresh the sub-grid content
+        }
     }
+}
