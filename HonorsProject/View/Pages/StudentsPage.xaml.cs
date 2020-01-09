@@ -41,6 +41,7 @@ namespace HonorsProject.View.Pages
 
         private void DeleteStudentConfrimation(object obj)
         {
+            VM.IsConfirmed = false;
             Student s = obj as Student;
             MessageBoxResult dialogResult = MessageBox.Show($"Delete student {s.Name}? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
 

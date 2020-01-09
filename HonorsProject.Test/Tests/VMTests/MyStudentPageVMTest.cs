@@ -409,9 +409,10 @@ namespace HonorsProject.Test.VMTest
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM.IsConfirmed = true;
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             //Act
-            VM.Remove(VM.SelectedStudent);
+            VM.Delete(VM.SelectedStudent);
             //Assert
             int studentCount = 2;
             Assert.AreEqual(studentCount, VM.Students.Count);

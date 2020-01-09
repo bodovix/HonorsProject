@@ -383,7 +383,6 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(BaseEntity objToDelete)
         {
-            IsConfirmed = SetFalse();
             FeedbackMessage = "";
             Student studentToDelete = objToDelete as Student;
             if (studentToDelete == null)
