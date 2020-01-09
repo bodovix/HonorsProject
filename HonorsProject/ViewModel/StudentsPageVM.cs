@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd
     {
         #region Properties
 
@@ -151,6 +151,7 @@ namespace HonorsProject.ViewModel
         public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
+        public CancelCmd CancelCmd { get; set; }
 
         #endregion Commands
 
@@ -170,6 +171,7 @@ namespace HonorsProject.ViewModel
                 MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
                 ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
                 DeleteCmd = new DeleteCmd(this);
+                CancelCmd = new CancelCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)loggedInLectuer;
                 SearchStudentTxt = "";
@@ -412,6 +414,28 @@ namespace HonorsProject.ViewModel
         public bool SetFalse()
         {
             return false;
+        }
+
+        public bool Cancel()
+        {
+            if (FormContext == FormContext.Create)
+                SelectedStudent = new Student();
+            else
+            {
+                try
+                {
+                    UnitOfWork.Reload(SelectedStudent);
+                    UpdateMyStudentsList(studentRowsToReturn);
+                    OnPropertyChanged(nameof(SelectedStudent));
+                }
+                catch
+                {
+                    SelectedStudent = new Student();
+                    FeedbackMessage = "Unable to re-load selected Group. \n Going back to new mode.";
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

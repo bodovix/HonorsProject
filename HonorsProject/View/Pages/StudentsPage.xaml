@@ -134,6 +134,7 @@
                             Style="{StaticResource FormSaveButton}" />
                         <Button Name="CancelStudentBtn"
                             Content="Cancel"
+                            Command="{Binding CancelCmd}"
                             Grid.Row="4"
                             Grid.Column="1"
                             Style="{StaticResource FormCancelButton}" />
