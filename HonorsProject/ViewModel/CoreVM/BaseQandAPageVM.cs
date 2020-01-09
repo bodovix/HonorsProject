@@ -14,7 +14,7 @@ using HonorsProject.Model.DTO;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd,IDeleteCmd,IUploadImageCmd,IToggleMarkQCmd, IToggleMarkACmd, ICancelmd,IEnterNewModeCmd
+    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd, IDeleteCmd, IUploadImageCmd, IToggleMarkQCmd, IToggleMarkACmd, ICancelmd, IEnterNewModeCmd
     {
         #region Properties
 
@@ -25,10 +25,13 @@ namespace HonorsProject.ViewModel.CoreVM
         public FormContext FormContextQuestion
         {
             get { return _formContextQuestion; }
-            set { _formContextQuestion = value;
+            set
+            {
+                _formContextQuestion = value;
                 OnPropertyChanged(nameof(FormContextQuestion));
             }
         }
+
         private FormContext _formContextAnswer;
 
         public FormContext FormContextAnswer
@@ -40,12 +43,15 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(FormContextAnswer));
             }
         }
+
         private Session _selectedSession;
 
         public Session SelectedSession
         {
             get { return _selectedSession; }
-            set { _selectedSession = value;
+            set
+            {
+                _selectedSession = value;
                 OnPropertyChanged(nameof(SelectedSession));
             }
         }
@@ -55,16 +61,20 @@ namespace HonorsProject.ViewModel.CoreVM
         public ObservableCollection<Question> Questions
         {
             get { return _questions; }
-            set { _questions = value;
+            set
+            {
+                _questions = value;
                 OnPropertyChanged(nameof(Questions));
             }
         }
+
         private Question _selectedQuestion;
 
         public Question SelectedQuestion
         {
             get { return _selectedQuestion; }
-            set {
+            set
+            {
                 if (value == null)
                     value = new Question();
                 //if selected.id == 0 create else update
@@ -82,8 +92,10 @@ namespace HonorsProject.ViewModel.CoreVM
         public string QuestionSearchTxt
         {
             get { return _quesitonSearchTxt; }
-            set { _quesitonSearchTxt = value;
-                UpdateQuestionsList( SelectedSession, QuestionSearchTxt);
+            set
+            {
+                _quesitonSearchTxt = value;
+                UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
                 OnPropertyChanged(nameof(QuestionSearchTxt));
             }
         }
@@ -105,10 +117,13 @@ namespace HonorsProject.ViewModel.CoreVM
         public ObservableCollection<Answer> Answers
         {
             get { return _answers; }
-            set { _answers = value;
+            set
+            {
+                _answers = value;
                 OnPropertyChanged(nameof(Answers));
             }
         }
+
         private Answer _selectedAnswer;
 
         public Answer SelectedAnswer
@@ -124,15 +139,17 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(SelectedAnswer));
                 AVisConDTO.Answer = value;
                 OnPropertyChanged(nameof(AVisConDTO));
-
             }
         }
+
         private string _answerSearchTxt;
 
         public string AnswerSearchTxt
         {
             get { return _answerSearchTxt; }
-            set { _answerSearchTxt = value;
+            set
+            {
+                _answerSearchTxt = value;
                 UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 OnPropertyChanged(AnswerSearchTxt);
             }
@@ -143,7 +160,9 @@ namespace HonorsProject.ViewModel.CoreVM
         public Image AnswerImage
         {
             get { return _answerImage; }
-            set { _answerImage = value;
+            set
+            {
+                _answerImage = value;
                 OnPropertyChanged(nameof(AnswerImage));
             }
         }
@@ -153,7 +172,9 @@ namespace HonorsProject.ViewModel.CoreVM
         public QandAMode QandAMode
         {
             get { return _qandAMode; }
-            set { _qandAMode = value;
+            set
+            {
+                _qandAMode = value;
                 OnPropertyChanged(nameof(QandAMode));
             }
         }
@@ -169,27 +190,33 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(QVisConDTO));
             }
         }
+
         private AnswerStateConverterDTO _aVisConDTO;
 
         public AnswerStateConverterDTO AVisConDTO
         {
             get { return _aVisConDTO; }
-            set { _aVisConDTO = value;
+            set
+            {
+                _aVisConDTO = value;
                 OnPropertyChanged(nameof(AVisConDTO));
             }
         }
 
-
         public bool IsConfirmed { get; set; }
+
         #endregion Properties
+
         #region Commands
+
         public SaveCmd SaveFormCmd { get; set; }
-        public DeleteCmd DeleteCmd { get; set ; }
+        public DeleteCmd DeleteCmd { get; set; }
         public UploadImageCmd UploadImageCmd { get; set; }
-        public ToggleMarkQCmd ToggleMarkQCmd { get; set ; }
+        public ToggleMarkQCmd ToggleMarkQCmd { get; set; }
         public ToggleMarkACmd ToggleMarkACmd { get; set; }
-        public CancelCmd CancelCmd { get ; set; }
+        public CancelCmd CancelCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
+
         #endregion Commands
 
         public BaseQandAPageVM(string dbcontextName) : base(dbcontextName)
@@ -208,7 +235,9 @@ namespace HonorsProject.ViewModel.CoreVM
             AnswerSearchTxt = "";
             QuestionSearchTxt = "";
         }
+
         protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+
         protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string answerSearchTxt);
 
         public abstract bool Save();
@@ -237,10 +266,10 @@ namespace HonorsProject.ViewModel.CoreVM
                         {
                             UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
                             OnPropertyChanged(nameof(SelectedQuestion));
-                        } 
+                        }
                     }
-                else
-                    FeedbackMessage = "New questions cannot be marked.";
+                    else
+                        FeedbackMessage = "New questions cannot be marked.";
                 }
                 else
                     FeedbackMessage = "No question selected.";
@@ -292,7 +321,5 @@ namespace HonorsProject.ViewModel.CoreVM
         public abstract bool Cancel();
 
         public abstract void EnterNewMode();
-
-       
     }
 }

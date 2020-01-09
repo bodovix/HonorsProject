@@ -10,15 +10,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QandAPage">
     <Page.Resources>
-        <cv:QandAModeToVisibleConverter x:Key="QandAModeToVisibleConverter"/>
-        <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter"/>
-        <cv:RoleToHiddenConverter x:Key="RoleToHiddenConverter"/>
-        <cv:FormContextToTextConverter x:Key="FormContextToTextConverter"/>
-        <cv:BoolToResolvedImgConverter x:Key="BoolToResolvedImgConverter"/>
-        <cv:QuestionIdToUserOrAdminVisConverter x:Key="QuestionIdToUserOrAdminVisConverter"/>
-        <cv:QuestionToUserVisConverter x:Key="QuestionToUserVisConverter"/>
-        <cv:AnswerToUserVisConverter x:Key="AnswerToUserVisConverter"/>
-        <cv:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
+        <cv:QandAModeToVisibleConverter x:Key="QandAModeToVisibleConverter" />
+        <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
+        <cv:RoleToHiddenConverter x:Key="RoleToHiddenConverter" />
+        <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
+        <cv:BoolToResolvedImgConverter x:Key="BoolToResolvedImgConverter" />
+        <cv:QuestionIdToUserOrAdminVisConverter x:Key="QuestionIdToUserOrAdminVisConverter" />
+        <cv:QuestionToUserVisConverter x:Key="QuestionToUserVisConverter" />
+        <cv:AnswerToUserVisConverter x:Key="AnswerToUserVisConverter" />
+        <cv:BoolToVisibleConverter x:Key="BoolToVisibleConverter" />
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -31,8 +31,8 @@
         <StackPanel Orientation="Horizontal">
             <!--Search Questions-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
-                <Button Name="NewQuestionBtn" 
-                        Content="New Question" 
+                <Button Name="NewQuestionBtn"
+                        Content="New Question"
                         Command="{Binding NewModeCmd}"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
                                 ConverterParameter={x:Static enums:Role.Student}}"
@@ -40,30 +40,30 @@
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchQTxtBox"
-                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ListView  x:Name="searchQResultsList"
                        Height="390"
                            ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            PreviewMouseLeftButtonUp="searchQResultsList_PreviewMouseLeftButtonUp"
-                           HorizontalContentAlignment="Stretch" >
+                           HorizontalContentAlignment="Stretch">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding IsResolved,
-                                        Converter={StaticResource BoolToResolvedImgConverter}}" 
+                                        Converter={StaticResource BoolToResolvedImgConverter}}"
                                            HorizontalAlignment="Left"
                                            Style="{StaticResource IconImage}" />
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="0"/>
-                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1"/>
+                                    <TextBlock Text="{Binding Id}"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
+                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
                                 </Grid>
                             </StackPanel>
                         </DataTemplate>
@@ -72,8 +72,8 @@
             </StackPanel>
             <!--Answers Search bar-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
-                <Button Name="NewAnswerBtn" 
-                        Content="New Answer" 
+                <Button Name="NewAnswerBtn"
+                        Content="New Answer"
                         Command="{Binding NewModeCmd}"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
                                 ConverterParameter={x:Static enums:Role.Lecturer}}"
@@ -81,7 +81,7 @@
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchTxtBox"
-                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 <ListView  x:Name="searchAResultsList"
                        Height="390"
                         ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -108,8 +108,8 @@
             </Grid.RowDefinitions>
             <!--Questions Form-->
             <GroupBox Header="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      x:Name="QuestionContainer" 
-                      Grid.Column="0" 
+                      x:Name="QuestionContainer"
+                      Grid.Column="0"
                       Grid.Row="0"
                       Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
                     ConverterParameter={x:Static enums:QandAMode.Question}}">
@@ -145,7 +145,7 @@
                     </GroupBox>
                     <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <Image Source="{Binding SelectedQuestion.IsResolved,
-                            Converter={StaticResource BoolToResolvedImgConverter}}" 
+                            Converter={StaticResource BoolToResolvedImgConverter}}"
                                Style="{StaticResource IconImage}" />
                     </GroupBox>
                     <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
@@ -156,39 +156,40 @@
                          Style="{StaticResource UserInput}"
                          Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
-                    <TextBlock Text="{Binding FeedbackMessage}" 
-                               Grid.Row="4" 
-                               Grid.Column="0" 
+                    <TextBlock Text="{Binding FeedbackMessage}"
+                               Grid.Row="4"
+                               Grid.Column="0"
                                Grid.ColumnSpan="2"
-                               Style="{StaticResource UserInputError}"/>
+                               Style="{StaticResource UserInputError}" />
                     <Image Name="QuestionImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
-                        <Button Name="QuestionSaveBtn" 
+                        <Button Name="QuestionSaveBtn"
                                 Command="{Binding SaveFormCmd}"
-                                Content="{Binding Path=FormContextQuestion, 
+                                Content="{Binding Path=FormContextQuestion,
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="QuestionCancelBtn"
-                                Content="Cancel" 
+                                Content="Cancel"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
-                        <Button Name="QuestionDeleteBtn" 
-                                Content="Delete" 
+                        <Button Name="QuestionDeleteBtn"
+                                Content="Delete"
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionIdToUserOrAdminVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
-                        <Button Name="QuestionResolvedBtn" 
-                                Content="Resolved" 
+                        <Button Name="QuestionResolvedBtn"
+                                Content="Resolved"
                                 Command="{Binding ToggleMarkQCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
-                        <Button Name="QuestoinUploadBtn" 
-                                Content="Upload" 
+                        <Button Name="QuestoinUploadBtn"
+                                Content="Upload"
+                                Command="{Binding UploadImageCmd}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
@@ -197,7 +198,7 @@
             <!--Answer Form-->
             <GroupBox Header="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       x:Name="AnswerContainer"
-                      Grid.Column="0" 
+                      Grid.Column="0"
                       Grid.Row="0"
                       Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
                     ConverterParameter={x:Static enums:QandAMode.Answer}}">
@@ -226,17 +227,17 @@
                                  Text="{Binding SelectedAnswer.Name}" />
                     </GroupBox>
                     <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <Label Content="{Binding SelectedAnswer.AnsweredBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                        <Label Content="{Binding SelectedAnswer.AnsweredBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <GroupBox Header="Created On" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                        <Label Content="{Binding SelectedAnswer.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                        <Label Content="{Binding SelectedAnswer.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
-                    <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" >
+                    <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1">
                         <GroupBox  Header="Was Helpful?" Style="{StaticResource FormGroupBox}">
-                            <Image Source="../Images/starIcon.png" 
-                                   Visibility="{Binding Path=SelectedAnswer.WasHelpfull, Converter={StaticResource BoolToVisibleConverter} }"/>
+                            <Image Source="../Images/starIcon.png"
+                                   Visibility="{Binding Path=SelectedAnswer.WasHelpfull, Converter={StaticResource BoolToVisibleConverter} }" />
                         </GroupBox>
                     </StackPanel>
                     <GroupBox Header="Answer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
@@ -247,39 +248,40 @@
                              Style="{StaticResource UserInput}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
-                    <TextBlock Text="{Binding FeedbackMessage}" 
-                               Grid.Row="4" 
-                               Grid.Column="0" 
+                    <TextBlock Text="{Binding FeedbackMessage}"
+                               Grid.Row="4"
+                               Grid.Column="0"
                                Grid.ColumnSpan="2"
-                               Style="{StaticResource UserInputError}"/>
+                               Style="{StaticResource UserInputError}" />
                     <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
-                        <Button Name="AnswerSaveBtn" 
-                                Content="{Binding Path=FormContextAnswer, 
+                        <Button Name="AnswerSaveBtn"
+                                Content="{Binding Path=FormContextAnswer,
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New|Update'}"
                                 Command="{Binding SaveFormCmd}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormSaveButton}" />
-                        <Button Name="AnswerCancelBtn" 
-                                Content="Cancel" 
+                        <Button Name="AnswerCancelBtn"
+                                Content="Cancel"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
-                        <Button Name="AnswerDeleteBtn" 
-                                Content="Delete" 
+                        <Button Name="AnswerDeleteBtn"
+                                Content="Delete"
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedAnswer}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
-                        <Button Name="AnswerResolvedBtn" 
-                                Content="Was Helpful" 
+                        <Button Name="AnswerResolvedBtn"
+                                Content="Was Helpful"
                                 Command="{Binding ToggleMarkACmd}"
                                 CommandParameter="{Binding SelectedAnswer}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
-                        <Button Name="AnswerUploadBtn" 
-                                Content="Upload" 
+                        <Button Name="AnswerUploadBtn"
+                                Content="Upload"
+                                Command="{Binding UploadImageCmd}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
