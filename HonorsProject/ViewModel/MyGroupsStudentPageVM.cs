@@ -271,7 +271,7 @@ namespace HonorsProject.ViewModel
         public bool Cancel()
         {
             if (FormContext == FormContext.Create)
-                SelectedGroup = new Group();
+                EnterNewMode();
             else
             {
                 try
@@ -282,7 +282,7 @@ namespace HonorsProject.ViewModel
                 }
                 catch
                 {
-                    SelectedGroup = new Group();
+                    EnterNewMode();
                     FeedbackMessage = "Unable to re-load selected Group. \n Going back to new mode.";
                     return false;
                 }

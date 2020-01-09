@@ -449,7 +449,7 @@ namespace HonorsProject.ViewModel
         public bool Cancel()
         {
             if (FormContext == FormContext.Create)
-                SelectedSession = new Session();
+                EnterNewMode();
             else
             {
                 try
@@ -463,7 +463,7 @@ namespace HonorsProject.ViewModel
                 }
                 catch
                 {
-                    SelectedSession = new Session();
+                    EnterNewMode();
                     FeedbackMessage = "Unable to re-load selected Session. \n Going back to new mode...";
                     return false;
                 }
