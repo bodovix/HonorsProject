@@ -133,6 +133,7 @@ namespace HonorsProject.ViewModel
         public DeleteCmd DeleteCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public GoToEntityCmd GoToEntityCmd { get; set; }
+        public CancelCmd CancelCmd { get; set; }
 
         #endregion CommandProperties
 
@@ -146,6 +147,7 @@ namespace HonorsProject.ViewModel
             DeleteCmd = new DeleteCmd(this);
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
             GoToEntityCmd = new GoToEntityCmd(this);
+            CancelCmd = new CancelCmd(this);
             //initial setup
             UserRole = Role.Lecturer;
             User = (Lecturer)appUser;
@@ -363,10 +365,16 @@ namespace HonorsProject.ViewModel
                 if (result != null)
                 {
                     MySessions = new ObservableCollection<Session>(result);
+                    OnPropertyChanged(nameof(MySessions));
+                    OnPropertyChanged(nameof(SelectedSession));
                     return true;
                 }
                 else
+                {
+                    OnPropertyChanged(nameof(MySessions));
+                    OnPropertyChanged(nameof(SelectedSession));
                     return false;
+                }
             }
             catch (Exception ex)
             {
@@ -385,10 +393,16 @@ namespace HonorsProject.ViewModel
                 if (result != null)
                 {
                     MySessions = new ObservableCollection<Session>(result);
+                    OnPropertyChanged(nameof(MySessions));
+                    OnPropertyChanged(nameof(SelectedSession));
                     return true;
                 }
                 else
+                {
+                    OnPropertyChanged(nameof(MySessions));
+                    OnPropertyChanged(nameof(SelectedSession));
                     return false;
+                }
             }
             catch (Exception ex)
             {
@@ -404,13 +418,20 @@ namespace HonorsProject.ViewModel
                 SubgridContext = SubgridContext.FutureSessions;
                 MySessions = new ObservableCollection<Session>();
                 List<Session> result = User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
+
                 if (result != null)
                 {
                     MySessions = new ObservableCollection<Session>(result);
+                    OnPropertyChanged(nameof(MySessions));
+                    OnPropertyChanged(nameof(SelectedSession));
                     return true;
                 }
                 else
+                {
+                    OnPropertyChanged(nameof(MySessions));
+                    OnPropertyChanged(nameof(SelectedSession));
                     return false;
+                }
             }
             catch (Exception ex)
             {
@@ -422,6 +443,31 @@ namespace HonorsProject.ViewModel
         public bool GoToEntity(BaseEntity entity)
         {
             Mediator.NotifyColleagues(MediatorChannels.GoToThisSession.ToString(), entity);
+            return true;
+        }
+
+        public bool Cancel()
+        {
+            if (FormContext == FormContext.Create)
+                SelectedSession = new Session();
+            else
+            {
+                try
+                {
+                    int selectedId = SelectedSession.Id;
+                    UnitOfWork.Reload(SelectedSession);
+                    UpdateMySessionsList();
+                    SelectedSession = MySessions.Where(S => S.Id == selectedId).FirstOrDefault();
+                    OnPropertyChanged(nameof(MySessions));
+                    OnPropertyChanged(nameof(SelectedSession));
+                }
+                catch
+                {
+                    SelectedSession = new Session();
+                    FeedbackMessage = "Unable to re-load selected Session. \n Going back to new mode...";
+                    return false;
+                }
+            }
             return true;
         }
     }

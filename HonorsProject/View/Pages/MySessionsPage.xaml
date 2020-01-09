@@ -15,7 +15,7 @@
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
         <cv:RoleToEnabledConverter x:Key="RoleToEnabledConverter" />
-        <uc:SessionsGridViewControl x:Key="SessionsGridViewControl"/>
+        <uc:SessionsGridViewControl x:Key="SessionsGridViewControl" />
     </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
         <Button Name="NewSessionBtn"
@@ -183,6 +183,7 @@
                 </GroupBox>
                 <Button Name="CancelBtn"
                         Content="Cancel"
+                        Command="{Binding CancelCmd}"
                         Grid.Row="2"
                         Grid.Column="3"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
@@ -230,9 +231,8 @@
                             Background="{Binding SubgridContext,
                                                 Converter={StaticResource SubgridContextToColourConverter},
                                             ConverterParameter={x:Static enums:SubgridContext.PreviousSessions}}" />
-                    
                 </StackPanel>
-                <ListView Grid.Column="0" Grid.Row="2"/>
+                <ListView Grid.Column="0" Grid.Row="2" />
                 <uc:SessionsGridViewControl x:Name="SessionsGridViewControl"
                                             Grid.Column="0"
                                             Grid.Row="3"
@@ -240,7 +240,7 @@
                                             SelectedSession="{Binding SelectedSession, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             GoToEntityCmd="{Binding GoToEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                            UserRole="{Binding UserRole,UpdateSourceTrigger=PropertyChanged}"/>
+                                            UserRole="{Binding UserRole,UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </Grid>
     </StackPanel>
