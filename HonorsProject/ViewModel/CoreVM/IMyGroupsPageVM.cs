@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public interface IMyGroupsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IDeleteCmd,IRemoveEntityCmd,IMoveEntityInList,IGoToEntityCmd
+    public interface IMyGroupsPageVM : ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IDeleteCmd, IRemoveEntityCmd, IMoveEntityInList, IGoToEntityCmd, ICancelmd
     {
         bool IsConfirmed { get; set; }
         int RowLimit { get; set; }

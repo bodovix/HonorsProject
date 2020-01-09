@@ -44,6 +44,11 @@ namespace HonorsProject.Model.Data
             return _context.SaveChanges();
         }
 
+        public void Reload(BaseEntity baseEntityToReload)
+        {
+            _context.Entry(baseEntityToReload).Reload();
+        }
+
         public void Dispose()
         {
             _context.Dispose();

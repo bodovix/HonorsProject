@@ -43,6 +43,7 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(Groups));
             }
         }
+
         private ObservableCollection<Session> _filteredSessions;
 
         public ObservableCollection<Session> FilteredSessions
@@ -54,6 +55,7 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(FilteredSessions));
             }
         }
+
         private Session _selectedSession;
 
         public Session SelectedSession
@@ -77,7 +79,9 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(SelectedSession));
             }
         }
+
         private ObservableCollection<Student> _studentsNotInGroup;
+
         public ObservableCollection<Student> StudentsNotInGroup
 
         {
@@ -141,10 +145,11 @@ namespace HonorsProject.ViewModel
         public NewModeCmd NewModeCmd { get; set; }
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
-        public RemoveEntityCmd RemoveEntityCmd { get; set ; }
+        public RemoveEntityCmd RemoveEntityCmd { get; set; }
         public MoveEntityOutOfListCmd MoveEntityOutOfListCmd { get; set; }
         public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
         public GoToEntityCmd GoToEntityCmd { get; set; }
+        public CancelCmd CancelCmd { get; set; }
 
         #endregion Properties
 
@@ -159,6 +164,8 @@ namespace HonorsProject.ViewModel
             MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
             MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
             GoToEntityCmd = new GoToEntityCmd(this);
+            CancelCmd = new CancelCmd(this);
+
             //Initial Setup
             try
             {
@@ -202,18 +209,21 @@ namespace HonorsProject.ViewModel
                     FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetCurrentSessions(SelectedGroup, DateTime.Now.Date));
                     Mediator.NotifyColleagues(MediatorChannels.LoadActiveSessionsSubgrid.ToString(), null);
                     break;
+
                 case SubgridContext.FutureSessions:
                     //load required Sessions..
                     FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetFutureSessions(SelectedGroup, DateTime.Now.Date));
                     //update the view to show future sessions
                     Mediator.NotifyColleagues(MediatorChannels.LoadFutureSessionsSubgrid.ToString(), null);
                     break;
+
                 case SubgridContext.PreviousSessions:
                     //load required Sessions..
                     FilteredSessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetPreviousSessions(SelectedGroup, DateTime.Now.Date));
                     //update the view to show previous
                     Mediator.NotifyColleagues(MediatorChannels.LoadPreviousSessionsSubgrid.ToString(), null);
                     break;
+
                 case SubgridContext.Groups:
                     throw new NotImplementedException("Groups subgrid not required. Contact Support.");
                 case SubgridContext.Questions:
@@ -224,6 +234,7 @@ namespace HonorsProject.ViewModel
                     //update the view to show Students Subgrid
                     Mediator.NotifyColleagues(MediatorChannels.LoadStudentsSubgrid.ToString(), null);
                     break;
+
                 default:
                     break;
             }
@@ -237,7 +248,7 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
-            FeedbackMessage="Students cannot remove students from groups.";
+            FeedbackMessage = "Students cannot remove students from groups.";
             return false;
         }
 
@@ -256,5 +267,26 @@ namespace HonorsProject.ViewModel
             Mediator.NotifyColleagues(MediatorChannels.GoToThisSession.ToString(), entity);
             return true;
         }
+
+        public bool Cancel()
+        {
+            if (FormContext == FormContext.Create)
+                SelectedGroup = new Group();
+            else
+            {
+                try
+                {
+                    UnitOfWork.Reload(SelectedGroup);
+                    UpdateMyGroupsList(RowLimit);
+                    OnPropertyChanged(nameof(SelectedGroup));
+                }
+                catch
+                {
+                    SelectedGroup = new Group();
+                    FeedbackMessage = "Unable to re-load selected Group. \n Going back to new mode.";
+                    return false;
+                }
+            }
+            return true;
+        }
     }
-}
