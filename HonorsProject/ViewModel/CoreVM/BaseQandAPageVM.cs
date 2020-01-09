@@ -11,6 +11,9 @@ using System.Drawing;
 using HonorsProject.ViewModel.Commands.IComands;
 using HonorsProject.ViewModel.Commands;
 using HonorsProject.Model.DTO;
+using System.Windows.Media;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
@@ -100,9 +103,9 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private Image _questionImage;
+        private ImageSource _questionImage;
 
-        public Image QuestionImage
+        public ImageSource QuestionImage
         {
             get { return _questionImage; }
             set
@@ -236,10 +239,6 @@ namespace HonorsProject.ViewModel.CoreVM
             QuestionSearchTxt = "";
         }
 
-        protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
-
-        protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string answerSearchTxt);
-
         public abstract bool Save();
 
         public abstract bool Delete(BaseEntity objToDelete);
@@ -321,5 +320,24 @@ namespace HonorsProject.ViewModel.CoreVM
         public abstract bool Cancel();
 
         public abstract void EnterNewMode();
+
+        protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+
+        protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string answerSearchTxt);
+
+        protected ImageSource OpenImageFromDisk()
+        {
+            ImageSource image = null;
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                image = new BitmapImage(new Uri(op.FileName));
+            }
+            return image;
+        }
     }
 }

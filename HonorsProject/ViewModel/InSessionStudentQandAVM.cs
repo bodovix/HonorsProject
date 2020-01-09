@@ -3,15 +3,21 @@ using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.CoreVM;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace HonorsProject.ViewModel
 {
@@ -131,8 +137,56 @@ namespace HonorsProject.ViewModel
 
         public override bool UploadImage(Image imageToUpload)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            ImageConverter converter = new ImageConverter();
+
+            if (SelectedQuestion.AskedBy == User)
+            {
+                if (SelectedQuestion != null)
+                {
+                    if (String.IsNullOrEmpty(SelectedQuestion.ImageLocation))
+                    {
+                        //Add New Question Image
+                        QuestionImage = OpenImageFromDisk();
+                        if (QuestionImage != null)
+                        {
+                        }
+                    }
+                    else
+                    {
+                        //Replace existing Question image
+                    }
+                }
+                else
+                    FeedbackMessage = "You can only add an image you a question you proposed.";
+            }
+            return result;
         }
+
+        //private async void DeleteImageFromFTPServer(string fileLocation)
+        //{
+        //    FtpWebRequest Request = (FtpWebRequest)WebRequest.Create("sftp://1701267@mayar.abertay.ac.uk/home/UAD/1701267/" + fileLocation);
+        //    Request.Method = WebRequestMethods.Ftp.DeleteFile;
+        //    string userName = "barrierSystem@foxcoparkingsolution.co.uk";
+        //    string password = "VzNpOw?U];yR";
+        //    Request.Credentials = new NetworkCredential(userName, password);
+        //    try
+        //    {
+        //        var ResponseTask = await Request.GetResponseAsync();
+        //        FtpWebResponse Response = (FtpWebResponse)ResponseTask;
+        //        Stream Stream = Response.GetResponseStream();
+
+        //        StreamReader Reader = new StreamReader(Stream);
+
+        //        Reader.Close();
+        //        Stream.Close();
+        //    }
+        //    catch (WebException e)
+        //    {
+        //        FeedbackMessage = ((FtpWebResponse)e.Response).StatusDescription;
+        //    }
+        //    catch (Exception) { FeedbackMessage = "Error deleting image. Please contact support."; }
+        //}
 
         protected override bool UpdateAnswersList(BaseEntity sQuestion, string answerSearchTxt)
         {

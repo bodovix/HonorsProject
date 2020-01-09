@@ -161,7 +161,11 @@
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                Style="{StaticResource UserInputError}" />
-                    <Image Name="QuestionImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
+                    <Image Name="QuestionImage"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           Grid.RowSpan="3"
+                           Source="{Binding QuestionImage, UpdateSourceTrigger=PropertyChanged}">
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="QuestionSaveBtn"
