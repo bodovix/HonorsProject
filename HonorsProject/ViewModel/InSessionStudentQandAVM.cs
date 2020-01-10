@@ -143,13 +143,16 @@ namespace HonorsProject.ViewModel
                 {
                     if (String.IsNullOrEmpty(SelectedQuestion.ImageLocation))
                     {
-                        //Add New Question Image
-                        QuestionImage = OpenImageFromDisk();
+                        //Add New Image to Question
+                        if (openFileDialog.ShowDialog() == true)
+                        {
+                            QuestionImage = new BitmapImage(new Uri(openFileDialog.FileName));
+                        }
                         if (QuestionImage != null)
                         {
                             //Save the file in FTP
                             SelectedQuestion.ImageLocation = String.Concat(SelectedQuestion.Id, "-", SelectedQuestion.AskedBy.Id);
-                            ftpResult = await SaveImageToFTPServer(SelectedQuestion.ImageLocation);
+                            ftpResult = SaveImageToFTPServer(SelectedQuestion.ImageLocation);
                             if (!ftpResult)
                             {
                                 //if FTP fails undo everything and run away.
@@ -185,62 +188,86 @@ namespace HonorsProject.ViewModel
             //}
         }
 
-        private async Task<bool> SaveImageToFTPServer(string fileLocation)
+        private bool SaveImageToFTPServer(string imageLocation)
         {
-            if (fileLocation == null)
-                fileLocation = "";
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("sftp://1701267@mayar.abertay.ac.uk/home/UAD/1701267/public_html/honors/" + fileLocation);
-            request.Method = WebRequestMethods.Ftp.UploadFile;
-            string userName = "1701267";
+            string host = "mayar.abertay.ac.uk";
+            int port = 22;
+            string username = "1701267";
             string password = "123Haggis0nToast123$";
-            request.Credentials = new NetworkCredential(userName, password);
-            try
-            {
-                var ResponseTask = await request.GetResponseAsync();
-                FtpWebResponse Response = (FtpWebResponse)ResponseTask;
-                Stream Stream = Response.GetResponseStream();
 
-                StreamReader Reader = new StreamReader(Stream);
+            BitmapEncoder encoder = new TiffBitmapEncoder();
+            byte[] biteArray = ImageSourceToBytes(encoder, QuestionImage); // Function returns byte[] csv file
 
-                Reader.Close();
-                Stream.Close();
-                return true;
-            }
-            catch (WebException e)
+            using (var client = new Renci.SshNet.SftpClient(host, port, username, password))
             {
-                FeedbackMessage = ((FtpWebResponse)e.Response).StatusDescription;
-                return false;
-            }
-            catch (Exception)
-            {
-                FeedbackMessage = "Error saving image. Please contact support.";
-                return false;
+                client.Connect();
+                if (client.IsConnected)
+                {
+                    client.ChangeDirectory("public_html/honors/questions");
+                    using (var ms = new MemoryStream(biteArray))
+                    {
+                        client.BufferSize = (uint)ms.Length; // bypass Payload error large files
+                        client.UploadFile(ms, openFileDialog.FileName);
+                        client.RenameFile(client.WorkingDirectory + "/" + openFileDialog.FileName, client.WorkingDirectory + "/" + imageLocation);
+                        return true;
+                    }
+                }
+                else
+                {
+                    FeedbackMessage = "I couldn't connect";
+                    return false;
+                }
             }
         }
 
-        private async void DeleteImageFromFTPServer(string fileLocation)
+        private byte[] ImageSourceToBytes(BitmapEncoder encoder, ImageSource imageSource)
         {
-            FtpWebRequest Request = (FtpWebRequest)WebRequest.Create("sftp://1701267@mayar.abertay.ac.uk/home/UAD/1701267/" + fileLocation);
-            Request.Method = WebRequestMethods.Ftp.DeleteFile;
-            string userName = "barrierSystem@foxcoparkingsolution.co.uk";
-            string password = "VzNpOw?U];yR";
-            Request.Credentials = new NetworkCredential(userName, password);
-            try
-            {
-                var ResponseTask = await Request.GetResponseAsync();
-                FtpWebResponse Response = (FtpWebResponse)ResponseTask;
-                Stream Stream = Response.GetResponseStream();
+            byte[] bytes = null;
+            var bitmapSource = imageSource as BitmapSource;
 
-                StreamReader Reader = new StreamReader(Stream);
-
-                Reader.Close();
-                Stream.Close();
-            }
-            catch (WebException e)
+            if (bitmapSource != null)
             {
-                FeedbackMessage = ((FtpWebResponse)e.Response).StatusDescription;
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+
+                using (var stream = new MemoryStream())
+                {
+                    encoder.Save(stream);
+                    bytes = stream.ToArray();
+                }
             }
-            catch (Exception) { FeedbackMessage = "Error deleting image. Please contact support."; }
+
+            return bytes;
+        }
+
+        private bool DeleteImageFromFTPServer(string imageLocation)
+        {
+            string host = "mayar.abertay.ac.uk";
+            int port = 22;
+            string username = "1701267";
+            string password = "123Haggis0nToast123$";
+
+            BitmapEncoder encoder = new TiffBitmapEncoder();
+            byte[] biteArray = ImageSourceToBytes(encoder, QuestionImage);
+
+            using (var client = new Renci.SshNet.SftpClient(host, port, username, password))
+            {
+                client.Connect();
+                if (client.IsConnected)
+                {
+                    client.ChangeDirectory("public_html/honors/questions");
+                    using (var ms = new MemoryStream(biteArray))
+                    {
+                        client.BufferSize = (uint)ms.Length; // bypass Payload error large files
+                        client.DeleteFile(client.WorkingDirectory + "/" + imageLocation);
+                    }
+                    return true;
+                }
+                else
+                {
+                    FeedbackMessage = "I couldn't connect to SFTP Server";
+                    return false;
+                }
+            }
         }
 
         protected override bool UpdateAnswersList(BaseEntity sQuestion, string answerSearchTxt)

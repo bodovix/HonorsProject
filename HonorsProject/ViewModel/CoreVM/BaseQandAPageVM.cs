@@ -207,6 +207,7 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         public bool IsConfirmed { get; set; }
+        protected OpenFileDialog openFileDialog { get; set; }
 
         #endregion Properties
 
@@ -237,6 +238,12 @@ namespace HonorsProject.ViewModel.CoreVM
             AVisConDTO = new AnswerStateConverterDTO();
             AnswerSearchTxt = "";
             QuestionSearchTxt = "";
+
+            openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a picture";
+            openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
         }
 
         public abstract bool Save();
@@ -324,20 +331,5 @@ namespace HonorsProject.ViewModel.CoreVM
         protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
 
         protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string answerSearchTxt);
-
-        protected ImageSource OpenImageFromDisk()
-        {
-            ImageSource image = null;
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                image = new BitmapImage(new Uri(op.FileName));
-            }
-            return image;
-        }
     }
 }
