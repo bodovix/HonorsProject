@@ -135,8 +135,7 @@ namespace HonorsProject.ViewModel
             bool ftpResult;
             bool dbResult;
             bool finalResult = false;
-            //try
-            //{
+
             if (SelectedQuestion.AskedBy == User)
             {
                 if (SelectedQuestion != null)
@@ -157,6 +156,7 @@ namespace HonorsProject.ViewModel
                             {
                                 //if FTP fails undo everything and run away.
                                 SelectedQuestion.ImageLocation = null;
+                                UnitOfWork.Complete();
                             }
                             else
                             {
@@ -167,6 +167,7 @@ namespace HonorsProject.ViewModel
                                     //undo Image location and FTP Step
                                     DeleteImageFromFTPServer(SelectedQuestion.ImageLocation);
                                     SelectedQuestion.ImageLocation = null;
+                                    UnitOfWork.Complete();
                                 }
                             }
                         }
@@ -180,12 +181,40 @@ namespace HonorsProject.ViewModel
                     FeedbackMessage = "You can only add an image you a question you proposed.";
             }
             return finalResult;
-            //}
-            //catch (Exception ex)
-            //{
-            //    FeedbackMessage = ex.Message;
-            //    return finalResult;
-            //}
+        }
+
+        private BitmapImage DownloadImageFromSFTP(string imageLocation)
+        {
+            string host = "mayar.abertay.ac.uk";
+            int port = 22;
+            string username = "1701267";
+            string password = "123Haggis0nToast123$";
+
+            BitmapEncoder encoder = new TiffBitmapEncoder();
+            byte[] biteArray = ImageSourceToBytes(encoder, QuestionImage); // Function returns byte[] csv file
+
+            using (var client = new Renci.SshNet.SftpClient(host, port, username, password))
+            {
+                client.Connect();
+                if (client.IsConnected)
+                {
+                    client.ChangeDirectory("public_html/honors/questions");
+                    using (MemoryStream fileStream = new MemoryStream())
+                    {
+                        client.DownloadFile(client.WorkingDirectory + "/" + imageLocation, fileStream);
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.StreamSource = fileStream;
+                        bitmapImage.EndInit();
+                        return bitmapImage;
+                    }
+                }
+                else
+                {
+                    FeedbackMessage = "I couldn't connect";
+                    return null;
+                }
+            }
         }
 
         private bool SaveImageToFTPServer(string imageLocation)
