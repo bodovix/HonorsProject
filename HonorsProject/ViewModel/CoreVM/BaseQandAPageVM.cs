@@ -14,6 +14,7 @@ using HonorsProject.Model.DTO;
 using System.Windows.Media;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
+using HonorsProject.Model.HelperClasses;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
@@ -83,6 +84,9 @@ namespace HonorsProject.ViewModel.CoreVM
                 //if selected.id == 0 create else update
                 FormContextQuestion = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedQuestion = value;
+                //if selected question has image. download it
+                if (!String.IsNullOrEmpty(SelectedQuestion.ImageLocation))
+                    ImageHandler.ReadImageSourceFromByteArraySFTP(QuestionImage, SelectedQuestion.ImageLocation);
                 UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 OnPropertyChanged(nameof(SelectedQuestion));
                 QVisConDTO.Question = value;
@@ -208,6 +212,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool IsConfirmed { get; set; }
         protected OpenFileDialog openFileDialog { get; set; }
+        public ImageHandler ImageHandler { get; set; }
 
         #endregion Properties
 
@@ -238,7 +243,6 @@ namespace HonorsProject.ViewModel.CoreVM
             AVisConDTO = new AnswerStateConverterDTO();
             AnswerSearchTxt = "";
             QuestionSearchTxt = "";
-
             openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select a picture";
             openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +

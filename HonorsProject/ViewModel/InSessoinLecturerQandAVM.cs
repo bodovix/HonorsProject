@@ -46,6 +46,7 @@ namespace HonorsProject.ViewModel
             SelectedSession = selectedSession;//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
             ///Answers loaded when question selected
+            ImageHandler = new ImageHandler("public_html/honors/answers");
         }
 
         protected override bool UpdateQuestionsList(BaseEntity sSession, string QuestionSearchTxt)

@@ -14,56 +14,59 @@ namespace HonorsProject.Model.HelperClasses
     public class ImageHandler
     {
         public string OutputMessage { get; set; }
-        public string host { get; set; }
-        public string username { get; set; }
-        public int port { get; set; }
-        public string password { get; set; }
+        public string Host { get; set; }
+        public string Username { get; set; }
+        public int Port { get; set; }
+        public string Password { get; set; }
+        public string SFTPWorkingDirectory { get; set; }
 
-        public ImageHandler()
+        public ImageHandler(string ftpPathToSaveTo)
         {
-            host = "mayar.abertay.ac.uk";
-            username = "1701267";
-            port = 22;
-            password = "123Haggis0nToast123$";
+            Host = "mayar.abertay.ac.uk";
+            Username = "1701267";
+            Port = 22;
+            Password = "123Haggis0nToast123$";
+            SFTPWorkingDirectory = ftpPathToSaveTo; // e.g. "public_html/honors/questions"
         }
 
-        private BitmapImage DownloadImageFromSFTP(string imageLocation)
+        public BitmapImage DownloadImageFromSFTP(BitmapImage bitmapImage, string imageLocation)
         {
-            using (var client = new Renci.SshNet.SftpClient(host, port, username, password))
+            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
             {
                 client.Connect();
                 if (client.IsConnected)
                 {
-                    client.ChangeDirectory("public_html/honors/questions");
+                    client.ChangeDirectory(SFTPWorkingDirectory);
                     using (MemoryStream fileStream = new MemoryStream())
                     {
                         client.DownloadFile(client.WorkingDirectory + "/" + imageLocation, fileStream);
-                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage = new BitmapImage();
                         bitmapImage.BeginInit();
                         bitmapImage.StreamSource = fileStream;
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                         bitmapImage.EndInit();
                         return bitmapImage;
                     }
                 }
                 else
                 {
-                    OutputMessage = "I couldn't connect";
+                    OutputMessage = "Couldn't connect to SFTP server.";
                     return null;
                 }
             }
         }
 
-        private bool SaveImageToFTPServer(ImageSource imageSource, string imageLocationMemory, string imageLocationDisk)
+        public bool SaveImageToFTPServer(ImageSource imageSource, string imageLocationMemory, string imageLocationDisk)
         {
             BitmapEncoder encoder = new TiffBitmapEncoder();
             byte[] biteArray = ImageSourceToBytes(encoder, imageSource); // Function returns byte[] csv file
 
-            using (var client = new Renci.SshNet.SftpClient(host, port, username, password))
+            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
             {
                 client.Connect();
                 if (client.IsConnected)
                 {
-                    client.ChangeDirectory("public_html/honors/questions");
+                    client.ChangeDirectory(SFTPWorkingDirectory);
                     using (var ms = new MemoryStream(biteArray))
                     {
                         client.BufferSize = (uint)ms.Length; // bypass Payload error large files
@@ -74,13 +77,68 @@ namespace HonorsProject.Model.HelperClasses
                 }
                 else
                 {
-                    OutputMessage = "I couldn't connect";
+                    OutputMessage = "Couldn't connect to SFTP server.";
                     return false;
                 }
             }
         }
 
-        private byte[] ImageSourceToBytes(BitmapEncoder encoder, ImageSource imageSource)
+        public bool WriteImageSourceAsByteArraySFTP(ImageSource imageSource, string imageLocationMemory)
+        {
+            BitmapEncoder encoder = new TiffBitmapEncoder();
+            byte[] biteArray = ImageSourceToBytes(encoder, imageSource); // Function returns byte[] csv file
+
+            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
+            {
+                client.Connect();
+                if (client.IsConnected)
+                {
+                    client.ChangeDirectory(SFTPWorkingDirectory);
+                    using (var ms = new MemoryStream(biteArray))
+                    {
+                        client.BufferSize = (uint)ms.Length; // bypass Payload error large files
+                        client.Create(SFTPWorkingDirectory + "/" + imageLocationMemory);
+                        client.WriteAllBytes(SFTPWorkingDirectory + "/" + imageLocationMemory, biteArray);// imageLocationDisk == openFileDialog.FileName
+                        return true;
+                    }
+                }
+                else
+                {
+                    OutputMessage = "Couldn't connect to SFTP server.";
+                    return false;
+                }
+            }
+        }
+
+        public bool ReadImageSourceFromByteArraySFTP(ImageSource imageSource, string imageLocationMemory)
+        {
+            BitmapEncoder encoder = new TiffBitmapEncoder();
+            byte[] biteArray = ImageSourceToBytes(encoder, imageSource); // Function returns byte[] csv file
+
+            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
+            {
+                client.Connect();
+                if (client.IsConnected)
+                {
+                    client.ChangeDirectory(SFTPWorkingDirectory);
+                    biteArray = client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
+                    if (biteArray != null)
+                    {
+                        imageSource = ByteToImage(biteArray);//TODO: figure out this weird bug - i suspect garbage collection
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                {
+                    OutputMessage = "Couldn't connect to SFTP server.";
+                    return false;
+                }
+            }
+        }
+
+        public byte[] ImageSourceToBytes(BitmapEncoder encoder, ImageSource imageSource)
         {
             byte[] bytes = null;
             var bitmapSource = imageSource as BitmapSource;
@@ -99,17 +157,30 @@ namespace HonorsProject.Model.HelperClasses
             return bytes;
         }
 
-        private bool DeleteImageFromFTPServer(string imageLocation)
+        public static ImageSource ByteToImage(byte[] imageData)
+        {
+            BitmapImage biImg = new BitmapImage();
+            MemoryStream ms = new MemoryStream(imageData);
+            biImg.BeginInit();
+            biImg.StreamSource = ms;
+            biImg.EndInit();
+
+            ImageSource imgSrc = biImg as ImageSource;
+
+            return imgSrc;
+        }
+
+        public bool DeleteFileFromFTPServer(string imageLocation)
         {
             //BitmapEncoder encoder = new TiffBitmapEncoder();
             // byte[] biteArray = ImageSourceToBytes(encoder, QuestionImage);
 
-            using (var client = new Renci.SshNet.SftpClient(host, port, username, password))
+            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
             {
                 client.Connect();
                 if (client.IsConnected)
                 {
-                    client.ChangeDirectory("public_html/honors/questions");
+                    client.ChangeDirectory(SFTPWorkingDirectory);
                     //using (var ms = new MemoryStream(biteArray))
                     // {
                     //client.BufferSize = (uint)ms.Length; // bypass Payload error large files
@@ -119,7 +190,7 @@ namespace HonorsProject.Model.HelperClasses
                 }
                 else
                 {
-                    OutputMessage = "Couldn't connect to SFTP Server";
+                    OutputMessage = "Couldn't connect to SFTP server";
                     return false;
                 }
             }

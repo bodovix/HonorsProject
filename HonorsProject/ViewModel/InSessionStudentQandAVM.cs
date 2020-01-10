@@ -33,7 +33,8 @@ namespace HonorsProject.ViewModel
             FormContextQuestion = FormContext.Create;
             SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
-            ///Answers loaded when question selected
+            //Answers loaded when question selected
+            ImageHandler = new ImageHandler("public_html/honors/questions");
         }
 
         private ISystemUser _user;
@@ -151,7 +152,7 @@ namespace HonorsProject.ViewModel
                         {
                             //Save the file in FTP
                             SelectedQuestion.ImageLocation = String.Concat(SelectedQuestion.Id, "-", SelectedQuestion.AskedBy.Id);
-                            ftpResult = SaveImageToFTPServer(SelectedQuestion.ImageLocation);
+                            ftpResult = ImageHandler.WriteImageSourceAsByteArraySFTP(QuestionImage, SelectedQuestion.ImageLocation);
                             if (!ftpResult)
                             {
                                 //if FTP fails undo everything and run away.
@@ -165,7 +166,7 @@ namespace HonorsProject.ViewModel
                                 if (!dbResult)
                                 {
                                     //undo Image location and FTP Step
-                                    DeleteImageFromFTPServer(SelectedQuestion.ImageLocation);
+                                    ImageHandler.DeleteFileFromFTPServer(SelectedQuestion.ImageLocation);
                                     SelectedQuestion.ImageLocation = null;
                                     UnitOfWork.Complete();
                                 }
