@@ -29,7 +29,7 @@ namespace HonorsProject.Model.Core
 
         List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
 
-        bool GenerateNewPasswordHash(ref string optionalPassword);
+        bool GenerateNewPasswordHash(ref string optionalPassword, string optionalPasswordConfirmation);
 
         bool AddNewGroup(Group selectedGroup, UnitOfWork unitOfWork);
 

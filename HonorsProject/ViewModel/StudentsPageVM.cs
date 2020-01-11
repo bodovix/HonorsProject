@@ -280,7 +280,7 @@ namespace HonorsProject.ViewModel
                 if (IsConfirmed)
                 {
                     //randomly generate
-                    SelectedStudent.GenerateNewPasswordHash(ref optionalNewPassword);
+                    SelectedStudent.GenerateNewPasswordHash(ref optionalNewPassword, null);
                     //have to set form context back when in create as this updates the id
                     if (FormContext == FormContext.Create)
                     {

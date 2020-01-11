@@ -154,7 +154,7 @@ namespace HonorsProject.Model.Entities
             return result;
         }
 
-        public bool GenerateNewPasswordHash(ref string optionalPassword)
+        public bool GenerateNewPasswordHash(ref string optionalPassword, string optionalPassConf)
         {
             if (String.IsNullOrEmpty(optionalPassword))
             {

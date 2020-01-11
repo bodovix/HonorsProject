@@ -28,6 +28,18 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
+        private string _proposedPasswordConf;
+
+        public string ProposedPasswordConf
+        {
+            get { return _proposedPasswordConf; }
+            set
+            {
+                _proposedPasswordConf = value;
+                OnPropertyChanged(nameof(ProposedPasswordConf));
+            }
+        }
+
         #endregion Properties
 
         #region Commands
@@ -41,6 +53,7 @@ namespace HonorsProject.ViewModel.CoreVM
         protected BaseMyAccountPageVM(string dbcontextName) : base(dbcontextName)
         {
             ProposedPassword = "";
+            ProposedPasswordConf = "";
             SaveFormCmd = new SaveCmd(this);
             NewPassHashCmd = new NewPassHashCmd(this);
             CancelCmd = new CancelCmd(this);
@@ -65,10 +78,16 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool GenerateNewPasswordHash(string optionalNewPassword)
         {
-            bool result;
+            FeedbackMessage = "";
+            bool result = false;
             try
             {
-                result = User.GenerateNewPasswordHash(ref optionalNewPassword);
+                if (String.IsNullOrEmpty(optionalNewPassword))
+                {
+                    FeedbackMessage = "Password Required.";
+                    return result;
+                }
+                result = User.GenerateNewPasswordHash(ref optionalNewPassword, ProposedPasswordConf);
                 if (result)
                 {
                     result = (UnitOfWork.Complete() > 0) ? true : false;

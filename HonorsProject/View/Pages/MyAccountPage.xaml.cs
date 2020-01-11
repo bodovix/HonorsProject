@@ -39,6 +39,7 @@ namespace HonorsProject.View.Pages
         {
             VM.ProposedPassword = "";
             ProposedPasswordTxt.Password = "";
+            ProposedPasswordConfirmationTxt.Password = "";
         }
 
         private void CreateMySesoinVM()
@@ -54,6 +55,12 @@ namespace HonorsProject.View.Pages
             //Manually bind for password box
             if (this.DataContext != null)
             { ((BaseMyAccountPageVM)this.DataContext).ProposedPassword = ((PasswordBox)sender).Password; }
+        }
+
+        private void ProposedPasswordConfirmationTxt_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((BaseMyAccountPageVM)this.DataContext).ProposedPasswordConf = ((PasswordBox)sender).Password; }
         }
     }
 }

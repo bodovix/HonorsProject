@@ -139,7 +139,7 @@ namespace HonorsProject.Model.Entities
             }
         }
 
-        public bool GenerateNewPasswordHash(ref string optionalPassword)
+        public bool GenerateNewPasswordHash(ref string optionalPassword, string optionalPassConf)
         {
             if (String.IsNullOrEmpty(optionalPassword))
             {
@@ -156,16 +156,18 @@ namespace HonorsProject.Model.Entities
             }
             else
             {
-                ValidatePassword(optionalPassword);
+                ValidatePasswordForManualSet(optionalPassword, optionalPassConf);
                 Password = Cryptography.Hash(optionalPassword);
                 return true;
             }
         }
 
-        private void ValidatePassword(string optionalPassword)
+        private void ValidatePasswordForManualSet(string optionalPassword, string passwordConf)
         {
             if (String.IsNullOrEmpty(optionalPassword))
                 throw new ArgumentException("Password cannot be empty.");
+            if (!String.Equals(optionalPassword, passwordConf))
+                throw new ArgumentException("Passwords don't match.");
         }
 
         public bool AddNewGroup(Group selectedGroup, UnitOfWork unitOfWork)
