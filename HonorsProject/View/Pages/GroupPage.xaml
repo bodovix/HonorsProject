@@ -15,6 +15,7 @@
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
         <cv:SubgridContextToVisibleConverter x:Key="SubgridContextToVisibleConverter" />
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -130,6 +131,7 @@
                                Grid.Row="2"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
+                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
                 <Button Name="SaveBtn"
                         Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"

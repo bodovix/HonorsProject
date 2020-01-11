@@ -14,6 +14,7 @@
     <Page.Resources>
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -125,6 +126,7 @@
                                Grid.Row="3"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
+                               Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
                         <Button Name="SaveStudentBtn"
                             Command="{Binding SaveFormCmd}"

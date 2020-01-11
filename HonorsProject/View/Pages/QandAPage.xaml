@@ -19,6 +19,7 @@
         <cv:QuestionToUserVisConverter x:Key="QuestionToUserVisConverter" />
         <cv:AnswerToUserVisConverter x:Key="AnswerToUserVisConverter" />
         <cv:BoolToVisibleConverter x:Key="BoolToVisibleConverter" />
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -160,6 +161,7 @@
                                Grid.Row="4"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
+                               Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
                     <Image Name="QuestionImage"
                            Grid.Row="1"
@@ -257,6 +259,7 @@
                                Grid.Row="4"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
+                               Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
                     <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>

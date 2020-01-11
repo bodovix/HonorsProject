@@ -16,6 +16,7 @@
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
         <cv:RoleToEnabledConverter x:Key="RoleToEnabledConverter" />
         <uc:SessionsGridViewControl x:Key="SessionsGridViewControl" />
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
         <Button Name="NewSessionBtn"
@@ -195,6 +196,7 @@
                     <TextBlock Grid.Row="3"
                        Grid.Column="1"
                        Text="{Binding FeedbackMessage}"
+                       Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                        Style="{StaticResource UserInputFeedback}" />
                 </Grid>
             </GroupBox>

@@ -10,6 +10,7 @@
       Title="MyAccountPage">
     <Page.Resources>
         <cv:RoleToStringConverter x:Key="RoleToStringConverter" />
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <StackPanel Orientation="Vertical">
         <GroupBox Header="Details">
@@ -82,6 +83,7 @@
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Text="{Binding FeedbackMessage}"
+                           Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                            Style="{StaticResource UserInputFeedback}" />
             </Grid>
         </GroupBox>
