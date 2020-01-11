@@ -27,12 +27,12 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        public MyAccountStudentPageVM(string dbcontextName) : base(dbcontextName)
+        public MyAccountStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
             //Initial Setup
             try
             {
-                User = UnitOfWork.StudentRepo.Get(User.Id);
+                User = UnitOfWork.StudentRepo.Get(appUser.Id);
                 UserRole = Role.Student;
             }
             catch (Exception ex)

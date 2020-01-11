@@ -3,12 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MyAccountPage">
-
-    <Grid Style="{StaticResource ContainerGrid}">
+    <Page.Resources>
+        <cv:RoleToStringConverter x:Key="RoleToStringConverter" />
+    </Page.Resources>
+    <Grid x:Name="MainContainer" Style="{StaticResource ContainerGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -23,29 +26,34 @@
         </Grid.RowDefinitions>
         <TextBlock Text="My Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormTitleText}" />
         <GroupBox Header="ID" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-            <Label Content="" Style="{StaticResource UserFormLbl}" />
+            <Label Content="{Binding User.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource UserFormLbl}" />
         </GroupBox>
         <GroupBox Header="Name" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
             <TextBox TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="" />
+                        Style="{StaticResource UserInput}"
+                        Text="{Binding User.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         </GroupBox>
         <GroupBox Header="Email" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-            <Label Content="" Style="{StaticResource UserFormLbl}" />
+            <Label Content="{Binding User.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource UserFormLbl}" />
         </GroupBox>
         <GroupBox Header="Password" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
             <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 Text="" />
+                                 Text="{Binding User.Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
         </GroupBox>
         <GroupBox Header="Created On" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-            <Label Content="" Style="{StaticResource UserFormLbl}" />
+            <Label Content="{Binding User.CreatedOn, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource UserFormLbl}" />
         </GroupBox>
         <GroupBox Header="Created By" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-            <Label Content="" Style="{StaticResource UserFormLbl}" />
+            <Label Content="{Binding User.CreatedByLecturerId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource UserFormLbl}" />
         </GroupBox>
         <GroupBox Header="Role" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-            <Label Content="" Style="{StaticResource UserFormLbl}" />
+            <Label Content="{Binding UserRole, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RoleToStringConverter}}"
+                   Style="{StaticResource UserFormLbl}" />
         </GroupBox>
         <Button Name="SaveBtn" Content="Save" Grid.Row="5" Grid.Column="0" Style="{StaticResource FormSaveButton}" />
         <Button Name="CancelBtn" Content="Cancel" Grid.Row="5" Grid.Column="1" Style="{StaticResource FormCancelButton}" />

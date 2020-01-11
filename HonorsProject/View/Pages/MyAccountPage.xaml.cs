@@ -1,4 +1,8 @@
-﻿using System;
+﻿using HonorsProject.Model.Data;
+using HonorsProject.Model.Enums;
+using HonorsProject.ViewModel;
+using HonorsProject.ViewModel.CoreVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +24,21 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class MyAccountPage : Page
     {
+        public BaseMyAccountPageVM VM { get; set; }
+
         public MyAccountPage()
         {
+            CreateMySesoinVM();
             InitializeComponent();
+            MainContainer.DataContext = VM;
+        }
+
+        private void CreateMySesoinVM()
+        {
+            if (App.LoggedInAs == Role.Lecturer)
+                VM = new MyAccountLecturerPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
+            else
+                VM = new MyAccountStudentPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
         }
     }
 }
