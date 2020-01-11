@@ -125,7 +125,7 @@
                                Grid.Row="3"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
-                               Style="{StaticResource UserInputError}" />
+                               Style="{StaticResource UserInputFeedback}" />
                         <Button Name="SaveStudentBtn"
                             Command="{Binding SaveFormCmd}"
                             Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"

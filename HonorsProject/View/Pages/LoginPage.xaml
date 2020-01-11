@@ -29,7 +29,7 @@
                     Style="{StaticResource FormSubmitButton}" />
 
         <TextBlock Text="{Binding FeedbackMessage}"
-                   Style="{StaticResource UserInputError}"
+                   Style="{StaticResource UserInputFeedback}"
                    Visibility="{Binding Path=FeedbackMessage, Converter={StaticResource ErrorMessageToVisibleConverter}}" />
     </StackPanel>
 </Page>

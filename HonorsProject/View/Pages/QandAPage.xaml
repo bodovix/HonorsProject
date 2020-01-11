@@ -160,7 +160,7 @@
                                Grid.Row="4"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
-                               Style="{StaticResource UserInputError}" />
+                               Style="{StaticResource UserInputFeedback}" />
                     <Image Name="QuestionImage"
                            Grid.Row="1"
                            Grid.Column="2"
@@ -257,7 +257,7 @@
                                Grid.Row="4"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
-                               Style="{StaticResource UserInputError}" />
+                               Style="{StaticResource UserInputFeedback}" />
                     <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">

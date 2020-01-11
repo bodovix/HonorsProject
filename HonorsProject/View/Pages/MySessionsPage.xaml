@@ -195,7 +195,7 @@
                     <TextBlock Grid.Row="3"
                        Grid.Column="1"
                        Text="{Binding FeedbackMessage}"
-                       Style="{StaticResource UserInputError}" />
+                       Style="{StaticResource UserInputFeedback}" />
                 </Grid>
             </GroupBox>
             <!--Sub Grid Container-->

@@ -82,7 +82,7 @@
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Text="{Binding FeedbackMessage}"
-                           Style="{StaticResource UserInputError}" />
+                           Style="{StaticResource UserInputFeedback}" />
             </Grid>
         </GroupBox>
 
