@@ -10,6 +10,7 @@
       Title="LoginPage">
     <Page.Resources>
         <cv:ErrorMessageToVisibleConverter x:Key="ErrorMessageToVisibleConverter" />
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <StackPanel
         Name="MainContainer"
@@ -30,6 +31,7 @@
 
         <TextBlock Text="{Binding FeedbackMessage}"
                    Style="{StaticResource UserInputFeedback}"
-                   Visibility="{Binding Path=FeedbackMessage, Converter={StaticResource ErrorMessageToVisibleConverter}}" />
+                   Visibility="{Binding Path=FeedbackMessage, Converter={StaticResource ErrorMessageToVisibleConverter}}"
+                   Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}" />
     </StackPanel>
 </Page>

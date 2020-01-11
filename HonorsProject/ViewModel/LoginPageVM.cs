@@ -50,7 +50,7 @@ namespace HonorsProject.ViewModel
 
         public LoginPageVM(string dbContextName) : base(dbContextName)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             LoginCmd = new LoginCmd(this);
         }
 
@@ -81,16 +81,12 @@ namespace HonorsProject.ViewModel
                             return true;
                         }
                         else
-                        {
-                            FeedbackMessage = "Invalid Login Credentials.";
-                            return false;
-                        }
+                            return ErrorFeedback("Invalid Login Credentials.");
                     }
                 }
                 catch (Exception ex)
                 {
-                    FeedbackMessage = ex.GetBaseException().Message;
-                    return false;
+                    return ErrorFeedback(ex.GetBaseException().Message);
                 }
             }
             else
@@ -102,13 +98,11 @@ namespace HonorsProject.ViewModel
             FeedbackMessage = "";
             if (userId == null || userId == 0)
             {
-                FeedbackMessage = "ID Required";
-                return false;
+                return ErrorFeedback("ID Required");
             }
             if (String.IsNullOrEmpty(password))
             {
-                FeedbackMessage = "Password Required";
-                return false;
+                return ErrorFeedback("Password Required");
             }
 
             return true;

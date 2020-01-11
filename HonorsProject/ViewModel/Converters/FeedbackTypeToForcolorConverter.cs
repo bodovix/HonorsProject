@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace HonorsProject.ViewModel.Converters
 {
@@ -16,17 +17,16 @@ namespace HonorsProject.ViewModel.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             FeedbackType feedbackType = (FeedbackType)value;
-
             switch (feedbackType)
             {
                 case FeedbackType.Error:
-                    return Brushes.Red;
+                    return new SolidColorBrush(Colors.Red);
 
                 case FeedbackType.Info:
-                    return Brushes.Blue;
+                    return new SolidColorBrush(Colors.Blue);
 
                 case FeedbackType.Success:
-                    return Brushes.Green;
+                    return new SolidColorBrush(Colors.Green);
 
                 default:
                     throw new Exception("Invalid feedback type for converter. Please contact support.");
