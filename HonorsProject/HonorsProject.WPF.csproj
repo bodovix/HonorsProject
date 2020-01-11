@@ -103,6 +103,7 @@
     <Compile Include="ViewModel\Converters\EnumToItemsSource.cs" />
     <Compile Include="ViewModel\Converters\FormContextToTextConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToVisibleConverter.cs" />
+    <Compile Include="ViewModel\CoreVM\BaseMyAccountPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseViewModel.cs" />
     <Compile Include="ViewModel\Commands\LoginCmd.cs" />
     <Compile Include="ViewModel\Converters\BoolToVisibleConverter.cs" />
@@ -115,6 +116,8 @@
     <Compile Include="ViewModel\InSessionStudentQandAVM.cs" />
     <Compile Include="ViewModel\InSessoinLecturerQandAVM.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />
+    <Compile Include="ViewModel\MyAccountLecturerPageVM.cs" />
+    <Compile Include="ViewModel\MyAccountStudentPageVM.cs" />
     <Compile Include="ViewModel\MyGroupsStudentPageVM.cs" />
     <Compile Include="ViewModel\MyGroupsLecturerPageVM.cs" />
     <Compile Include="ViewModel\MySessionsLecturerPageVM.cs" />
