@@ -41,11 +41,6 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        public override bool Cancel()
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Save()
         {
             throw new NotImplementedException();

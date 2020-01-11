@@ -30,7 +30,22 @@ namespace HonorsProject.ViewModel.CoreVM
             CancelCmd = new CancelCmd(this);
         }
 
-        public abstract bool Cancel();
+        public bool Cancel()
+        {
+            try
+            {
+                UnitOfWork.Reload((BaseEntity)User);
+                OnPropertyChanged(nameof(User));
+            }
+            catch
+            {
+                FeedbackMessage = "Unable to refresh user account. " +
+                                    "\n Navigate away then come back. " +
+                                    "\n If this does not solve your issue please contact support.";
+                return false;
+            }
+            return true;
+        }
 
         public abstract bool Save();
     }
