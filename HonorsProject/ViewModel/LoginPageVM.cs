@@ -95,7 +95,7 @@ namespace HonorsProject.ViewModel
 
         private bool ValidateLogin(int? userId, string password)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             if (userId == null || userId == 0)
             {
                 return ErrorFeedback("ID Required");
