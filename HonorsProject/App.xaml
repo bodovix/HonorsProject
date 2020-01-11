@@ -70,7 +70,7 @@
             <Setter Property="Height" Value="30" />
         </Style>
         <Style TargetType="TextBlock" x:Key="UserInputFeedback" BasedOn="{StaticResource UserInputLabel}">
-            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <Style TargetType="Button" x:Key="FormSaveButton">
