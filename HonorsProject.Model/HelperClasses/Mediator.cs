@@ -48,10 +48,5 @@ namespace HonorsProject.Model.HelperClasses
         {
             mediatorDictionary = new Dictionary<string, List<Action<object>>>();
         }
-
-        public static void NotifyColleagues(object p1, object p2)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

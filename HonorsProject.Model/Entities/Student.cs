@@ -156,9 +156,16 @@ namespace HonorsProject.Model.Entities
             }
             else
             {
-                Cryptography.Hash(optionalPassword);
+                ValidatePassword(optionalPassword);
+                Password = Cryptography.Hash(optionalPassword);
                 return true;
             }
+        }
+
+        private void ValidatePassword(string optionalPassword)
+        {
+            if (String.IsNullOrEmpty(optionalPassword))
+                throw new ArgumentException("Password cannot be empty.");
         }
 
         public bool AddNewGroup(Group selectedGroup, UnitOfWork unitOfWork)

@@ -1,5 +1,6 @@
 ﻿using HonorsProject.Model.Data;
 using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel;
 using HonorsProject.ViewModel.CoreVM;
 using System;
@@ -30,7 +31,14 @@ namespace HonorsProject.View.Pages
         {
             CreateMySesoinVM();
             InitializeComponent();
-            MainContainer.DataContext = VM;
+            this.DataContext = VM;
+            Mediator.Register(MediatorChannels.ClearPropPassInput.ToString(), ClearProposedPassword);
+        }
+
+        private void ClearProposedPassword(object obj)
+        {
+            VM.ProposedPassword = "";
+            ProposedPasswordTxt.Password = "";
         }
 
         private void CreateMySesoinVM()
@@ -39,6 +47,13 @@ namespace HonorsProject.View.Pages
                 VM = new MyAccountLecturerPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
             else
                 VM = new MyAccountStudentPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            //Manually bind for password box
+            if (this.DataContext != null)
+            { ((BaseMyAccountPageVM)this.DataContext).ProposedPassword = ((PasswordBox)sender).Password; }
         }
     }
 }

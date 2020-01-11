@@ -11,61 +11,80 @@
     <Page.Resources>
         <cv:RoleToStringConverter x:Key="RoleToStringConverter" />
     </Page.Resources>
-    <Grid x:Name="MainContainer" Style="{StaticResource ContainerGrid}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock Text="My Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormTitleText}" />
-        <GroupBox Header="ID" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-            <Label Content="{Binding User.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="Details">
+            <Grid x:Name="MainContainer" Style="{StaticResource ContainerGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="My Details" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormTitleText}" />
+                <GroupBox Header="ID" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding User.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                    Style="{StaticResource UserFormLbl}" />
-        </GroupBox>
-        <GroupBox Header="Name" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-            <TextBox TextWrapping="Wrap"
-                        Style="{StaticResource UserInput}"
-                        Text="{Binding User.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        </GroupBox>
-        <GroupBox Header="Email" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-            <Label Content="{Binding User.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                </GroupBox>
+                <GroupBox Header="Name" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <Label  Style="{StaticResource UserFormLbl}"
+                        Content="{Binding User.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                </GroupBox>
+                <GroupBox Header="Email" Grid.Row="3" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding User.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                    Style="{StaticResource UserFormLbl}" />
-        </GroupBox>
-        <GroupBox Header="Password" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-            <TextBox TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="{Binding User.Password, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-        </GroupBox>
-        <GroupBox Header="Created On" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-            <Label Content="{Binding User.CreatedOn, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                </GroupBox>
+                <GroupBox Header="Role" Grid.Row="4" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding UserRole, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RoleToStringConverter}}"
                    Style="{StaticResource UserFormLbl}" />
-        </GroupBox>
-        <GroupBox Header="Created By" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-            <Label Content="{Binding User.CreatedByLecturerId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                </GroupBox>
+                <GroupBox Header="Created On" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding User.CreatedOn, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                    Style="{StaticResource UserFormLbl}" />
-        </GroupBox>
-        <GroupBox Header="Role" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-            <Label Content="{Binding UserRole, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RoleToStringConverter}}"
+                </GroupBox>
+                <GroupBox Header="Created By" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding User.CreatedByLecturerId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                    Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <GroupBox Header="Hashed Password" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <Label Content="{Binding User.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource UserFormLbl}" />
+                </GroupBox>
+                <GroupBox Header="New Password" Grid.Row="4" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                    <PasswordBox x:Name="ProposedPasswordTxt"
+                        PasswordChanged="PasswordBox_PasswordChanged"
+                        FontFamily="Password"
+                     Style="{StaticResource UserInputPassword}" />
+                </GroupBox>
+            </Grid>
         </GroupBox>
-        <Button Name="SaveBtn" 
-                Content="Save" 
-                Command="{Binding SaveFormCmd}"
-                Grid.Row="5"
-                Grid.Column="0" 
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="*" />
+                <RowDefinition  Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="Change Password"
+                Command="{Binding NewPassHashCmd}"
+                CommandParameter="{Binding ProposedPassword}"
+                Grid.Row="0"
+                Grid.Column="0"
                 Style="{StaticResource FormSaveButton}" />
-        <Button Name="CancelBtn" 
+            <!--<Button Name="CancelBtn"
                 Content="Cancel"
                 Command="{Binding CancelCmd}"
-                Grid.Row="5"
-                Grid.Column="1" 
-                Style="{StaticResource FormCancelButton}" />
-    </Grid>
+                Grid.Row="1"
+                Grid.Column="0"
+                Style="{StaticResource FormCancelButton}" />-->
+        </Grid>
+    </StackPanel>
 </Page>

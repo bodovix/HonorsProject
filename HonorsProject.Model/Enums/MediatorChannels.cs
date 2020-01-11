@@ -22,6 +22,8 @@ namespace HonorsProject.Model.Enums
         LoadStudentsSubgrid,
         GoToThisSession,
         DeleteQuestionConfirmation,
-        DeleteAnswerConfirmation
+        DeleteAnswerConfirmation,
+        ChangePasswordBox,
+        ClearPropPassInput
     }
 }
