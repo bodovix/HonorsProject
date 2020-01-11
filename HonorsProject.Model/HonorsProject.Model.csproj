@@ -85,6 +85,7 @@
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Enums\FeedbackType.cs" />
     <Compile Include="Enums\MediatorChannels.cs" />
     <Compile Include="Enums\QandAMode.cs" />
     <Compile Include="Enums\SubgridContext.cs" />
