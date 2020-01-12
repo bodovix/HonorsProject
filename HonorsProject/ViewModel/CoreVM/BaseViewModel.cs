@@ -68,24 +68,10 @@ namespace HonorsProject.ViewModel.CoreVM
             FeedbackMessage = "";
         }
 
-        protected void InfoMessage(string message)
+        protected void ShowFeedback(string message, FeedbackType feedback)
         {
             FeedbackMessage = message;
-            FeedbackType = FeedbackType.Info;
-        }
-
-        protected bool ErrorFeedback(string message)
-        {
-            FeedbackMessage = message;
-            FeedbackType = FeedbackType.Error;
-            return false;
-        }
-
-        protected bool SuccessFeedback(string message)
-        {
-            FeedbackMessage = message;
-            FeedbackType = FeedbackType.Success;
-            return true;
+            FeedbackType = feedback;
         }
     }
 }

@@ -56,6 +56,7 @@ namespace HonorsProject.ViewModel
 
         public bool Login(ref ISystemUser appUser)
         {
+            ClearFeedback();
             if (ValidateLogin(UserId, _password))
             {
                 try
@@ -81,12 +82,16 @@ namespace HonorsProject.ViewModel
                             return true;
                         }
                         else
-                            return ErrorFeedback("Invalid Login Credentials.");
+                        {
+                            ShowFeedback("Invalid Login Credentials.", FeedbackType.Error);
+                            return false;
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    return ErrorFeedback(ex.GetBaseException().Message);
+                    ShowFeedback(ex.GetBaseException().Message, FeedbackType.Error);
+                    return false;
                 }
             }
             else
@@ -98,11 +103,13 @@ namespace HonorsProject.ViewModel
             ClearFeedback();
             if (userId == null || userId == 0)
             {
-                return ErrorFeedback("ID Required");
+                ShowFeedback("ID Required", FeedbackType.Error);
+                return false;
             }
             if (String.IsNullOrEmpty(password))
             {
-                return ErrorFeedback("Password Required");
+                ShowFeedback("Password Required", FeedbackType.Error);
+                return false;
             }
 
             return true;
