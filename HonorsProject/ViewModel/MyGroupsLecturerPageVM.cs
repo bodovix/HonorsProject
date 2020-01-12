@@ -197,7 +197,7 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             bool result = false;
             try
             {
@@ -206,19 +206,23 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = User.AddNewGroup(SelectedGroup, UnitOfWork);
                     UpdateMyGroupsList(RowLimit);
+                    ShowFeedback($"Successfully created: {SelectedGroup.Id}.", FeedbackType.Success);
                 }
                 else
                 {
                     //Update
                     result = SelectedGroup.ValidateGroup();
                     if (result)
+                    {
                         UnitOfWork.Complete();
+                        ShowFeedback($"Successfully updated: {SelectedGroup.Id}.", FeedbackType.Success);
+                    }
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.GetBaseException().Message;
+                ShowFeedback(ex.GetBaseException().Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -231,7 +235,7 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(BaseEntity objToDelete)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             bool result;
             if (objToDelete is Session)
             {
@@ -245,7 +249,7 @@ namespace HonorsProject.ViewModel
             }
             else
             {
-                FeedbackMessage = $"Cannot delete object of type {objToDelete.GetType().ToString()}. Please contact support.";
+                ShowFeedback($"Cannot delete object of type {objToDelete.GetType().ToString()}. Please contact support.", FeedbackType.Error);
                 result = false;
             }
             return result;
@@ -256,7 +260,7 @@ namespace HonorsProject.ViewModel
             Session sessionToDelete = objToDelete as Session;
             if (sessionToDelete == null)
             {
-                FeedbackMessage = "No session selected.";
+                ShowFeedback("No session selected.", FeedbackType.Error);
                 return false;
             }
             try
@@ -264,25 +268,30 @@ namespace HonorsProject.ViewModel
                 Mediator.NotifyColleagues(MediatorChannels.DeleteSessionConfirmation.ToString(), sessionToDelete);
                 if (IsConfirmed)
                 {
+                    int id = sessionToDelete.Id;
                     UnitOfWork.SessionRepository.Remove(sessionToDelete);
                     int count = UnitOfWork.Complete();
                     if (count > 0)
                     {
                         UpdateMyGroupsList(RowLimit);
+                        ShowFeedback($"Successfully deleted Session: {id}.", FeedbackType.Success);
                         return true;
                     }
                     else
+                    {
+                        ShowFeedback("Session not deleted.", FeedbackType.Error);
                         return false;
+                    }
                 }
                 else
                 {
-                    FeedbackMessage = "Delete canceled.";
+                    ShowFeedback("Delete canceled.", FeedbackType.Error);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -292,7 +301,7 @@ namespace HonorsProject.ViewModel
             Group groupToDelete = objToDelete as Group;
             if (groupToDelete == null)
             {
-                FeedbackMessage = "No group selected.";
+                ShowFeedback("No group selected.", FeedbackType.Error);
                 return false;
             }
             try
@@ -300,22 +309,27 @@ namespace HonorsProject.ViewModel
                 Mediator.NotifyColleagues(MediatorChannels.DeleteGroupConfirmation.ToString(), groupToDelete);
                 if (IsConfirmed)
                 {
+                    int id = groupToDelete.Id;
                     UnitOfWork.GroupRepository.Remove(groupToDelete);
                     int count = UnitOfWork.Complete();
                     if (count > 0)
                     {
                         UpdateMyGroupsList(RowLimit);
+                        ShowFeedback($"Successfully deleted Group: {id}.", FeedbackType.Success);
                         return true;
                     }
                     else
+                    {
+                        ShowFeedback($"Failed to delete group: {id}.", FeedbackType.Error);
                         return false;
+                    }
                 }
 
                 return false;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -352,14 +366,14 @@ namespace HonorsProject.ViewModel
                 case SubgridContext.Questions:
                     throw new NotImplementedException("Questions subgrid not required. Contact Support.");
                 case SubgridContext.Answers:
-                    throw new NotImplementedException("Ansers subgrid not required. Contact Support.");
+                    throw new NotImplementedException("Answers subgrid not required. Contact Support.");
                 case SubgridContext.Students:
                     //update the view to show Students Subgrid
                     Mediator.NotifyColleagues(MediatorChannels.LoadStudentsSubgrid.ToString(), null);
                     break;
 
                 default:
-                    break;
+                    throw new AggregateException("Invalid subgrid option. Please contact support.");
             }
             return result;
         }
@@ -372,23 +386,33 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
+            bool result = false;
             if (entity == null)
             {
-                FeedbackMessage = "No valid group selected. Canceling.";
+                ShowFeedback("No valid group selected. Canceling.", FeedbackType.Error);
                 return false;
             }
             try
             {
-                FeedbackMessage = "";
+                ClearFeedback();
                 string msg = "";
-                SelectedGroup.RemoveStudent((Student)entity, UnitOfWork, ref msg);
-                UpdateMyGroupsList(RowLimit);
-                FeedbackMessage = msg;
-                return true;
+                int sId = entity.Id;
+                result = SelectedGroup.RemoveStudent((Student)entity, UnitOfWork, ref msg);
+                if (result)
+                {
+                    UpdateMyGroupsList(RowLimit);
+                    ShowFeedback($"Removed Student {sId} from Group {SelectedGroup.Id}.", FeedbackType.Success);
+                    return true;
+                }
+                else
+                {
+                    ShowFeedback(msg, FeedbackType.Error);
+                    return false;
+                }
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -405,29 +429,31 @@ namespace HonorsProject.ViewModel
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             try
             {
                 bool result = false;
                 if (entityToRemove is Student student)
                 {
+                    int sId = student.Id;
                     SelectedGroup.Students.Remove(student);
                     UnitOfWork.Complete();
                     RefreshAvailableStudents(SelectedGroup);
+                    ShowFeedback($"Student {sId} removed from Group {SelectedGroup.Id}.", FeedbackType.Success);
                     return true;
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             try
             {
                 bool result = false;
@@ -435,19 +461,25 @@ namespace HonorsProject.ViewModel
                 {
                     if (SelectedGroup.Students.Contains(entityToAdd))
                     {
-                        FeedbackMessage = $"Student already belongs to group: {entityToAdd.Name}";
+                        ShowFeedback($"Student already belongs to group: {entityToAdd.Name}", FeedbackType.Error);
                         return false;
                     }
+                    int sId = student.Id;
                     SelectedGroup.Students.Add(student);
-                    UnitOfWork.Complete();
-                    RefreshAvailableStudents(SelectedGroup);
-                    return true;
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                    {
+                        RefreshAvailableStudents(SelectedGroup);
+                        ShowFeedback($"Student {sId} removed from Group {SelectedGroup.Id}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to remove student {sId} from Group {SelectedGroup.Id}. \n Please try again or contact support.", FeedbackType.Error);
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -460,6 +492,7 @@ namespace HonorsProject.ViewModel
 
         public bool Cancel()
         {
+            ClearFeedback();
             if (FormContext == FormContext.Create)
                 EnterNewMode();
             else
@@ -473,7 +506,7 @@ namespace HonorsProject.ViewModel
                 catch
                 {
                     EnterNewMode();
-                    FeedbackMessage = "Unable to re-load selected Group. \n Going back to new mode.";
+                    ShowFeedback("Unable to re-load selected Group. \n Going back to new mode.", FeedbackType.Error);
                     return false;
                 }
             }

@@ -49,11 +49,11 @@ namespace HonorsProject.Model.Entities
             {
                 Students.Remove(studentToRemove);
                 int rows = u.Complete();
-                if(rows > 0)
+                if (rows > 0)
                     return true;
                 else
                 {
-                    msg = "No record found to delte in database. \nRefresh to try again or contact support.";
+                    msg = "No record found to delete in database. \nRefresh to try again or contact support.";
                     return false;
                 }
             }

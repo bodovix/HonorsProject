@@ -185,7 +185,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
         }
 
@@ -201,23 +201,32 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
+            bool result = false;
             if (entity == null)
             {
-                FeedbackMessage = "No valid group selected. Canceling.";
+                ShowFeedback("No valid group selected. Canceling.", FeedbackType.Error);
                 return false;
             }
             try
             {
-                FeedbackMessage = "";
+                ClearFeedback();
                 string msg = "";
-                SelectedStudent.RemoveGroup((Group)entity, UnitOfWork, ref msg);
-                RefreshAvailableGroups(SelectedStudent);
-                FeedbackMessage = msg;
-                return true;
+                int gId = entity.Id;
+                result = SelectedStudent.RemoveGroup((Group)entity, UnitOfWork, ref msg);
+                if (result)
+                {
+                    RefreshAvailableGroups(SelectedStudent);
+                    ShowFeedback($"Removed Student {SelectedStudent.Id} from Group {gId}.", FeedbackType.Success);
+                    result = true;
+                }
+                else
+                    ShowFeedback(msg, FeedbackType.Error);
+
+                return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -231,7 +240,7 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             bool result;
             try
             {
@@ -240,7 +249,12 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = Lecturer.AddNewStudent(SelectedStudent, UnitOfWork);
                     if (result)
+                    {
                         UpdateMyStudentsList(studentRowsToReturn);
+                        ShowFeedback($"Created Student: {SelectedStudent.Id}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to create student.", FeedbackType.Error);
                 }
                 else
                 {
@@ -248,10 +262,12 @@ namespace HonorsProject.ViewModel
                     result = SelectedStudent.Validate();
                     if (result)
                     {
-                        int rowsChanged = UnitOfWork.Complete();
-                        if (rowsChanged == 0)
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                        if (result)
+                            ShowFeedback($"Updated Student: {SelectedStudent.Id}.", FeedbackType.Success);
+                        else
                         {
-                            FeedbackMessage = $"Student not updated: {SelectedStudent.Id}.";
+                            ShowFeedback($"Student not updated: {SelectedStudent.Id}.", FeedbackType.Error);
                             result = false;
                         }
                     }
@@ -260,7 +276,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.GetBaseException().Message;
+                ShowFeedback(ex.GetBaseException().Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -272,7 +288,8 @@ namespace HonorsProject.ViewModel
 
         public bool GenerateNewPasswordHash(string optionalNewPassword)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
+            bool result = false;
             try
             {
                 //Confirmation Check
@@ -280,58 +297,60 @@ namespace HonorsProject.ViewModel
                 if (IsConfirmed)
                 {
                     //randomly generate
-                    SelectedStudent.GenerateNewPasswordHash(ref optionalNewPassword, null);
-                    //have to set form context back when in create as this updates the id
-                    if (FormContext == FormContext.Create)
-                    {
-                        //have to update at property level so view updates....
-                        SelectedStudent = SelectedStudent;
-                        FormContext = FormContext.Create;
-                    }
+                    result = SelectedStudent.GenerateNewPasswordHash(ref optionalNewPassword, null);
+                    OnPropertyChanged(nameof(SelectedStudent));
+                    if (result)
+                        ShowFeedback("Password hash generated: \nRemember to save changes.", FeedbackType.Info);
                     else
-                        SelectedStudent = SelectedStudent;
+                        ShowFeedback("Failed to generate new password hash.", FeedbackType.Error);
                     //Temporary display new password
                     Mediator.NotifyColleagues(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), optionalNewPassword);
                     return true;
                 }
                 else
                 {
-                    FeedbackMessage = "Generation of new password Canceled.";
+                    ShowFeedback("Generation of new password Canceled.", FeedbackType.Error);
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             try
             {
                 bool result = false;
                 if (entityToRemove is Group group)
                 {
+                    int gId = group.Id;
                     SelectedStudent.Groups.Remove(group);
-                    UnitOfWork.Complete();
-                    RefreshAvailableGroups(SelectedStudent);
-                    return true;
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                    {
+                        RefreshAvailableGroups(SelectedStudent);
+                        ShowFeedback($"Student {SelectedStudent.Id} removed from group {gId}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to remove Student {SelectedStudent.Id} from group {gId}.", FeedbackType.Error);
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             try
             {
                 bool result = false;
@@ -343,15 +362,20 @@ namespace HonorsProject.ViewModel
                         return false;
                     }
                     SelectedStudent.Groups.Add(group);
-                    UnitOfWork.Complete();
-                    RefreshAvailableGroups(SelectedStudent);
-                    return true;
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                    {
+                        RefreshAvailableGroups(SelectedStudent);
+                        ShowFeedback($"Student {SelectedStudent.Id} added to Group {group.Id}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to add Student {SelectedStudent.Id} to Group {group.Id}.", FeedbackType.Error);
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -359,7 +383,7 @@ namespace HonorsProject.ViewModel
         public bool ChangeSubgridContext(SubgridContext context)
         {
             bool result = false;
-            FeedbackMessage = "";
+            ClearFeedback();
 
             switch (context)
             {
@@ -376,7 +400,7 @@ namespace HonorsProject.ViewModel
                     break;
 
                 default:
-                    FeedbackMessage = "Sub-grid type not supported. Contact support.";
+                    ShowFeedback("Sub-grid type not supported. Contact support.", FeedbackType.Error);
                     break;
             }
             return result;
@@ -384,30 +408,37 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(BaseEntity objToDelete)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
+            bool result = false;
             Student studentToDelete = objToDelete as Student;
             if (studentToDelete == null)
             {
-                FeedbackMessage = "No student selected.";
-                return false;
+                ShowFeedback("No student selected.", FeedbackType.Error);
+                return result;
             }
             try
             {
                 Mediator.NotifyColleagues(MediatorChannels.DeleteStudentConfirmation.ToString(), studentToDelete);
                 if (IsConfirmed)
                 {
+                    int id = studentToDelete.Id;
                     UnitOfWork.StudentRepo.Remove(studentToDelete);
-                    UnitOfWork.Complete();
-                    UpdateMyStudentsList(studentRowsToReturn);
-                    return true;
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                    {
+                        UpdateMyStudentsList(studentRowsToReturn);
+                        ShowFeedback($"Deleted Student: {id}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to delete Student: {id}.", FeedbackType.Error);
                 }
 
-                return false;
+                return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
-                return false;
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return result;
             }
         }
 
@@ -418,6 +449,7 @@ namespace HonorsProject.ViewModel
 
         public bool Cancel()
         {
+            ClearFeedback();
             if (FormContext == FormContext.Create)
                 EnterNewMode();
             else
@@ -431,7 +463,7 @@ namespace HonorsProject.ViewModel
                 catch
                 {
                     EnterNewMode();
-                    FeedbackMessage = "Unable to re-load selected Group. \n Going back to new mode.";
+                    ShowFeedback("Unable to re-load selected Group. \n Going back to new mode.", FeedbackType.Error);
                     return false;
                 }
             }

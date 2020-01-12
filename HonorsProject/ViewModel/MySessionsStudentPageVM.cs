@@ -170,7 +170,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
         }
 
@@ -193,7 +193,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.GetBaseException().Message;
+                ShowFeedback(ex.GetBaseException().Message, FeedbackType.Error);
             }
         }
 
@@ -225,7 +225,7 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(BaseEntity objectToDelete)
         {
-            FeedbackMessage = "Students Cannot Delete Sessions";
+            ShowFeedback("Students Cannot Delete Sessions", FeedbackType.Error);
             return false;
         }
 
@@ -262,7 +262,7 @@ namespace HonorsProject.ViewModel
                     break;
 
                 default:
-                    FeedbackMessage = "Sub-grid type not supported. Contact support.";
+                    ShowFeedback("Sub-grid type not supported. Contact support.", FeedbackType.Error);
                     break;
             }
             return result;
@@ -291,7 +291,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -319,7 +319,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -347,7 +347,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -360,6 +360,7 @@ namespace HonorsProject.ViewModel
 
         public bool Cancel()
         {
+            ClearFeedback();
             if (FormContext == FormContext.Create)
                 EnterNewMode();
             else
@@ -376,7 +377,7 @@ namespace HonorsProject.ViewModel
                 catch
                 {
                     EnterNewMode();
-                    FeedbackMessage = "Unable to re-load selected Session. \n Going back to new mode...";
+                    ShowFeedback("Unable to re-load selected Session. \n Going back to new mode...", FeedbackType.Error);
                     return false;
                 }
             }

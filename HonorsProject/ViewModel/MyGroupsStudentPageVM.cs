@@ -182,7 +182,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
         }
 
@@ -236,7 +236,7 @@ namespace HonorsProject.ViewModel
                     break;
 
                 default:
-                    break;
+                    throw new Exception("Invalid subgrid navigation performed. Please contact support.");
             }
             return result;
         }
@@ -248,13 +248,13 @@ namespace HonorsProject.ViewModel
 
         public bool Remove(BaseEntity entity)
         {
-            FeedbackMessage = "Students cannot remove students from groups.";
+            ShowFeedback("Students cannot remove students from groups.", FeedbackType.Error);
             return false;
         }
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
-            throw new NotImplementedException("Students cannot remove students from grups.");
+            throw new NotImplementedException("Students cannot remove students from groups.");
         }
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
@@ -270,6 +270,7 @@ namespace HonorsProject.ViewModel
 
         public bool Cancel()
         {
+            ClearFeedback();
             if (FormContext == FormContext.Create)
                 EnterNewMode();
             else
@@ -283,7 +284,7 @@ namespace HonorsProject.ViewModel
                 catch
                 {
                     EnterNewMode();
-                    FeedbackMessage = "Unable to re-load selected Group. \n Going back to new mode.";
+                    ShowFeedback("Unable to re-load selected Group. \n Going back to new mode.", FeedbackType.Error);
                     return false;
                 }
             }

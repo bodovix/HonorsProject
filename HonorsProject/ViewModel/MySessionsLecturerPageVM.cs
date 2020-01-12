@@ -154,7 +154,7 @@ namespace HonorsProject.ViewModel
             GetAllLecturers();
             SelectedSession = new Session();
             FormContext = FormContext.Create;
-            GetAllGroups(dbcontextName);
+            GetAllGroups();
             //initially loads current sessions
             GetAllMyCurrentSessions();
         }
@@ -175,11 +175,11 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
         }
 
-        private void GetAllGroups(string dbcontextName)
+        private void GetAllGroups()
         {
             try
             {
@@ -198,13 +198,13 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.GetBaseException().Message;
+                ShowFeedback(ex.GetBaseException().Message, FeedbackType.Error);
             }
         }
 
         public bool Save()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             bool result;
             try
             {
@@ -213,7 +213,12 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = User.AddNewSession(SelectedSession, UnitOfWork);
                     if (result)
+                    {
                         UpdateMySessionsList();
+                        ShowFeedback($"Successfully created session: {SelectedSession.Id}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to create session. please try again or contact support.", FeedbackType.Error);
                     return result;
                 }
                 else
@@ -221,13 +226,18 @@ namespace HonorsProject.ViewModel
                     //Update
                     result = SelectedSession.ValidateSession();
                     if (result)
+                    {
                         UnitOfWork.Complete();
+                        ShowFeedback($"Successfully updated session: {SelectedSession.Id}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to update session: {SelectedSession.Id}.", FeedbackType.Error);
                     return result;
                 }
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.GetBaseException().Message;
+                ShowFeedback(ex.GetBaseException().Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -255,28 +265,36 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(BaseEntity objToDelete)
         {
+            ClearFeedback();
+            bool result = false;
             Session sessionToDelte = objToDelete as Session;
             if (sessionToDelte == null)
             {
-                FeedbackMessage = "No session selected.";
-                return false;
+                ShowFeedback("No session selected.", FeedbackType.Error);
+                return result;
             }
             try
             {
                 Mediator.NotifyColleagues(MediatorChannels.DeleteSessionConfirmation.ToString(), null);
                 if (IsConfirmationAccepted)
                 {
+                    int sId = sessionToDelte.Id;
                     UnitOfWork.SessionRepository.Remove(sessionToDelte);
-                    UnitOfWork.Complete();
-                    UpdateMySessionsList();
-                    return true;
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                    {
+                        UpdateMySessionsList();
+                        ShowFeedback($"Successfully deleted Session: {sId}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to delete Session: {sId}.", FeedbackType.Error);
                 }
 
-                return false;
+                return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -289,7 +307,7 @@ namespace HonorsProject.ViewModel
 
         public bool AddLecturer()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             try
             {
                 //is lecturer selected
@@ -301,34 +319,41 @@ namespace HonorsProject.ViewModel
                 else
                 {
                     SelectedSession.Lecturers.Add(SelectedLecturer);
+                    ShowFeedback($"Added lecturer: {SelectedLecturer.Id}.", FeedbackType.Success);
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
 
         public bool Remove(BaseEntity entityToRemove)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
+            bool result = false;
             Lecturer lecturer = (Lecturer)entityToRemove;
             if (SelectedSession.Lecturers != null)
                 //Saving done on update Save button clicked
                 if (SelectedSession.Lecturers.Contains(lecturer))
                 {
-                    SelectedSession.Lecturers.Remove(lecturer);
-                    return true;
+                    int lId = lecturer.Id;
+                    result = SelectedSession.Lecturers.Remove(lecturer);
+                    if (result)
+                        ShowFeedback($"Lecturer {lId} removed from session {SelectedSession.Id}.", FeedbackType.Success);
+                    else
+                        ShowFeedback($"Failed to remove lecture {lId} from ", FeedbackType.Error);
+                    return result;
                 }
                 else
                 {
-                    FeedbackMessage = "Lecturer not found in session.";
-                    return false;
+                    ShowFeedback("Lecturer not found in session.", FeedbackType.Error);
+                    return result;
                 }
             else
-                return false;
+                return result;
         }
 
         public bool ChangeSubgridContext(SubgridContext subgridContext)
@@ -349,7 +374,7 @@ namespace HonorsProject.ViewModel
                     break;
 
                 default:
-                    FeedbackMessage = "Sub-grid type not supported. Contact support.";
+                    ShowFeedback("Sub-grid type not supported. Contact support.", FeedbackType.Error);
                     break;
             }
             return result;
@@ -378,7 +403,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -406,7 +431,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -435,7 +460,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -448,6 +473,7 @@ namespace HonorsProject.ViewModel
 
         public bool Cancel()
         {
+            ClearFeedback();
             if (FormContext == FormContext.Create)
                 EnterNewMode();
             else
@@ -464,7 +490,8 @@ namespace HonorsProject.ViewModel
                 catch
                 {
                     EnterNewMode();
-                    FeedbackMessage = "Unable to re-load selected Session. \n Going back to new mode...";
+                    ShowFeedback("Unable to re-load selected Session. \n Going back to new mode...", FeedbackType.Error);
+
                     return false;
                 }
             }

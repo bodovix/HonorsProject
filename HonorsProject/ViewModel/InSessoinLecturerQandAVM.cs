@@ -77,6 +77,7 @@ namespace HonorsProject.ViewModel
 
         public override bool Delete(BaseEntity objToDelete)
         {
+            ClearFeedback();
             //IsConfirmed is set to false in code behind for testability
             bool result = false;
             try
@@ -90,10 +91,14 @@ namespace HonorsProject.ViewModel
                     //delete it
                     if (IsConfirmed)
                     {
+                        int id = question.Id;
                         UnitOfWork.QuestionRepository.Remove(question);
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result)
+                        {
                             UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                            ShowFeedback($"Deleted question: {id}", FeedbackType.Success);
+                        }
                     }
                 }
                 else if (objToDelete is Answer answer)
@@ -106,24 +111,28 @@ namespace HonorsProject.ViewModel
                     //delete it
                     if (IsConfirmed)
                     {
+                        int id = answer.Id;
                         UnitOfWork.AnswerRepository.Remove(answer);
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result)
+                        {
                             UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                            ShowFeedback($"Deleted answer: {id}", FeedbackType.Success);
+                        }
                     }
                 }
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
 
         public override bool Save()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             bool result = false;
             try
             {
@@ -132,26 +141,30 @@ namespace HonorsProject.ViewModel
                     //create new  answer
                     result = User.AnswerQuestion(SelectedAnswer, UnitOfWork);
                     UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    ShowFeedback($"Successfully created: {SelectedAnswer.Id}.", FeedbackType.Success);
                 }
                 else
                 {
                     //Update Selected Answer
                     result = SelectedAnswer.ValidateAnswer();
                     if (result)
+                    {
                         result = (UnitOfWork.Complete() > 0) ? true : false;
+                        ShowFeedback($"Successfully updated: {SelectedAnswer.Id}", FeedbackType.Success);
+                    }
                 }
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException ex)
             {
-                FeedbackMessage = e.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
-            catch (SqlException e)
+            catch (SqlException ex)
             {
-                FeedbackMessage = e.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
 
             return result;
@@ -164,7 +177,7 @@ namespace HonorsProject.ViewModel
 
         public override void EnterNewMode()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             if (SelectedQuestion == null)
             {
                 FeedbackMessage = "Question not selected to answer.";
@@ -184,6 +197,7 @@ namespace HonorsProject.ViewModel
 
         public override bool Cancel()
         {
+            ClearFeedback();
             if (FormContextAnswer == FormContext.Create)
                 EnterNewMode();
             else
@@ -197,7 +211,7 @@ namespace HonorsProject.ViewModel
                 catch
                 {
                     EnterNewMode();
-                    FeedbackMessage = "Unable to re-load selected Answer. \n Going back to new mode.";
+                    ShowFeedback("Unable to re-load selected Answer. \n Going back to new mode.", FeedbackType.Info);
                     return false;
                 }
             }

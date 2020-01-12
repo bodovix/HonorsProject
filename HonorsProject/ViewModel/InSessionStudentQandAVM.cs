@@ -23,20 +23,6 @@ namespace HonorsProject.ViewModel
 {
     internal class InSessionStudentQandAVM : BaseQandAPageVM
     {
-        public InSessionStudentQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(dbcontextName)
-        {
-            //Setup
-            User = UnitOfWork.StudentRepo.Get(appUser.Id);
-            UserRole = Role.Student;
-            IsConfirmed = false;
-            QandAMode = QandAMode.Question;
-            FormContextQuestion = FormContext.Create;
-            SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);//Might need to attach this to the UoW. not sure yet
-            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
-            //Answers loaded when question selected
-            ImageHandler = new ImageHandler("public_html/honors/questions");
-        }
-
         private ISystemUser _user;
 
         public override ISystemUser User
@@ -54,8 +40,23 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        public InSessionStudentQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(dbcontextName)
+        {
+            //Setup
+            User = UnitOfWork.StudentRepo.Get(appUser.Id);
+            UserRole = Role.Student;
+            IsConfirmed = false;
+            QandAMode = QandAMode.Question;
+            FormContextQuestion = FormContext.Create;
+            SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);//Might need to attach this to the UoW. not sure yet
+            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
+            //Answers loaded when question selected
+            ImageHandler = new ImageHandler("public_html/honors/questions");
+        }
+
         public override bool Delete(BaseEntity objToDelete)
         {
+            ClearFeedback();
             if (objToDelete is Question question)
             {
                 bool result = false;
@@ -69,16 +70,20 @@ namespace HonorsProject.ViewModel
                     //delete it
                     if (IsConfirmed)
                     {
+                        int id = question.Id;
                         UnitOfWork.QuestionRepository.Remove(question);
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result)
+                        {
                             UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                            ShowFeedback($"Deleted {id}.", FeedbackType.Success);
+                        }
                     }
                     return result;
                 }
                 catch (Exception ex)
                 {
-                    FeedbackMessage = ex.Message;
+                    ShowFeedback(ex.Message, FeedbackType.Error);
                     return false;
                 }
             }
@@ -88,7 +93,7 @@ namespace HonorsProject.ViewModel
 
         public override void EnterNewMode()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             //Lecturers can only create answers
             QandAMode = QandAMode.Question;
             SelectedQuestion = new Question((Student)User);
@@ -98,7 +103,7 @@ namespace HonorsProject.ViewModel
 
         public override bool Save()
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             bool result = false;
             try
             {
@@ -107,32 +112,37 @@ namespace HonorsProject.ViewModel
                     //create new  answer
                     result = User.AskQuestion(SelectedQuestion, UnitOfWork);
                     UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                    ShowFeedback($"Added question: {SelectedQuestion.Name}.", FeedbackType.Success);
                 }
                 else
                 {
                     //Update Selected Answer
                     result = SelectedQuestion.Validate();
                     if (result)
+                    {
                         result = (UnitOfWork.Complete() > 0) ? true : false;
+                        ShowFeedback($"Updated question: {SelectedQuestion.Name}", FeedbackType.Success);
+                    }
                 }
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException ex)
             {
-                FeedbackMessage = e.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
-            catch (SqlException e)
+            catch (SqlException ex)
             {
-                FeedbackMessage = e.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
             return result;
         }
 
         public async override Task<bool> UploadImage(Image imageToUpload)
         {
+            ClearFeedback();
             bool ftpResult;
             bool dbResult;
             bool finalResult = false;
@@ -212,6 +222,7 @@ namespace HonorsProject.ViewModel
 
         public override bool Cancel()
         {
+            ClearFeedback();
             if (FormContextQuestion == FormContext.Create)
                 EnterNewMode();
             else
@@ -225,7 +236,7 @@ namespace HonorsProject.ViewModel
                 catch
                 {
                     EnterNewMode();
-                    FeedbackMessage = "Unable to re-load selected Question. \n Going back to new mode.";
+                    ShowFeedback("Unable to re-load selected Question. \n Going back to new mode.", FeedbackType.Info);
                     return false;
                 }
             }
