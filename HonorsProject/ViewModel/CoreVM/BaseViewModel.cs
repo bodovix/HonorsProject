@@ -11,6 +11,8 @@ namespace HonorsProject.ViewModel.CoreVM
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        #region Properties
+
         protected string dbConName;
         private string _feedbackMessage;
 
@@ -56,6 +58,8 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #endregion Properties
 
         public BaseViewModel(string dbcontextName)
         {

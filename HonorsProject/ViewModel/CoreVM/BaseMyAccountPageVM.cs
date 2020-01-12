@@ -61,6 +61,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool Cancel()
         {
+            ClearFeedback();
             try
             {
                 UnitOfWork.Reload((BaseEntity)User);
@@ -68,9 +69,9 @@ namespace HonorsProject.ViewModel.CoreVM
             }
             catch
             {
-                FeedbackMessage = "Unable to refresh user account. " +
+                ShowFeedback("Unable to refresh user account. " +
                                     "\n Navigate away then come back. " +
-                                    "\n If this does not solve your issue please contact support.";
+                                    "\n If this does not solve your issue please contact support.", FeedbackType.Error);
                 return false;
             }
             return true;
@@ -78,13 +79,13 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool GenerateNewPasswordHash(string optionalNewPassword)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             bool result = false;
             try
             {
                 if (String.IsNullOrEmpty(optionalNewPassword))
                 {
-                    FeedbackMessage = "Password Required.";
+                    ShowFeedback("Password Required.", FeedbackType.Error);
                     return result;
                 }
                 result = User.GenerateNewPasswordHash(ref optionalNewPassword, ProposedPasswordConf);
@@ -95,17 +96,18 @@ namespace HonorsProject.ViewModel.CoreVM
                     if (result)
                     {
                         OnPropertyChanged(nameof(User));
+                        ShowFeedback("New password saved.", FeedbackType.Success);
                         result = true;
                     }
                     else
-                        FeedbackMessage = "Failed to save changes to database. Please try again or contact support.";
+                        ShowFeedback("Failed to save changes to database. Please try again or contact support.", FeedbackType.Error);
                 }
                 else
-                    FeedbackMessage = "Failed to generate new hash for password. Please try again or contact support.";
+                    ShowFeedback("Failed to generate new hash for password. Please try again or contact support.", FeedbackType.Error);
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 result = false;
             }
             return result;

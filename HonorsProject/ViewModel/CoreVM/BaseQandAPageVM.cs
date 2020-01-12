@@ -258,7 +258,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool ToggleMarkQuestion(Question questionToMark)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             try
             {
                 bool result = false;
@@ -271,30 +271,31 @@ namespace HonorsProject.ViewModel.CoreVM
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         string output = (questionToMark.IsResolved) ? "resolved" : "still open";
                         if (result == false)
-                            FeedbackMessage = $"Unable to mark question as {output}.";
+                            ShowFeedback($"Unable to mark question as {output}.", FeedbackType.Error);
                         else
                         {
                             UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
                             OnPropertyChanged(nameof(SelectedQuestion));
+                            ShowFeedback($"Marked as {output}.", FeedbackType.Success);
                         }
                     }
                     else
-                        FeedbackMessage = "New questions cannot be marked.";
+                        ShowFeedback("New questions cannot be marked.", FeedbackType.Error);
                 }
                 else
-                    FeedbackMessage = "No question selected.";
+                    ShowFeedback("No question selected.", FeedbackType.Error);
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
 
         public bool ToggleMarkAnswer(Answer answer)
         {
-            FeedbackMessage = "";
+            ClearFeedback();
             try
             {
                 bool result = false;
@@ -307,23 +308,24 @@ namespace HonorsProject.ViewModel.CoreVM
                         string output = (answer.WasHelpfull) ? "helpful" : "unhelpful";
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result == false)
-                            FeedbackMessage = $"Unable to mark answer as {output}.";
+                            ShowFeedback($"Unable to mark answer as {output}.", FeedbackType.Error);
                         else
                         {
                             UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                             OnPropertyChanged(nameof(SelectedAnswer));
+                            ShowFeedback($"Marked as {output}.", FeedbackType.Success);
                         }
                     }
                     else
-                        FeedbackMessage = "New answers cannot be marked.";
+                        ShowFeedback("New answers cannot be marked.", FeedbackType.Error);
                 }
                 else
-                    FeedbackMessage = "No answer selected.";
+                    ShowFeedback("No answer selected.", FeedbackType.Error);
                 return result;
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
