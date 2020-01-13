@@ -118,7 +118,10 @@ namespace HonorsProject.Model.HelperClasses
                 if (client.IsConnected)
                 {
                     client.ChangeDirectory(SFTPWorkingDirectory);
-                    return client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
+                    if (client.Exists(client.WorkingDirectory + "/" + imageLocationMemory))
+                        return client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
+                    else
+                        return null;
                 }
                 else
                 {
@@ -150,10 +153,14 @@ namespace HonorsProject.Model.HelperClasses
         public BitmapImage ByteToImage(byte[] imageData)
         {
             BitmapImage bitmapImage = new BitmapImage();
-            MemoryStream ms = new MemoryStream(imageData);
-            bitmapImage.BeginInit();
-            bitmapImage.StreamSource = ms;
-            bitmapImage.EndInit();
+
+            if (imageData != null)
+            {
+                MemoryStream ms = new MemoryStream(imageData);
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = ms;
+                bitmapImage.EndInit();
+            }
 
             return bitmapImage;
         }
@@ -172,7 +179,8 @@ namespace HonorsProject.Model.HelperClasses
                     //using (var ms = new MemoryStream(biteArray))
                     // {
                     //client.BufferSize = (uint)ms.Length; // bypass Payload error large files
-                    client.DeleteFile(client.WorkingDirectory + "/" + imageLocation);
+                    if (client.Exists(client.WorkingDirectory + "/" + imageLocation))
+                        client.DeleteFile(client.WorkingDirectory + "/" + imageLocation);
                     // }
                     return true;
                 }

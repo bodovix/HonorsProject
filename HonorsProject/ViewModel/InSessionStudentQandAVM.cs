@@ -143,8 +143,8 @@ namespace HonorsProject.ViewModel
         public async override Task<bool> UploadImage(Image imageToUpload)
         {
             ClearFeedback();
-            bool ftpResult;
-            bool dbResult;
+            bool ftpResult = false;
+            bool dbResult = false;
             bool finalResult = false;
 
             if (SelectedQuestion.AskedBy == User)
@@ -153,45 +153,55 @@ namespace HonorsProject.ViewModel
                 {
                     if (String.IsNullOrEmpty(SelectedQuestion.ImageLocation))
                     {
-                        //Add New Image to Question
-                        if (openFileDialog.ShowDialog() == true)
-                        {
-                            QuestionImage = new BitmapImage(new Uri(openFileDialog.FileName));
-                        }
-                        if (QuestionImage != null)
-                        {
-                            //Save the file in FTP
-                            SelectedQuestion.ImageLocation = String.Concat(SelectedQuestion.Id, "-", SelectedQuestion.AskedBy.Id);
-                            ftpResult = ImageHandler.WriteImageSourceAsByteArraySFTP(QuestionImage, SelectedQuestion.ImageLocation);
-                            if (!ftpResult)
-                            {
-                                //if FTP fails undo everything and run away.
-                                SelectedQuestion.ImageLocation = null;
-                                UnitOfWork.Complete();
-                            }
-                            else
-                            {
-                                //Then Save the file location to the database
-                                dbResult = (UnitOfWork.Complete() > 0) ? true : false;
-                                if (!dbResult)
-                                {
-                                    //undo Image location and FTP Step
-                                    ImageHandler.DeleteFileFromFTPServer(SelectedQuestion.ImageLocation);
-                                    SelectedQuestion.ImageLocation = null;
-                                    UnitOfWork.Complete();
-                                }
-                            }
-                        }
+                        AddImage(ftpResult, dbResult);
                     }
                     else
                     {
                         //Replace existing Question image
+                        bool result = ImageHandler.DeleteFileFromFTPServer(SelectedQuestion.ImageLocation);
+                        if (result)
+                            AddImage(ftpResult, dbResult);
+                        else
+                            ShowFeedback("Failed to Replace Existing image. Try again or contact support", FeedbackType.Error);
                     }
                 }
                 else
                     FeedbackMessage = "You can only add an image you a question you proposed.";
             }
             return finalResult;
+        }
+
+        private void AddImage(bool ftpResult, bool dbResult)
+        {
+            //Add New Image to Question
+            if (openFileDialog.ShowDialog() == true)
+            {
+                QuestionImage = new BitmapImage(new Uri(openFileDialog.FileName));
+            }
+            if (QuestionImage != null)
+            {
+                //Save the file in FTP
+                SelectedQuestion.ImageLocation = String.Concat(SelectedQuestion.Id, "-", SelectedQuestion.AskedBy.Id, ":", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                ftpResult = ImageHandler.WriteImageSourceAsByteArraySFTP(QuestionImage, SelectedQuestion.ImageLocation);
+                if (!ftpResult)
+                {
+                    //if FTP fails undo everything and run away.
+                    SelectedQuestion.ImageLocation = null;
+                    UnitOfWork.Complete();
+                }
+                else
+                {
+                    //Then Save the file location to the database
+                    dbResult = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (!dbResult)
+                    {
+                        //undo Image location and FTP Step
+                        ImageHandler.DeleteFileFromFTPServer(SelectedQuestion.ImageLocation);
+                        SelectedQuestion.ImageLocation = null;
+                        UnitOfWork.Complete();
+                    }
+                }
+            }
         }
 
         protected override bool UpdateAnswersList(BaseEntity sQuestion, string answerSearchTxt)
