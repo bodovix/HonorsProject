@@ -73,6 +73,7 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         private Question _selectedQuestion;
+        private byte[] questionByteArray;
 
         public Question SelectedQuestion
         {
@@ -84,14 +85,33 @@ namespace HonorsProject.ViewModel.CoreVM
                 //if selected.id == 0 create else update
                 FormContextQuestion = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedQuestion = value;
-                //if selected question has image. download it
-                if (!String.IsNullOrEmpty(SelectedQuestion.ImageLocation))
-                    ImageHandler.ReadImageSourceFromByteArraySFTP(QuestionImage, SelectedQuestion.ImageLocation);
                 UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 OnPropertyChanged(nameof(SelectedQuestion));
                 QVisConDTO.Question = value;
                 OnPropertyChanged(nameof(QVisConDTO));
+                //if selected question has image. download it
+                RefreshImage(QuestionImage, SelectedQuestion.ImageLocation, ref questionByteArray);
             }
+        }
+
+#pragma warning disable IDE0060 // Remove unused parameter --- NOT sure why its gives squiggly message is used. :TODO:Investigate warning
+
+        private bool RefreshImage(ImageSource imageSource, string imageLocation, ref byte[] imageByteArray)
+#pragma warning restore IDE0060 // Remove unused parameter
+        {
+            if (!String.IsNullOrEmpty(imageLocation))
+            {
+                ImageHandler.ReadByteArrayFromSFTP(ref imageByteArray, imageLocation);
+                imageSource = ImageHandler.ByteToImage(imageByteArray);
+            }
+            else
+                imageSource = null;
+            OnPropertyChanged(nameof(imageSource));
+
+            if (imageSource == null)
+                return true;
+            else
+                return false;
         }
 
         private string _quesitonSearchTxt;

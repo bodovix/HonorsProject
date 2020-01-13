@@ -110,10 +110,9 @@ namespace HonorsProject.Model.HelperClasses
             }
         }
 
-        public bool ReadImageSourceFromByteArraySFTP(ImageSource imageSource, string imageLocationMemory)
+        public bool ReadByteArrayFromSFTP(ref byte[] bytesLocal, string imageLocationMemory)
         {
-            BitmapEncoder encoder = new TiffBitmapEncoder();
-            byte[] biteArray = ImageSourceToBytes(encoder, imageSource); // Function returns byte[] csv file
+            byte[] bytesFTP;
 
             using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
             {
@@ -121,10 +120,10 @@ namespace HonorsProject.Model.HelperClasses
                 if (client.IsConnected)
                 {
                     client.ChangeDirectory(SFTPWorkingDirectory);
-                    biteArray = client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
-                    if (biteArray != null)
+                    bytesFTP = client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
+                    if (bytesFTP != null)
                     {
-                        imageSource = ByteToImage(biteArray);//TODO: figure out this weird bug - i suspect garbage collection
+                        bytesLocal = bytesFTP.ToArray();
                         return true;
                     }
                     else
@@ -157,15 +156,15 @@ namespace HonorsProject.Model.HelperClasses
             return bytes;
         }
 
-        public static ImageSource ByteToImage(byte[] imageData)
+        public ImageSource ByteToImage(byte[] imageData)
         {
-            BitmapImage biImg = new BitmapImage();
+            BitmapImage bitmapImage = new BitmapImage();
             MemoryStream ms = new MemoryStream(imageData);
-            biImg.BeginInit();
-            biImg.StreamSource = ms;
-            biImg.EndInit();
+            bitmapImage.BeginInit();
+            bitmapImage.StreamSource = ms;
+            bitmapImage.EndInit();
 
-            ImageSource imgSrc = biImg as ImageSource;
+            ImageSource imgSrc = bitmapImage as ImageSource;
 
             return imgSrc;
         }
