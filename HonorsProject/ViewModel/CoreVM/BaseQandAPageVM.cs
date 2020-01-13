@@ -96,10 +96,7 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-#pragma warning disable IDE0060 // Remove unused parameter --- NOT sure why its gives squiggly message is used. :TODO:Investigate warning
-
-        private ImageSource RefreshImage(string nameOfImage, string imageLocation, ref byte[] imageByteArray)
-#pragma warning restore IDE0060 // Remove unused parameter
+        private ImageSource RefreshImage(string nameOfImageProperty, string imageLocation, ref byte[] imageByteArray)
         {
             ImageSource imageSource;
             if (!String.IsNullOrEmpty(imageLocation))
