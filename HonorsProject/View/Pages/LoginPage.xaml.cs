@@ -39,5 +39,13 @@ namespace HonorsProject.View.Pages
             if (this.DataContext != null)
             { ((LoginPageVM)this.DataContext).Password = ((PasswordBox)sender).Password; }
         }
+
+        private void LoginEnter_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                VM.Login(ref App.AppUser);
+            }
+        }
     }
 }

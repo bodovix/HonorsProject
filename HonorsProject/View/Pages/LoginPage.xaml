@@ -20,11 +20,14 @@
         Margin="10">
         <TextBlock Text="LS Login" Style="{StaticResource FormTitleText}" />
         <TextBlock Text="User ID" Style="{StaticResource UserInputLabel}" />
-        <TextBox Text="{Binding UserId, Mode=TwoWay}"  Style="{StaticResource UserInput}" />
+        <TextBox Text="{Binding UserId, Mode=TwoWay}"
+                 KeyUp="LoginEnter_KeyUp"
+                 Style="{StaticResource UserInput}" />
         <TextBlock Text="Password" Style="{StaticResource UserInputLabel}" />
         <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"
-                 FontFamily="Password"
-                     Style="{StaticResource UserInputPassword}" />
+                    FontFamily="Password"
+                     Style="{StaticResource UserInputPassword}"
+                     KeyUp="LoginEnter_KeyUp" />
         <Button Content="Login"
                     Command="{Binding LoginCmd}"
                     Style="{StaticResource FormSubmitButton}" />
