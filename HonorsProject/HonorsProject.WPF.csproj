@@ -116,6 +116,7 @@
     <Compile Include="ViewModel\CoreVM\IMyGroupsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\IMySessionsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseQandAPageVM.cs" />
+    <Compile Include="ViewModel\MyQuestionsQandAVM.cs" />
     <Compile Include="ViewModel\InSessionStudentQandAVM.cs" />
     <Compile Include="ViewModel\InSessoinLecturerQandAVM.cs" />
     <Compile Include="ViewModel\LoginPageVM.cs" />

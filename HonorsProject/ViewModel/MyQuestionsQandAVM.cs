@@ -21,21 +21,22 @@ using System.Windows.Media.Imaging;
 
 namespace HonorsProject.ViewModel
 {
-    internal class InSessionStudentQandAVM : BaseStudentQandA
+    internal class MyQuestionsQandAVM : BaseStudentQandA
     {
-        public InSessionStudentQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(appUser, dbcontextName)
+        public MyQuestionsQandAVM(ISystemUser appUser, Question selectedQuestion, string dbcontextName) : base(appUser, dbcontextName)
         {
             //Setup
-            FormContextQuestion = FormContext.Create;//Answers loaded when question selected
-            SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);//Might need to attach this to the UoW. not sure yet
-            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
+            FormContextQuestion = FormContext.Update;
+            if (selectedQuestion != null)
+                SelectedQuestion = UnitOfWork.QuestionRepository.Get(selectedQuestion.Id);
+            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)User, null).ToList());
         }
 
         protected override bool UpdateQuestionsList(BaseEntity sSession, string questionSearchTxt)
         {
             Session selectedSession = (Session)sSession;
             if (selectedSession != null)
-                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(selectedSession, questionSearchTxt));
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)User, questionSearchTxt));
             else
                 Questions = new ObservableCollection<Question>();
             if (Questions.Count > 0)

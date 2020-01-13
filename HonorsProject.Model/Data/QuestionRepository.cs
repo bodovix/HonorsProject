@@ -26,8 +26,20 @@ namespace HonorsProject.Model.Data
             else
                 return _entities.Where(q => (q.Id.ToString().Contains(searchTxt)
                                         || q.Name.Contains(searchTxt)
-                                        || q.QuestionText.Contains(searchTxt))
+                                        || q.QuestionText.Contains(searchTxt)
+                                        || q.Id.ToString().Contains(searchTxt))
                                         && q.Session.Id == session.Id).ToList();
+        }
+
+        public List<Question> GetAllForStudent(Student user, string searchTxt)
+        {
+            if (String.IsNullOrEmpty(searchTxt))
+                return _entities.Where(q => q.AskedBy.Id == user.Id).ToList();
+            else
+                return _entities.Where(q => q.AskedBy.Id == user.Id
+                                        && (q.Name.Contains(searchTxt)
+                                        || q.QuestionText.Contains(searchTxt)
+                                        || q.Id.ToString().Contains(searchTxt))).ToList();
         }
     }
 }

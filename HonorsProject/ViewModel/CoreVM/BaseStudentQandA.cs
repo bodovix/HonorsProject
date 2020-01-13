@@ -40,7 +40,6 @@ namespace HonorsProject.ViewModel.CoreVM
             User = UnitOfWork.StudentRepo.Get(appUser.Id);
             IsConfirmed = false;
             QandAMode = QandAMode.Question;
-            FormContextQuestion = FormContext.Create;//Answers loaded when question selected
             ImageHandler = new ImageHandler("public_html/honors/questions");
         }
 
