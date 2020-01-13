@@ -90,29 +90,26 @@ namespace HonorsProject.ViewModel.CoreVM
                 QVisConDTO.Question = value;
                 OnPropertyChanged(nameof(QVisConDTO));
                 //if selected question has image. download it
-                RefreshImage(QuestionImage, SelectedQuestion.ImageLocation, ref questionByteArray);
+                QuestionImage = RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation, ref questionByteArray);
+                OnPropertyChanged(nameof(QuestionImage));
                 ClearFeedback();
             }
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter --- NOT sure why its gives squiggly message is used. :TODO:Investigate warning
 
-        private bool RefreshImage(ImageSource imageSource, string imageLocation, ref byte[] imageByteArray)
+        private ImageSource RefreshImage(string nameOfImage, string imageLocation, ref byte[] imageByteArray)
 #pragma warning restore IDE0060 // Remove unused parameter
         {
+            ImageSource imageSource;
             if (!String.IsNullOrEmpty(imageLocation))
             {
-                ImageHandler.ReadByteArrayFromSFTP(ref imageByteArray, imageLocation);
+                imageByteArray = ImageHandler.ReadByteArrayFromSFTP(imageLocation);
                 imageSource = ImageHandler.ByteToImage(imageByteArray);
             }
             else
                 imageSource = null;
-            OnPropertyChanged(nameof(imageSource));
-
-            if (imageSource == null)
-                return true;
-            else
-                return false;
+            return imageSource;
         }
 
         private string _quesitonSearchTxt;

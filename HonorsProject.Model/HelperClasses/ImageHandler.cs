@@ -110,29 +110,20 @@ namespace HonorsProject.Model.HelperClasses
             }
         }
 
-        public bool ReadByteArrayFromSFTP(ref byte[] bytesLocal, string imageLocationMemory)
+        public byte[] ReadByteArrayFromSFTP(string imageLocationMemory)
         {
-            byte[] bytesFTP;
-
             using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
             {
                 client.Connect();
                 if (client.IsConnected)
                 {
                     client.ChangeDirectory(SFTPWorkingDirectory);
-                    bytesFTP = client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
-                    if (bytesFTP != null)
-                    {
-                        bytesLocal = bytesFTP.ToArray();
-                        return true;
-                    }
-                    else
-                        return false;
+                    return client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
                 }
                 else
                 {
                     OutputMessage = "Couldn't connect to SFTP server.";
-                    return false;
+                    return null;
                 }
             }
         }
@@ -156,7 +147,7 @@ namespace HonorsProject.Model.HelperClasses
             return bytes;
         }
 
-        public ImageSource ByteToImage(byte[] imageData)
+        public BitmapImage ByteToImage(byte[] imageData)
         {
             BitmapImage bitmapImage = new BitmapImage();
             MemoryStream ms = new MemoryStream(imageData);
@@ -164,9 +155,7 @@ namespace HonorsProject.Model.HelperClasses
             bitmapImage.StreamSource = ms;
             bitmapImage.EndInit();
 
-            ImageSource imgSrc = bitmapImage as ImageSource;
-
-            return imgSrc;
+            return bitmapImage;
         }
 
         public bool DeleteFileFromFTPServer(string imageLocation)
