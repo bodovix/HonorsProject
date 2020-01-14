@@ -191,7 +191,8 @@ namespace HonorsProject.ViewModel
 
         public bool Save()
         {
-            throw new NotImplementedException("Students cannot update or create groups.");
+            ShowFeedback("Students cannot update or create groups.", FeedbackType.Error);
+            return false;
         }
 
         public void EnterNewMode()
@@ -246,7 +247,8 @@ namespace HonorsProject.ViewModel
 
         public bool Delete(BaseEntity objToDelete)
         {
-            throw new NotImplementedException("Students cannot delete groups.");
+            ShowFeedback("Students cannot delete groups.", FeedbackType.Error);
+            return false;
         }
 
         public bool Remove(BaseEntity entity)
@@ -257,12 +259,14 @@ namespace HonorsProject.ViewModel
 
         public bool MoveEntityOutOfList(BaseEntity entityToRemove)
         {
-            throw new NotImplementedException("Students cannot remove students from groups.");
+            ShowFeedback("Students cannot remove students from groups.", FeedbackType.Error);
+            return false;
         }
 
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
-            throw new NotImplementedException("Students cannot add students to groups.");
+            ShowFeedback("Students cannot add students to groups.", FeedbackType.Error);
+            return false;
         }
 
         public bool GoToEntity(BaseEntity entity)
@@ -274,7 +278,7 @@ namespace HonorsProject.ViewModel
             }
             else if (entity is Student)
             {
-                Mediator.NotifyColleagues(MediatorChannels.GoToThisStudent.ToString(), entity);
+                ShowFeedback("Students cannot view Students profiles.", FeedbackType.Error);
                 return true;
             }
             else if (entity is null)
