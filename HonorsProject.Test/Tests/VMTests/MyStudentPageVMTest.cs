@@ -18,7 +18,7 @@ namespace HonorsProject.Test.VMTest
         public MyStudentPageVMTest() : base()
         {
             _appUser = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234); ;
-            VM = new StudentsPageVM(dbConName, _appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
         }
 
         [TestMethod]

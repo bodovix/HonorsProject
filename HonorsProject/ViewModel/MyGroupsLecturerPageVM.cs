@@ -182,7 +182,7 @@ namespace HonorsProject.ViewModel
                 User = (Lecturer)appUser;
                 UserRole = Role.Lecturer;
                 RowLimit = 10;
-		//if group passed in load it else start in create mode.
+                //if group passed in load it else start in create mode.
                 if (selectedGroup.Id != 0)
                     SelectedGroup = UnitOfWork.GroupRepository.Get(selectedGroup.Id);
                 else
@@ -489,8 +489,23 @@ namespace HonorsProject.ViewModel
 
         public bool GoToEntity(BaseEntity entity)
         {
-            Mediator.NotifyColleagues(MediatorChannels.GoToThisSession.ToString(), entity);
-            return true;
+            if (entity is Session)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisSession.ToString(), entity);
+                return true;
+            }
+            else if (entity is Student)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisStudent.ToString(), entity);
+                return true;
+            }
+            else if (entity is null)
+            {
+                ShowFeedback("Cannot go to a NULL object.", FeedbackType.Error);
+                return false;
+            }
+            ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
+            return false;
         }
 
         public bool Cancel()

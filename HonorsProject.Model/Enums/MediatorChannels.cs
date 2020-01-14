@@ -25,6 +25,7 @@ namespace HonorsProject.Model.Enums
         DeleteAnswerConfirmation,
         ChangePasswordBox,
         ClearPropPassInput,
-        GoToThisGroup
+        GoToThisGroup,
+        GoToThisStudent
     }
 }

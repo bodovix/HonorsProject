@@ -27,10 +27,12 @@ namespace HonorsProject.View.Pages
     public partial class StudentsPage : Page
     {
         public StudentsPageVM VM { get; set; }
+        private Student _selectedStudent;
 
-        public StudentsPage()
+        public StudentsPage(Student selectedStudent)
         {
-            VM = new StudentsPageVM(ConnectionConfigs.LiveConfig, App.AppUser);
+            _selectedStudent = selectedStudent;
+            VM = new StudentsPageVM(ConnectionConfigs.LiveConfig, _selectedStudent, App.AppUser);
             InitializeComponent();
             Mediator.Register(MediatorChannels.StudentsPageGeneratePasswordCheck.ToString(), ShowPasswordConfBox);
             Mediator.Register(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), ShowPasswordDisplay);

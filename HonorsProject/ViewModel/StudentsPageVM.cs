@@ -156,7 +156,7 @@ namespace HonorsProject.ViewModel
 
         #endregion Commands
 
-        public StudentsPageVM(string dbcontextName, ISystemUser loggedInLectuer) : base(dbcontextName)
+        public StudentsPageVM(string dbcontextName, Student selectedStudent, ISystemUser loggedInLectuer) : base(dbcontextName)
         {
             try
             {
@@ -177,9 +177,10 @@ namespace HonorsProject.ViewModel
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)loggedInLectuer;
                 SearchStudentTxt = "";
-                FormContext = FormContext.Create;
-                SelectedStudent = new Student();
-
+                if (selectedStudent.Id == 0)
+                    SelectedStudent = new Student();
+                else
+                    SelectedStudent = UnitOfWork.StudentRepo.Get(selectedStudent.Id);
                 //TODO: figure out Async with EF and Pagination/ limit the results (limit probably best)
                 RefreshAvailableGroups(SelectedStudent);
                 List<Student> results = UnitOfWork.StudentRepo.GetAll().ToList();

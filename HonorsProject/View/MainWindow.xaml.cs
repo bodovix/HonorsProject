@@ -88,6 +88,12 @@ namespace HonorsProject.View
             MainContent.Content = new MySessionsPage();
         }
 
+        internal void GoToStudentPageWithStudent(BaseEntity entity)
+        {
+            Mediator.ClearMediator();
+            MainContent.Content = new StudentsPage((Student)entity);
+        }
+
         internal void GotoGroupPageWithGroup(BaseEntity entity)
         {
             Mediator.ClearMediator();
@@ -103,7 +109,7 @@ namespace HonorsProject.View
         private void StudentsBtn_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new StudentsPage();
+            MainContent.Content = new StudentsPage(new Student());
         }
 
         private void GroupsBtn_Click(object sender, RoutedEventArgs e)

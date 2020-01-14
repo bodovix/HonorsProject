@@ -199,7 +199,8 @@
                     <uc:StudentsGridViewControl x:Name="StudentsGridViewControl"
                                                 Students="{Binding SelectedGroup.Students ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedStudent="{Binding SelectedStudent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                                RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                GoToEntityCmd="{Binding GoToEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     <uc:SessionsGridViewControl x:Name="SessionsGridViewControl"
                                                 Visibility="Collapsed"
                                             Sessions="{Binding FilteredSessions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
