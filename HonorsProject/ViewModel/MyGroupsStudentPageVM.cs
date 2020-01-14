@@ -27,7 +27,10 @@ namespace HonorsProject.ViewModel
             get { return _selectedGroup; }
             set
             {
+                if (value == null)
+                    value = new Group();
                 _selectedGroup = value;
+                ChangeSubgridContext(SubgridContext);
                 OnPropertyChanged(nameof(SelectedGroup));
             }
         }
