@@ -38,7 +38,6 @@ namespace HonorsProject.View
             InitiallyHideNavigation();
 
             Mediator.Register(MediatorChannels.LoginAsUserX.ToString(), LoggInAsX);
-
         }
 
         private void InitiallyHideNavigation()
@@ -88,11 +87,13 @@ namespace HonorsProject.View
             ShowAppropriateNavigation();
             MainContent.Content = new MySessionsPage();
         }
+
         public void GoToQandAWithEntity(BaseEntity entityTofocusOn)
         {
             Mediator.ClearMediator();
             MainContent.Content = new QandAPage(entityTofocusOn);
         }
+
         private void StudentsBtn_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
@@ -114,7 +115,7 @@ namespace HonorsProject.View
         private void MyQuestoins_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new QandAPage(null);
+            MainContent.Content = new QandAPage(new Question());
         }
 
         private void MyAnswers_Click(object sender, RoutedEventArgs e)

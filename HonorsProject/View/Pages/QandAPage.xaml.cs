@@ -93,6 +93,8 @@ namespace HonorsProject.View.Pages
                 }
                 else if (entity is Question)
                 {
+                    //my questions navigation used
+                    VM = new MyQuestionsQandAVM(App.AppUser, (Question)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity is Answer)
                 {

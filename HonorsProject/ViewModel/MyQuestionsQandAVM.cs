@@ -27,8 +27,10 @@ namespace HonorsProject.ViewModel
         {
             //Setup
             FormContextQuestion = FormContext.Update;
+            //set selected question if there is one
             if (selectedQuestion != null)
-                SelectedQuestion = UnitOfWork.QuestionRepository.Get(selectedQuestion.Id);
+                if (selectedQuestion.Id != 0)
+                    SelectedQuestion = UnitOfWork.QuestionRepository.Get(selectedQuestion.Id);
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)User, null).ToList());
         }
 
