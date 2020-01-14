@@ -22,7 +22,7 @@ namespace HonorsProject.ViewModel
         public InSessoinLecturerQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(appUser, dbcontextName)
         {
             //Setup
-            FormContextQuestion = FormContext.Create;
+            FormContextAnswer = FormContext.Create;
             SelectedSession = selectedSession;//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
             ///Answers loaded when question selected

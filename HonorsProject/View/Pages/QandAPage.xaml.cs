@@ -75,6 +75,7 @@ namespace HonorsProject.View.Pages
                 }
                 else if (entity is Answer)
                 {
+                    VM = new MyAnswersQandAVM(App.AppUser, (Answer)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity == null)
                 {
