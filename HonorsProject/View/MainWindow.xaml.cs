@@ -88,6 +88,12 @@ namespace HonorsProject.View
             MainContent.Content = new MySessionsPage();
         }
 
+        internal void GotoGroupPageWithGroup(BaseEntity entity)
+        {
+            Mediator.ClearMediator();
+            MainContent.Content = new GroupPage((Group)entity);
+        }
+
         public void GoToQandAWithEntity(BaseEntity entityTofocusOn)
         {
             Mediator.ClearMediator();
@@ -103,7 +109,7 @@ namespace HonorsProject.View
         private void GroupsBtn_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new GroupPage();
+            MainContent.Content = new GroupPage(new Group());
         }
 
         private void MySessionsBtn_Click(object sender, RoutedEventArgs e)

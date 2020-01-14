@@ -28,9 +28,11 @@ namespace HonorsProject.View.Pages
     public partial class GroupPage : Page
     {
         private IMyGroupsPageVM VM;
+        private Group _selectedGroup;
 
-        public GroupPage()
+        public GroupPage(Group selectedGroup)
         {
+            _selectedGroup = selectedGroup;
             CreateMyGroupsVM();
             InitializeComponent();
             Mediator.Register(MediatorChannels.DeleteGroupConfirmation.ToString(), DeleteGroupConfirmation);
@@ -86,6 +88,7 @@ namespace HonorsProject.View.Pages
             else
                 VM.IsConfirmed = false;
         }
+
         private void DeleteSessionConfirmation(object obj)
         {
             Session s = obj as Session;
@@ -96,12 +99,13 @@ namespace HonorsProject.View.Pages
             else
                 VM.IsConfirmed = false;
         }
+
         private void CreateMyGroupsVM()
         {
             if (App.LoggedInAs == Role.Lecturer)
-                VM = new MyGroupsLecturerPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
+                VM = new MyGroupsLecturerPageVM(App.AppUser, _selectedGroup, ConnectionConfigs.LiveConfig);
             else
-                VM = new MyGroupsStudentPageVM(App.AppUser, ConnectionConfigs.LiveConfig);
+                VM = new MyGroupsStudentPageVM(App.AppUser, _selectedGroup, ConnectionConfigs.LiveConfig);
         }
     }
 }

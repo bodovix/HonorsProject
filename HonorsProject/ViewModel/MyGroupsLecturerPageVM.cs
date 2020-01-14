@@ -163,7 +163,7 @@ namespace HonorsProject.ViewModel
 
         #endregion Commands
 
-        public MyGroupsLecturerPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
+        public MyGroupsLecturerPageVM(ISystemUser appUser, Group selectedGroup, string dbcontextName) : base(dbcontextName)
         {
             //Commands
             SaveFormCmd = new SaveCmd(this);
@@ -182,8 +182,11 @@ namespace HonorsProject.ViewModel
                 User = (Lecturer)appUser;
                 UserRole = Role.Lecturer;
                 RowLimit = 10;
-                SelectedGroup = new Group();
-                FormContext = FormContext.Create;
+		//if group passed in load it else start in create mode.
+                if (selectedGroup.Id != 0)
+                    SelectedGroup = UnitOfWork.GroupRepository.Get(selectedGroup.Id);
+                else
+                    SelectedGroup = new Group();
                 SubgridContext = SubgridContext.Students;
                 ChangeSubgridContext(SubgridContext);
                 GroupSearchTxt = "";

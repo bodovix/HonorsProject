@@ -196,7 +196,8 @@
                                         Visibility="Visible"
                                         Groups="{Binding SelectedStudent.Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         SelectedGroup="{Binding SelectedGroup,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                        RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                        GoToEntityCmd="{Binding GoToEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                 <uc:QuestionsGridViewControl
                                         x:Name="QuestionsGV"
                                         Grid.Column="0" Grid.Row="1"

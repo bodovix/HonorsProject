@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd, IGoToEntityCmd
     {
         #region Properties
 
@@ -152,6 +152,7 @@ namespace HonorsProject.ViewModel
         public ChangeSubgridContextCmd ChangeSubgridContextCmd { get; set; }
         public DeleteCmd DeleteCmd { get; set; }
         public CancelCmd CancelCmd { get; set; }
+        public GoToEntityCmd GoToEntityCmd { get; set; }
 
         #endregion Commands
 
@@ -172,6 +173,7 @@ namespace HonorsProject.ViewModel
                 ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
                 DeleteCmd = new DeleteCmd(this);
                 CancelCmd = new CancelCmd(this);
+                GoToEntityCmd = new GoToEntityCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)loggedInLectuer;
                 SearchStudentTxt = "";
@@ -468,6 +470,21 @@ namespace HonorsProject.ViewModel
                 }
             }
             return true;
+        }
+
+        public bool GoToEntity(BaseEntity entity)
+        {
+            if (entity is Group)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisGroup.ToString(), entity);
+                return true;
+            }
+            else if (entity == null)
+            {
+                ShowFeedback("Cannot go to a null entity", FeedbackType.Error);
+                return false;
+            }
+            return false;
         }
     }
 }

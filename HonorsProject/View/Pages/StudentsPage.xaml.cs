@@ -1,4 +1,5 @@
-﻿using HonorsProject.Model.Data;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
@@ -36,7 +37,15 @@ namespace HonorsProject.View.Pages
             Mediator.Register(MediatorChannels.LoadGroupsSubgridForStudents.ToString(), ShowStudentsGroups);
             Mediator.Register(MediatorChannels.LoadQuestionsSubgridForStudents.ToString(), ShowStudentsQuestions);
             Mediator.Register(MediatorChannels.DeleteStudentConfirmation.ToString(), DeleteStudentConfrimation);
+            Mediator.Register(MediatorChannels.GoToThisGroup.ToString(), GoToThisGroup);
             DataContext = VM;
+        }
+
+        private void GoToThisGroup(object obj)
+        {
+            Mediator.ClearMediator();
+            BaseEntity entity = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GotoGroupPageWithGroup(entity);
         }
 
         private void DeleteStudentConfrimation(object obj)

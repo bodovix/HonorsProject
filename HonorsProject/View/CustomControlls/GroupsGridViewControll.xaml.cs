@@ -33,6 +33,16 @@ namespace HonorsProject.View.CustomControlls
         public static readonly DependencyProperty GroupToRemoveProperty =
             DependencyProperty.Register(nameof(RemoveEntityCmd), typeof(RemoveEntityCmd), typeof(GroupsGridViewControll), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public GoToEntityCmd GoToEntityCmd
+        {
+            get { return (GoToEntityCmd)GetValue(GoToEntityCmdProperty); }
+            set { SetValue(GoToEntityCmdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for GroupToRemove.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GoToEntityCmdProperty =
+            DependencyProperty.Register(nameof(GoToEntityCmd), typeof(GoToEntityCmd), typeof(GroupsGridViewControll), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public Group SelectedGroup
         {
             get { return (Group)GetValue(groupSeleProperty); }

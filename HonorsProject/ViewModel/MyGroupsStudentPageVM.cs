@@ -153,7 +153,7 @@ namespace HonorsProject.ViewModel
 
         #endregion Properties
 
-        public MyGroupsStudentPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
+        public MyGroupsStudentPageVM(ISystemUser appUser, Group selectedGroup, string dbcontextName) : base(dbcontextName)
         {
             //Commands
             SaveFormCmd = new SaveCmd(this);
@@ -173,8 +173,11 @@ namespace HonorsProject.ViewModel
                 User = (Student)appUser;
                 UserRole = Role.Student;
                 RowLimit = 10;
-                SelectedGroup = new Group();
-                FormContext = FormContext.Create;
+		//if group passed int opage select it. otherwise go into new mode.
+                if (selectedGroup.Id != 0)
+                    SelectedGroup = UnitOfWork.GroupRepository.Get(selectedGroup.Id);
+                else
+                    SelectedGroup = new Group();
                 SubgridContext = SubgridContext.Students;
                 ChangeSubgridContext(SubgridContext);
                 GroupSearchTxt = "";
