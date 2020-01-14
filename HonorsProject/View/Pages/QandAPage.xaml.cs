@@ -72,6 +72,7 @@ namespace HonorsProject.View.Pages
                 }
                 else if (entity is Question)
                 {
+                    throw new NotImplementedException("My Questions has not been implemented for Lecturers yet. \nPlease contact support.");
                 }
                 else if (entity is Answer)
                 {
@@ -79,7 +80,7 @@ namespace HonorsProject.View.Pages
                 }
                 else if (entity == null)
                 {
-                    Console.WriteLine("null");
+                    throw new Exception("Null object passed into QandA page for Lecturers. \nPlease contact support.");
                 }
                 else
                 {
@@ -99,10 +100,11 @@ namespace HonorsProject.View.Pages
                 }
                 else if (entity is Answer)
                 {
+                    throw new NotImplementedException("My Answers has not been implemented for Students yet. \nPlease contact support.");
                 }
                 else if (entity == null)
                 {
-                    Console.WriteLine("null");
+                    throw new Exception("Null object passed into QandA page for Students. \nPlease contact support.");
                 }
                 else
                 {
