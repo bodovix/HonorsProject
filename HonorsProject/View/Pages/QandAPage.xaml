@@ -90,9 +90,23 @@
                         PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Name}" />
-                                <TextBlock Text="{Binding Id}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/starIcon.png"
+                                        HorizontalAlignment="Left"
+                                        Visibility="{Binding WasHelpfull,
+                                        Converter={StaticResource BoolToVisibleConverter}}"
+                                        Style="{StaticResource IconImage}"/>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding Id}"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
+                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
+                                </Grid>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
