@@ -18,6 +18,8 @@ namespace HonorsProject.ViewModel
             //Setup
             if (selectedAnswer.Id == 0)
                 FormContextAnswer = FormContext.Create;
+            else
+                FormContextAnswer = FormContext.Update;
             SelectedAnswer = selectedAnswer;//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllWithAnswersByLecturer(User, QuestionSearchTxt).ToList());
         }
@@ -31,5 +33,8 @@ namespace HonorsProject.ViewModel
                 Questions = new ObservableCollection<Question>();
             return (Questions.Count > 0) ? true : false;
         }
+
+        //all answers for selected question are loaded - makes sense to be able to see other
+        //lecturers answers before you create /update yours.
     }
 }
