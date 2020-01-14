@@ -121,7 +121,7 @@ namespace HonorsProject.View
         private void MyAnswers_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new QandAPage(null);
+            MainContent.Content = new QandAPage(new Answer());
         }
 
         private void DataAnalysisBtn_Click(object sender, RoutedEventArgs e)

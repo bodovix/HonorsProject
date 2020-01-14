@@ -41,5 +41,16 @@ namespace HonorsProject.Model.Data
                                         || q.QuestionText.Contains(searchTxt)
                                         || q.Id.ToString().Contains(searchTxt))).ToList();
         }
+
+        public List<Question> GetAllWithAnswersByLecturer(ISystemUser user, string questionSearchTxt)
+        {
+            if (String.IsNullOrEmpty(questionSearchTxt))
+                return _entities.Where(q => q.Answers.Any(a => a.AnsweredBy.Id == user.Id)).ToList();
+            else
+                return _entities.Where(q => q.Answers.Any(a => a.AnsweredBy.Id == user.Id)
+                                        && (q.Id.ToString().Contains(questionSearchTxt)
+                                        || q.Name.Contains(questionSearchTxt)
+                                        || q.QuestionText.Contains(questionSearchTxt))).ToList();
+        }
     }
 }

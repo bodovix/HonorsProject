@@ -227,8 +227,9 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         public bool IsConfirmed { get; set; }
-        protected OpenFileDialog openFileDialog { get; set; }
         public ImageHandler ImageHandler { get; set; }
+        protected OpenFileDialog openFileDialog { get; set; }
+        protected int rowLimit { get; set; }
 
         #endregion Properties
 
@@ -259,6 +260,7 @@ namespace HonorsProject.ViewModel.CoreVM
             AVisConDTO = new AnswerStateConverterDTO();
             AnswerSearchTxt = "";
             QuestionSearchTxt = "";
+            rowLimit = 20;
             openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select a picture";
             openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +

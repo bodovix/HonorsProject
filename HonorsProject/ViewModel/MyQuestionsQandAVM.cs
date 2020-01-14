@@ -26,11 +26,13 @@ namespace HonorsProject.ViewModel
         public MyQuestionsQandAVM(ISystemUser appUser, Question selectedQuestion, string dbcontextName) : base(appUser, dbcontextName)
         {
             //Setup
-            FormContextQuestion = FormContext.Update;
             //set selected question if there is one
             if (selectedQuestion != null)
                 if (selectedQuestion.Id != 0)
+                {
                     SelectedQuestion = UnitOfWork.QuestionRepository.Get(selectedQuestion.Id);
+                    FormContextQuestion = FormContext.Update;
+                }
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)User, null).ToList());
         }
 
