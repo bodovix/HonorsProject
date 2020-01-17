@@ -218,19 +218,6 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        protected override bool UpdateAnswersList(BaseEntity sQuestion, string answerSearchTxt)
-        {
-            Question selectedQuestion = (Question)sQuestion;
-            if (selectedQuestion != null)
-                Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSearchForQuestion(selectedQuestion, answerSearchTxt));
-            else
-                Answers = new ObservableCollection<Answer>();
-            if (Answers.Count > 0)
-                return true;
-            else
-                return false;
-        }
-
         protected override abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
     }
 }

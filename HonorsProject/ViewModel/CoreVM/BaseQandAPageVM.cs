@@ -343,6 +343,17 @@ namespace HonorsProject.ViewModel.CoreVM
 
         protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
 
-        protected abstract bool UpdateAnswersList(BaseEntity entToSearchFrom, string answerSearchTxt);
+        protected bool UpdateAnswersList(BaseEntity sQuestion, string anserSearchTxt)
+        {
+            Question selectedQuestion = (Question)sQuestion;
+            if (selectedQuestion != null)
+                Answers = new ObservableCollection<Answer>(UnitOfWork.AnswerRepository.GetFromSearchForQuestion(selectedQuestion, anserSearchTxt));
+            else
+                Answers = new ObservableCollection<Answer>();
+            if (Answers.Count > 0)
+                return true;
+            else
+                return false;
+        }
     }
 }
