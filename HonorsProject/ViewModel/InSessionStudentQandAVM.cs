@@ -56,5 +56,42 @@ namespace HonorsProject.ViewModel
             else
                 return false;
         }
+
+        public override bool ToggleMarkQuestion(Question questionToMark)
+        {
+            ClearFeedback();
+            try
+            {
+                bool result = false;
+                if (questionToMark != null)
+                {
+                    if (questionToMark.Id > 0)
+                    {
+                        //toggle is Resolved for question
+                        questionToMark.IsResolved = !questionToMark.IsResolved;
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                        string output = (questionToMark.IsResolved) ? "resolved" : "still open";
+                        if (result == false)
+                            ShowFeedback($"Unable to mark question as {output}.", FeedbackType.Error);
+                        else
+                        {
+                            UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                            OnPropertyChanged(nameof(SelectedQuestion));
+                            ShowFeedback($"Marked as {output}.", FeedbackType.Success);
+                        }
+                    }
+                    else
+                        ShowFeedback("New questions cannot be marked.", FeedbackType.Error);
+                }
+                else
+                    ShowFeedback("No question selected.", FeedbackType.Error);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return false;
+            }
+        }
     }
 }

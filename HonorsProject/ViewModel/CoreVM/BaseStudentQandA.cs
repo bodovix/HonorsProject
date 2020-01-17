@@ -219,5 +219,7 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         protected override abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+
+        public abstract override bool ToggleMarkQuestion(Question questionToMark);
     }
 }

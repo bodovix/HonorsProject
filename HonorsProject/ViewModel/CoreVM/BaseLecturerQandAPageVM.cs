@@ -190,5 +190,11 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         protected abstract override bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+
+        public override bool ToggleMarkQuestion(Question questionToMark)
+        {
+            ShowFeedback("Lecturers cannot mark questions as resolved.", FeedbackType.Error);
+            return false;
+        }
     }
 }
