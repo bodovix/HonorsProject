@@ -147,5 +147,11 @@ namespace HonorsProject.View
             Mediator.ClearMediator();
             MainContent.Content = new MyAccountPage();
         }
+
+        private void ExitAppBtn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+            return;
+        }
     }
 }

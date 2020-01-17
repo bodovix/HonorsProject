@@ -15,7 +15,9 @@
         <!--menu bar-->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Exit" />
+                <MenuItem Name="ExitAppBtn"
+                        Header="Exit"
+                          Click="ExitAppBtn_Click" />
             </MenuItem>
         </Menu>
         <!--Control Panel-->
