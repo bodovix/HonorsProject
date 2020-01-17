@@ -62,6 +62,16 @@ namespace HonorsProject.View.CustomControlls
             }
         }
 
+        public GoToEntityCmd GoToEntityCmd
+        {
+            get { return (GoToEntityCmd)GetValue(GoToEntityCmdProperty); }
+            set { SetValue(GoToEntityCmdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for GroupToRemove.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GoToEntityCmdProperty =
+            DependencyProperty.Register(nameof(GoToEntityCmd), typeof(GoToEntityCmd), typeof(QuestionsGridViewControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public QuestionsGridViewControl()
         {
             InitializeComponent();
