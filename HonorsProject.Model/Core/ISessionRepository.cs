@@ -26,5 +26,6 @@ namespace HonorsProject.Model.Core
         List<Session> GetFutureSessions(Student studentGroup, DateTime date);
 
         List<Session> GetPreviousSessions(Student studentGroup, DateTime date);
+        Session GetSessionWithQuestion(Question selectedQuestion);
     }
 }

@@ -204,7 +204,8 @@
                                         Visibility="Collapsed"
                                         Questions="{Binding SelectedStudent.Questions, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                         SelectedQuestion="{Binding SelectedQuestion,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                        RemoveEntityCmd="{Binding RemoveEntityCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                        GoToEntityCmd="{Binding GoToEntityCmd, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </StackPanel>
     </Grid>

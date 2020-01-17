@@ -68,14 +68,17 @@ namespace HonorsProject.View.Pages
             {
                 if (entity is Session)
                 {
+                    //go the in session windows as a lecturer
                     VM = new InSessoinLecturerQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity is Question)
                 {
-                    throw new NotImplementedException("My Questions has not been implemented for Lecturers yet. \nPlease contact support.");
+                    //load in session page for specific question.
+                    VM = new InSessoinLecturerQandAVM(App.AppUser, (Question)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity is Answer)
                 {
+                    //go to MyAnswers window and show questions you have answers to
                     VM = new MyAnswersQandAVM(App.AppUser, (Answer)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity == null)
@@ -87,10 +90,11 @@ namespace HonorsProject.View.Pages
                     throw new InvalidCastException("Invalid Cast exception in QandA Page. Please contact support.");
                 }
             }
-            else
+            else //Logged in as student
             {
                 if (entity is Session)
                 {
+                    //Go to the in session window as a student
                     VM = new InSessionStudentQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
                 }
                 else if (entity is Question)
@@ -100,7 +104,7 @@ namespace HonorsProject.View.Pages
                 }
                 else if (entity is Answer)
                 {
-                    throw new NotImplementedException("My Answers has not been implemented for Students yet. \nPlease contact support.");
+                    throw new NotImplementedException("My Answers has not been implemented for Students. \nPlease contact support.");
                 }
                 else if (entity == null)
                 {

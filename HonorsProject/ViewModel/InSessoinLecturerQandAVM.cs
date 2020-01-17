@@ -28,6 +28,16 @@ namespace HonorsProject.ViewModel
             ///Answers loaded when question selected
         }
 
+        public InSessoinLecturerQandAVM(ISystemUser appUser, Question selectedQuestion, string dbcontextName) : base(appUser, dbcontextName)
+        {
+            //Setup
+            FormContextAnswer = FormContext.Create;
+            SelectedSession = UnitOfWork.SessionRepository.GetSessionWithQuestion(selectedQuestion);//Might need to attach this to the UoW. not sure yet
+            SelectedQuestion = selectedQuestion;
+            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
+            ///Answers loaded when question selected
+        }
+
         protected override bool UpdateQuestionsList(BaseEntity sSession, string QuestionSearchTxt)
         {
             Session selectedSession = (Session)sSession;

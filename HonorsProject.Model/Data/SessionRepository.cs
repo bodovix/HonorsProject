@@ -41,7 +41,7 @@ namespace HonorsProject.Model.Data
         public List<Session> GetCurrentSessions(Group group, DateTime date)
         {
             DateTime dateDate = date.Date;
-            //get sessions belonging to this group 
+            //get sessions belonging to this group
             //where inputted date is between the start and end dates of the session
             List<Session> results = _entities.Where(sesh => sesh.Group.Id == group.Id
                                                 && sesh.StartTime <= dateDate
@@ -114,6 +114,11 @@ namespace HonorsProject.Model.Data
                                                 && sesh.EndTime < dateDate)
                                                     .ToList();
             return results;
+        }
+
+        public Session GetSessionWithQuestion(Question selectedQuestion)
+        {
+            return _entities.Where(s => s.Questions.Any(q => q.Id == selectedQuestion.Id)).FirstOrDefault();
         }
     }
 }

@@ -40,7 +40,15 @@ namespace HonorsProject.View.Pages
             Mediator.Register(MediatorChannels.LoadQuestionsSubgridForStudents.ToString(), ShowStudentsQuestions);
             Mediator.Register(MediatorChannels.DeleteStudentConfirmation.ToString(), DeleteStudentConfrimation);
             Mediator.Register(MediatorChannels.GoToThisGroup.ToString(), GoToThisGroup);
+            Mediator.Register(MediatorChannels.GoToThisQuestion.ToString(), GoToThisQuestion);
             DataContext = VM;
+        }
+
+        private void GoToThisQuestion(object obj)
+        {
+            Mediator.ClearMediator();
+            BaseEntity question = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GoToQandAWithEntity(question);
         }
 
         private void GoToThisGroup(object obj)
@@ -89,6 +97,10 @@ namespace HonorsProject.View.Pages
                 VM.IsConfirmed = true;
             else
                 VM.IsConfirmed = false;
+        }
+
+        private void QuestionsGV_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
         }
     }
 }

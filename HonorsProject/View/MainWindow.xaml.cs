@@ -88,16 +88,16 @@ namespace HonorsProject.View
             MainContent.Content = new MySessionsPage();
         }
 
-        internal void GoToStudentPageWithStudent(BaseEntity entity)
+        internal void GoToStudentPageWithStudent(BaseEntity student)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new StudentsPage((Student)entity);
+            MainContent.Content = new StudentsPage((Student)student);
         }
 
-        internal void GotoGroupPageWithGroup(BaseEntity entity)
+        internal void GotoGroupPageWithGroup(BaseEntity group)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new GroupPage((Group)entity);
+            MainContent.Content = new GroupPage((Group)group);
         }
 
         public void GoToQandAWithEntity(BaseEntity entityTofocusOn)

@@ -480,6 +480,11 @@ namespace HonorsProject.ViewModel
                 Mediator.NotifyColleagues(MediatorChannels.GoToThisGroup.ToString(), entity);
                 return true;
             }
+            else if (entity is Question)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisQuestion.ToString(), entity);
+                return true;
+            }
             else if (entity == null)
             {
                 ShowFeedback("Cannot go to a null entity", FeedbackType.Error);
