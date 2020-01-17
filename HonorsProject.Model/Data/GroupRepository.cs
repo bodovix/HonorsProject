@@ -14,6 +14,24 @@ namespace HonorsProject.Model.Data
         {
         }
 
+        public List<Group> GetForStudent(Student student, int rowLimit)
+        {
+            if (rowLimit > 0)
+                return _entities.Where(g => g.Students.Any(s => s.Id == student.Id)).Take(rowLimit).ToList();
+            else
+                return _entities.Where(g => g.Students.Any(s => s.Id == student.Id)).ToList();
+        }
+
+        public List<Group> GetForStudentSearch(Student student, string groupSearchTxt, int rowLimit)
+        {
+            if (rowLimit > 0)
+                return _entities.Where(g => g.Students.Any(s => s.Id == student.Id)
+                            && (g.Name.Contains(groupSearchTxt)
+                            || g.Id.ToString().Contains(groupSearchTxt))).Take(rowLimit).ToList();
+            else
+                return _entities.Where(g => g.Students.Any(s => s.Id == student.Id)).ToList();
+        }
+
         public List<Group> GetGroupsNotContainingStudent(Student student)
         {
             return _entities.Where(g => !g.Students.Any(s => s.Id == student.Id)).ToList();

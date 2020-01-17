@@ -104,6 +104,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _groupSearchTxt = value;
+                UpdateMyGroupsList(RowLimit);
                 OnPropertyChanged(nameof(GroupSearchTxt));
             }
         }
@@ -184,7 +185,7 @@ namespace HonorsProject.ViewModel
                 SubgridContext = SubgridContext.Students;
                 ChangeSubgridContext(SubgridContext);
                 GroupSearchTxt = "";
-                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTop(RowLimit).ToList());
+                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetForStudent((Student)User, RowLimit).ToList());
             }
             catch (Exception ex)
             {
@@ -318,7 +319,7 @@ namespace HonorsProject.ViewModel
 
         private void UpdateMyGroupsList(int rows)
         {
-            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rows));
+            Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetForStudentSearch((Student)User, GroupSearchTxt, rows));
             ChangeSubgridContext(SubgridContext);//refresh the sub-grid content
         }
     }
