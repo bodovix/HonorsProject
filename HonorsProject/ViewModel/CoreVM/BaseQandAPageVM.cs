@@ -91,7 +91,6 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(QVisConDTO));
                 //if selected question has image. download it
                 QuestionImage = RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation, ref questionByteArray);
-                OnPropertyChanged(nameof(QuestionImage));
                 ClearFeedback();
             }
         }
@@ -106,6 +105,8 @@ namespace HonorsProject.ViewModel.CoreVM
             }
             else
                 imageSource = null;
+            OnPropertyChanged(nameOfImageProperty);
+
             return imageSource;
         }
 
@@ -153,7 +154,6 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(AVisConDTO));
                 //if selected answer has image. download it
                 AnswerImage = RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation, ref answerByteArray);
-                OnPropertyChanged(nameof(AnswerImage));
                 ClearFeedback();
             }
         }
