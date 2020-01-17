@@ -95,7 +95,7 @@
                                         HorizontalAlignment="Left"
                                         Visibility="{Binding WasHelpfull,
                                         Converter={StaticResource BoolToVisibleConverter}}"
-                                        Style="{StaticResource IconImage}"/>
+                                        Style="{StaticResource IconImage}" />
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
@@ -275,7 +275,11 @@
                                Grid.ColumnSpan="2"
                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
-                    <Image Name="AnswerImage" Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
+                    <Image Name="AnswerImage"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           Grid.RowSpan="3"
+                           Source="{Binding AnswerImage, UpdateSourceTrigger=PropertyChanged}">
                     </Image>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="AnswerSaveBtn"

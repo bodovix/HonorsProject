@@ -42,7 +42,7 @@ namespace HonorsProject.ViewModel.CoreVM
             User = UnitOfWork.StudentRepo.Get(appUser.Id);
             IsConfirmed = false;
             QandAMode = QandAMode.Question;
-            ImageHandler = new ImageHandler("public_html/honors/questions");
+            ImageHandler = new ImageHandler("public_html/honors/images");
         }
 
         public override bool Cancel()
@@ -180,7 +180,7 @@ namespace HonorsProject.ViewModel.CoreVM
                     }
                 }
                 else
-                    FeedbackMessage = "You can only add an image you a question you proposed.";
+                    FeedbackMessage = "You can only add an image to a question you proposed.";
             }
             return finalResult;
         }
@@ -195,7 +195,7 @@ namespace HonorsProject.ViewModel.CoreVM
             if (QuestionImage != null)
             {
                 //Save the file in FTP
-                SelectedQuestion.ImageLocation = String.Concat(SelectedQuestion.Id, "-", SelectedQuestion.AskedBy.Id, ":", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                SelectedQuestion.ImageLocation = String.Concat("Q-" + SelectedQuestion.Id, "-", SelectedQuestion.AskedBy.Id, "-", DateTime.Now.ToString("yyyyMMddHHmmss"));
                 ftpResult = ImageHandler.WriteImageSourceAsByteArraySFTP(QuestionImage, SelectedQuestion.ImageLocation);
                 if (!ftpResult)
                 {

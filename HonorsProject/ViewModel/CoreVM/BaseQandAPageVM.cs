@@ -135,6 +135,7 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
+        private byte[] answerByteArray;
         private Answer _selectedAnswer;
 
         public Answer SelectedAnswer
@@ -150,6 +151,9 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(SelectedAnswer));
                 AVisConDTO.Answer = value;
                 OnPropertyChanged(nameof(AVisConDTO));
+                //if selected answer has image. download it
+                AnswerImage = RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation, ref answerByteArray);
+                OnPropertyChanged(nameof(AnswerImage));
                 ClearFeedback();
             }
         }
@@ -167,9 +171,9 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private Image _answerImage;
+        private ImageSource _answerImage;
 
-        public Image AnswerImage
+        public ImageSource AnswerImage
         {
             get { return _answerImage; }
             set

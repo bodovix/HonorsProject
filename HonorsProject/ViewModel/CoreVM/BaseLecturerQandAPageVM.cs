@@ -43,7 +43,7 @@ namespace HonorsProject.ViewModel.CoreVM
             User = UnitOfWork.LecturerRepo.Get(appUser.Id);
             IsConfirmed = false;
             QandAMode = QandAMode.Answer;
-            ImageHandler = new ImageHandler("public_html/honors/questions");
+            ImageHandler = new ImageHandler("public_html/honors/images");
         }
 
         public override bool Save()
@@ -141,9 +141,68 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        public override Task<bool> UploadImage(Image imageToUpload)
+        public async override Task<bool> UploadImage(Image imageToUpload)
         {
-            throw new NotImplementedException();
+            ClearFeedback();
+            bool ftpResult = false;
+            bool dbResult = false;
+            bool finalResult = false;
+
+            if (SelectedAnswer.AnsweredBy == User)
+            {
+                if (SelectedAnswer != null)
+                {
+                    if (String.IsNullOrEmpty(SelectedAnswer.ImageLocation))
+                    {
+                        AddImage(ftpResult, dbResult);
+                    }
+                    else
+                    {
+                        //Replace existing Question image
+                        bool result = ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
+                        if (result)
+                            AddImage(ftpResult, dbResult);
+                        else
+                            ShowFeedback("Failed to Replace Existing image. Try again or contact support", FeedbackType.Error);
+                    }
+                }
+                else
+                    FeedbackMessage = "You can only add an image to a question or answer you posted.";
+            }
+            return finalResult;
+        }
+
+        private void AddImage(bool ftpResult, bool dbResult)
+        {
+            //Add New Image to Question
+            if (openFileDialog.ShowDialog() == true)
+            {
+                AnswerImage = new BitmapImage(new Uri(openFileDialog.FileName));
+            }
+            if (AnswerImage != null)
+            {
+                //Save the file in FTP
+                SelectedAnswer.ImageLocation = String.Concat("A-" + SelectedAnswer.Id, "-", SelectedAnswer.AnsweredBy.Id, "-", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                ftpResult = ImageHandler.WriteImageSourceAsByteArraySFTP(AnswerImage, SelectedAnswer.ImageLocation);
+                if (!ftpResult)
+                {
+                    //if FTP fails undo everything and run away.
+                    SelectedAnswer.ImageLocation = null;
+                    UnitOfWork.Complete();
+                }
+                else
+                {
+                    //Then Save the file location to the database
+                    dbResult = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (!dbResult)
+                    {
+                        //undo Image location and FTP Step
+                        ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
+                        SelectedAnswer.ImageLocation = null;
+                        UnitOfWork.Complete();
+                    }
+                }
+            }
         }
 
         public override bool Cancel()
