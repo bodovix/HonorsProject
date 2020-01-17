@@ -109,18 +109,7 @@ namespace HonorsProject.ViewModel.CoreVM
             return imageSource;
         }
 
-        private string _quesitonSearchTxt;
-
-        public string QuestionSearchTxt
-        {
-            get { return _quesitonSearchTxt; }
-            set
-            {
-                _quesitonSearchTxt = value;
-                UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
-                OnPropertyChanged(nameof(QuestionSearchTxt));
-            }
-        }
+        public abstract string QuestionSearchTxt { get; set; }
 
         private ImageSource _questionImage;
 

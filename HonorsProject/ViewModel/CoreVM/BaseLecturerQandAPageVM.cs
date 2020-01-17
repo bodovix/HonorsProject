@@ -34,6 +34,8 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
+        public abstract override string QuestionSearchTxt { get; set; }
+
         public BaseLecturerQandAPageVM(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
             QandAMode = QandAMode.Question;

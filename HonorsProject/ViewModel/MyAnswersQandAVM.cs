@@ -13,6 +13,19 @@ namespace HonorsProject.ViewModel
 {
     public class MyAnswersQandAVM : BaseLecturerQandAPageVM
     {
+        private string _quesitonSearchTxt;
+
+        public override string QuestionSearchTxt
+        {
+            get { return _quesitonSearchTxt; }
+            set
+            {
+                _quesitonSearchTxt = value;
+                UpdateQuestionsList((BaseEntity)User, QuestionSearchTxt);
+                OnPropertyChanged(nameof(QuestionSearchTxt));
+            }
+        }
+
         public MyAnswersQandAVM(ISystemUser appUser, Answer selectedAnswer, string dbcontextName) : base(appUser, dbcontextName)
         {
             //Setup

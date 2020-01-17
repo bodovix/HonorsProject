@@ -23,6 +23,19 @@ namespace HonorsProject.ViewModel
 {
     internal class InSessionStudentQandAVM : BaseStudentQandA
     {
+        private string _quesitonSearchTxt;
+
+        public override string QuestionSearchTxt
+        {
+            get { return _quesitonSearchTxt; }
+            set
+            {
+                _quesitonSearchTxt = value;
+                UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                OnPropertyChanged(nameof(QuestionSearchTxt));
+            }
+        }
+
         public InSessionStudentQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(appUser, dbcontextName)
         {
             //Setup

@@ -34,6 +34,8 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
+        public abstract override string QuestionSearchTxt { get; set; }
+
         public BaseStudentQandA(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
             UserRole = Role.Student;

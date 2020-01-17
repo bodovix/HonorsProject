@@ -23,6 +23,19 @@ namespace HonorsProject.ViewModel
 {
     internal class MyQuestionsQandAVM : BaseStudentQandA
     {
+        private string _quesitonSearchTxt;
+
+        public override string QuestionSearchTxt
+        {
+            get { return _quesitonSearchTxt; }
+            set
+            {
+                _quesitonSearchTxt = value;
+                UpdateQuestionsList((BaseEntity)User, QuestionSearchTxt);
+                OnPropertyChanged(nameof(QuestionSearchTxt));
+            }
+        }
+
         public MyQuestionsQandAVM(ISystemUser appUser, Question selectedQuestion, string dbcontextName) : base(appUser, dbcontextName)
         {
             //Setup
@@ -36,11 +49,11 @@ namespace HonorsProject.ViewModel
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)User, null).ToList());
         }
 
-        protected override bool UpdateQuestionsList(BaseEntity sSession, string questionSearchTxt)
+        protected override bool UpdateQuestionsList(BaseEntity sStudent, string questionSearchTxt)
         {
-            Session selectedSession = (Session)sSession;
-            if (selectedSession != null)
-                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)User, questionSearchTxt));
+            Student student = (Student)sStudent;
+            if (student != null)
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)student, questionSearchTxt));
             else
                 Questions = new ObservableCollection<Question>();
             if (Questions.Count > 0)
