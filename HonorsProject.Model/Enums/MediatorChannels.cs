@@ -27,6 +27,7 @@ namespace HonorsProject.Model.Enums
         ClearPropPassInput,
         GoToThisGroup,
         GoToThisStudent,
-        GoToThisQuestion
+        GoToThisQuestion,
+        StudnetCSVImport
     }
 }

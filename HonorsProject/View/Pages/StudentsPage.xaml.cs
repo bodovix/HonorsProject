@@ -41,7 +41,14 @@ namespace HonorsProject.View.Pages
             Mediator.Register(MediatorChannels.DeleteStudentConfirmation.ToString(), DeleteStudentConfrimation);
             Mediator.Register(MediatorChannels.GoToThisGroup.ToString(), GoToThisGroup);
             Mediator.Register(MediatorChannels.GoToThisQuestion.ToString(), GoToThisQuestion);
+            Mediator.Register(MediatorChannels.StudnetCSVImport.ToString(), StudnetCSVImport);
             DataContext = VM;
+        }
+
+        private void StudnetCSVImport(object obj)
+        {
+            string format = obj as string;
+            MessageBox.Show("CSV format must be:\n" + format);
         }
 
         private void GoToThisQuestion(object obj)

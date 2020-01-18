@@ -495,6 +495,9 @@ namespace HonorsProject.ViewModel
         public bool Import()
         {
             ClearFeedback();
+            string scvFormat = " id,name,email,date of birth (yyyy-mm-dd), password.";
+            string feedbackFormat = "\nFormat:" + scvFormat + "\nCanceling import...";
+            Mediator.NotifyColleagues(MediatorChannels.StudnetCSVImport.ToString(), scvFormat);
             bool result = false;
             OpenFileDialog fileDialog = new OpenFileDialog();
             Uri uri = null;
@@ -511,7 +514,6 @@ namespace HonorsProject.ViewModel
                     int rowCount = 1;
                     int expectedRowLength = 5;
                     List<Student> newStudents = new List<Student>();
-                    string feedbackFormat = "\nFormat id,name,email,date of birth (yyyy-mm-dd), password.\nCanceling import...";
                     while (!parser.EndOfData)
                     {
                         try
