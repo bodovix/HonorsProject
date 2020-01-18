@@ -26,16 +26,6 @@
         </Grid.RowDefinitions>
         <!--Search Panel-->
         <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
-            <Button Name="CSVDeleteBtn"
-                    Content="CSV Delete"
-                    Command="{Binding CSVCmd}"
-                    CommandParameter="{x:Static enums:CSVAction.Delete}"
-                    Style="{StaticResource FormCancelButton}" />
-            <Button Name="CSVImportBtn"
-                    Content="CSV Import"
-                    Command="{Binding CSVCmd}"
-                    CommandParameter="{x:Static enums:CSVAction.Create}"
-                    Style="{StaticResource FormSaveButton}" />
             <Button Name="NewStudentBtn"
                     Content="New Student"
                     Command="{Binding NewModeCmd}"
@@ -98,6 +88,7 @@
                             <RowDefinition Height="19*" />
                             <RowDefinition Height="9*" />
                             <RowDefinition Height="15*" />
+                            <RowDefinition Height="15*" />
                         </Grid.RowDefinitions>
                         <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                             <TextBox TextWrapping="Wrap"
@@ -150,6 +141,20 @@
                             Grid.Row="4"
                             Grid.Column="1"
                             Style="{StaticResource FormCancelButton}" />
+                        <Button Name="CSVDeleteBtn"
+                            Content="CSV Delete"
+                            Command="{Binding CSVCmd}"
+                            CommandParameter="{x:Static enums:CSVAction.Delete}"
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Style="{StaticResource FormCancelButton}" />
+                        <Button Name="CSVImportBtn"
+                            Content="CSV Import"
+                            Command="{Binding CSVCmd}"
+                            CommandParameter="{x:Static enums:CSVAction.Create}"
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Style="{StaticResource FormSaveButton}" />
                     </Grid>
                 </GroupBox>
 

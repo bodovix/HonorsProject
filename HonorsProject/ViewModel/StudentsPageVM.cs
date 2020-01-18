@@ -597,7 +597,7 @@ namespace HonorsProject.ViewModel
                 }
             }
             else
-                ShowFeedback("No CSV file selected. Canceling import.", FeedbackType.Info);
+                ShowFeedback("No CSV file selected. Canceling delete.", FeedbackType.Info);
             return result;
         }
 
