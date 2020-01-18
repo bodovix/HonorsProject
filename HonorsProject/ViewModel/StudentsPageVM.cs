@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd, IGoToEntityCmd, IImportCSVCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd, IGoToEntityCmd, ICSVCmd
     {
         #region Properties
 
@@ -155,7 +155,7 @@ namespace HonorsProject.ViewModel
         public DeleteCmd DeleteCmd { get; set; }
         public CancelCmd CancelCmd { get; set; }
         public GoToEntityCmd GoToEntityCmd { get; set; }
-        public ImportCSVCmd ImportCSVCmd { get; set; }
+        public CSVCmd CSVCmd { get; set; }
 
         #endregion Commands
 
@@ -177,7 +177,7 @@ namespace HonorsProject.ViewModel
                 DeleteCmd = new DeleteCmd(this);
                 CancelCmd = new CancelCmd(this);
                 GoToEntityCmd = new GoToEntityCmd(this);
-                ImportCSVCmd = new ImportCSVCmd(this);
+                CSVCmd = new CSVCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)loggedInLectuer;
                 SearchStudentTxt = "";
@@ -492,11 +492,27 @@ namespace HonorsProject.ViewModel
             return false;
         }
 
-        public bool Import()
+        public bool ExecuteCSV(CSVAction action)
+        {
+            switch (action)
+            {
+                case CSVAction.Create:
+                    return ImportViaCSV();
+
+                case CSVAction.Delete:
+                    return DeleteViaCSV();
+
+                default:
+                    ShowFeedback("Invalid CSV Action. Please contact support.", FeedbackType.Error);
+                    return false;
+            }
+        }
+
+        private bool DeleteViaCSV()
         {
             ClearFeedback();
-            string scvFormat = " id,name,email,date of birth (yyyy-mm-dd), password.";
-            string feedbackFormat = "\nFormat:" + scvFormat + "\nCanceling import...";
+            string scvFormat = " Delete CSV must start with the ID of the students to be deleted.\nAll other columns are ignored.";
+            string feedbackFormat = "\nFormat:" + scvFormat + "\nCanceling delete...";
             Mediator.NotifyColleagues(MediatorChannels.StudnetCSVImport.ToString(), scvFormat);
             bool result = false;
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -507,98 +523,199 @@ namespace HonorsProject.ViewModel
             }
             if (uri != null)
             {
-                using (TextFieldParser parser = new TextFieldParser(uri.LocalPath))
+                try
                 {
-                    parser.TextFieldType = FieldType.Delimited;
-                    parser.SetDelimiters(",");
-                    int rowCount = 1;
-                    int expectedRowLength = 5;
-                    List<Student> newStudents = new List<Student>();
-                    while (!parser.EndOfData)
+                    using (TextFieldParser parser = new TextFieldParser(uri.LocalPath))
                     {
-                        try
+                        parser.TextFieldType = FieldType.Delimited;
+                        parser.SetDelimiters(",");
+                        int rowCount = 1;
+                        List<Student> studentsToRemove = new List<Student>();
+                        while (!parser.EndOfData)
                         {
-                            string[] fields = parser.ReadFields();
-                            //Validate
-                            if (fields.Length != expectedRowLength)
+                            try
                             {
-                                ShowFeedback($"Invalid CSV Format: row {rowCount} must only contain {expectedRowLength} columns." + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
+                                string[] fields = parser.ReadFields();
+                                //Validate
+                                if (fields.Length == 0)
+                                {
+                                    ShowFeedback($"Invalid CSV Format: row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
 
-                            //ID
-                            int id;
-                            if (String.IsNullOrEmpty(fields[0]))
+                                //ID
+                                int id;
+                                if (String.IsNullOrEmpty(fields[0]))
+                                {
+                                    ShowFeedback($"ID not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                if (!int.TryParse(fields[0], out id))
+                                {
+                                    ShowFeedback($"ID in row {rowCount} not in valid format. The ID column must be integer" + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+
+                                //Add student to list to remove if they exist
+                                Student student = UnitOfWork.StudentRepo.Get(id);
+                                if (student != null)
+                                    studentsToRemove.Add(student);
+                                rowCount++;
+                            }
+                            catch (MalformedLineException ex)
                             {
-                                ShowFeedback($"ID not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                ShowFeedback(ex.Message, FeedbackType.Error);
                                 return false;
                             }
-                            if (!int.TryParse(fields[0], out id))
-                            {
-                                ShowFeedback($"ID in row {rowCount} not in valid format. Must be integer" + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
-                            if (UnitOfWork.StudentRepo.Get(id) != null)
-                            {
-                                ShowFeedback($"ID in row {rowCount} already exists in Students database." + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
-                            //NAME
-                            if (String.IsNullOrEmpty(fields[1]))
-                            {
-                                ShowFeedback($"Name not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
-                            string name = fields[1];
-                            //EMAIL
-                            if (String.IsNullOrEmpty(fields[2]))
-                            {
-                                ShowFeedback($"Email not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
-                            string email = fields[2];
-                            //DOB
-                            if (String.IsNullOrEmpty(fields[3]))
-                            {
-                                ShowFeedback($"Date not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
-                            DateTime dob;
-                            if (!DateTime.TryParse(fields[3], out dob))
-                            {
-                                ShowFeedback($"Date not in valid format for row {rowCount}." + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
-                            //PASSWORD
-                            if (String.IsNullOrEmpty(fields[4]))
-                            {
-                                ShowFeedback($"Password not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
-                                return false;
-                            }
-                            string password = Cryptography.Hash(fields[4]);
-                            //Add student
-                            newStudents.Add(new Student(id, name, email, password, DateTime.Now.Date, Lecturer.Id));
-                            rowCount++;
                         }
-                        catch (MalformedLineException ex)
+                        //If all Parsed into Students correctly save to database
+                        if (studentsToRemove.Count > 0)
                         {
-                            ShowFeedback(ex.Message, FeedbackType.Error);
+                            UnitOfWork.StudentRepo.RemoveRange(studentsToRemove);
+                            result = (UnitOfWork.Complete() > 0) ? true : false;
+                            if (result)
+                            {
+                                ShowFeedback("Successfully delete students.", FeedbackType.Success);
+                                UpdateMyStudentsList(studentRowsToReturn);
+                                return true;
+                            }
+                            else
+                                ShowFeedback("Failed to delete  students", FeedbackType.Error);
+                            UpdateMyStudentsList(studentRowsToReturn);
+                        }
+                        else
+                        {
+                            ShowFeedback("No students in database found with matching ids from CSV file.", FeedbackType.Error);
                             return false;
                         }
                     }
-                    //If all Parsed into Students correctly save to database
-                    UnitOfWork.StudentRepo.AddRange(newStudents);
-                    result = (UnitOfWork.Complete() > 0) ? true : false;
-                    if (result)
-                        ShowFeedback("Successfully imported students.", FeedbackType.Success);
-                    else
-                        ShowFeedback("Failed to save new students to database", FeedbackType.Error);
-                    UpdateMyStudentsList(studentRowsToReturn);
+                }
+                catch (Exception ex)
+                {
+                    ShowFeedback(ex.Message, FeedbackType.Error);
+                    return false;
                 }
             }
             else
                 ShowFeedback("No CSV file selected. Canceling import.", FeedbackType.Info);
             return result;
+        }
+
+        private bool ImportViaCSV()
+        {
+            try
+            {
+                ClearFeedback();
+                string scvFormat = " id,name,email,date of birth (yyyy-mm-dd), password.";
+                string feedbackFormat = "\nFormat:" + scvFormat + "\nCanceling import...";
+                Mediator.NotifyColleagues(MediatorChannels.StudnetCSVImport.ToString(), scvFormat);
+                bool result = false;
+                OpenFileDialog fileDialog = new OpenFileDialog();
+                Uri uri = null;
+                if (fileDialog.ShowDialog() == true)
+                {
+                    uri = new Uri(fileDialog.FileName);
+                }
+                if (uri != null)
+                {
+                    using (TextFieldParser parser = new TextFieldParser(uri.LocalPath))
+                    {
+                        parser.TextFieldType = FieldType.Delimited;
+                        parser.SetDelimiters(",");
+                        int rowCount = 1;
+                        int expectedRowLength = 5;
+                        List<Student> newStudents = new List<Student>();
+                        while (!parser.EndOfData)
+                        {
+                            try
+                            {
+                                string[] fields = parser.ReadFields();
+                                //Validate
+                                if (fields.Length != expectedRowLength)
+                                {
+                                    ShowFeedback($"Invalid CSV Format: row {rowCount} must only contain {expectedRowLength} columns." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+
+                                //ID
+                                int id;
+                                if (String.IsNullOrEmpty(fields[0]))
+                                {
+                                    ShowFeedback($"ID not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                if (!int.TryParse(fields[0], out id))
+                                {
+                                    ShowFeedback($"ID in row {rowCount} not in valid format. Must be integer" + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                if (UnitOfWork.StudentRepo.Get(id) != null)
+                                {
+                                    ShowFeedback($"ID in row {rowCount} already exists in Students database." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                //NAME
+                                if (String.IsNullOrEmpty(fields[1]))
+                                {
+                                    ShowFeedback($"Name not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                string name = fields[1];
+                                //EMAIL
+                                if (String.IsNullOrEmpty(fields[2]))
+                                {
+                                    ShowFeedback($"Email not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                string email = fields[2];
+                                //DOB
+                                if (String.IsNullOrEmpty(fields[3]))
+                                {
+                                    ShowFeedback($"Date not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                DateTime dob;
+                                if (!DateTime.TryParse(fields[3], out dob))
+                                {
+                                    ShowFeedback($"Date not in valid format for row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                //PASSWORD
+                                if (String.IsNullOrEmpty(fields[4]))
+                                {
+                                    ShowFeedback($"Password not found in row {rowCount}." + feedbackFormat, FeedbackType.Error);
+                                    return false;
+                                }
+                                string password = Cryptography.Hash(fields[4]);
+                                //Add student
+                                newStudents.Add(new Student(id, name, email, password, DateTime.Now.Date, Lecturer.Id));
+                                rowCount++;
+                            }
+                            catch (MalformedLineException ex)
+                            {
+                                ShowFeedback(ex.Message, FeedbackType.Error);
+                                return false;
+                            }
+                        }
+                        //If all Parsed into Students correctly save to database
+                        UnitOfWork.StudentRepo.AddRange(newStudents);
+                        result = (UnitOfWork.Complete() > 0) ? true : false;
+                        if (result)
+                            ShowFeedback("Successfully imported students.", FeedbackType.Success);
+                        else
+                            ShowFeedback("Failed to save new students to database", FeedbackType.Error);
+                        UpdateMyStudentsList(studentRowsToReturn);
+                    }
+                }
+                else
+                    ShowFeedback("No CSV file selected. Canceling import.", FeedbackType.Info);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return false;
+            }
         }
     }
 }

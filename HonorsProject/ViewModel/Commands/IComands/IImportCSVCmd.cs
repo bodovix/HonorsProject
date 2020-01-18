@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HonorsProject.Model.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.Commands.IComands
 {
-    public interface IImportCSVCmd
+    public interface ICSVCmd
     {
-        ImportCSVCmd ImportCSVCmd { get; set; }
+        CSVCmd CSVCmd { get; set; }
 
-        bool Import();
+        bool ExecuteCSV(CSVAction action);
     }
 }
