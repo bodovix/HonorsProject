@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd, IGoToEntityCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd, IGoToEntityCmd, IImportCSVCmd
     {
         #region Properties
 
@@ -153,6 +153,7 @@ namespace HonorsProject.ViewModel
         public DeleteCmd DeleteCmd { get; set; }
         public CancelCmd CancelCmd { get; set; }
         public GoToEntityCmd GoToEntityCmd { get; set; }
+        public ImportCSVCmd ImportCSVCmd { get; set; }
 
         #endregion Commands
 
@@ -174,6 +175,7 @@ namespace HonorsProject.ViewModel
                 DeleteCmd = new DeleteCmd(this);
                 CancelCmd = new CancelCmd(this);
                 GoToEntityCmd = new GoToEntityCmd(this);
+                ImportCSVCmd = new ImportCSVCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)loggedInLectuer;
                 SearchStudentTxt = "";
@@ -491,6 +493,11 @@ namespace HonorsProject.ViewModel
                 return false;
             }
             return false;
+        }
+
+        public bool Import()
+        {
+            throw new NotImplementedException();
         }
     }
 }
