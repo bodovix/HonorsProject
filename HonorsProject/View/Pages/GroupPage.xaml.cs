@@ -3,6 +3,7 @@ using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.View.ExtensionMethods;
 using HonorsProject.ViewModel;
 using HonorsProject.ViewModel.CoreVM;
 using System;
@@ -34,6 +35,7 @@ namespace HonorsProject.View.Pages
         {
             _selectedGroup = selectedGroup;
             CreateMyGroupsVM();
+            this.SetMenuButtonColor(MenuButtonsSelection.GroupPage);
             InitializeComponent();
             Mediator.Register(MediatorChannels.DeleteGroupConfirmation.ToString(), DeleteGroupConfirmation);
             Mediator.Register(MediatorChannels.DeleteSessionConfirmation.ToString(), DeleteSessionConfirmation);

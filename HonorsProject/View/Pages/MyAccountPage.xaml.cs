@@ -1,6 +1,7 @@
 ﻿using HonorsProject.Model.Data;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.View.ExtensionMethods;
 using HonorsProject.ViewModel;
 using HonorsProject.ViewModel.CoreVM;
 using System;
@@ -30,6 +31,7 @@ namespace HonorsProject.View.Pages
         public MyAccountPage()
         {
             CreateMySesoinVM();
+            this.SetMenuButtonColor(MenuButtonsSelection.MyAccountPage);
             InitializeComponent();
             this.DataContext = VM;
             Mediator.Register(MediatorChannels.ClearPropPassInput.ToString(), ClearProposedPassword);

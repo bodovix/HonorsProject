@@ -148,6 +148,7 @@
     <Compile Include="View\CustomControlls\QuestionsGridViewControl.xaml.cs">
       <DependentUpon>QuestionsGridViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ExtensionMethods\PagesExtenstionMethods.cs" />
     <Compile Include="View\Pages\DataAnalysisPage.xaml.cs">
       <DependentUpon>DataAnalysisPage.xaml</DependentUpon>
     </Compile>

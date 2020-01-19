@@ -88,6 +88,7 @@
     <Compile Include="Enums\CSVAction.cs" />
     <Compile Include="Enums\FeedbackType.cs" />
     <Compile Include="Enums\MediatorChannels.cs" />
+    <Compile Include="Enums\MenuButtonsSelection.cs" />
     <Compile Include="Enums\QandAMode.cs" />
     <Compile Include="Enums\SubgridContext.cs" />
     <Compile Include="Enums\FormContext.cs" />

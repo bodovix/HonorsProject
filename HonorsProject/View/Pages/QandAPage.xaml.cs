@@ -3,6 +3,7 @@ using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.View.ExtensionMethods;
 using HonorsProject.ViewModel;
 using HonorsProject.ViewModel.CoreVM;
 using System;
@@ -70,16 +71,19 @@ namespace HonorsProject.View.Pages
                 {
                     //go the in session windows as a lecturer
                     VM = new InSessoinLecturerQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
+                    this.SetMenuButtonColor(MenuButtonsSelection.ClearAll);
                 }
                 else if (entity is Question)
                 {
                     //load in session page for specific question.
                     VM = new InSessoinLecturerQandAVM(App.AppUser, (Question)entity, ConnectionConfigs.LiveConfig);
+                    this.SetMenuButtonColor(MenuButtonsSelection.QuesstionsPage);
                 }
                 else if (entity is Answer)
                 {
                     //go to MyAnswers window and show questions you have answers to
                     VM = new MyAnswersQandAVM(App.AppUser, (Answer)entity, ConnectionConfigs.LiveConfig);
+                    this.SetMenuButtonColor(MenuButtonsSelection.AnswersPage);
                 }
                 else if (entity == null)
                 {
@@ -96,11 +100,13 @@ namespace HonorsProject.View.Pages
                 {
                     //Go to the in session window as a student
                     VM = new InSessionStudentQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
+                    this.SetMenuButtonColor(MenuButtonsSelection.ClearAll);
                 }
                 else if (entity is Question)
                 {
                     //my questions navigation used
                     VM = new MyQuestionsQandAVM(App.AppUser, (Question)entity, ConnectionConfigs.LiveConfig);
+                    this.SetMenuButtonColor(MenuButtonsSelection.QuesstionsPage);
                 }
                 else if (entity is Answer)
                 {

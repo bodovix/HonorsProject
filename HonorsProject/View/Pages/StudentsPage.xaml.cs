@@ -3,6 +3,7 @@ using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.View.ExtensionMethods;
 using HonorsProject.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace HonorsProject.View.Pages
         {
             _selectedStudent = selectedStudent;
             VM = new StudentsPageVM(ConnectionConfigs.LiveConfig, _selectedStudent, App.AppUser);
+            this.SetMenuButtonColor(MenuButtonsSelection.StudentsPage);
             InitializeComponent();
             Mediator.Register(MediatorChannels.StudentsPageGeneratePasswordCheck.ToString(), ShowPasswordConfBox);
             Mediator.Register(MediatorChannels.StudentsPageNewPasswordDisplay.ToString(), ShowPasswordDisplay);
