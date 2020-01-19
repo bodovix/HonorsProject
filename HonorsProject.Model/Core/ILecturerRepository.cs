@@ -10,5 +10,6 @@ namespace HonorsProject.Model.Core
     public interface ILecturerRepository : IRepository<Lecturer>
     {
         IEnumerable<Lecturer> GetLecturerWhereX(int id);
+        List<Lecturer> GetTopXFromSearch(string searchTxt, int rows);
     }
 }

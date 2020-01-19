@@ -26,6 +26,10 @@
                     VerticalAlignment="Center"
                     MinWidth="50"
                     MaxWidth="150">
+            <Button Name="LecturersBtn"
+                    Content="Lecturers"
+                    Click="LecturersBtn_Click"
+                    Style="{StaticResource InfoButton}" />
             <Button Name="StudentsBtn"
                     Content="Students"
                     Click="StudentsBtn_Click"

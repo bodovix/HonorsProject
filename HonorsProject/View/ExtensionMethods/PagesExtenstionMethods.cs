@@ -48,6 +48,10 @@ namespace HonorsProject.View.ExtensionMethods
                     ((MainWindow)System.Windows.Application.Current.MainWindow).StudentsBtn.Background = highlighted;
                     break;
 
+                case MenuButtonsSelection.LecturersPage:
+                    ((MainWindow)System.Windows.Application.Current.MainWindow).LecturersBtn.Background = highlighted;
+                    break;
+
                 case MenuButtonsSelection.ClearAll:
                     Clear();
                     break;

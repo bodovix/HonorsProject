@@ -141,6 +141,23 @@ namespace HonorsProject.Model.Entities
                 return false;
         }
 
+        public bool AddNewLecturer(Lecturer selectedLecturer, UnitOfWork unitOfWork)
+        {
+            selectedLecturer.CreatedByLecturerId = Id;
+            selectedLecturer.CreatedOn = DateTime.Now.Date;
+            if (selectedLecturer.Validate())
+            {
+                unitOfWork.LecturerRepo.Add(selectedLecturer);
+                bool result = (unitOfWork.Complete() > 0) ? true : false;
+                if (result)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
         public bool AnswerQuestion(Answer selectedAnswer, UnitOfWork unitOfWork)
         {
             bool result = false;
@@ -152,6 +169,21 @@ namespace HonorsProject.Model.Entities
                 result = (unitOfWork.Complete() > 0) ? true : false;
             }
             return result;
+        }
+
+        public bool Validate()
+        {
+            if (String.IsNullOrEmpty(Name))
+                throw new ArgumentException("Name required.");
+            if (CreatedOn == null)
+                throw new ArgumentException("Date created on required.");
+            if (String.IsNullOrEmpty(Email))
+                throw new ArgumentException("Email required.");
+            if (String.IsNullOrEmpty(Password))
+                throw new ArgumentException("Password required.");
+            if (CreatedByLecturerId == 0)
+                throw new ArgumentException("Created by id required.");
+            return true;
         }
 
         public bool GenerateNewPasswordHash(ref string optionalPassword, string optionalPassConf)

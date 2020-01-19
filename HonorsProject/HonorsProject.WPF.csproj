@@ -132,6 +132,7 @@
     <Compile Include="ViewModel\MySessionsLecturerPageVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\MySessionsStudentPageVM.cs" />
+    <Compile Include="ViewModel\LecturerPageVM.cs" />
     <Compile Include="ViewModel\StudentsPageVM.cs" />
     <Compile Include="View\CustomControlls\SessionsGridViewControl.xaml.cs">
       <DependentUpon>SessionsGridViewControl.xaml</DependentUpon>
@@ -166,6 +167,9 @@
     </Compile>
     <Compile Include="View\Pages\QandAPage.xaml.cs">
       <DependentUpon>QandAPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\LecturersPage.xaml.cs">
+      <DependentUpon>LecturersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\StudentsPage.xaml.cs">
       <DependentUpon>StudentsPage.xaml</DependentUpon>
@@ -225,6 +229,10 @@
     <Page Include="View\Pages\QandAPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\LecturersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\StudentsPage.xaml">
       <SubType>Designer</SubType>

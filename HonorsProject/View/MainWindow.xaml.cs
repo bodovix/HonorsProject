@@ -42,6 +42,7 @@ namespace HonorsProject.View
 
         private void InitiallyHideNavigation()
         {
+            LecturersBtn.Visibility = Visibility.Collapsed;
             StudentsBtn.Visibility = Visibility.Collapsed;
             GroupsBtn.Visibility = Visibility.Collapsed;
             MySessionsBtn.Visibility = Visibility.Collapsed;
@@ -56,6 +57,7 @@ namespace HonorsProject.View
             switch (App.LoggedInAs)
             {
                 case Role.Student:
+                    LecturersBtn.Visibility = Visibility.Collapsed;
                     StudentsBtn.Visibility = Visibility.Collapsed;
                     GroupsBtn.Visibility = Visibility.Visible;
                     MySessionsBtn.Visibility = Visibility.Visible;
@@ -66,6 +68,7 @@ namespace HonorsProject.View
                     break;
 
                 case Role.Lecturer:
+                    LecturersBtn.Visibility = Visibility.Visible;
                     StudentsBtn.Visibility = Visibility.Visible;
                     GroupsBtn.Visibility = Visibility.Visible;
                     MySessionsBtn.Visibility = Visibility.Visible;
@@ -110,6 +113,12 @@ namespace HonorsProject.View
         {
             Mediator.ClearMediator();
             MainContent.Content = new StudentsPage(new Student());
+        }
+
+        private void LecturersBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.ClearMediator();
+            MainContent.Content = new LecturerPage();
         }
 
         private void GroupsBtn_Click(object sender, RoutedEventArgs e)

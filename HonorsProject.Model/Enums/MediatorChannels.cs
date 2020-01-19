@@ -28,6 +28,8 @@ namespace HonorsProject.Model.Enums
         GoToThisGroup,
         GoToThisStudent,
         GoToThisQuestion,
-        StudnetCSVImport
+        StudnetCSVImport,
+        LecturerPageGeneratePasswordCheck,
+        LecturerPageNewPasswordDisplay
     }
 }

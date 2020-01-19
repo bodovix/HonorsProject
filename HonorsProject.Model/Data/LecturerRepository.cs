@@ -20,5 +20,17 @@ namespace HonorsProject.Model.Data
         {
             throw new NotImplementedException();
         }
+
+        public List<Lecturer> GetTopXFromSearch(string searchTxt, int rows)
+        {
+            //if no search return all
+            if (String.IsNullOrEmpty(searchTxt))
+                return _entities.Take(rows).ToList();
+            else
+                return _entities.Where(s =>
+                        s.Name.Contains(searchTxt)
+                        || s.Email.Contains(searchTxt)
+                        || s.Id.ToString().Contains(searchTxt)).Take(rows).ToList();
+        }
     }
 }

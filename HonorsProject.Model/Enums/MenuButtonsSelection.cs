@@ -15,7 +15,8 @@ namespace HonorsProject.Model.Enums
         MySessionPage,
         StudentsPage,
         AnswersPage,
-        ClearAll
+        ClearAll,
+        LecturersPage
         // login and main window don't have navigation items to color
     }
 }
