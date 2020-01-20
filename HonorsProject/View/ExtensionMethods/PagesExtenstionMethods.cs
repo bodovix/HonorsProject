@@ -70,6 +70,7 @@ namespace HonorsProject.View.ExtensionMethods
             ((MainWindow)System.Windows.Application.Current.MainWindow).MyQuestoins.Background = Brushes.LightGray;
             ((MainWindow)System.Windows.Application.Current.MainWindow).MySessionsBtn.Background = Brushes.LightGray;
             ((MainWindow)System.Windows.Application.Current.MainWindow).StudentsBtn.Background = Brushes.LightGray;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).LecturersBtn.Background = Brushes.LightGray;
         }
     }
 }
