@@ -28,7 +28,7 @@
                   HorizontalContentAlignment="Stretch"
                   ItemsSource="{Binding Path=EntitiesAvailable, ElementName=InOrOutCtrl}"
                   Grid.Row="1"
-                  Height="100"
+                  Height="400"
                   Grid.Column="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -53,7 +53,7 @@
         <ListView Name="InItemsLV"
                   HorizontalContentAlignment="Stretch"
                   ItemsSource="{Binding Path=EntitiesOwned, ElementName=InOrOutCtrl}"
-                  Height="100"
+                  Height="400"
                   Grid.Row="1"
                   Grid.Column="1">
             <ListView.ItemTemplate>
