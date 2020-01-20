@@ -103,7 +103,8 @@
                            Height="30" />
                 </GroupBox>
                 <StackPanel Grid.Column="2"
-                        Grid.Row="0">
+                        Grid.Row="0"
+                            Grid.RowSpan="3">
                     <TextBlock Text="Add Students"
 
                         Style="{StaticResource FormTitleText}" />
