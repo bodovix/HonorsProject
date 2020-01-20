@@ -17,6 +17,7 @@
         <cv:RoleToEnabledConverter x:Key="RoleToEnabledConverter" />
         <uc:SessionsGridViewControl x:Key="SessionsGridViewControl" />
         <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
+        <cv:RoleToBoolConverter x:Key="RoleToBoolConverter" />
     </Page.Resources>
     <StackPanel Name="MainContainer" Orientation="Vertical">
         <Button Name="NewSessionBtn"
@@ -139,15 +140,13 @@
                                 TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                IsEnabled="{Binding Path=UserRole, Converter={StaticResource RoleToEnabledConverter},
-                    ConverterParameter={x:Static enums:Role.Lecturer}}" />
+                                IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <GroupBox Header="Group" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <ComboBox x:Name="GroupComboBox"
                               Height="23"
                               ItemsSource="{Binding Groups}"
-                              IsEnabled="{Binding Path=UserRole, Converter={StaticResource RoleToEnabledConverter},
-                    ConverterParameter={x:Static enums:Role.Lecturer}}"
+                              IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}"
                               SelectedItem="{Binding SelectedSession.Group,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                               DisplayMemberPath="Name">
                             <ComboBox.ItemContainerStyle>
@@ -160,14 +159,12 @@
                     <GroupBox Header="Start Time" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <DatePicker SelectedDate="{Binding SelectedSession.StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource UserInputDate}"
-                                IsEnabled="{Binding Path=UserRole, Converter={StaticResource RoleToEnabledConverter},
-                    ConverterParameter={x:Static enums:Role.Lecturer}}" />
+                                IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <GroupBox Header="End Time" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <DatePicker SelectedDate="{Binding SelectedSession.EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource UserInputDate}"
-                                IsEnabled="{Binding Path=UserRole, Converter={StaticResource RoleToEnabledConverter},
-                    ConverterParameter={x:Static enums:Role.Lecturer}}" />
+                                IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <Button Name="SaveBtn"
                         Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
