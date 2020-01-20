@@ -151,14 +151,16 @@
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Student}}"
+                                 IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Student}}"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <Label Content="{Binding SelectedQuestion.AskedBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
+                        <Label Content="{Binding SelectedQuestion.AskedBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <GroupBox Header="Time Asked" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                        <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource UserFormLbl}" />
+                        <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               Style="{StaticResource UserFormLbl}" />
                     </GroupBox>
                     <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <Image Source="{Binding SelectedQuestion.IsResolved,
@@ -171,7 +173,7 @@
                          MaxLength="300"
                          Height="80"
                          Style="{StaticResource UserInput}"
-                         IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Student}}"
+                         IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Student}}"
                          Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
@@ -248,7 +250,7 @@
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}"
+                                 IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}"
                                  Text="{Binding SelectedAnswer.Name}" />
                     </GroupBox>
                     <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
@@ -271,7 +273,7 @@
                              MaxLength="300"
                              Height="80"
                              Style="{StaticResource UserInput}"
-                             IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}"
+                             IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
