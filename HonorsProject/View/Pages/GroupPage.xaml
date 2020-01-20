@@ -138,6 +138,7 @@
                         Style="{StaticResource FormCancelButton}" />
                 </Grid>
             </GroupBox>
+            <!--In or out Part-->
             <Grid Grid.Column="1" Grid.Row="0">
                 <GroupBox Header="Add Students"
                           Style="{StaticResource FormGroupBox}">
@@ -160,7 +161,7 @@
             </Grid>
             
             <!--sub-grid section-->
-            <Grid Grid.Column="0" Grid.Row="1">
+            <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
