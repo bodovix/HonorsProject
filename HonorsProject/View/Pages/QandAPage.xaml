@@ -13,6 +13,7 @@
         <cv:QandAModeToVisibleConverter x:Key="QandAModeToVisibleConverter" />
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
         <cv:RoleToHiddenConverter x:Key="RoleToHiddenConverter" />
+        <cv:RoleToBoolConverter x:Key="RoleToBoolConverter" />
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
         <cv:BoolToResolvedImgConverter x:Key="BoolToResolvedImgConverter" />
         <cv:QuestionIdToUserOrAdminVisConverter x:Key="QuestionIdToUserOrAdminVisConverter" />
@@ -150,6 +151,7 @@
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
+                                 IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Student}}"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
@@ -169,6 +171,7 @@
                          MaxLength="300"
                          Height="80"
                          Style="{StaticResource UserInput}"
+                         IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Student}}"
                          Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
@@ -245,6 +248,7 @@
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
+                                 IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}"
                                  Text="{Binding SelectedAnswer.Name}" />
                     </GroupBox>
                     <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
@@ -267,6 +271,7 @@
                              MaxLength="300"
                              Height="80"
                              Style="{StaticResource UserInput}"
+                             IsEnabled="{Binding FormContext,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
