@@ -79,63 +79,48 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--main details form-->
-            <Grid Grid.Column="0" Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <Label  Style="{StaticResource UserFormLbl  }"
+            <GroupBox Header="Group Details:" Style="{StaticResource FormGroupBox}">
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                        <Label  Style="{StaticResource UserFormLbl  }"
                                  Content="{Binding SelectedGroup.Id}" />
-                </GroupBox>
-                <GroupBox Header="Created On" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="{Binding SelectedGroup.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    </GroupBox>
+                    <GroupBox Header="Created On" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                        <Label Content="{Binding SelectedGroup.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Height="30" />
-                </GroupBox>
-                <StackPanel Grid.Column="2"
-                        Grid.Row="0"
-                            Grid.RowSpan="3">
-                    <TextBlock Text="Add Students"
+                    </GroupBox>
 
-                        Style="{StaticResource FormTitleText}" />
-                    <uc:InOrOutControl
-                        x:Name="InOrOutControl"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                            ConverterParameter={x:Static enums:Role.Lecturer}}"
-                        EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        AvailableTxt="Students nsot in Group"
-                        EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        ContainsTxt="Students in Group"
-                        MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                    <TextBox TextWrapping="Wrap"
+                    <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                        <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  Text="{Binding SelectedGroup.Name}"
                                  IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
-                </GroupBox>
-                <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                    <Label Content="{Binding SelectedGroup.CreatedByLecturerId, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    </GroupBox>
+                    <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                        <Label Content="{Binding SelectedGroup.CreatedByLecturerId, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                            Height="30" />
-                </GroupBox>
-                <TextBlock Text="{Binding FeedbackMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    </GroupBox>
+                    <TextBlock Text="{Binding FeedbackMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                Grid.Row="2"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                 Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
-                <Button Name="SaveBtn"
+                    <Button Name="SaveBtn"
                         Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
                         Command="{Binding SaveFormCmd}"
                         Grid.Column="0"
@@ -143,7 +128,7 @@
                         Style="{StaticResource FormSaveButton}"
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                             ConverterParameter={x:Static enums:Role.Lecturer}}" />
-                <Button Name="CancelBtn"
+                    <Button Name="CancelBtn"
                         Content="Cancel"
                         Command="{Binding CancelCmd}"
                         Grid.Column="1"
@@ -151,7 +136,29 @@
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                             ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormCancelButton}" />
+                </Grid>
+            </GroupBox>
+            <Grid Grid.Column="1" Grid.Row="0">
+                <GroupBox Header="Add Students"
+                          Style="{StaticResource FormGroupBox}">
+                    <StackPanel Grid.Column="2"
+                        Grid.Row="0"
+                            Grid.RowSpan="3">
+                        <TextBlock Text="Manage Students:" Style="{StaticResource FormTitleText}" />
+                        <uc:InOrOutControl
+                        x:Name="InOrOutControl"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            ConverterParameter={x:Static enums:Role.Lecturer}}"
+                        EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        AvailableTxt="Students not in Group"
+                        EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        ContainsTxt="Students in Group"
+                        MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </GroupBox>
             </Grid>
+            
             <!--sub-grid section-->
             <Grid Grid.Column="0" Grid.Row="1">
                 <Grid.ColumnDefinitions>

@@ -76,7 +76,6 @@
                 </Grid.RowDefinitions>
                 <!--Details Form-->
                 <GroupBox Header="Student Details:" Style="{StaticResource FormGroupBox}">
-
                     <Grid Grid.Column="0" Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
