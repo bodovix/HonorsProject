@@ -197,8 +197,8 @@ namespace HonorsProject.Model.Entities
                 for (int i = 0; i < stringChars.Length; i++)
                     stringChars[i] = chars[random.Next(chars.Length)];
 
-                string randomPasswordTxt = new string(stringChars);
-                Password = Cryptography.Hash(randomPasswordTxt);
+                optionalPassword = new string(stringChars);
+                Password = Cryptography.Hash(optionalPassword);
                 return true;
             }
             else
