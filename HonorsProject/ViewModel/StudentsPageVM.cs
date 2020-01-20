@@ -358,6 +358,11 @@ namespace HonorsProject.ViewModel
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
             ClearFeedback();
+            if (FormContext == FormContext.Create)
+            {
+                ShowFeedback("Create student first.", FeedbackType.Error);
+                return false;
+            }
             try
             {
                 bool result = false;

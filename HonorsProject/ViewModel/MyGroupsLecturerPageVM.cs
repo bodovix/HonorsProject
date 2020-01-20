@@ -423,10 +423,10 @@ namespace HonorsProject.ViewModel
         private void RefreshAvailableStudents(Group group)
         {
             List<Student> students;
-            if (group == null || group.Id == 0) // If in New Mode
-                students = UnitOfWork.StudentRepo.GetAll().ToList();
-            else // if student already selected
-                students = UnitOfWork.StudentRepo.GetStudentsNotInGroup(group).ToList();
+            //if (group == null || group.Id == 0) // If in New Mode
+            //    students = UnitOfWork.StudentRepo.GetAll().ToList();
+            //else // if student already selected
+            students = UnitOfWork.StudentRepo.GetStudentsNotInGroup(group).ToList();
             StudentsNotInGroup = new ObservableCollection<Student>(students);
         }
 
@@ -440,9 +440,15 @@ namespace HonorsProject.ViewModel
                 {
                     int sId = student.Id;
                     SelectedGroup.Students.Remove(student);
-                    UnitOfWork.Complete();
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                    {
+                        RefreshAvailableStudents(SelectedGroup);
+                        ShowFeedback($"Student {sId} removed from Group {SelectedGroup.Id}.", FeedbackType.Success);
+                    }
+                    else
+                        ShowFeedback($"Failed to remove student {sId} from Group {SelectedGroup.Id}. \n Please try again or contact support.", FeedbackType.Error);
                     RefreshAvailableStudents(SelectedGroup);
-                    ShowFeedback($"Student {sId} removed from Group {SelectedGroup.Id}.", FeedbackType.Success);
                     return true;
                 }
                 return result;
@@ -457,6 +463,11 @@ namespace HonorsProject.ViewModel
         public bool MoveEntityInToList(BaseEntity entityToAdd)
         {
             ClearFeedback();
+            if (FormContext == FormContext.Create)
+            {
+                ShowFeedback("Create group first.", FeedbackType.Error);
+                return false;
+            }
             try
             {
                 bool result = false;
@@ -473,10 +484,10 @@ namespace HonorsProject.ViewModel
                     if (result)
                     {
                         RefreshAvailableStudents(SelectedGroup);
-                        ShowFeedback($"Student {sId} removed from Group {SelectedGroup.Id}.", FeedbackType.Success);
+                        ShowFeedback($"Student {sId} added to Group {SelectedGroup.Id}.", FeedbackType.Success);
                     }
                     else
-                        ShowFeedback($"Failed to remove student {sId} from Group {SelectedGroup.Id}. \n Please try again or contact support.", FeedbackType.Error);
+                        ShowFeedback($"Failed to add student {sId} to Group {SelectedGroup.Id}. \n Please try again or contact support.", FeedbackType.Error);
                 }
                 return result;
             }
