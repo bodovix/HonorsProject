@@ -83,31 +83,35 @@ namespace HonorsProject.Model.HelperClasses
             }
         }
 
-        public bool WriteImageSourceAsByteArraySFTP(ImageSource imageSource, string imageLocationMemory)
+        public async Task<bool> WriteImageSourceAsByteArraySFTP(ImageSource imageSource, string imageLocationMemory)
         {
-            BitmapEncoder encoder = new TiffBitmapEncoder();
-            byte[] biteArray = ImageSourceToBytes(encoder, imageSource); // Function returns byte[] csv file
-
-            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
+            var taskResult = await Task.Run(() =>
             {
-                client.Connect();
-                if (client.IsConnected)
+                BitmapEncoder encoder = new TiffBitmapEncoder();
+                byte[] biteArray = ImageSourceToBytes(encoder, imageSource); // Function returns byte[] csv file
+
+                using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
                 {
-                    client.ChangeDirectory(SFTPWorkingDirectory);
-                    using (var ms = new MemoryStream(biteArray))
+                    client.Connect();
+                    if (client.IsConnected)
                     {
-                        client.BufferSize = (uint)ms.Length; // bypass Payload error large files
-                        client.Create(SFTPWorkingDirectory + "/" + imageLocationMemory);
-                        client.WriteAllBytes(SFTPWorkingDirectory + "/" + imageLocationMemory, biteArray);// imageLocationDisk == openFileDialog.FileName
-                        return true;
+                        client.ChangeDirectory(SFTPWorkingDirectory);
+                        using (var ms = new MemoryStream(biteArray))
+                        {
+                            client.BufferSize = (uint)ms.Length; // bypass Payload error large files
+                            client.Create(SFTPWorkingDirectory + "/" + imageLocationMemory);
+                            client.WriteAllBytes(SFTPWorkingDirectory + "/" + imageLocationMemory, biteArray);// imageLocationDisk == openFileDialog.FileName
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        OutputMessage = "Couldn't connect to SFTP server.";
+                        return false;
                     }
                 }
-                else
-                {
-                    OutputMessage = "Couldn't connect to SFTP server.";
-                    return false;
-                }
-            }
+            });
+            return taskResult;
         }
 
         public byte[] ReadByteArrayFromSFTP(string imageLocationMemory)
@@ -165,31 +169,34 @@ namespace HonorsProject.Model.HelperClasses
             return bitmapImage;
         }
 
-        public bool DeleteFileFromFTPServer(string imageLocation)
+        public async Task<bool> DeleteFileFromFTPServer(string imageLocation)
         {
             //BitmapEncoder encoder = new TiffBitmapEncoder();
             // byte[] biteArray = ImageSourceToBytes(encoder, QuestionImage);
-
-            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
+            var taskResult = await Task.Run(() =>
             {
-                client.Connect();
-                if (client.IsConnected)
+                using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
                 {
-                    client.ChangeDirectory(SFTPWorkingDirectory);
-                    //using (var ms = new MemoryStream(biteArray))
-                    // {
-                    //client.BufferSize = (uint)ms.Length; // bypass Payload error large files
-                    if (client.Exists(client.WorkingDirectory + "/" + imageLocation))
-                        client.DeleteFile(client.WorkingDirectory + "/" + imageLocation);
-                    // }
-                    return true;
+                    client.Connect();
+                    if (client.IsConnected)
+                    {
+                        client.ChangeDirectory(SFTPWorkingDirectory);
+                        //using (var ms = new MemoryStream(biteArray))
+                        // {
+                        //client.BufferSize = (uint)ms.Length; // bypass Payload error large files
+                        if (client.Exists(client.WorkingDirectory + "/" + imageLocation))
+                            client.DeleteFile(client.WorkingDirectory + "/" + imageLocation);
+                        // }
+                        return true;
+                    }
+                    else
+                    {
+                        OutputMessage = "Couldn't connect to SFTP server";
+                        return false;
+                    }
                 }
-                else
-                {
-                    OutputMessage = "Couldn't connect to SFTP server";
-                    return false;
-                }
-            }
+            });
+            return taskResult;
         }
     }
 }

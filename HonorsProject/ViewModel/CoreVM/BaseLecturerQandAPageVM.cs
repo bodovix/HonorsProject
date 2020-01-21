@@ -154,14 +154,14 @@ namespace HonorsProject.ViewModel.CoreVM
                 {
                     if (String.IsNullOrEmpty(SelectedAnswer.ImageLocation))
                     {
-                        AddImage(ftpResult, dbResult);
+                        await AddImage(ftpResult, dbResult);
                     }
                     else
                     {
                         //Replace existing Question image
-                        bool result = ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
+                        bool result = await ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
                         if (result)
-                            AddImage(ftpResult, dbResult);
+                            await AddImage(ftpResult, dbResult);
                         else
                             ShowFeedback("Failed to Replace Existing image. Try again or contact support", FeedbackType.Error);
                     }
@@ -172,7 +172,7 @@ namespace HonorsProject.ViewModel.CoreVM
             return finalResult;
         }
 
-        private void AddImage(bool ftpResult, bool dbResult)
+        private async Task AddImage(bool ftpResult, bool dbResult)
         {
             //Add New Image to Question
             if (openFileDialog.ShowDialog() == true)
@@ -183,7 +183,7 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 //Save the file in FTP
                 SelectedAnswer.ImageLocation = String.Concat("A-" + SelectedAnswer.Id, "-", SelectedAnswer.AnsweredBy.Id, "-", DateTime.Now.ToString("yyyyMMddHHmmss"));
-                ftpResult = ImageHandler.WriteImageSourceAsByteArraySFTP(AnswerImage, SelectedAnswer.ImageLocation);
+                ftpResult = await ImageHandler.WriteImageSourceAsByteArraySFTP(AnswerImage, SelectedAnswer.ImageLocation);
                 if (!ftpResult)
                 {
                     //if FTP fails undo everything and run away.
@@ -197,7 +197,7 @@ namespace HonorsProject.ViewModel.CoreVM
                     if (!dbResult)
                     {
                         //undo Image location and FTP Step
-                        ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
+                        await ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
                         SelectedAnswer.ImageLocation = null;
                         UnitOfWork.Complete();
                     }
