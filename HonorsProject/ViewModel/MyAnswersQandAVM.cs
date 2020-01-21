@@ -33,6 +33,7 @@ namespace HonorsProject.ViewModel
                 FormContextAnswer = FormContext.Create;
             else
                 FormContextAnswer = FormContext.Update;
+            SelectedQuestion = selectedAnswer.Question;
             SelectedAnswer = selectedAnswer;//Might need to attach this to the UoW. not sure yet
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllWithAnswersByLecturer(User, QuestionSearchTxt).ToList());
         }
@@ -45,6 +46,14 @@ namespace HonorsProject.ViewModel
             else
                 Questions = new ObservableCollection<Question>();
             return (Questions.Count > 0) ? true : false;
+        }
+
+        protected override void SetHeaderMessage()
+        {
+            if (SelectedQuestion != null)
+                SelectedSession = SelectedQuestion.Session;
+            if (SelectedSession != null)
+                HeaderMessage = SelectedSession.Name;
         }
 
         //all answers for selected question are loaded - makes sense to be able to see other

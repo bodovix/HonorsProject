@@ -98,5 +98,13 @@ namespace HonorsProject.ViewModel
                 return false;
             }
         }
+
+        protected override void SetHeaderMessage()
+        {
+            if (SelectedQuestion != null)
+                SelectedSession = SelectedQuestion.Session;
+            if (SelectedSession != null)
+                HeaderMessage = SelectedSession.Name;
+        }
     }
 }

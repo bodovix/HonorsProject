@@ -23,6 +23,17 @@ namespace HonorsProject.ViewModel.CoreVM
         #region Properties
 
         public abstract ISystemUser User { get; set; }
+        private string _headerMessage;
+
+        public string HeaderMessage
+        {
+            get { return _headerMessage; }
+            set
+            {
+                _headerMessage = value;
+                OnPropertyChanged(nameof(HeaderMessage));
+            }
+        }
 
         private FormContext _formContextQuestion;
 
@@ -72,8 +83,9 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private Question _selectedQuestion;
         private byte[] questionByteArray;
+
+        private Question _selectedQuestion;
 
         public Question SelectedQuestion
         {
@@ -89,6 +101,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(SelectedQuestion));
                 QVisConDTO.Question = value;
                 OnPropertyChanged(nameof(QVisConDTO));
+                SetHeaderMessage();
                 //if selected question has image. download it
                 QuestionImage = RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation, ref questionByteArray);
                 ClearFeedback();
@@ -152,6 +165,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(SelectedAnswer));
                 AVisConDTO.Answer = value;
                 OnPropertyChanged(nameof(AVisConDTO));
+                SetHeaderMessage();
                 //if selected answer has image. download it
                 AnswerImage = RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation, ref answerByteArray);
                 ClearFeedback();
@@ -324,5 +338,7 @@ namespace HonorsProject.ViewModel.CoreVM
             else
                 return false;
         }
+
+        protected abstract void SetHeaderMessage();
     }
 }

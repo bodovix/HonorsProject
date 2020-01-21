@@ -224,7 +224,7 @@
                 </Grid>
             </GroupBox>
             <!--Answer Form-->
-            <GroupBox Header="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            <GroupBox Header="{Binding HeaderMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       x:Name="AnswerContainer"
                       Grid.Column="0"
                       Grid.Row="0"

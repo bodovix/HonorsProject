@@ -255,5 +255,7 @@ namespace HonorsProject.ViewModel.CoreVM
             ShowFeedback("Lecturers cannot mark questions as resolved.", FeedbackType.Error);
             return false;
         }
+
+        protected override abstract void SetHeaderMessage();
     }
 }
