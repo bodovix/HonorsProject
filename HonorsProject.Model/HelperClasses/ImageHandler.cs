@@ -114,25 +114,29 @@ namespace HonorsProject.Model.HelperClasses
             return taskResult;
         }
 
-        public byte[] ReadByteArrayFromSFTP(string imageLocationMemory)
+        public async Task<byte[]> ReadByteArrayFromSFTP(string imageLocationMemory)
         {
-            using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
+            var taskResult = await Task.Run(() =>
             {
-                client.Connect();
-                if (client.IsConnected)
+                using (var client = new Renci.SshNet.SftpClient(Host, Port, Username, Password))
                 {
-                    client.ChangeDirectory(SFTPWorkingDirectory);
-                    if (client.Exists(client.WorkingDirectory + "/" + imageLocationMemory))
-                        return client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
+                    client.Connect();
+                    if (client.IsConnected)
+                    {
+                        client.ChangeDirectory(SFTPWorkingDirectory);
+                        if (client.Exists(client.WorkingDirectory + "/" + imageLocationMemory))
+                            return client.ReadAllBytes(client.WorkingDirectory + "/" + imageLocationMemory);// imageLocationDisk == openFileDialog.FileName
+                        else
+                            return null;
+                    }
                     else
+                    {
+                        OutputMessage = "Couldn't connect to SFTP server.";
                         return null;
+                    }
                 }
-                else
-                {
-                    OutputMessage = "Couldn't connect to SFTP server.";
-                    return null;
-                }
-            }
+            });
+            return taskResult;
         }
 
         public byte[] ImageSourceToBytes(BitmapEncoder encoder, ImageSource imageSource)

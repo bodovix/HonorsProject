@@ -103,17 +103,27 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(QVisConDTO));
                 SetHeaderMessage();
                 //if selected question has image. download it
-                QuestionImage = RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation, ref questionByteArray);
+                AsyncRunner.Run(AwaitQuestionImage());
                 ClearFeedback();
             }
         }
 
-        private ImageSource RefreshImage(string nameOfImageProperty, string imageLocation, ref byte[] imageByteArray)
+        private async Task AwaitQuestionImage()
+        {
+            QuestionImage = await RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation, questionByteArray);
+        }
+
+        private async Task AwaitAnswerImage()
+        {
+            AnswerImage = await RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation, answerByteArray);
+        }
+
+        private async Task<ImageSource> RefreshImage(string nameOfImageProperty, string imageLocation, byte[] imageByteArray)
         {
             ImageSource imageSource;
             if (!String.IsNullOrEmpty(imageLocation))
             {
-                imageByteArray = ImageHandler.ReadByteArrayFromSFTP(imageLocation);
+                imageByteArray = await ImageHandler.ReadByteArrayFromSFTP(imageLocation);
                 imageSource = ImageHandler.ByteToImage(imageByteArray);
             }
             else
@@ -167,7 +177,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 OnPropertyChanged(nameof(AVisConDTO));
                 SetHeaderMessage();
                 //if selected answer has image. download it
-                AnswerImage = RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation, ref answerByteArray);
+                AsyncRunner.Run(AwaitAnswerImage());
                 ClearFeedback();
             }
         }

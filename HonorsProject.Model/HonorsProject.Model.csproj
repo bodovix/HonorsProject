@@ -93,6 +93,7 @@
     <Compile Include="Enums\SubgridContext.cs" />
     <Compile Include="Enums\FormContext.cs" />
     <Compile Include="Enums\Role.cs" />
+    <Compile Include="HelperClasses\AsyncRunner.cs" />
     <Compile Include="HelperClasses\Cryptography.cs" />
     <Compile Include="HelperClasses\ImageHandler.cs" />
     <Compile Include="HelperClasses\Mediator.cs" />
