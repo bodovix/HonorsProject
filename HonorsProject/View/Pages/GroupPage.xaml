@@ -27,7 +27,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--Search Panel-->
-        <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
+        <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
             <Button Name="NewGroupBtn"
                     Content="New Group"
                     Command="{Binding NewModeCmd}"
@@ -39,7 +39,7 @@
             <TextBox Name="SearchTxtBox"
                      Text="{Binding GroupSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             <ListView  x:Name="searchResultsList"
-                       Height="390"
+                       Height="500"
                        ItemsSource="{Binding Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                        SelectedItem="{Binding SelectedGroup, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
