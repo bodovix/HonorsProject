@@ -40,6 +40,8 @@ namespace HonorsProject.Model.Entities
         {
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Answer name required.");
+            if (Name.Length > 50)
+                throw new ArgumentException("Name cannot exceed 20 characters.");
             if (String.IsNullOrEmpty(AnswerTest))
                 throw new ArgumentException("Answer text required.");
             if (Question == null)

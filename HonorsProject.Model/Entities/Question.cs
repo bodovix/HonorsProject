@@ -47,6 +47,8 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Time asked required.");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Name required.");
+            if (Name.Length > 50)
+                throw new ArgumentException("Name cannot exceed 20 characters.");
             if (String.IsNullOrEmpty(QuestionText))
                 throw new ArgumentException("Question text required.");
             if (Session == null)
