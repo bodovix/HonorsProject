@@ -83,8 +83,6 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private byte[] questionByteArray;
-
         private Question _selectedQuestion;
 
         public Question SelectedQuestion
@@ -110,21 +108,24 @@ namespace HonorsProject.ViewModel.CoreVM
 
         private async Task AwaitQuestionImage()
         {
-            QuestionImage = await RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation, questionByteArray);
+            QuestionImage = await RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation);
         }
 
         private async Task AwaitAnswerImage()
         {
-            AnswerImage = await RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation, answerByteArray);
+            AnswerImage = await RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation);
         }
 
-        private async Task<ImageSource> RefreshImage(string nameOfImageProperty, string imageLocation, byte[] imageByteArray)
+        private async Task<ImageSource> RefreshImage(string nameOfImageProperty, string imageLocation)
         {
             ImageSource imageSource;
             if (!String.IsNullOrEmpty(imageLocation))
             {
-                imageByteArray = await ImageHandler.ReadByteArrayFromSFTP(imageLocation);
-                imageSource = ImageHandler.ByteToImage(imageByteArray);
+                byte[] imageByteArray = await ImageHandler.ReadByteArrayFromSFTP(imageLocation);
+                if (imageByteArray != null)
+                    imageSource = ImageHandler.ByteToImage(imageByteArray);
+                else
+                    imageSource = null;
             }
             else
                 imageSource = null;
@@ -159,7 +160,6 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private byte[] answerByteArray;
         private Answer _selectedAnswer;
 
         public Answer SelectedAnswer
