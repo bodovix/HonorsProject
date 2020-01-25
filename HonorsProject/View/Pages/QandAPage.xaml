@@ -23,6 +23,8 @@
         <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
         <cv:QuestionToUserBoolConverter x:Key="QuestionToUserBoolConverter" />
         <cv:AnswerToUserBoolConverter x:Key="AnswerToUserBoolConverter" />
+        <cv:AnswerToUserInvertedBoolConverter x:Key="AnswerToUserInvertedBoolConverter" />
+        <cv:QuestionToUserInvertedBoolConverter x:Key="QuestionToUserInvertedBoolConverter" />
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -153,7 +155,7 @@
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 IsEnabled="{Binding QVisConDTO,Converter={StaticResource QuestionToUserBoolConverter}}"
+                                 IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
@@ -175,7 +177,7 @@
                          MaxLength="300"
                          Height="80"
                          Style="{StaticResource UserInput}"
-                         IsEnabled="{Binding QVisConDTO,Converter={StaticResource QuestionToUserBoolConverter}}"
+                         IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
                          Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
@@ -252,7 +254,8 @@
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
-                                 IsEnabled="{Binding AVisConDTO,Converter={StaticResource AnswerToUserBoolConverter}}"
+                                 MaxLength="50"
+                                 IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
                                  Text="{Binding SelectedAnswer.Name}" />
                     </GroupBox>
                     <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
@@ -275,7 +278,7 @@
                              MaxLength="300"
                              Height="80"
                              Style="{StaticResource UserInput}"
-                             IsEnabled="{Binding AVisConDTO,Converter={StaticResource AnswerToUserBoolConverter}}"
+                             IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
