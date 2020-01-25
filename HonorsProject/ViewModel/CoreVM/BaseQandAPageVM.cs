@@ -92,6 +92,8 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 if (value == null)
                     value = new Question();
+                ClearFeedback();
+
                 //if selected.id == 0 create else update
                 FormContextQuestion = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedQuestion = value;
@@ -102,7 +104,6 @@ namespace HonorsProject.ViewModel.CoreVM
                 SetHeaderMessage();
                 //if selected question has image. download it
                 AsyncRunner.Run(AwaitQuestionImage());
-                ClearFeedback();
             }
         }
 
@@ -169,6 +170,8 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 if (value == null)
                     value = new Answer();
+                ClearFeedback();
+
                 //if selected.id == 0 create else update
                 FormContextAnswer = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedAnswer = value;
@@ -178,7 +181,6 @@ namespace HonorsProject.ViewModel.CoreVM
                 SetHeaderMessage();
                 //if selected answer has image. download it
                 AsyncRunner.Run(AwaitAnswerImage());
-                ClearFeedback();
             }
         }
 

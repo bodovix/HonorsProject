@@ -79,8 +79,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <!--main details form-->
             <GroupBox Header="Group Details:" Style="{StaticResource FormGroupBox}">
@@ -139,27 +139,29 @@
                 </Grid>
             </GroupBox>
             <!--In or out Part-->
-            <Grid Grid.Column="1" Grid.Row="0">
+            <Grid Grid.Column="1"
+                  Grid.Row="0"
+                  Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            ConverterParameter={x:Static enums:Role.Lecturer}}">
                 <GroupBox Header="Add Students"
                           Style="{StaticResource FormGroupBox}">
                     <StackPanel Grid.Column="2"
-                        Grid.Row="0"
-                            Grid.RowSpan="3">
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Width="400">
                         <TextBlock Text="Manage Students:" Style="{StaticResource FormTitleText}" />
                         <uc:InOrOutControl
-                        x:Name="InOrOutControl"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                            ConverterParameter={x:Static enums:Role.Lecturer}}"
-                        EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        AvailableTxt="Students not in Group"
-                        EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        ContainsTxt="Students in Group"
-                        MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            x:Name="InOrOutControl"
+                            EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                            AvailableTxt="Students not in Group"
+                            EntitiesOwned="{Binding Path=SelectedGroup.Students,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                            ContainsTxt="Students in Group"
+                            MoveEntityOutOfListCmd="{Binding DataContext.MoveEntityOutOfListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                            MoveEntityInToListCmd="{Binding DataContext.MoveEntityInToListCmd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </GroupBox>
             </Grid>
-            
+
             <!--sub-grid section-->
             <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
