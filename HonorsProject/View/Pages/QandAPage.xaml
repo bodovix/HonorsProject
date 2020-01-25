@@ -68,8 +68,8 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0" Style="{StaticResource QandASearchResultsTextBlock}" />
-                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource QandASearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
                                 </Grid>
                             </StackPanel>
                         </DataTemplate>
@@ -110,8 +110,8 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0"  Style="{StaticResource QandASearchResultsTextBlock}" />
-                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource QandASearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0"  Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
                                 </Grid>
                             </StackPanel>
                         </DataTemplate>

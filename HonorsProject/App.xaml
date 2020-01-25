@@ -130,9 +130,14 @@
             <Setter Property="Margin" Value="10,0,10,0" />
             <Setter Property="AutoGenerateColumns" Value="False" />
         </Style>
-        <Style TargetType="TextBlock" x:Key="QandASearchResultsTextBlock">
+        <Style TargetType="TextBlock" x:Key="InlineImgSearchResultsTextBlock">
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="MaxWidth" Value="170" />
+            <Setter Property="MaxHeight" Value="40" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="NoImgSearchResultsTextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="MaxWidth" Value="200" />
             <Setter Property="MaxHeight" Value="40" />
         </Style>
     </Application.Resources>

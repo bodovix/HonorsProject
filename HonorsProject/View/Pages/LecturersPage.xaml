@@ -25,7 +25,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--Search Panel-->
-        <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="150">
+        <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
             <Button Name="NewLecturerBtn"
                     Content="New Lecturer"
                     Command="{Binding NewModeCmd}"
@@ -41,8 +41,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Id}" />
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Id}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
