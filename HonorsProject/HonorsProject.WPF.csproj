@@ -94,10 +94,12 @@
     <Compile Include="ViewModel\Commands\ToggleMarkQCmd.cs" />
     <Compile Include="ViewModel\Commands\UploadImageCmd.cs" />
     <Compile Include="ViewModel\Commands\SaveCmd.cs" />
+    <Compile Include="ViewModel\Converters\AnswerToUserInvertedBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\AnswerToUserBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToResolvedImgConverter.cs" />
     <Compile Include="ViewModel\Converters\AnswerToUserVisConverter.cs" />
     <Compile Include="ViewModel\Converters\FeedbackTypeToForcolorConverter.cs" />
+    <Compile Include="ViewModel\Converters\QuestionToUserInvertedBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\QuestionToUserBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\QuestionToUserVisConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToBoolConverter.cs" />
