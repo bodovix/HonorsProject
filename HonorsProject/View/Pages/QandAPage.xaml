@@ -68,8 +68,8 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
-                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
+                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0" Style="{StaticResource QandASearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource QandASearchResultsTextBlock}" />
                                 </Grid>
                             </StackPanel>
                         </DataTemplate>
@@ -92,6 +92,7 @@
                        Height="390"
                         ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding SelectedAnswer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -103,14 +104,14 @@
                                         Style="{StaticResource IconImage}" />
                                 <Grid HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="170" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"  TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" />
-                                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" />
+                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0"  Style="{StaticResource QandASearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource QandASearchResultsTextBlock}" />
                                 </Grid>
                             </StackPanel>
                         </DataTemplate>
@@ -156,6 +157,7 @@
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
+                                 MaxLength="50"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">

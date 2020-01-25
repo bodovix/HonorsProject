@@ -130,5 +130,10 @@
             <Setter Property="Margin" Value="10,0,10,0" />
             <Setter Property="AutoGenerateColumns" Value="False" />
         </Style>
+        <Style TargetType="TextBlock" x:Key="QandASearchResultsTextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="MaxWidth" Value="140" />
+            <Setter Property="MaxHeight" Value="40" />
+        </Style>
     </Application.Resources>
 </Application>
