@@ -9,6 +9,7 @@ using HonorsProject.Model.HelperClasses;
 using System.Security.Cryptography;
 using System.Security.Authentication;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace HonorsProject.Model.Entities
 {
@@ -94,7 +95,11 @@ namespace HonorsProject.Model.Entities
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Name required.");
             if (String.IsNullOrEmpty(Email))
-                throw new ArgumentException("Start time required.");
+                throw new ArgumentException("Email required.");
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(Email);
+            if (!match.Success)
+                throw new ArgumentException("Email in invalid format.");
             if (String.IsNullOrEmpty(Password))
                 throw new ArgumentException("Password required.");
             if (CreatedOn == null)

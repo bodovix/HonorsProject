@@ -8,6 +8,7 @@ using HonorsProject.Model.Core;
 using System.Security.Cryptography;
 using HonorsProject.Model.HelperClasses;
 using System.Security.Authentication;
+using System.Text.RegularExpressions;
 
 namespace HonorsProject.Model.Entities
 {
@@ -179,6 +180,10 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Date created on required.");
             if (String.IsNullOrEmpty(Email))
                 throw new ArgumentException("Email required.");
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(Email);
+            if (!match.Success)
+                throw new ArgumentException("Email in invalid format.");
             if (String.IsNullOrEmpty(Password))
                 throw new ArgumentException("Password required.");
             if (CreatedByLecturerId == 0)
