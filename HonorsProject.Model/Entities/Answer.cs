@@ -40,8 +40,6 @@ namespace HonorsProject.Model.Entities
         {
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Answer name required.");
-            if (u.AnswerRepository.CheckNameAlreadyExistsForQuestion(this))
-                throw new ArgumentException("Name already exists for this question.");
             if (Name.Length > nameSizeLimit)
                 throw new ArgumentException($"Name cannot exceed {nameSizeLimit} characters.");
             if (String.IsNullOrEmpty(AnswerTest))
@@ -54,6 +52,8 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Answered by required.");
             if (CreatedOn == null)
                 throw new ArgumentException("Created on required.");
+            if (u.AnswerRepository.CheckNameAlreadyExistsForQuestion(this))
+                throw new ArgumentException("Name already exists for this question.");
             return true;
         }
     }

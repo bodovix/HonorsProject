@@ -47,8 +47,6 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Time asked required.");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Name required.");
-            if (u.QuestionRepository.CheckNameAlreadyExistsForSession(this))
-                throw new ArgumentException("Name already exists for this session.");
 
             if (Name.Length > nameSizeLimit)
                 throw new ArgumentException($"Name cannot exceed {nameSizeLimit} characters.");
@@ -64,6 +62,9 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Asked by required.");
             if (CreatedOn == null)
                 throw new ArgumentException("Created on required.");
+            if (u.QuestionRepository.CheckNameAlreadyExistsForSession(this))
+                throw new ArgumentException("Name already exists for this session.");
+
             return true;
         }
     }

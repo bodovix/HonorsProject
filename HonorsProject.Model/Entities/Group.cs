@@ -35,15 +35,14 @@ namespace HonorsProject.Model.Entities
             //ID auto incremented by EF
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Group name required.");
-            if (u.GroupRepository.CheckGroupNameAlreadyExists(this))
-                throw new ArgumentException("Group name must be Unique.");
             if (Name.Length > nameSizeLimit)
                 throw new ArgumentException($"Group name cannot exceed {nameSizeLimit} chars.");
             if (CreatedOn == null)
                 throw new ArgumentException("Group created on date required.");
             if (CreatedByLecturerId == 0)
                 throw new ArgumentException("Group created by Id required.");
-
+            if (u.GroupRepository.CheckGroupNameAlreadyExists(this))
+                throw new ArgumentException("Group name must be Unique.");
             return true;
         }
 
