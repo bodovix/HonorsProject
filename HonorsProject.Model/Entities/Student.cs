@@ -143,12 +143,7 @@ namespace HonorsProject.Model.Entities
         {
             if (String.IsNullOrEmpty(optionalPassword))
             {
-                string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                char[] stringChars = new char[8];
-                Random random = new Random();
-
-                for (int i = 0; i < stringChars.Length; i++)
-                    stringChars[i] = chars[random.Next(chars.Length)];
+                char[] stringChars = Cryptography.GenerateRandomString();
 
                 optionalPassword = new string(stringChars);
                 Password = Cryptography.Hash(optionalPassword);

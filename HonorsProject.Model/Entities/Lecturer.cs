@@ -190,12 +190,7 @@ namespace HonorsProject.Model.Entities
         {
             if (String.IsNullOrEmpty(optionalPassword))
             {
-                string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                char[] stringChars = new char[8];
-                Random random = new Random();
-
-                for (int i = 0; i < stringChars.Length; i++)
-                    stringChars[i] = chars[random.Next(chars.Length)];
+                char[] stringChars = Cryptography.GenerateRandomString();
 
                 optionalPassword = new string(stringChars);
                 Password = Cryptography.Hash(optionalPassword);
@@ -203,16 +198,18 @@ namespace HonorsProject.Model.Entities
             }
             else
             {
-                ValidatePassword(optionalPassword);
+                ValidatePasswordForManualSet(optionalPassword, optionalPassConf);
                 Password = Cryptography.Hash(optionalPassword);
                 return true;
             }
         }
 
-        private void ValidatePassword(string optionalPassword)
+        private void ValidatePasswordForManualSet(string optionalPassword, string passwordConf)
         {
             if (String.IsNullOrEmpty(optionalPassword))
                 throw new ArgumentException("Password cannot be empty.");
+            if (!String.Equals(optionalPassword, passwordConf))
+                throw new ArgumentException("Passwords don't match.");
         }
 
         public bool AskQuestion(Question selectedQuestion, UnitOfWork unitOfWork)

@@ -36,6 +36,17 @@ namespace HonorsProject.Model.HelperClasses
             return string.Format("$MYHASH$V1${0}${1}", iterations, base64Hash);
         }
 
+        public static char[] GenerateRandomString()
+        {
+            string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            char[] stringChars = new char[8];
+            Random random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+                stringChars[i] = chars[random.Next(chars.Length)];
+            return stringChars;
+        }
+
         public static bool IsHashSupported(string hashString)
         {
             return hashString.Contains("$MYHASH$V1$");
