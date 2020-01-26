@@ -80,12 +80,12 @@ namespace HonorsProject.Model.Entities
                 return false;
         }
 
-        public bool AddNewSession(Session session, IUnitOfWork u)
+        public bool AddNewSession(Session session, UnitOfWork u)
         {
             session.CreatedByLecturerId = Id;
             session.CreatedOn = DateTime.Now;
             //creating session this way so constructor can validate it
-            if (session.ValidateSession())
+            if (session.ValidateSession(u))
             {
                 u.SessionRepository.Add(session);
                 u.Complete();
@@ -113,17 +113,17 @@ namespace HonorsProject.Model.Entities
                 return false;
         }
 
-        public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
             return unitOfWork.SessionRepository.GetCurrentSessions(this, todaysDate);
         }
 
-        public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
             return unitOfWork.SessionRepository.GetPreviousSessions(this, todaysDate);
         }
 
-        public List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyFutureSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
             return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate);
         }

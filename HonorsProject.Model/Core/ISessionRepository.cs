@@ -27,5 +27,6 @@ namespace HonorsProject.Model.Core
 
         List<Session> GetPreviousSessions(Student studentGroup, DateTime date);
         Session GetSessionWithQuestion(Question selectedQuestion);
+        bool CheckSessionNameAlreadyExistsForGroup(Session session);
     }
 }

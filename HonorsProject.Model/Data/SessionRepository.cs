@@ -14,6 +14,17 @@ namespace HonorsProject.Model.Data
         {
         }
 
+        public bool CheckSessionNameAlreadyExistsForGroup(Session session)
+        {
+            //count all sessions in the selected session group where the name matches but ignore this one.
+            //return true if > 0. false if <= 0
+            return (_entities.Where(s =>
+                                (s.Name.Equals(session.Name)
+                                && s.Id != session.Id
+                                && s.Group.Id == session.Group.Id)
+                                ).Count() > 0) ? true : false;
+        }
+
         public List<Session> GetCurrentSessions(Lecturer lecturer, DateTime date)
         {
             DateTime dateDate = date.Date;

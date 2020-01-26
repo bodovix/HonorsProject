@@ -21,13 +21,13 @@ namespace HonorsProject.Model.Core
 
         bool Register(IUnitOfWork unitOfWork);
 
-        bool AddNewSession(Session selectedSession, IUnitOfWork unitOfWork);
+        bool AddNewSession(Session selectedSession, UnitOfWork unitOfWork);
 
-        List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
+        List<Session> GetAllMyCurrentSessions(DateTime todaysDate, UnitOfWork unitOfWork);
 
-        List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
+        List<Session> GetAllMyPreviousSessions(DateTime todaysDate, UnitOfWork unitOfWork);
 
-        List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork);
+        List<Session> GetAllMyFutureSessions(DateTime todaysDate, UnitOfWork unitOfWork);
 
         bool GenerateNewPasswordHash(ref string optionalPassword, string optionalPasswordConfirmation);
 

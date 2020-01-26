@@ -224,7 +224,7 @@ namespace HonorsProject.ViewModel
                 else
                 {
                     //Update
-                    result = SelectedSession.ValidateSession();
+                    result = SelectedSession.ValidateSession(UnitOfWork);
                     if (result)
                     {
                         UnitOfWork.Complete();

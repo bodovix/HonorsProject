@@ -62,7 +62,7 @@ namespace HonorsProject.Model.Entities
             return value;
         }
 
-        public bool ValidateSession()
+        public bool ValidateSession(UnitOfWork u)
         {
             if (String.IsNullOrEmpty(this.Name))
                 throw new ArgumentException("Name required.");
@@ -76,12 +76,15 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Sessions must belong to a group.");
             if (Group.Id == 0)
                 throw new ArgumentException("Sessions must belong to a group.");
+
             if (CreatedByLecturerId == 0)
                 throw new ArgumentException("Session created by Id required.");
             if (Lecturers == null)
                 throw new ArgumentException("Session must have lecturers");
             if (Lecturers.Count == 0)
                 throw new ArgumentException("Session must have lecturers");
+            if (u.SessionRepository.CheckSessionNameAlreadyExistsForGroup(this))
+                throw new ArgumentException("Session name already exists for this group.");
             return true;
         }
     }

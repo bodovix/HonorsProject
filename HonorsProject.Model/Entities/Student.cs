@@ -111,22 +111,22 @@ namespace HonorsProject.Model.Entities
             return true;
         }
 
-        public bool AddNewSession(Session selectedSession, IUnitOfWork u)
+        public bool AddNewSession(Session selectedSession, UnitOfWork u)
         {
             throw new NotImplementedException("Students Cannot Create New Sessions.");
         }
 
-        public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
             return unitOfWork.SessionRepository.GetCurrentSessions(this, todaysDate.Date);
         }
 
-        public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
             return unitOfWork.SessionRepository.GetPreviousSessions(this, todaysDate.Date);
         }
 
-        public List<Session> GetAllMyFutureSessions(DateTime todaysDate, IUnitOfWork unitOfWork)
+        public List<Session> GetAllMyFutureSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
             return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate.Date);
         }
