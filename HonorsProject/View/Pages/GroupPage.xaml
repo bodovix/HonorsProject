@@ -45,8 +45,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Id}" Style="{StaticResource NoImgSearchResultsTextBlock}"  />
-                            <TextBlock Text="{Binding Name}" Style="{StaticResource NoImgSearchResultsTextBlock}"  />
+                            <TextBlock Text="{Binding Id}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -107,6 +107,7 @@
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
+                                 MaxLength="50"
                                  Text="{Binding SelectedGroup.Name}"
                                  IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>

@@ -66,6 +66,8 @@ namespace HonorsProject.Model.Entities
         {
             if (String.IsNullOrEmpty(this.Name))
                 throw new ArgumentException("Name required.");
+            if (Name.Length > nameSizeLimit)
+                throw new ArgumentException($"Name cannot exceed {nameSizeLimit} characters.");
             if (StartTime == null)
                 throw new ArgumentException("Start time required.");
             if (EndTime == null)

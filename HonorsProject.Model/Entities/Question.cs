@@ -43,13 +43,12 @@ namespace HonorsProject.Model.Entities
 
         public bool Validate()
         {
-            int sizeLimit = 50;
             if (TimeAsked == null)
                 throw new ArgumentException("Time asked required.");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Name required.");
-            if (Name.Length > sizeLimit)
-                throw new ArgumentException($"Name cannot exceed {sizeLimit} characters.");
+            if (Name.Length > nameSizeLimit)
+                throw new ArgumentException($"Name cannot exceed {nameSizeLimit} characters.");
             if (String.IsNullOrEmpty(QuestionText))
                 throw new ArgumentException("Question text required.");
             if (Session == null)

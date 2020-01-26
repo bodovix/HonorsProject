@@ -99,8 +99,9 @@
                         </GroupBox>
                         <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                             <TextBox TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="{Binding SelectedLecturer.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                     MaxLength="50"
+                                     Style="{StaticResource UserInput}"
+                                     Text="{Binding SelectedLecturer.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         </GroupBox>
                         <GroupBox Header="Password" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                             <!--password kept as label for the time being-->

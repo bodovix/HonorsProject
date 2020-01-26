@@ -94,6 +94,8 @@ namespace HonorsProject.Model.Entities
                 throw new ArgumentException("Student ID required");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Name required.");
+            if (Name.Length > nameSizeLimit)
+                throw new ArgumentException($"Name cannot exceed {nameSizeLimit} characters.");
             if (String.IsNullOrEmpty(Email))
                 throw new ArgumentException("Email required.");
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");

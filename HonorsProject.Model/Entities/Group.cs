@@ -35,6 +35,8 @@ namespace HonorsProject.Model.Entities
             //ID auto incremented by EF
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Group name required.");
+            if (Name.Length > nameSizeLimit)
+                throw new ArgumentException($"Group name cannot exceed {nameSizeLimit} chars.");
             if (CreatedOn == null)
                 throw new ArgumentException("Group created on date required.");
             if (CreatedByLecturerId == 0)
