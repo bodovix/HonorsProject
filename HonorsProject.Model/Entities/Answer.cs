@@ -38,10 +38,10 @@ namespace HonorsProject.Model.Entities
 
         public bool ValidateAnswer(UnitOfWork u)
         {
-            if (u.AnswerRepository.CheckNameAlreadyExistsForQuestion(this))
-                throw new ArgumentException("Name already exists for this question.");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Answer name required.");
+            if (u.AnswerRepository.CheckNameAlreadyExistsForQuestion(this))
+                throw new ArgumentException("Name already exists for this question.");
             if (Name.Length > nameSizeLimit)
                 throw new ArgumentException($"Name cannot exceed {nameSizeLimit} characters.");
             if (String.IsNullOrEmpty(AnswerTest))

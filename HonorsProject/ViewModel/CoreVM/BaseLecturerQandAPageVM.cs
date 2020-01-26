@@ -57,6 +57,7 @@ namespace HonorsProject.ViewModel.CoreVM
                     //create new  answer
                     result = User.AnswerQuestion(SelectedAnswer, UnitOfWork);
                     UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    FormContextAnswer = FormContext.Update;//selected item now has an id go to update
                     ShowFeedback($"Successfully created: {SelectedAnswer.Id}.", FeedbackType.Success);
                 }
                 else

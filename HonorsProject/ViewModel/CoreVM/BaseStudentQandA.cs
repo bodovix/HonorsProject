@@ -80,7 +80,7 @@ namespace HonorsProject.ViewModel.CoreVM
                     if (question.AskedBy.Id != User.Id)
                         throw new Exception("Can only delete your question.");
                     //Run delete confirmation message
-                    Mediator.NotifyColleagues(MediatorChannels.DeleteAnswerConfirmation.ToString(), null);
+                    Mediator.NotifyColleagues(MediatorChannels.DeleteQuestionConfirmation.ToString(), null);
                     //delete it
                     if (IsConfirmed)
                     {
@@ -126,12 +126,13 @@ namespace HonorsProject.ViewModel.CoreVM
                     //create new  answer
                     result = User.AskQuestion(SelectedQuestion, UnitOfWork);
                     UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                    FormContextQuestion = FormContext.Update;//selected item now has an id go to update mode
                     ShowFeedback($"Added question: {SelectedQuestion.Name}.", FeedbackType.Success);
                 }
                 else
                 {
                     //Update Selected Answer
-                    result = SelectedQuestion.Validate();
+                    result = SelectedQuestion.Validate(UnitOfWork);
                     if (result)
                     {
                         result = (UnitOfWork.Complete() > 0) ? true : false;

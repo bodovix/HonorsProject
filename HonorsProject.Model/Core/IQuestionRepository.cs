@@ -16,5 +16,6 @@ namespace HonorsProject.Model.Core
         List<Question> GetAllForStudent(Student user, string searchTxt);
 
         List<Question> GetAllWithAnswersByLecturer(ISystemUser user, string questionSearchTxt);
+        bool CheckNameAlreadyExistsForSession(Question question);
     }
 }

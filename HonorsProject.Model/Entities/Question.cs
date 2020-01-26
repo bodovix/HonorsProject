@@ -41,12 +41,15 @@ namespace HonorsProject.Model.Entities
             CreatedOn = createdOn;
         }
 
-        public bool Validate()
+        public bool Validate(UnitOfWork u)
         {
             if (TimeAsked == null)
                 throw new ArgumentException("Time asked required.");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Name required.");
+            if (u.QuestionRepository.CheckNameAlreadyExistsForSession(this))
+                throw new ArgumentException("Name already exists for this session.");
+
             if (Name.Length > nameSizeLimit)
                 throw new ArgumentException($"Name cannot exceed {nameSizeLimit} characters.");
             if (String.IsNullOrEmpty(QuestionText))

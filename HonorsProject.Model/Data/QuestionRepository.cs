@@ -52,5 +52,12 @@ namespace HonorsProject.Model.Data
                                         || q.Name.Contains(questionSearchTxt)
                                         || q.QuestionText.Contains(questionSearchTxt))).ToList();
         }
+
+        public bool CheckNameAlreadyExistsForSession(Question question)
+        {
+            return (_entities.Where(q =>
+                               (q.Session.Id == question.Session.Id && q.Id != question.Id))
+                               .Count(a => a.Name.Equals(question.Name)) > 0) ? true : false;
+        }
     }
 }
