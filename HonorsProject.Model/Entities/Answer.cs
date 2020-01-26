@@ -36,8 +36,10 @@ namespace HonorsProject.Model.Entities
             CreatedOn = createdOn;
         }
 
-        public bool ValidateAnswer()
+        public bool ValidateAnswer(UnitOfWork u)
         {
+            if (u.AnswerRepository.CheckNameAlreadyExistsForQuestion(this))
+                throw new ArgumentException("Name already exists for this question.");
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Answer name required.");
             if (Name.Length > nameSizeLimit)

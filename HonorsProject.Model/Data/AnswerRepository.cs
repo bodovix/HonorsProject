@@ -29,5 +29,12 @@ namespace HonorsProject.Model.Data
                             || a.AnswerTest.Contains(searchTxt))
                             && a.Question.Id == question.Id).ToList();
         }
+
+        public bool CheckNameAlreadyExistsForQuestion(Answer answer)
+        {
+            return (_entities.Where(a =>
+                                (a.Question.Id == answer.Question.Id && a.Id != answer.Id))
+                                .Count(a => a.Name.Equals(answer.Name)) > 0) ? true : false;
+        }
     }
 }

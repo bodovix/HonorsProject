@@ -164,7 +164,7 @@ namespace HonorsProject.Model.Entities
             bool result = false;
             selectedAnswer.CreatedOn = DateTime.Now;
             selectedAnswer.AnsweredBy = this;
-            if (selectedAnswer.ValidateAnswer())
+            if (selectedAnswer.ValidateAnswer(unitOfWork))
             {
                 unitOfWork.AnswerRepository.Add(selectedAnswer);
                 result = (unitOfWork.Complete() > 0) ? true : false;

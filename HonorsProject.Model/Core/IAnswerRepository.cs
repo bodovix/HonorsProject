@@ -10,6 +10,9 @@ namespace HonorsProject.Model.Core
     public interface IAnswerRepository : IRepository<Answer>
     {
         List<Answer> GetFromSession(Question question);
+
         List<Answer> GetFromSearchForQuestion(Question question, string answerSearchTxt);
+
+        bool CheckNameAlreadyExistsForQuestion(Answer answer);
     }
 }

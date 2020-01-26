@@ -62,7 +62,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 else
                 {
                     //Update Selected Answer
-                    result = SelectedAnswer.ValidateAnswer();
+                    result = SelectedAnswer.ValidateAnswer(UnitOfWork);
                     if (result)
                     {
                         result = (UnitOfWork.Complete() > 0) ? true : false;
