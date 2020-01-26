@@ -137,10 +137,11 @@
                     </GroupBox>
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox    Name="NameTxt"
-                                TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
+                                    TextWrapping="Wrap"
+                                    MaxLength="50"
+                                    Style="{StaticResource UserInput}"
+                                    Text="{Binding SelectedSession.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <GroupBox Header="Group" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <ComboBox x:Name="GroupComboBox"
