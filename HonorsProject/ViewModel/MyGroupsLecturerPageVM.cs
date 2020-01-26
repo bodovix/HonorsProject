@@ -209,12 +209,13 @@ namespace HonorsProject.ViewModel
                     //Create New
                     result = User.AddNewGroup(SelectedGroup, UnitOfWork);
                     UpdateMyGroupsList(RowLimit);
+                    FormContext = FormContext.Update;//since selected group now has ID set
                     ShowFeedback($"Successfully created: {SelectedGroup.Id}.", FeedbackType.Success);
                 }
                 else
                 {
                     //Update
-                    result = SelectedGroup.ValidateGroup();
+                    result = SelectedGroup.ValidateGroup(UnitOfWork);
                     if (result)
                     {
                         UnitOfWork.Complete();

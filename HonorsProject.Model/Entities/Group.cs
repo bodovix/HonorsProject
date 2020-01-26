@@ -30,11 +30,13 @@ namespace HonorsProject.Model.Entities
             CreatedByLecturerId = createdByLecturerId;
         }
 
-        public bool ValidateGroup()
+        public bool ValidateGroup(UnitOfWork u)
         {
             //ID auto incremented by EF
             if (String.IsNullOrEmpty(Name))
                 throw new ArgumentException("Group name required.");
+            if (u.GroupRepository.CheckGroupNameAlreadyExists(this))
+                throw new ArgumentException("Group name must be Unique.");
             if (Name.Length > nameSizeLimit)
                 throw new ArgumentException($"Group name cannot exceed {nameSizeLimit} chars.");
             if (CreatedOn == null)

@@ -14,6 +14,12 @@ namespace HonorsProject.Model.Data
         {
         }
 
+        public bool CheckGroupNameAlreadyExists(Group group)
+        {
+            return (_entities.Count(g => (g.Name.Equals(group.Name))
+                                        && g.Id != group.Id) > 0) ? true : false;
+        }
+
         public List<Group> GetForStudent(Student student, int rowLimit)
         {
             if (rowLimit > 0)

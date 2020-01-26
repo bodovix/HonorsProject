@@ -16,5 +16,6 @@ namespace HonorsProject.Model.Core
         List<Group> GetForStudent(Student student, int rowLimit);
 
         List<Group> GetForStudentSearch(Student student, string groupSearchTxt, int rows);
+        bool CheckGroupNameAlreadyExists(Group group);
     }
 }

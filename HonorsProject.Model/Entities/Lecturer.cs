@@ -100,7 +100,7 @@ namespace HonorsProject.Model.Entities
             groupToAdd.CreatedByLecturerId = Id;
             groupToAdd.CreatedOn = DateTime.Now;
             //creating session this way so constructor can validate it
-            if (groupToAdd.ValidateGroup())
+            if (groupToAdd.ValidateGroup(unitOfWork))
             {
                 unitOfWork.GroupRepository.Add(groupToAdd);
                 int rowCount = unitOfWork.Complete();
