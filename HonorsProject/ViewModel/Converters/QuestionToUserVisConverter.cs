@@ -17,9 +17,9 @@ namespace HonorsProject.ViewModel.Converters
         public object Convert(object obj, Type targetType, object parameter, CultureInfo culture)
         {
             QuestionStateConverterDTO dto = (QuestionStateConverterDTO)obj;
-            if(dto.Question == null || dto.User == null)
+            if (dto.Question == null || dto.User == null)
                 return Visibility.Collapsed;
-            if(dto.Question.AskedBy == null)
+            if (dto.Question.AskedBy == null)
                 return Visibility.Collapsed;
 
             //if roles match required make the item visible
@@ -27,7 +27,6 @@ namespace HonorsProject.ViewModel.Converters
                 return Visibility.Visible;
             else
                 return Visibility.Collapsed;
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

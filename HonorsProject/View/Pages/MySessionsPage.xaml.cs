@@ -29,7 +29,7 @@ namespace HonorsProject.View.Pages
     public partial class MySessionsPage : Page
     {
         //Polymorphic VM for Students or Lecturers
-        private IMySessionsPageVM VM;
+        private BaseMySessionsPageVM VM;
 
         public MySessionsPage()
         {

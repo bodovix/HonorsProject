@@ -138,7 +138,7 @@
     <Compile Include="ViewModel\Commands\IComands\IEnterNewModeCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\ISaveVMFormCmd.cs" />
     <Compile Include="ViewModel\CoreVM\IMyGroupsPageVM.cs" />
-    <Compile Include="ViewModel\CoreVM\IMySessionsPageVM.cs" />
+    <Compile Include="ViewModel\CoreVM\BaseMySessionsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseQandAPageVM.cs" />
     <Compile Include="ViewModel\MyAnswersQandAVM.cs" />
     <Compile Include="ViewModel\MyQuestionsQandAVM.cs" />
