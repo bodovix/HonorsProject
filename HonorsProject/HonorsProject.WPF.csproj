@@ -137,7 +137,7 @@
     <Compile Include="ViewModel\Converters\ErrorMessageToVisibleConverter.cs" />
     <Compile Include="ViewModel\Commands\IComands\IEnterNewModeCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\ISaveVMFormCmd.cs" />
-    <Compile Include="ViewModel\CoreVM\IMyGroupsPageVM.cs" />
+    <Compile Include="ViewModel\CoreVM\BaseMyGroupsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseMySessionsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseQandAPageVM.cs" />
     <Compile Include="ViewModel\MyAnswersQandAVM.cs" />

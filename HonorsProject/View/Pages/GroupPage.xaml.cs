@@ -28,7 +28,7 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class GroupPage : Page
     {
-        private IMyGroupsPageVM VM;
+        private BaseMyGroupsPageVM VM;
         private Group _selectedGroup;
 
         public GroupPage(Group selectedGroup)
