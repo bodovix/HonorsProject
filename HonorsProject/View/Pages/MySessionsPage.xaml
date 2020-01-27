@@ -7,6 +7,8 @@
       xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       xmlns:uc="clr-namespace:HonorsProject.View.CustomControlls"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MySessionsPage">
@@ -158,13 +160,13 @@
                         </ComboBox>
                     </GroupBox>
                     <GroupBox Header="Start Time" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <DatePicker SelectedDate="{Binding SelectedSession.StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           Style="{StaticResource UserInputDate}"
+                        <xctk:DateTimePicker DefaultValue="{x:Static sys:DateTime.Now}"
+                                             Value="{Binding SelectedSession.StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                 IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <GroupBox Header="End Time" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <DatePicker SelectedDate="{Binding SelectedSession.EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           Style="{StaticResource UserInputDate}"
+                        <xctk:DateTimePicker DefaultValue="{x:Static sys:DateTime.Now}"
+                                             Value="{Binding SelectedSession.EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                 IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <Button Name="SaveBtn"

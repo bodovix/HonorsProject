@@ -40,7 +40,7 @@ namespace HonorsProject.ViewModel
         {
             //Setup
             FormContextQuestion = FormContext.Create;//Answers loaded when question selected
-            SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);//Might need to attach this to the UoW. not sure yet
+            SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
         }
 

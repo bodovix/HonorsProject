@@ -10,10 +10,10 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <uc:RoleToVisibleConverter x:Key="RoleToVisibleConverter"/>
+        <uc:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <DataGrid       Name="SessionsDataGrid"   
+        <DataGrid       Name="SessionsDataGrid"
                         Grid.Column="0"
                           Grid.Row="3"
                           ItemsSource="{Binding Path=Sessions, ElementName=SessionsControl}"
@@ -32,8 +32,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Width="*" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Start Date" Width="*" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy}}" />
-                <DataGridTextColumn Header="End Date" Width="*" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy}}" />
+                <DataGridTextColumn Header="Start Time" Width="*" Binding="{Binding StartTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
+                <DataGridTextColumn Header="End Time" Width="*" Binding="{Binding EndTime, StringFormat={}{0:dd/MM/yyyy HH:mm}}" />
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

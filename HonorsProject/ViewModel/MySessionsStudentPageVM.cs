@@ -274,7 +274,7 @@ namespace HonorsProject.ViewModel
             {
                 SubgridContext = SubgridContext.ActiveSessions;
                 MySessions = new ObservableCollection<Session>();
-                List<Session> result = User.GetAllMyCurrentSessions(DateTime.Now.Date, UnitOfWork);
+                List<Session> result = User.GetAllMyCurrentSessions(DateTime.Now, UnitOfWork);
                 if (result != null)
                 {
                     MySessions = new ObservableCollection<Session>(result);
@@ -302,7 +302,7 @@ namespace HonorsProject.ViewModel
             {
                 SubgridContext = SubgridContext.PreviousSessions;
                 MySessions = new ObservableCollection<Session>();
-                List<Session> result = User.GetAllMyPreviousSessions(DateTime.Now.Date, UnitOfWork);
+                List<Session> result = User.GetAllMyPreviousSessions(DateTime.Now, UnitOfWork);
                 if (result != null)
                 {
                     MySessions = new ObservableCollection<Session>(result);
@@ -330,7 +330,7 @@ namespace HonorsProject.ViewModel
             {
                 SubgridContext = SubgridContext.FutureSessions;
                 MySessions = new ObservableCollection<Session>();
-                List<Session> result = User.GetAllMyFutureSessions(DateTime.Now.Date, UnitOfWork);
+                List<Session> result = User.GetAllMyFutureSessions(DateTime.Now, UnitOfWork);
                 if (result != null)
                 {
                     MySessions = new ObservableCollection<Session>(result);

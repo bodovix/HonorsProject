@@ -118,17 +118,17 @@ namespace HonorsProject.Model.Entities
 
         public List<Session> GetAllMyCurrentSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
-            return unitOfWork.SessionRepository.GetCurrentSessions(this, todaysDate.Date);
+            return unitOfWork.SessionRepository.GetCurrentSessions(this, todaysDate);
         }
 
         public List<Session> GetAllMyPreviousSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
-            return unitOfWork.SessionRepository.GetPreviousSessions(this, todaysDate.Date);
+            return unitOfWork.SessionRepository.GetPreviousSessions(this, todaysDate);
         }
 
         public List<Session> GetAllMyFutureSessions(DateTime todaysDate, UnitOfWork unitOfWork)
         {
-            return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate.Date);
+            return unitOfWork.SessionRepository.GetFutureSessions(this, todaysDate);
         }
 
         public bool RemoveGroup(Group groupToRemve, UnitOfWork u, ref string feedackMsg)

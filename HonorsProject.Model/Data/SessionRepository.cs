@@ -25,104 +25,95 @@ namespace HonorsProject.Model.Data
                                 ).Count() > 0) ? true : false;
         }
 
-        public List<Session> GetCurrentSessions(Lecturer lecturer, DateTime date)
+        public List<Session> GetCurrentSessions(Lecturer lecturer, DateTime dateTime)
         {
-            DateTime dateDate = date.Date;
             //get sessions belonging to this lecturer or was created by
             //where inputted date is between the start and end dates of the session
             List<Session> results = _entities.Where(s => (s.Lecturers.Any(l => l.Id == lecturer.Id) || s.CreatedByLecturerId == lecturer.Id)
-                                                && s.StartTime <= dateDate
-                                                && s.EndTime >= dateDate)
+                                                && s.StartTime <= dateTime
+                                                && s.EndTime >= dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetCurrentSessions(Student student, DateTime date)
+        public List<Session> GetCurrentSessions(Student student, DateTime dateTime)
         {
-            DateTime dateDate = date.Date;
             //get sessions belonging to this student from the sessions group
             //where inputted date is between the start and end dates of the session
             List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
-                                                && sesh.StartTime <= dateDate
-                                                && sesh.EndTime >= dateDate)
+                                                && sesh.StartTime <= dateTime
+                                                && sesh.EndTime >= dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetCurrentSessions(Group group, DateTime date)
+        public List<Session> GetCurrentSessions(Group group, DateTime dateTime)
         {
-            DateTime dateDate = date.Date;
             //get sessions belonging to this group
             //where inputted date is between the start and end dates of the session
             List<Session> results = _entities.Where(sesh => sesh.Group.Id == group.Id
-                                                && sesh.StartTime <= dateDate
-                                                && sesh.EndTime >= dateDate)
+                                                && sesh.StartTime <= dateTime
+                                                && sesh.EndTime >= dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetFutureSessions(Lecturer lecturer, DateTime date)
+        public List<Session> GetFutureSessions(Lecturer lecturer, DateTime dateTime)
         {
             //get sessions belonging to this lecturer or was created by
             //and start date is ahead of inputted date
-            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(s => (s.Lecturers.Any(l => l.Id == lecturer.Id) || s.CreatedByLecturerId == lecturer.Id)
-                                                && s.StartTime > dateDate)
+                                                && s.StartTime > dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetFutureSessions(Student student, DateTime date)
+        public List<Session> GetFutureSessions(Student student, DateTime dateTime)
         {
             //get sessions belonging to this student from the sessions group
             //and start date is ahead of inputted date
-            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
-                                                && sesh.StartTime > dateDate)
+                                                && sesh.StartTime > dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetFutureSessions(Group group, DateTime date)
+        public List<Session> GetFutureSessions(Group group, DateTime dateTime)
         {
             //get sessions belonging to this group
             //and start date is ahead of inputted date
-            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(sesh => sesh.Group.Id == group.Id
-                                                && sesh.StartTime > dateDate)
+                                                && sesh.StartTime > dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetPreviousSessions(Lecturer lecturer, DateTime date)
+        public List<Session> GetPreviousSessions(Lecturer lecturer, DateTime dateTime)
         {
             //get sessions belonging to this lecturer
             //and end date is behind inputted date
-            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(s => (s.Lecturers.Any(l => l.Id == lecturer.Id) || s.CreatedByLecturerId == lecturer.Id)
-                                                && s.EndTime < dateDate)
+                                                && s.EndTime < dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetPreviousSessions(Student student, DateTime date)
+        public List<Session> GetPreviousSessions(Student student, DateTime dateTime)
         {
             //get sessions belonging to this student from the sessions group
             //and end date is behind inputted date
-            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
-                                                && sesh.EndTime < dateDate)
+                                                && sesh.EndTime < dateTime)
                                                     .ToList();
             return results;
         }
 
-        public List<Session> GetPreviousSessions(Group group, DateTime date)
+        public List<Session> GetPreviousSessions(Group group, DateTime dateTime)
         {
             //get sessions belonging to this group
             //and end date is behind inputted date
-            DateTime dateDate = date.Date;
             List<Session> results = _entities.Where(sesh => sesh.Group.Id == group.Id
-                                                && sesh.EndTime < dateDate)
+                                                && sesh.EndTime < dateTime)
                                                     .ToList();
             return results;
         }
