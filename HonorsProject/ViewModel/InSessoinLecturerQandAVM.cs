@@ -27,7 +27,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _quesitonSearchTxt = value;
-                UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                UpdateQuestionsList(QuestionSearchTxt);
                 OnPropertyChanged(nameof(QuestionSearchTxt));
             }
         }
@@ -73,11 +73,10 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        protected override bool UpdateQuestionsList(BaseEntity sSession, string QuestionSearchTxt)
+        protected override bool UpdateQuestionsList(string QuestionSearchTxt)
         {
-            Session selectedSession = (Session)sSession;
-            if (selectedSession != null)
-                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(selectedSession, QuestionSearchTxt));
+            if (SelectedSession != null)
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(SelectedSession, QuestionSearchTxt));
             else
                 Questions = new ObservableCollection<Question>();
             if (Questions.Count > 0)

@@ -21,7 +21,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _quesitonSearchTxt = value;
-                UpdateQuestionsList((BaseEntity)User, QuestionSearchTxt);
+                UpdateQuestionsList(QuestionSearchTxt);
                 OnPropertyChanged(nameof(QuestionSearchTxt));
             }
         }
@@ -38,9 +38,9 @@ namespace HonorsProject.ViewModel
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllWithAnswersByLecturer(User, QuestionSearchTxt).ToList());
         }
 
-        protected override bool UpdateQuestionsList(BaseEntity user, string questionSearchTxt)
+        protected override bool UpdateQuestionsList(string questionSearchTxt)
         {
-            Lecturer u = (Lecturer)user;
+            Lecturer u = (Lecturer)User;
             if (u != null)
                 Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllWithAnswersByLecturer(u, QuestionSearchTxt));
             else

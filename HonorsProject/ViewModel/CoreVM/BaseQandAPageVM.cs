@@ -336,9 +336,9 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public abstract void EnterNewMode();
 
-        protected abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+        protected abstract bool UpdateQuestionsList(string questionSearchTxt);
 
-        protected bool UpdateAnswersList(BaseEntity sQuestion, string anserSearchTxt)
+        protected bool UpdateAnswersList(Question sQuestion, string anserSearchTxt)
         {
             Question selectedQuestion = (Question)sQuestion;
             if (selectedQuestion != null)

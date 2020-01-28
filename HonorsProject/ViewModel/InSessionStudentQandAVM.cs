@@ -31,7 +31,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _quesitonSearchTxt = value;
-                UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                UpdateQuestionsList(QuestionSearchTxt);
                 OnPropertyChanged(nameof(QuestionSearchTxt));
             }
         }
@@ -44,11 +44,10 @@ namespace HonorsProject.ViewModel
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
         }
 
-        protected override bool UpdateQuestionsList(BaseEntity sSession, string questionSearchTxt)
+        protected override bool UpdateQuestionsList(string questionSearchTxt)
         {
-            Session selectedSession = (Session)sSession;
-            if (selectedSession != null)
-                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(selectedSession, questionSearchTxt));
+            if (SelectedSession != null)
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(SelectedSession, questionSearchTxt));
             else
                 Questions = new ObservableCollection<Question>();
             if (Questions.Count > 0)
@@ -75,7 +74,7 @@ namespace HonorsProject.ViewModel
                             ShowFeedback($"Unable to mark question as {output}.", FeedbackType.Error);
                         else
                         {
-                            UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                            UpdateQuestionsList(QuestionSearchTxt);
                             OnPropertyChanged(nameof(SelectedQuestion));
                             ShowFeedback($"Marked as {output}.", FeedbackType.Success);
                         }

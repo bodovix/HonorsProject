@@ -55,7 +55,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 try
                 {
                     UnitOfWork.Reload(SelectedQuestion);
-                    UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                    UpdateQuestionsList(QuestionSearchTxt);
                     OnPropertyChanged(nameof(SelectedQuestion));
                 }
                 catch
@@ -89,7 +89,7 @@ namespace HonorsProject.ViewModel.CoreVM
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result)
                         {
-                            UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                            UpdateQuestionsList(QuestionSearchTxt);
                             ShowFeedback($"Deleted {id}.", FeedbackType.Success);
                         }
                     }
@@ -108,50 +108,74 @@ namespace HonorsProject.ViewModel.CoreVM
         public override void EnterNewMode()
         {
             ClearFeedback();
-            //Lecturers can only create answers
-            QandAMode = QandAMode.Question;
-            SelectedQuestion = new Question((Student)User);
-            SelectedQuestion.Session = SelectedSession;
-            FormContextQuestion = FormContext.Create;
+            if (SelectedSession == null)
+            {
+                ShowFeedback("Cannot create new Question. No session selected", FeedbackType.Error);
+            }
+            if (DateTime.Now >= SelectedSession.StartTime && DateTime.Now <= SelectedSession.EndTime)
+            {
+                ClearFeedback();
+                //Lecturers can only create answers
+                QandAMode = QandAMode.Question;
+                SelectedQuestion = new Question((Student)User);
+                SelectedQuestion.Session = SelectedSession;
+                FormContextQuestion = FormContext.Create;
+            }
+            else
+                ShowFeedback("Cannot enter new question.\nNo Session Selected.", FeedbackType.Error);
         }
 
         public override bool Save()
         {
-            ClearFeedback();
             bool result = false;
-            try
+            if (SelectedSession == null)
             {
-                if (FormContextQuestion == FormContext.Create)
+                ShowFeedback("Cannot save changes. No Selected Session found.", FeedbackType.Error);
+                return result;
+            }
+            if (DateTime.Now >= SelectedSession.StartTime && DateTime.Now <= SelectedSession.EndTime)
+            {
+                ClearFeedback();
+                try
                 {
-                    //create new  answer
-                    result = User.AskQuestion(SelectedQuestion, UnitOfWork);
-                    UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
-                    FormContextQuestion = FormContext.Update;//selected item now has an id go to update mode
-                    ShowFeedback($"Added question: {SelectedQuestion.Name}.", FeedbackType.Success);
-                }
-                else
-                {
-                    //Update Selected Answer
-                    result = SelectedQuestion.Validate(UnitOfWork);
-                    if (result)
+                    if (FormContextQuestion == FormContext.Create)
                     {
-                        result = (UnitOfWork.Complete() > 0) ? true : false;
-                        ShowFeedback($"Updated question: {SelectedQuestion.Name}", FeedbackType.Success);
+                        //create new  answer
+                        result = User.AskQuestion(SelectedQuestion, UnitOfWork);
+                        UpdateQuestionsList(QuestionSearchTxt);
+                        FormContextQuestion = FormContext.Update;//selected item now has an id go to update mode
+                        ShowFeedback($"Added question: {SelectedQuestion.Name}.", FeedbackType.Success);
+                    }
+                    else
+                    {
+                        //Update Selected Answer
+                        result = SelectedQuestion.Validate(UnitOfWork);
+                        if (result)
+                        {
+                            result = (UnitOfWork.Complete() > 0) ? true : false;
+                            ShowFeedback($"Updated question: {SelectedQuestion.Name}", FeedbackType.Success);
+                        }
                     }
                 }
+                catch (DbUpdateException ex)
+                {
+                    ShowFeedback(ex.Message, FeedbackType.Error);
+                }
+                catch (SqlException ex)
+                {
+                    ShowFeedback(ex.Message, FeedbackType.Error);
+                }
+                catch (Exception ex)
+                {
+                    ShowFeedback(ex.Message, FeedbackType.Error);
+                }
             }
-            catch (DbUpdateException ex)
+            else
             {
-                ShowFeedback(ex.Message, FeedbackType.Error);
+                ShowFeedback($"Cannot Save: \nSession: {SelectedSession.Name} not open. Start: {SelectedSession.StartTime} - {SelectedSession.EndTime}", FeedbackType.Error);
+                result = false;
             }
-            catch (SqlException ex)
-            {
-                ShowFeedback(ex.Message, FeedbackType.Error);
-            }
-            catch (Exception ex)
-            {
-                ShowFeedback(ex.Message, FeedbackType.Error);
-            }
+
             return result;
         }
 
@@ -219,7 +243,7 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        protected override abstract bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+        protected override abstract bool UpdateQuestionsList(string questionSearchTxt);
 
         public abstract override bool ToggleMarkQuestion(Question questionToMark);
 

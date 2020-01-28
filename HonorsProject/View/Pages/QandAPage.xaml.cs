@@ -34,8 +34,9 @@ namespace HonorsProject.View.Pages
         public QandAPage(BaseEntity entityToFocusOn)
         {
             entity = entityToFocusOn;
-            PickVM();
             InitializeComponent();
+
+            PickVM();
             MainContainer.DataContext = VM;
             Mediator.Register(MediatorChannels.DeleteAnswerConfirmation.ToString(), DeleteAnswerConfirmation);
             Mediator.Register(MediatorChannels.DeleteQuestionConfirmation.ToString(), DeleteQuestionConfirmation);
@@ -67,19 +68,19 @@ namespace HonorsProject.View.Pages
         {
             if (App.LoggedInAs == Role.Lecturer)
             {
-                if (entity is Session)
+                if (entity is Session)//in session page
                 {
                     //go the in session windows as a lecturer
                     VM = new InSessoinLecturerQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
                     this.SetMenuButtonColor(MenuButtonsSelection.ClearAll);
                 }
-                else if (entity is Question)
+                else if (entity is Question)//lecturers go to session with this question
                 {
                     //load in session page for specific question.
                     VM = new InSessoinLecturerQandAVM(App.AppUser, (Question)entity, ConnectionConfigs.LiveConfig);
                     this.SetMenuButtonColor(MenuButtonsSelection.QuesstionsPage);
                 }
-                else if (entity is Answer)
+                else if (entity is Answer)//lecturers go to my answers page
                 {
                     //go to MyAnswers window and show questions you have answers to
                     VM = new MyAnswersQandAVM(App.AppUser, (Answer)entity, ConnectionConfigs.LiveConfig);
@@ -96,17 +97,18 @@ namespace HonorsProject.View.Pages
             }
             else //Logged in as student
             {
-                if (entity is Session)
+                if (entity is Session)//students in session page
                 {
                     //Go to the in session window as a student
                     VM = new InSessionStudentQandAVM(App.AppUser, (Session)entity, ConnectionConfigs.LiveConfig);
                     this.SetMenuButtonColor(MenuButtonsSelection.ClearAll);
                 }
-                else if (entity is Question)
+                else if (entity is Question)//students my questions page
                 {
                     //my questions navigation used
                     VM = new MyQuestionsQandAVM(App.AppUser, (Question)entity, ConnectionConfigs.LiveConfig);
                     this.SetMenuButtonColor(MenuButtonsSelection.QuesstionsPage);
+                    NewQuestionBtn.Visibility = Visibility.Hidden;
                 }
                 else if (entity is Answer)
                 {

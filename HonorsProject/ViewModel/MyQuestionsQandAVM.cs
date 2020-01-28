@@ -31,7 +31,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _quesitonSearchTxt = value;
-                UpdateQuestionsList((BaseEntity)User, QuestionSearchTxt);
+                UpdateQuestionsList(QuestionSearchTxt);
                 OnPropertyChanged(nameof(QuestionSearchTxt));
             }
         }
@@ -49,9 +49,9 @@ namespace HonorsProject.ViewModel
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)User, null).ToList());
         }
 
-        protected override bool UpdateQuestionsList(BaseEntity sStudent, string questionSearchTxt)
+        protected override bool UpdateQuestionsList(string questionSearchTxt)
         {
-            Student student = (Student)sStudent;
+            Student student = (Student)User;
             if (student != null)
                 Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetAllForStudent((Student)student, questionSearchTxt));
             else
@@ -80,7 +80,7 @@ namespace HonorsProject.ViewModel
                             ShowFeedback($"Unable to mark question as {output}.", FeedbackType.Error);
                         else
                         {
-                            UpdateQuestionsList((Student)User, QuestionSearchTxt);
+                            UpdateQuestionsList(QuestionSearchTxt);
                             OnPropertyChanged(nameof(SelectedQuestion));
                             ShowFeedback($"Marked as {output}.", FeedbackType.Success);
                         }

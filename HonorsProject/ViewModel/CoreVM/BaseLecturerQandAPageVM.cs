@@ -108,7 +108,7 @@ namespace HonorsProject.ViewModel.CoreVM
                         result = (UnitOfWork.Complete() > 0) ? true : false;
                         if (result)
                         {
-                            UpdateQuestionsList(SelectedSession, QuestionSearchTxt);
+                            UpdateQuestionsList(QuestionSearchTxt);
                             ShowFeedback($"Deleted question: {id}", FeedbackType.Success);
                         }
                     }
@@ -249,7 +249,7 @@ namespace HonorsProject.ViewModel.CoreVM
             FormContextAnswer = FormContext.Create;
         }
 
-        protected abstract override bool UpdateQuestionsList(BaseEntity entToSearchFrom, string questionSearchTxt);
+        protected abstract override bool UpdateQuestionsList(string questionSearchTxt);
 
         public override bool ToggleMarkQuestion(Question questionToMark)
         {
