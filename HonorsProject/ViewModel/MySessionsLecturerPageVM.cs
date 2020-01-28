@@ -59,6 +59,7 @@ namespace HonorsProject.ViewModel
                     if (result)
                     {
                         UpdateMySessionsList();
+                        ChangeSubgridContext(SubgridContext);
                         ShowFeedback($"Successfully created session: {SelectedSession.Id}.", FeedbackType.Success);
                     }
                     else
