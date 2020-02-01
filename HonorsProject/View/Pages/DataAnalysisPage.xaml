@@ -1,14 +1,99 @@
 ﻿<Page x:Class="HonorsProject.View.Pages.DataAnalysisPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DataAnalysisPage">
 
-    <Grid>
-        
+    <Grid x:Name="MainContainer">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <!--Search Groups-->
+            <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
+                <Label Content="Search"
+                   Style="{StaticResource SearchLabel}" />
+                <TextBox Name="SearchGTxtBox"
+                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ListView  x:Name="searchQResultsList"
+                       Height="390"
+                           ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           PreviewMouseLeftButtonUp="searchQResultsList_PreviewMouseLeftButtonUp"
+                           HorizontalContentAlignment="Stretch">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding IsResolved,
+                                        Converter={StaticResource BoolToResolvedImgConverter}}"
+                                           HorizontalAlignment="Left"
+                                           Style="{StaticResource IconImage}" />
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <!--Answers Search bar-->
+            <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
+                <Button Name="NewAnswerBtn"
+                        Content="New Answer"
+                        Command="{Binding NewModeCmd}"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
+                                ConverterParameter={x:Static enums:Role.Lecturer}}"
+                        Style="{StaticResource FormSubmitButton}" />
+                <Label Content="Search"
+                   Style="{StaticResource SearchLabel}" />
+                <TextBox Name="SearchTxtBox"
+                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <ListView  x:Name="searchAResultsList"
+                       Height="390"
+                        ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedAnswer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/starIcon.png"
+                                        HorizontalAlignment="Left"
+                                        Visibility="{Binding WasHelpfull,
+                                        Converter={StaticResource BoolToVisibleConverter}}"
+                                        Style="{StaticResource IconImage}" />
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0"  Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

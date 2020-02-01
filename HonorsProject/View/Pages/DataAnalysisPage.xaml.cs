@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HonorsProject.View.ExtensionMethods;
+using HonorsProject.ViewModel;
+using HonorsProject.Model.Data;
+using HonorsProject.ViewModel.CoreVM;
 
 namespace HonorsProject.View.Pages
 {
@@ -22,10 +25,14 @@ namespace HonorsProject.View.Pages
     /// </summary>
     public partial class DataAnalysisPage : Page
     {
+        public BaseViewModel VM;
+
         public DataAnalysisPage()
         {
             this.SetMenuButtonColor(MenuButtonsSelection.DataAnalysisPage);
             InitializeComponent();
+            VM = new DataAnalysisVM(ConnectionConfigs.LiveConfig);
+            MainContainer.DataContext = VM;
         }
     }
 }

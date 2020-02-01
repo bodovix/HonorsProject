@@ -140,6 +140,7 @@
     <Compile Include="ViewModel\CoreVM\BaseMyGroupsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseMySessionsPageVM.cs" />
     <Compile Include="ViewModel\CoreVM\BaseQandAPageVM.cs" />
+    <Compile Include="ViewModel\DataAnalysisVM.cs" />
     <Compile Include="ViewModel\MyAnswersQandAVM.cs" />
     <Compile Include="ViewModel\MyQuestionsQandAVM.cs" />
     <Compile Include="ViewModel\InSessionStudentQandAVM.cs" />
