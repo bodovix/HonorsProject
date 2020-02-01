@@ -34,5 +34,13 @@ namespace HonorsProject.View.Pages
             VM = new DataAnalysisVM(ConnectionConfigs.LiveConfig);
             MainContainer.DataContext = VM;
         }
+
+        private void SearchGroupsResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void SearchSessionResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+        }
     }
 }

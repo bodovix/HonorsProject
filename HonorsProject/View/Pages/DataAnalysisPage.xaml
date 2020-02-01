@@ -22,31 +22,18 @@
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchGTxtBox"
-                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <ListView  x:Name="searchQResultsList"
+                         Text="{Binding GroupSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ListView  x:Name="searchGroupsResultsList"
                        Height="390"
-                           ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           SelectedItem="{Binding SelectedQuestion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           PreviewMouseLeftButtonUp="searchQResultsList_PreviewMouseLeftButtonUp"
+                           ItemsSource="{Binding Groups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           SelectedItem="{Binding SelectedGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                           PreviewMouseLeftButtonUp="SearchGroupsResultsList_PreviewMouseLeftButtonUp"
                            HorizontalContentAlignment="Stretch">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="{Binding IsResolved,
-                                        Converter={StaticResource BoolToResolvedImgConverter}}"
-                                           HorizontalAlignment="Left"
-                                           Style="{StaticResource IconImage}" />
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
-                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
-                                </Grid>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Id}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -54,46 +41,63 @@
             </StackPanel>
             <!--Answers Search bar-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
-                <Button Name="NewAnswerBtn"
-                        Content="New Answer"
-                        Command="{Binding NewModeCmd}"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
-                                ConverterParameter={x:Static enums:Role.Lecturer}}"
-                        Style="{StaticResource FormSubmitButton}" />
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchTxtBox"
-                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                <ListView  x:Name="searchAResultsList"
+                         Text="{Binding SessionSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                <ListView  x:Name="searchSessionResultsList"
                        Height="390"
-                        ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        SelectedItem="{Binding SelectedAnswer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding Sessions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedSession,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                        PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
+                        PreviewMouseLeftButtonUp="SearchSessionResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="../Images/starIcon.png"
-                                        HorizontalAlignment="Left"
-                                        Visibility="{Binding WasHelpfull,
-                                        Converter={StaticResource BoolToVisibleConverter}}"
-                                        Style="{StaticResource IconImage}" />
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0"  Style="{StaticResource InlineImgSearchResultsTextBlock}" />
-                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
-                                </Grid>
+                                <TextBlock Text="{Binding Id}"   Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
         </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="HEADING BOUND HERE"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       Style="{StaticResource FormTitleText}" />
+            <GroupBox
+                Header="Number of Questions Asked:"
+                Grid.Column="0"
+                Grid.Row="1">
+                <Label Content="Count  bound here" />
+            </GroupBox>
+            <GroupBox
+                Header="Most Frequent askers BOUND here in list"
+                Grid.Column="1"
+                Grid.Row="1">
+                <ListView />
+            </GroupBox>
+            <GroupBox
+                Header="Common phrase identification"
+                Grid.Column="0"
+                Grid.Row="2"
+                Grid.ColumnSpan="2">
+                <ListView>
+                </ListView>
+            </GroupBox>
+        </Grid>
     </Grid>
 </Page>

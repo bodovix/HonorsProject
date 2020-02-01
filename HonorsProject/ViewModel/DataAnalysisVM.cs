@@ -11,6 +11,18 @@ namespace HonorsProject.ViewModel
 {
     internal class DataAnalysisVM : BaseViewModel
     {
+        private string _groupSearchTxt;
+
+        public string GroupSearchTxt
+        {
+            get { return _groupSearchTxt; }
+            set
+            {
+                _groupSearchTxt = value;
+                OnPropertyChanged(nameof(GroupSearchTxt));
+            }
+        }
+
         private Group _selectedGroup;
 
         public Group SelectedGroup
@@ -35,6 +47,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private string _sessionSearchTxt;
+
+        public string SessionSearchTxt
+        {
+            get { return _sessionSearchTxt; }
+            set
+            {
+                _sessionSearchTxt = value;
+                OnPropertyChanged(nameof(SessionSearchTxt));
+            }
+        }
+
         private Session _selectedSession;
 
         public Session SelectedSession
@@ -44,6 +68,18 @@ namespace HonorsProject.ViewModel
             {
                 _selectedSession = value;
                 OnPropertyChanged(nameof(SelectedSession));
+            }
+        }
+
+        private ObservableCollection<Session> _sessions;
+
+        public ObservableCollection<Session> Sessions
+        {
+            get { return _sessions; }
+            set
+            {
+                _sessions = value;
+                OnPropertyChanged(nameof(Sessions));
             }
         }
 
