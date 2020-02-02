@@ -71,10 +71,10 @@ namespace HonorsProject.Model.Entities
         public List<FrequentAskersTuple> CalcMostFrequentAskers()
         {
             return Questions.GroupBy(s => s.AskedBy)
-                                .Select(tuple => new FrequentAskersTuple
+                                .Select(sesh => new FrequentAskersTuple
                                 {
-                                    Student = tuple.Key,
-                                    Count = tuple.Count()
+                                    Student = sesh.Key,
+                                    Count = sesh.Count()
                                 }).OrderBy(tuple => tuple.Count).ToList();
         }
 

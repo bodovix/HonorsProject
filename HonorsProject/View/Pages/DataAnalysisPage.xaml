@@ -53,7 +53,7 @@
                         PreviewMouseLeftButtonUp="SearchSessionResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding Id}"   Style="{StaticResource NoImgSearchResultsTextBlock}" />
                                 <TextBlock Text="{Binding Name}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
                             </StackPanel>
@@ -90,7 +90,18 @@
                 Header="Most Frequent askers BOUND here in list"
                 Grid.Column="1"
                 Grid.Row="1">
-                <ListView />
+                <ListView x:Name="mostFrequentAskersResultsList"
+                       Height="200"
+                        ItemsSource="{Binding MostFrequentAskers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </GroupBox>
             <GroupBox
                 Header="Common phrase identification"
