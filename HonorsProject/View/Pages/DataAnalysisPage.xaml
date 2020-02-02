@@ -71,6 +71,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <TextBlock Text="HEADING BOUND HERE"
                        Grid.Column="0"
@@ -97,6 +98,18 @@
                 Grid.ColumnSpan="2">
                 <ListView>
                 </ListView>
+            </GroupBox>
+            <GroupBox
+                Header="Common Phrase blacklist for group here"
+                Grid.Column="0"
+                Grid.Row="3"
+                Grid.ColumnSpan="2">
+                <StackPanel Orientation="Vertical">
+                    <TextBox />
+                    <Button Content="Add new Blacklist" />
+                    <ListView>
+                    </ListView>
+                </StackPanel>
             </GroupBox>
         </Grid>
     </Grid>
