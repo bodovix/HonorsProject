@@ -183,7 +183,7 @@ namespace HonorsProject.ViewModel.CoreVM
             return true;
         }
 
-        protected bool GetAllMyCurrentSessions()
+        public bool GetAllMyCurrentSessions()
         {
             try
             {
@@ -211,7 +211,7 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        protected bool GetAllMyPreviousSessions()
+        public bool GetAllMyPreviousSessions()
         {
             try
             {
@@ -239,7 +239,7 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        protected bool GetAllMyFutureSessions()
+        public bool GetAllMyFutureSessions()
         {
             try
             {

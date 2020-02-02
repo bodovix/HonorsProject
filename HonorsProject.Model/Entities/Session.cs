@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HonorsProject.Model.Core;
 using System.Collections.ObjectModel;
+using HonorsProject.Model.HelperClasses;
 
 namespace HonorsProject.Model.Entities
 {
@@ -60,6 +61,26 @@ namespace HonorsProject.Model.Entities
                 value = DateTime.Now.Date;
 
             return value;
+        }
+
+        public int CalcNumberQuestionsAsked()
+        {
+            return Questions.Count();
+        }
+
+        public List<FrequentAskersTuple> CalcMostFrequentAskers()
+        {
+            return Questions.GroupBy(s => s.AskedBy)
+                                .Select(tuple => new FrequentAskersTuple
+                                {
+                                    Student = tuple.Key,
+                                    Count = tuple.Count()
+                                }).OrderBy(tuple => tuple.Count).ToList();
+        }
+
+        public void CalcCommonPhraseIdentification()
+        {
+            throw new NotImplementedException("not implemented yet");
         }
 
         public bool ValidateSession(UnitOfWork u)

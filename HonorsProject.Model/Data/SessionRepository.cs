@@ -122,5 +122,32 @@ namespace HonorsProject.Model.Data
         {
             return _entities.Where(s => s.Questions.Any(q => q.Id == selectedQuestion.Id)).FirstOrDefault();
         }
+
+        public List<Session> GetTopXWithSearchForGroup(Group group, string searchTxt, int rowLimit)
+        {
+            if (group == null)
+                return null;
+            if (group.Id == 0)
+                return null;
+            if (String.IsNullOrEmpty(searchTxt))
+            {
+                //no search string
+                if (rowLimit == 0)
+                    return _entities.Where(s => s.Group.Id == group.Id).ToList();//no row limit
+                else
+                    return _entities.Where(s => s.Group.Id == group.Id).Take(rowLimit).ToList();//include row limit
+            }
+            else
+            {
+                //include search string
+                //no search
+                if (rowLimit == 0)
+                    return _entities.Where(s => s.Group.Id == group.Id && (s.Id.ToString().Contains(searchTxt)
+                                                    || s.Name.Contains(searchTxt))).ToList();//no row limit
+                else
+                    return _entities.Where(s => s.Group.Id == group.Id && (s.Id.ToString().Contains(searchTxt)
+                                                    || s.Name.Contains(searchTxt))).Take(rowLimit).ToList();//include row limit
+            }
+        }
     }
 }

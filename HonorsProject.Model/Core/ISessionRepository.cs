@@ -26,7 +26,11 @@ namespace HonorsProject.Model.Core
         List<Session> GetFutureSessions(Student studentGroup, DateTime date);
 
         List<Session> GetPreviousSessions(Student studentGroup, DateTime date);
+
+        List<Session> GetTopXWithSearchForGroup(Group group, string searchTxt, int rowLimit);
+
         Session GetSessionWithQuestion(Question selectedQuestion);
+
         bool CheckSessionNameAlreadyExistsForGroup(Session session);
     }
 }

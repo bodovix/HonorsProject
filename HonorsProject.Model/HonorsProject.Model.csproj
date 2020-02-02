@@ -95,6 +95,7 @@
     <Compile Include="Enums\Role.cs" />
     <Compile Include="HelperClasses\AsyncRunner.cs" />
     <Compile Include="HelperClasses\Cryptography.cs" />
+    <Compile Include="HelperClasses\FrequentAskersTuple.cs" />
     <Compile Include="HelperClasses\ImageHandler.cs" />
     <Compile Include="HelperClasses\Mediator.cs" />
     <Compile Include="DTO\QuestionStateConverterDTO.cs" />

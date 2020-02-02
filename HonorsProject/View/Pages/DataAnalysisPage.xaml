@@ -72,8 +72,9 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <TextBlock Text="HEADING BOUND HERE"
+            <TextBlock Text="Group and session HEADING BOUND HERE"
                        Grid.Column="0"
                        Grid.Row="0"
                        Grid.ColumnSpan="2"
@@ -83,7 +84,7 @@
                 Header="Number of Questions Asked:"
                 Grid.Column="0"
                 Grid.Row="1">
-                <Label Content="Count  bound here" />
+                <Label Content="{Binding NumQuestionsAsked,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
             </GroupBox>
             <GroupBox
                 Header="Most Frequent askers BOUND here in list"
@@ -111,6 +112,11 @@
                     </ListView>
                 </StackPanel>
             </GroupBox>
+            <TextBlock Text="{Binding FeedbackMessage}"
+                       Style="{StaticResource UserInputFeedback}"
+                       Grid.Column="0"
+                       Grid.Row="4"
+                       Grid.ColumnSpan="2" />
         </Grid>
     </Grid>
 </Page>

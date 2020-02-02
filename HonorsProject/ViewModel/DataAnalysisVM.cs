@@ -1,4 +1,6 @@
 ﻿using HonorsProject.Model.Entities;
+using HonorsProject.Model.Enums;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,19 @@ namespace HonorsProject.ViewModel
 {
     internal class DataAnalysisVM : BaseViewModel
     {
+        private int rowLimit;
+        private Lecturer _user;
+
+        public Lecturer User
+        {
+            get { return _user; }
+            set
+            {
+                _user = value;
+                OnPropertyChanged(nameof(User));
+            }
+        }
+
         private string _groupSearchTxt;
 
         public string GroupSearchTxt
@@ -20,6 +35,7 @@ namespace HonorsProject.ViewModel
             {
                 _groupSearchTxt = value;
                 OnPropertyChanged(nameof(GroupSearchTxt));
+                UpdateGroupsList();
             }
         }
 
@@ -32,6 +48,7 @@ namespace HonorsProject.ViewModel
             {
                 _selectedGroup = value;
                 OnPropertyChanged(nameof(SelectedGroup));
+                UpdateSessionsList();
             }
         }
 
@@ -56,6 +73,7 @@ namespace HonorsProject.ViewModel
             {
                 _sessionSearchTxt = value;
                 OnPropertyChanged(nameof(SessionSearchTxt));
+                UpdateSessionsList();
             }
         }
 
@@ -68,6 +86,21 @@ namespace HonorsProject.ViewModel
             {
                 _selectedSession = value;
                 OnPropertyChanged(nameof(SelectedSession));
+                try
+                {
+                    //calculate
+                    if (SelectedSession != null)
+                        if (SelectedSession.Id != 0)
+                        {
+                            NumQuestionsAsked = SelectedSession.CalcNumberQuestionsAsked();
+                            MostFrequentAskers = new ObservableCollection<FrequentAskersTuple>(SelectedSession.CalcMostFrequentAskers());
+                            SelectedSession.CalcCommonPhraseIdentification();
+                        }
+                }
+                catch (Exception ex)
+                {
+                    ShowFeedback(ex.Message, FeedbackType.Error);
+                }
             }
         }
 
@@ -83,8 +116,81 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private int _numbQuestionsAsked;
+
+        public int NumQuestionsAsked
+        {
+            get { return _numbQuestionsAsked; }
+            set
+            {
+                _numbQuestionsAsked = value;
+                OnPropertyChanged(nameof(NumQuestionsAsked));
+            }
+        }
+
+        private ObservableCollection<FrequentAskersTuple> _mostFrequentAskers;
+
+        public ObservableCollection<FrequentAskersTuple> MostFrequentAskers
+        {
+            get { return _mostFrequentAskers; }
+            set
+            {
+                _mostFrequentAskers = value;
+                OnPropertyChanged(nameof(MostFrequentAskers));
+            }
+        }
+
         public DataAnalysisVM(string dbcontextName) : base(dbcontextName)
         {
+            try
+            {
+                User = (Lecturer)App.AppUser;
+                UserRole = Role.Lecturer;
+                rowLimit = 30;
+                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rowLimit));
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+            }
+        }
+
+        private void UpdateGroupsList()
+        {
+            try
+            {
+                Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rowLimit));
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+            }
+        }
+
+        private void UpdateSessionsList()
+        {
+            try
+            {
+                if (SelectedGroup != null)
+                {
+                    if (SelectedGroup.Id != 0)
+                        Sessions = new ObservableCollection<Session>(UnitOfWork.SessionRepository.GetTopXWithSearchForGroup(SelectedGroup, SessionSearchTxt, rowLimit));
+                    else
+                    {
+                        Sessions = new ObservableCollection<Session>();
+                        ShowFeedback("No Group selected", FeedbackType.Info);
+                    }
+                }
+                else
+                {
+                    Sessions = new ObservableCollection<Session>();
+                    ShowFeedback("No Group selected", FeedbackType.Info);
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+            }
         }
     }
 }
