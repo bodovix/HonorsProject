@@ -15,7 +15,7 @@ namespace HonorsProject.Model.HelperClasses
         public override string ToString()
         {
             if (Student != null)
-                return Student.Name + "\n" + Student.Id + "\nCount:" + Count;
+                return Student.Name + "\n" + Student.Id + "\nCount: " + Count;
             else
                 return "0";
         }
