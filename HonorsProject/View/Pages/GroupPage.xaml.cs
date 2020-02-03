@@ -45,8 +45,17 @@ namespace HonorsProject.View.Pages
             Mediator.Register(MediatorChannels.LoadStudentsSubgrid.ToString(), LoadStudentsSubgrid);
             Mediator.Register(MediatorChannels.GoToThisSession.ToString(), GoToThisSession);
             Mediator.Register(MediatorChannels.GoToThisStudent.ToString(), GoToThisStudent);
+            Mediator.Register(MediatorChannels.GoToAnalyseEntity.ToString(), GoToAnalyseEntity);
 
             DataContext = VM;
+        }
+
+        private void GoToAnalyseEntity(object obj)
+        {
+            Mediator.ClearMediator();
+
+            BaseEntity entity = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GoToAnalyseEntity(entity);
         }
 
         private void GoToThisStudent(object obj)

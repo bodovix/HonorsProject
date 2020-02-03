@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseMyGroupsPageVM : BaseViewModel, ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IDeleteCmd, IRemoveEntityCmd, IMoveEntityInList, IGoToEntityCmd, ICancelmd
+    public abstract class BaseMyGroupsPageVM : BaseViewModel, ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IDeleteCmd, IRemoveEntityCmd, IMoveEntityInList, IGoToEntityCmd, IAnalyseEntityCmd, ICancelmd
     {
         #region Properties
 
@@ -150,6 +150,7 @@ namespace HonorsProject.ViewModel.CoreVM
         public MoveEntityInToListCmd MoveEntityInToListCmd { get; set; }
         public GoToEntityCmd GoToEntityCmd { get; set; }
         public CancelCmd CancelCmd { get; set; }
+        public AnalyseEntityCmd AnalyseEntityCmd { get; set; }
 
         #endregion Commands
 
@@ -164,10 +165,13 @@ namespace HonorsProject.ViewModel.CoreVM
             MoveEntityOutOfListCmd = new MoveEntityOutOfListCmd(this);
             MoveEntityInToListCmd = new MoveEntityInToListCmd(this);
             GoToEntityCmd = new GoToEntityCmd(this);
+            AnalyseEntityCmd = new AnalyseEntityCmd(this);
             CancelCmd = new CancelCmd(this);
         }
 
         public abstract bool GoToEntity(BaseEntity entity);
+
+        public abstract bool GoToAnalyseEntity(BaseEntity entity);
 
         public abstract bool MoveEntityInToList(BaseEntity entityToAdd);
 

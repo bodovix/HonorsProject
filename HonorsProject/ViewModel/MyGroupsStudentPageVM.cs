@@ -106,5 +106,11 @@ namespace HonorsProject.ViewModel
             ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
             return false;
         }
+
+        public override bool GoToAnalyseEntity(BaseEntity entity)
+        {
+            ShowFeedback("Students cannot analyse sessions.", FeedbackType.Error);
+            return false;
+        }
     }
 }

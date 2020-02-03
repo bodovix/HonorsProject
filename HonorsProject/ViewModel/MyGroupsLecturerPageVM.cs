@@ -311,5 +311,16 @@ namespace HonorsProject.ViewModel
             ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
             return false;
         }
+
+        public override bool GoToAnalyseEntity(BaseEntity entity)
+        {
+            if (entity is Session)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToAnalyseEntity.ToString(), entity);
+                return true;
+            }
+            ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
+            return false;
+        }
     }
 }

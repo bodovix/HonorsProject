@@ -16,6 +16,8 @@ namespace HonorsProject.ViewModel
 {
     internal class DataAnalysisVM : BaseViewModel, IGoToEntityCmd
     {
+        #region Properties
+
         private int rowLimit;
         private string _selectionTitle;
 
@@ -111,6 +113,8 @@ namespace HonorsProject.ViewModel
                             NumQuestionsAsked = SelectedSession.CalcNumberQuestionsAsked();
                             MostFrequentAskers = new ObservableCollection<FrequentAskersTuple>(SelectedSession.CalcMostFrequentAskers());
                             CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
+                            if (CommonPhrases.Count == 0)
+                                CommonPhrases.Add("No Common Phrases detected.", 0);
                         }
                     UpdateHeader();
                 }
@@ -168,6 +172,8 @@ namespace HonorsProject.ViewModel
                 OnPropertyChanged(nameof(CommonPhrases));
             }
         }
+
+        #endregion Properties
 
         public GoToEntityCmd GoToEntityCmd { get; set; }
 
