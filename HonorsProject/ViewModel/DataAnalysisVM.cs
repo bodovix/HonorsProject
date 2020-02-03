@@ -17,6 +17,18 @@ namespace HonorsProject.ViewModel
     internal class DataAnalysisVM : BaseViewModel, IGoToEntityCmd
     {
         private int rowLimit;
+        private string _selectionTitle;
+
+        public string SelectionTitle
+        {
+            get { return _selectionTitle; }
+            set
+            {
+                _selectionTitle = value;
+                OnPropertyChanged(nameof(SelectionTitle));
+            }
+        }
+
         private Lecturer _user;
 
         public Lecturer User
@@ -52,6 +64,7 @@ namespace HonorsProject.ViewModel
                 _selectedGroup = value;
                 OnPropertyChanged(nameof(SelectedGroup));
                 UpdateSessionsList();
+                UpdateHeader();
             }
         }
 
@@ -99,6 +112,7 @@ namespace HonorsProject.ViewModel
                             MostFrequentAskers = new ObservableCollection<FrequentAskersTuple>(SelectedSession.CalcMostFrequentAskers());
                             CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
                         }
+                    UpdateHeader();
                 }
                 catch (Exception ex)
                 {
@@ -160,7 +174,7 @@ namespace HonorsProject.ViewModel
         public DataAnalysisVM(string dbcontextName) : base(dbcontextName)
         {
             GoToEntityCmd = new GoToEntityCmd(this);
-
+            UpdateHeader();
             try
             {
                 User = (Lecturer)App.AppUser;
@@ -172,6 +186,22 @@ namespace HonorsProject.ViewModel
             {
                 ShowFeedback(ex.Message, FeedbackType.Error);
             }
+        }
+
+        public bool GoToEntity(BaseEntity entity)
+        {
+            if (entity is Student)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisStudent.ToString(), entity);
+                return true;
+            }
+            else if (entity is null)
+            {
+                ShowFeedback("Cannot go to a NULL object.", FeedbackType.Error);
+                return false;
+            }
+            ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
+            return false;
         }
 
         private void UpdateGroupsList()
@@ -212,20 +242,32 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        public bool GoToEntity(BaseEntity entity)
+        private void UpdateHeader()
         {
-            if (entity is Student)
+            if (SelectedGroup == null)
             {
-                Mediator.NotifyColleagues(MediatorChannels.GoToThisStudent.ToString(), entity);
-                return true;
+                SelectionTitle = "No Groups or Sessions selected.";
+                return;
             }
-            else if (entity is null)
+            else if (SelectedGroup.Id == 0)
             {
-                ShowFeedback("Cannot go to a NULL object.", FeedbackType.Error);
-                return false;
+                SelectionTitle = "No Groups or Sessions selected.";
+                return;
             }
-            ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
-            return false;
+            else if (SelectedSession == null)
+            {
+                SelectionTitle = $"{SelectedGroup.Name}";
+                return;
+            }
+            else if (SelectedSession.Id == 0)
+            {
+                SelectionTitle = $"{SelectedGroup.Name}";
+                return;
+            }
+            else
+            {
+                SelectionTitle = $"{SelectedGroup.Name} - {SelectedSession.Name}";
+            }
         }
     }
 }

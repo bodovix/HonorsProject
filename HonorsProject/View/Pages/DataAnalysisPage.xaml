@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DataAnalysisPage">
     <Page.Resources>
-        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter"/>
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <Grid x:Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -77,7 +77,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <TextBlock Text="Group and session HEADING BOUND HERE"
+            <TextBlock Text="{Binding SelectionTitle}"
                        Grid.Column="0"
                        Grid.Row="0"
                        Grid.ColumnSpan="2"
