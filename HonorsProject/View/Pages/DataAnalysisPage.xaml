@@ -84,7 +84,8 @@
                 Header="Number of Questions Asked:"
                 Grid.Column="0"
                 Grid.Row="1">
-                <Label Content="{Binding NumQuestionsAsked,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <Label Content="{Binding NumQuestionsAsked,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                       Style="{StaticResource NumberDisplayBigDataAnalysis}" />
             </GroupBox>
             <GroupBox
                 Header="Most Frequent askers BOUND here in list"
@@ -108,7 +109,19 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 Grid.ColumnSpan="2">
-                <ListView>
+                <ListView x:Name="commonPhrasesListView"
+                       Height="200"
+                        ItemsSource="{Binding CommonPhrases,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Key}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text=" - Occurrences - " Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text="{Binding Value}" Style="{StaticResource NoImgSearchResultsTextBlock}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </GroupBox>
             <GroupBox

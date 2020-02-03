@@ -94,7 +94,7 @@ namespace HonorsProject.ViewModel
                         {
                             NumQuestionsAsked = SelectedSession.CalcNumberQuestionsAsked();
                             MostFrequentAskers = new ObservableCollection<FrequentAskersTuple>(SelectedSession.CalcMostFrequentAskers());
-                            SelectedSession.CalcCommonPhraseIdentification();
+                            CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
                         }
                 }
                 catch (Exception ex)
@@ -137,6 +137,18 @@ namespace HonorsProject.ViewModel
             {
                 _mostFrequentAskers = value;
                 OnPropertyChanged(nameof(MostFrequentAskers));
+            }
+        }
+
+        private Dictionary<string, int> _commonPhrases;
+
+        public Dictionary<string, int> CommonPhrases
+        {
+            get { return _commonPhrases; }
+            set
+            {
+                _commonPhrases = value;
+                OnPropertyChanged(nameof(CommonPhrases));
             }
         }
 

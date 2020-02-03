@@ -78,9 +78,61 @@ namespace HonorsProject.Model.Entities
                                 }).OrderBy(tuple => tuple.Count).ToList();
         }
 
-        public void CalcCommonPhraseIdentification()
+        public Dictionary<string, int> CalcCommonPhraseIdentification()
         {
-            throw new NotImplementedException("not implemented yet");
+            string allText = new string(Questions.SelectMany(q => q.QuestionText.ToLower() + " ").ToArray());
+            List<string> multiWords = new List<string>();
+            List<string> list = allText.Split(',', '.', ';', ' ', '\n', '\r').ToList();
+            list = list.Where(x => !string.IsNullOrEmpty(x)).ToList();
+            string[] splitTxt = list.ToArray();
+
+            const int MaxPhraseLength = 20;
+            Dictionary<string, int> Counts = new Dictionary<string, int>();
+
+            for (int phraseLen = MaxPhraseLength; phraseLen >= 2; phraseLen--)
+            {
+                for (int i = 0; i < splitTxt.Length - 1; i++)
+                {
+                    string[] phrase = GetPhrase(splitTxt, i, phraseLen);
+                    string sphrase = string.Join(" ", phrase);
+
+                    int index = FindPhraseIndex(splitTxt, i + phrase.Length, phrase);
+
+                    if (index > -1)
+                    {
+                        Console.WriteLine("Phrase : {0} found at {1}", sphrase, index);
+
+                        if (!Counts.ContainsKey(sphrase))
+                            Counts.Add(sphrase, 1);
+
+                        Counts[sphrase]++;
+                    }
+                }
+            }
+
+            return Counts;
+        }
+
+        private static string[] GetPhrase(string[] words, int startpos, int len)
+        {
+            return words.Skip(startpos).Take(len).ToArray();
+        }
+
+        private static int FindPhraseIndex(string[] words, int startIndex, string[] matchWords)
+        {
+            for (int i = startIndex; i < words.Length; i++)
+            {
+                int j;
+
+                for (j = 0; j < matchWords.Length && (i + j) < words.Length; j++)
+                    if (matchWords[j] != words[i + j])
+                        break;
+
+                if (j == matchWords.Length)
+                    return startIndex;
+            }
+
+            return -1;
         }
 
         public bool ValidateSession(UnitOfWork u)
