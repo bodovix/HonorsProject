@@ -75,7 +75,7 @@ namespace HonorsProject.Model.Entities
                                 {
                                     Student = sesh.Key,
                                     Count = sesh.Count()
-                                }).OrderBy(tuple => tuple.Count).ToList();
+                                }).OrderByDescending(tuple => tuple.Count).ToList();
         }
 
         public Dictionary<string, int> CalcCommonPhraseIdentification()
