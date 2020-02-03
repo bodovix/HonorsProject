@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -45,6 +46,32 @@ namespace HonorsProject.View.Pages
             if (e.Key == Key.Return)
             {
                 VM.Login(ref App.AppUser);
+            }
+        }
+
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((Keyboard.GetKeyStates(Key.CapsLock) & KeyStates.Toggled) == KeyStates.Toggled)
+            {
+                if (PassBox.ToolTip == null)
+                {
+                    ToolTip tt = new ToolTip();
+                    tt.Content = "Warning: CapsLock is on";
+                    tt.PlacementTarget = sender as UIElement;
+                    tt.Placement = PlacementMode.Bottom;
+                    PassBox.ToolTip = tt;
+                    tt.IsOpen = true;
+                }
+            }
+            else
+            {
+                var currentToolTip = PassBox.ToolTip as ToolTip;
+                if (currentToolTip != null)
+                {
+                    currentToolTip.IsOpen = false;
+                }
+
+                PassBox.ToolTip = null;
             }
         }
     }

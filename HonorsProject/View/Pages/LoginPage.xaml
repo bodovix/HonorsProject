@@ -24,8 +24,11 @@
                  KeyUp="LoginEnter_KeyUp"
                  Style="{StaticResource UserInput}" />
         <TextBlock Text="Password" Style="{StaticResource UserInputLabel}" />
-        <PasswordBox PasswordChanged="PasswordBox_PasswordChanged"
+        <PasswordBox
+                    x:Name="PassBox"
+                    PasswordChanged="PasswordBox_PasswordChanged"
                     FontFamily="Password"
+                     KeyDown="PasswordBox_KeyDown"
                      Style="{StaticResource UserInputPassword}"
                      KeyUp="LoginEnter_KeyUp" />
         <Button Content="Login"
