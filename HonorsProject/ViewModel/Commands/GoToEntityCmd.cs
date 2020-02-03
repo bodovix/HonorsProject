@@ -1,5 +1,6 @@
 ﻿using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
+using HonorsProject.Model.HelperClasses;
 using HonorsProject.ViewModel.Commands.IComands;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,11 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            BaseEntity entity = (BaseEntity)parameter;
+            BaseEntity entity;
+            if (parameter is FrequentAskersTuple)
+                entity = ((FrequentAskersTuple)parameter).Student;
+            else
+                entity = (BaseEntity)parameter;
             VM.GoToEntity(entity);
         }
     }

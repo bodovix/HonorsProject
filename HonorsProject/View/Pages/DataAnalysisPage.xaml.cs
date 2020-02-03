@@ -17,6 +17,8 @@ using HonorsProject.View.ExtensionMethods;
 using HonorsProject.ViewModel;
 using HonorsProject.Model.Data;
 using HonorsProject.ViewModel.CoreVM;
+using HonorsProject.Model.HelperClasses;
+using HonorsProject.Model.Core;
 
 namespace HonorsProject.View.Pages
 {
@@ -32,7 +34,16 @@ namespace HonorsProject.View.Pages
             this.SetMenuButtonColor(MenuButtonsSelection.DataAnalysisPage);
             InitializeComponent();
             VM = new DataAnalysisVM(ConnectionConfigs.LiveConfig);
+            Mediator.Register(MediatorChannels.GoToThisStudent.ToString(), GoToThisStudent);
             MainContainer.DataContext = VM;
+        }
+
+        private void GoToThisStudent(object obj)
+        {
+            Mediator.ClearMediator();
+
+            BaseEntity entity = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GoToStudentPageWithStudent(entity);
         }
 
         private void SearchGroupsResultsList_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

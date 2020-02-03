@@ -119,7 +119,7 @@
                                Grid.Row="2"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
-                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
+                               Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
                     <Button Name="SaveBtn"
                         Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"

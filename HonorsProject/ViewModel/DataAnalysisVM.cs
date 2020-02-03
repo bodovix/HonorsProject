@@ -1,6 +1,9 @@
-﻿using HonorsProject.Model.Entities;
+﻿using HonorsProject.Model.Core;
+using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.ViewModel.Commands;
+using HonorsProject.ViewModel.Commands.IComands;
 using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
@@ -11,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    internal class DataAnalysisVM : BaseViewModel
+    internal class DataAnalysisVM : BaseViewModel, IGoToEntityCmd
     {
         private int rowLimit;
         private Lecturer _user;
@@ -152,8 +155,12 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        public GoToEntityCmd GoToEntityCmd { get; set; }
+
         public DataAnalysisVM(string dbcontextName) : base(dbcontextName)
         {
+            GoToEntityCmd = new GoToEntityCmd(this);
+
             try
             {
                 User = (Lecturer)App.AppUser;
@@ -203,6 +210,22 @@ namespace HonorsProject.ViewModel
             {
                 ShowFeedback(ex.Message, FeedbackType.Error);
             }
+        }
+
+        public bool GoToEntity(BaseEntity entity)
+        {
+            if (entity is Student)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisStudent.ToString(), entity);
+                return true;
+            }
+            else if (entity is null)
+            {
+                ShowFeedback("Cannot go to a NULL object.", FeedbackType.Error);
+                return false;
+            }
+            ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
+            return false;
         }
     }
 }

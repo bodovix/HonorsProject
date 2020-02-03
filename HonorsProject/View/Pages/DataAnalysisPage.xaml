@@ -3,11 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DataAnalysisPage">
-
+    <Page.Resources>
+        <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter"/>
+    </Page.Resources>
     <Grid x:Name="MainContainer">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -39,7 +42,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
-            <!--Answers Search bar-->
+            <!--Sessions Search bar-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
                 <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
@@ -102,6 +105,21 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                            <MenuItem  Header="Go To Student"
+                                           Command="{Binding DataContext.GoToEntityCmd}"
+                                           CommandParameter="{Binding SelectedItem}">
+                                <MenuItem.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold">Navigate to Students page</TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </MenuItem.ToolTip>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                 </ListView>
             </GroupBox>
             <GroupBox
@@ -118,7 +136,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Key}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
                                 <TextBlock Text=" - Occurrences - " Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                                <TextBlock Text="{Binding Value}" Style="{StaticResource NoImgSearchResultsTextBlock}"/>
+                                <TextBlock Text="{Binding Value}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -138,6 +156,7 @@
             </GroupBox>
             <TextBlock Text="{Binding FeedbackMessage}"
                        Style="{StaticResource UserInputFeedback}"
+                       Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                        Grid.Column="0"
                        Grid.Row="4"
                        Grid.ColumnSpan="2" />
