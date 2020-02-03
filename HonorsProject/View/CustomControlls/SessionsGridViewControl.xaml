@@ -37,6 +37,27 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                            <Button Command="{Binding DataContext.AnalyseEntityCmd, ElementName=SessionsDataGrid}"
+                                    CommandParameter="{Binding}">
+                                <Image Source="../Images/dataAnalisis.png"
+                                Style="{StaticResource IconImage}">
+                                    <Image.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold">Analyse session</TextBlock>
+                                                <TextBlock>Analyse the selected session.</TextBlock>
+                                                <TextBlock>Unsaved changes will be lost.</TextBlock>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </Image.ToolTip>
+                                </Image>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
                             <Button Command="{Binding DataContext.GoToEntityCmd, ElementName=SessionsDataGrid}"
                                     CommandParameter="{Binding}">
                                 <Image Source="../Images/magnifyingGlass64Img.png"

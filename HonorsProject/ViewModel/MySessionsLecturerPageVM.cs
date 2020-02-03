@@ -179,5 +179,11 @@ namespace HonorsProject.ViewModel
             else
                 return result;
         }
+
+        public override bool GoToAnalyseEntity(BaseEntity entity)
+        {
+            Mediator.NotifyColleagues(MediatorChannels.GoToAnalyseEntity.ToString(), entity);
+            return true;
+        }
     }
 }

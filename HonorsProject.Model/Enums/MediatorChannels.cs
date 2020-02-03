@@ -30,6 +30,7 @@ namespace HonorsProject.Model.Enums
         GoToThisQuestion,
         StudnetCSVImport,
         LecturerPageGeneratePasswordCheck,
-        LecturerPageNewPasswordDisplay
+        LecturerPageNewPasswordDisplay,
+        GoToAnalyseEntity
     }
 }

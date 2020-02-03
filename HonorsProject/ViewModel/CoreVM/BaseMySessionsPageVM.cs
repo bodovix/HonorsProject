@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseMySessionsPageVM : BaseViewModel, ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IAddLecturerCmd, IRemoveEntityCmd, IDeleteCmd, IGoToEntityCmd, ICancelmd
+    public abstract class BaseMySessionsPageVM : BaseViewModel, ISaveVMFormCmd, IEnterNewModeCmd, IChangeSubgridCmd, IAddLecturerCmd, IRemoveEntityCmd, IDeleteCmd, IGoToEntityCmd, IAnalyseEntityCmd, ICancelmd
     {
         #region Properties
 
@@ -123,6 +123,7 @@ namespace HonorsProject.ViewModel.CoreVM
         public DeleteCmd DeleteCmd { get; set; }
         public GoToEntityCmd GoToEntityCmd { get; set; }
         public CancelCmd CancelCmd { get; set; }
+        public AnalyseEntityCmd AnalyseEntityCmd { get; set; }
 
         #endregion Commands
 
@@ -136,6 +137,7 @@ namespace HonorsProject.ViewModel.CoreVM
             DeleteCmd = new DeleteCmd(this);
             ChangeSubgridContextCmd = new ChangeSubgridContextCmd(this);
             GoToEntityCmd = new GoToEntityCmd(this);
+            AnalyseEntityCmd = new AnalyseEntityCmd(this);
             CancelCmd = new CancelCmd(this);
             //initial setup
         }
@@ -354,5 +356,7 @@ namespace HonorsProject.ViewModel.CoreVM
             }
             return result;
         }
+
+        public abstract bool GoToAnalyseEntity(BaseEntity entity);
     }
 }

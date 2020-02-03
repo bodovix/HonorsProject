@@ -171,7 +171,7 @@ namespace HonorsProject.ViewModel
 
         public GoToEntityCmd GoToEntityCmd { get; set; }
 
-        public DataAnalysisVM(string dbcontextName) : base(dbcontextName)
+        public DataAnalysisVM(BaseEntity entityToFocusOn, string dbcontextName) : base(dbcontextName)
         {
             GoToEntityCmd = new GoToEntityCmd(this);
             UpdateHeader();
@@ -181,6 +181,15 @@ namespace HonorsProject.ViewModel
                 UserRole = Role.Lecturer;
                 rowLimit = 30;
                 Groups = new ObservableCollection<Group>(UnitOfWork.GroupRepository.GetTopXFromSearch(GroupSearchTxt, rowLimit));
+                if (entityToFocusOn is Group)
+                    SelectedGroup = UnitOfWork.GroupRepository.Get(entityToFocusOn.Id);
+                else if (entityToFocusOn is Session)
+                {
+                    Session session = (Session)entityToFocusOn;
+                    SelectedGroup = UnitOfWork.GroupRepository.Get(session.Group.Id);
+                    if (SelectedGroup != null)
+                        SelectedSession = UnitOfWork.SessionRepository.Get(entityToFocusOn.Id);
+                }
             }
             catch (Exception ex)
             {

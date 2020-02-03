@@ -70,5 +70,11 @@ namespace HonorsProject.ViewModel
         {
             throw new NotImplementedException("Students cannot remove lecturers from sessions");
         }
+
+        public override bool GoToAnalyseEntity(BaseEntity entity)
+        {
+            ShowFeedback("Students Cannot Analyse Sessions.", FeedbackType.Error);
+            return false;
+        }
     }
 }

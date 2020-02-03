@@ -28,12 +28,14 @@ namespace HonorsProject.View.Pages
     public partial class DataAnalysisPage : Page
     {
         public BaseViewModel VM;
+        private BaseEntity entity;
 
-        public DataAnalysisPage()
+        public DataAnalysisPage(BaseEntity entityToFocusOn)
         {
+            entity = entityToFocusOn;
             this.SetMenuButtonColor(MenuButtonsSelection.DataAnalysisPage);
             InitializeComponent();
-            VM = new DataAnalysisVM(ConnectionConfigs.LiveConfig);
+            VM = new DataAnalysisVM(entity, ConnectionConfigs.LiveConfig);
             Mediator.Register(MediatorChannels.GoToThisStudent.ToString(), GoToThisStudent);
             MainContainer.DataContext = VM;
         }

@@ -34,7 +34,6 @@ namespace HonorsProject.View.CustomControlls
         public static readonly DependencyProperty RemoveEntityCmdProperty =
             DependencyProperty.Register(nameof(RemoveEntityCmd), typeof(RemoveEntityCmd), typeof(SessionsGridViewControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        
         public GoToEntityCmd GoToEntityCmd
         {
             get { return (GoToEntityCmd)GetValue(GoToEntityCmdProperty); }
@@ -45,6 +44,16 @@ namespace HonorsProject.View.CustomControlls
         public static readonly DependencyProperty GoToEntityCmdProperty =
             DependencyProperty.Register(nameof(GoToEntityCmd), typeof(GoToEntityCmd), typeof(SessionsGridViewControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public AnalyseEntityCmd AnalyseEntityCmd
+        {
+            get { return (AnalyseEntityCmd)GetValue(AnalyseEntityCmdProperty); }
+            set { SetValue(AnalyseEntityCmdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for GroupToRemove.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AnalyseEntityCmdProperty =
+            DependencyProperty.Register(nameof(AnalyseEntityCmd), typeof(AnalyseEntityCmd), typeof(SessionsGridViewControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         public Role UserRole
         {
             get { return (Role)GetValue(UserRoleProperty); }
@@ -54,7 +63,6 @@ namespace HonorsProject.View.CustomControlls
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty UserRoleProperty =
             DependencyProperty.Register(nameof(UserRole), typeof(Role), typeof(SessionsGridViewControl), new PropertyMetadata(Role.Student));
-
 
         public Student SelectedSession
         {

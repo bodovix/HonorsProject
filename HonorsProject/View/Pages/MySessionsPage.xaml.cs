@@ -39,6 +39,15 @@ namespace HonorsProject.View.Pages
             MainContainer.DataContext = VM;
             Mediator.Register(MediatorChannels.DeleteSessionConfirmation.ToString(), ShowDeleteConfMessage);
             Mediator.Register(MediatorChannels.GoToThisSession.ToString(), GoToSession);
+            Mediator.Register(MediatorChannels.GoToAnalyseEntity.ToString(), GoToAnalyseEntity);
+        }
+
+        private void GoToAnalyseEntity(object obj)
+        {
+            Mediator.ClearMediator();
+
+            BaseEntity entity = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GoToAnalyseEntity(entity);
         }
 
         private void GoToSession(object obj)

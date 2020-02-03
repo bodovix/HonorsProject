@@ -109,6 +109,12 @@ namespace HonorsProject.View
             MainContent.Content = new QandAPage(entityTofocusOn);
         }
 
+        internal void GoToAnalyseEntity(BaseEntity entity)
+        {
+            Mediator.ClearMediator();
+            MainContent.Content = new DataAnalysisPage(entity);
+        }
+
         private void StudentsBtn_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
@@ -148,7 +154,7 @@ namespace HonorsProject.View
         private void DataAnalysisBtn_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new DataAnalysisPage();
+            MainContent.Content = new DataAnalysisPage(null);
         }
 
         private void MyAccountBtn_Click(object sender, RoutedEventArgs e)
