@@ -219,7 +219,8 @@ namespace HonorsProject.Test.VMTest
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
-            VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
+            VM.SelectedStudent = VM.UnitOfWork.StudentRepo.Get(444);
+            VM.SelectedStudent.Name = "Updated";
             VM.FormContext = FormContext.Update;
             //Act
             bool result = VM.Save();
