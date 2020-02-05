@@ -109,7 +109,17 @@ namespace HonorsProject.ViewModel
 
         public override bool GoToAnalyseEntity(BaseEntity entity)
         {
-            ShowFeedback("Students cannot analyse sessions.", FeedbackType.Error);
+            if (entity is Session)
+            {
+                ShowFeedback("Students cannot analyse Groups.", FeedbackType.Error);
+                return false;
+            }
+            if (entity is Group)
+            {
+                ShowFeedback("Students cannot analyse Groups.", FeedbackType.Error);
+                return false;
+            }
+            ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
             return false;
         }
     }

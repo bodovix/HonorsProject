@@ -43,6 +43,7 @@ namespace HonorsProject.View.Pages
             Mediator.Register(MediatorChannels.DeleteStudentConfirmation.ToString(), DeleteStudentConfrimation);
             Mediator.Register(MediatorChannels.GoToThisGroup.ToString(), GoToThisGroup);
             Mediator.Register(MediatorChannels.GoToThisQuestion.ToString(), GoToThisQuestion);
+            Mediator.Register(MediatorChannels.GoToAnalyseEntity.ToString(), GoToAnalyseEntity);
             Mediator.Register(MediatorChannels.StudnetCSVImport.ToString(), StudnetCSVImport);
             DataContext = VM;
         }
@@ -51,6 +52,13 @@ namespace HonorsProject.View.Pages
         {
             string format = obj as string;
             MessageBox.Show("CSV format must be:\n" + format);
+        }
+
+        private void GoToAnalyseEntity(object obj)
+        {
+            Mediator.ClearMediator();
+            BaseEntity group = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GoToAnalyseEntity(group);
         }
 
         private void GoToThisQuestion(object obj)

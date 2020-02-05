@@ -314,9 +314,14 @@ namespace HonorsProject.ViewModel
 
         public override bool GoToAnalyseEntity(BaseEntity entity)
         {
-            if (entity is Session)
+            if (entity is Session session)
             {
-                Mediator.NotifyColleagues(MediatorChannels.GoToAnalyseEntity.ToString(), entity);
+                Mediator.NotifyColleagues(MediatorChannels.GoToAnalyseEntity.ToString(), session);
+                return true;
+            }
+            if (entity is Group group)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToAnalyseEntity.ToString(), group);
                 return true;
             }
             ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);

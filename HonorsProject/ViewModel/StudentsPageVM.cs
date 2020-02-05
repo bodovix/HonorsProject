@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd, IGoToEntityCmd, ICSVCmd
+    public class StudentsPageVM : BaseViewModel, IRemoveEntityCmd, IEnterNewModeCmd, ISaveVMFormCmd, INewPassHashCmd, IMoveEntityInList, IChangeSubgridCmd, IDeleteCmd, ICancelmd, IGoToEntityCmd, IAnalyseEntityCmd, ICSVCmd
     {
         #region Properties
 
@@ -156,6 +156,7 @@ namespace HonorsProject.ViewModel
         public CancelCmd CancelCmd { get; set; }
         public GoToEntityCmd GoToEntityCmd { get; set; }
         public CSVCmd CSVCmd { get; set; }
+        public AnalyseEntityCmd AnalyseEntityCmd { get; set; }
 
         #endregion Commands
 
@@ -177,6 +178,7 @@ namespace HonorsProject.ViewModel
                 DeleteCmd = new DeleteCmd(this);
                 CancelCmd = new CancelCmd(this);
                 GoToEntityCmd = new GoToEntityCmd(this);
+                AnalyseEntityCmd = new AnalyseEntityCmd(this);
                 CSVCmd = new CSVCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 Lecturer = (Lecturer)loggedInLectuer;
@@ -721,6 +723,17 @@ namespace HonorsProject.ViewModel
                 ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
+        }
+
+        public bool GoToAnalyseEntity(BaseEntity entity)
+        {
+            if (entity is Group group)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToAnalyseEntity.ToString(), group);
+                return true;
+            }
+            ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
+            return false;
         }
     }
 }
