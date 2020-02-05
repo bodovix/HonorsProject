@@ -32,7 +32,7 @@ namespace HonorsProject.Test.VMTest
             //Act
             // -- VM constructor is Act
             //Assert
-            int expectedSessions = 2;
+            int expectedSessions = 1;
             int expectedGroups = 3;
             int expectedLecturers = 2;
             Assert.AreEqual(FormContext.Create, VM.FormContext, "FormContext in wrong initial mode");
@@ -59,13 +59,13 @@ namespace HonorsProject.Test.VMTest
             Group group = VM.Groups.Where(g => g.Id == 1).FirstOrDefault();
             DateTime startDate = DateTime.Now.Date;
             DateTime endDate = DateTime.Now.Date;
-            DateTime createdOn = new DateTime(2019, 09, 29);
+            DateTime createdOn = DateTime.Now.Date;
             VM.SelectedSession = new Session("Test Session", startDate, endDate, LecLst, group, null, createdOn, _lecturer.Id);
 
             //Act
             bool result = VM.Save();
             //Assert
-            int expectedSessions = 3;
+            int expectedSessions = 1;
             int expectedLecturers = 2;
             int expectedGroups = 3;
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
@@ -97,13 +97,13 @@ namespace HonorsProject.Test.VMTest
             //Act
             bool result = VM.Save();
             //Assert
-            int expectedSessions = 3;
+            int expectedSessions = 1;
             int expectedLecturers = 2;
             int expectedGroups = 3;
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
             Assert.AreEqual(FormContext.Create, VM.FormContext, "FormContext in wrong initial mode");
             Assert.AreEqual(Role.Lecturer, VM.UserRole, "UserRole in wrong initial mode for lecturer");
-            Assert.AreEqual(expectedSessions, VM.MySessions.Count, $"VM Sessions Count Wrong {VM.MySessions.Count} : should be {expectedSessions}");
+            Assert.AreEqual(expectedSessions, VM.MySessions.Count, $"VM Sessions Count Wrong.");
             Assert.AreEqual(expectedLecturers, VM.AvailableLecturers.Count, "VM Lecturer Count Wrong");
             Assert.AreEqual(expectedGroups, VM.Groups.Count, "VM Groups Count Wrong");//one null and the test one(s)
         }
@@ -196,7 +196,7 @@ namespace HonorsProject.Test.VMTest
             //Act
             bool result = VM.Save();
             //Assert
-            int expectedSessions = 2;
+            int expectedSessions = 3;
             int expectedLecturers = 2;
             int expectedGroups = 3;
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
@@ -229,7 +229,7 @@ namespace HonorsProject.Test.VMTest
             //Act
             bool result = VM.Save();
             //Assert
-            int expectedSessions = 2;
+            int expectedSessions = 3;
             int expectedLecturers = 2;
             int expectedGroups = 3;
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
@@ -250,7 +250,7 @@ namespace HonorsProject.Test.VMTest
             VM.FormContext = FormContext.Create;
             //Act - update session details
             //select a session
-            VM.SelectedSession = VM.MySessions.Where(s => s.Id == 1).FirstOrDefault();
+            VM.SelectedSession = VM.MySessions.Where(s => s.Id == 2).FirstOrDefault();
             //update it
             VM.SelectedSession.Name = "UpdatedTo";
             VM.SelectedSession.Group = VM.Groups.Where(g => g.Id == 2).FirstOrDefault();
@@ -259,7 +259,7 @@ namespace HonorsProject.Test.VMTest
             VM.SelectedSession.EndTime = new DateTime(2019, 12, 06);
             bool result = VM.Save();
             //Assert
-            int expectedSessions = 2;
+            int expectedSessions = 1;
             int expectedLecturers = 2;
             int expectedGroups = 3;
             Assert.IsTrue(result, $"Save Returned False: Message: {VM.FeedbackMessage}");
