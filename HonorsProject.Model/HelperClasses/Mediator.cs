@@ -41,7 +41,8 @@ namespace HonorsProject.Model.HelperClasses
         {
             if (mediatorDictionary.ContainsKey(channel))
                 foreach (var callback in mediatorDictionary[channel].ToArray())
-                    callback(args);
+                    if (callback != null)
+                        callback(args);
         }
 
         static public void ClearMediator()

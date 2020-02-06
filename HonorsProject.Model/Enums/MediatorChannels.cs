@@ -31,6 +31,7 @@ namespace HonorsProject.Model.Enums
         StudnetCSVImport,
         LecturerPageGeneratePasswordCheck,
         LecturerPageNewPasswordDisplay,
-        GoToAnalyseEntity
+        GoToAnalyseEntity,
+        PoolingUpdate
     }
 }

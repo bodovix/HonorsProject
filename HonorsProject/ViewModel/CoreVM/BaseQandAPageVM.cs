@@ -285,6 +285,14 @@ namespace HonorsProject.ViewModel.CoreVM
             openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
               "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
               "Portable Network Graphic (*.png)|*.png";
+
+            Mediator.Register(MediatorChannels.PoolingUpdate.ToString(), PoolingUpdate);
+        }
+
+        private void PoolingUpdate(object obj)
+        {
+            UpdateQuestionsList(QuestionSearchTxt);
+            UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
         }
 
         public abstract bool Save();
