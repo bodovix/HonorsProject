@@ -66,7 +66,7 @@ namespace HonorsProject.ViewModel
             set
             {
                 _searchTxt = value;
-                UpdateLecturersList(rowsToReturn);
+                UpdateLecturersList(SearchTxt, rowsToReturn);
                 OnPropertyChanged(nameof(SearchTxt));
             }
         }
@@ -132,11 +132,18 @@ namespace HonorsProject.ViewModel
                 //TODO: figure out Async with EF and Pagination/ limit the results (limit probably best)
                 List<Lecturer> results = UnitOfWork.LecturerRepo.GetTopXFromSearch(null, rowsToReturn).ToList();
                 Lecturers = new ObservableCollection<Lecturer>(results);
+
+                Mediator.Register(MediatorChannels.PoolingUpdate.ToString(), PoolingUpdate);
             }
             catch (Exception ex)
             {
                 ShowFeedback(ex.Message, FeedbackType.Error);
             }
+        }
+
+        private void PoolingUpdate(object obj)
+        {
+            UpdateLecturersList(SearchTxt, rowsToReturn);
         }
 
         public void EnterNewMode()
@@ -157,7 +164,7 @@ namespace HonorsProject.ViewModel
                     result = User.AddNewLecturer(SelectedLecturer, UnitOfWork);
                     if (result)
                     {
-                        UpdateLecturersList(rowsToReturn);
+                        UpdateLecturersList(SearchTxt, rowsToReturn);
                         ShowFeedback($"Created lecturer: {SelectedLecturer.Id}.", FeedbackType.Success);
                     }
                     else
@@ -188,9 +195,9 @@ namespace HonorsProject.ViewModel
             }
         }
 
-        private void UpdateLecturersList(int rows)
+        private void UpdateLecturersList(String searchTxt, int rows)
         {
-            Lecturers = new ObservableCollection<Lecturer>(UnitOfWork.LecturerRepo.GetTopXFromSearch(SearchTxt, rows));
+            Lecturers = new ObservableCollection<Lecturer>(UnitOfWork.LecturerRepo.GetTopXFromSearch(searchTxt, rows));
         }
 
         public bool Delete(BaseEntity objToDelete)
@@ -213,7 +220,7 @@ namespace HonorsProject.ViewModel
                     result = (UnitOfWork.Complete() > 0) ? true : false;
                     if (result)
                     {
-                        UpdateLecturersList(rowsToReturn);
+                        UpdateLecturersList(SearchTxt, rowsToReturn);
                         ShowFeedback($"Deleted Student: {id}.", FeedbackType.Success);
                     }
                     else
@@ -239,7 +246,7 @@ namespace HonorsProject.ViewModel
                 try
                 {
                     UnitOfWork.Reload(SelectedLecturer);
-                    UpdateLecturersList(rowsToReturn);
+                    UpdateLecturersList(SearchTxt, rowsToReturn);
                     OnPropertyChanged(nameof(SelectedLecturer));
                 }
                 catch

@@ -25,6 +25,7 @@ namespace HonorsProject
         public App()
         {
             poolingThread = new Thread(SignalPoolingUpdate);
+            poolingThread.IsBackground = true;
             poolingThread.Start();
         }
 
