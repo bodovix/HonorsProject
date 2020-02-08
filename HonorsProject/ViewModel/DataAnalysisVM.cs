@@ -196,11 +196,21 @@ namespace HonorsProject.ViewModel
                     if (SelectedGroup != null)
                         SelectedSession = UnitOfWork.SessionRepository.Get(entityToFocusOn.Id);
                 }
+                //Register for pooling update signals
+                Mediator.Register(MediatorChannels.PoolingUpdate.ToString(), PoolingUpdate);
             }
             catch (Exception ex)
             {
                 ShowFeedback(ex.Message, FeedbackType.Error);
             }
+        }
+
+        private void PoolingUpdate(object obj)
+        {
+            UpdateGroupsList();
+            if (SelectedGroup != null)
+                UpdateSessionsList();
+            UpdateHeader();
         }
 
         public bool GoToEntity(BaseEntity entity)
