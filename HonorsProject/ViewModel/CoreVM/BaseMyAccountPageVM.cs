@@ -57,6 +57,7 @@ namespace HonorsProject.ViewModel.CoreVM
             SaveFormCmd = new SaveCmd(this);
             NewPassHashCmd = new NewPassHashCmd(this);
             CancelCmd = new CancelCmd(this);
+            //No need for pooling updates in MyAccount page as it only loads your single reccord
         }
 
         public bool Cancel()
