@@ -143,7 +143,10 @@ namespace HonorsProject.ViewModel
 
         private void PoolingUpdate(object obj)
         {
-            UpdateLecturersList(SearchTxt, rowsToReturn);
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                UpdateLecturersList(SearchTxt, rowsToReturn);
+            });
         }
 
         public void EnterNewMode()

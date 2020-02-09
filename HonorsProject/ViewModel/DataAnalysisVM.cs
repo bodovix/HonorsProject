@@ -207,10 +207,13 @@ namespace HonorsProject.ViewModel
 
         private void PoolingUpdate(object obj)
         {
-            UpdateGroupsList();
-            if (SelectedGroup != null)
-                UpdateSessionsList();
-            UpdateHeader();
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                UpdateGroupsList();
+                if (SelectedGroup != null)
+                    UpdateSessionsList();
+                UpdateHeader();
+            });
         }
 
         public bool GoToEntity(BaseEntity entity)

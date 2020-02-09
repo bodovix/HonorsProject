@@ -2,6 +2,7 @@
 using HonorsProject.Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,11 @@ namespace HonorsProject.Model.Data
         public void Reload(BaseEntity baseEntityToReload)
         {
             _context.Entry(baseEntityToReload).Reload();
+        }
+
+        public void ReloadRange(ObservableCollection<BaseEntity> entitysToReload)
+        {
+            _context.Entry(entitysToReload).Reload();
         }
 
         public void Dispose()
