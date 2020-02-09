@@ -140,6 +140,23 @@ namespace HonorsProject.ViewModel.CoreVM
             AnalyseEntityCmd = new AnalyseEntityCmd(this);
             CancelCmd = new CancelCmd(this);
             //initial setup
+            try
+            {
+                Mediator.Register(MediatorChannels.PoolingUpdate.ToString(), PoolingUpdate);
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+            }
+        }
+
+        private void PoolingUpdate(object obj)
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                UpdateMySessionsList();
+                GetAllLecturers();
+            });
         }
 
         public abstract bool AddLecturer();
@@ -218,21 +235,11 @@ namespace HonorsProject.ViewModel.CoreVM
             try
             {
                 SubgridContext = SubgridContext.PreviousSessions;
-                MySessions = new ObservableCollection<Session>();
-                List<Session> result = User.GetAllMyPreviousSessions(DateTime.Now, UnitOfWork);
-                if (result != null)
-                {
-                    MySessions = new ObservableCollection<Session>(result);
-                    OnPropertyChanged(nameof(MySessions));
-                    OnPropertyChanged(nameof(SelectedSession));
-                    return true;
-                }
-                else
-                {
-                    OnPropertyChanged(nameof(MySessions));
-                    OnPropertyChanged(nameof(SelectedSession));
-                    return false;
-                }
+                MySessions = new ObservableCollection<Session>(User.GetAllMyPreviousSessions(DateTime.Now, UnitOfWork));
+
+                OnPropertyChanged(nameof(MySessions));
+                OnPropertyChanged(nameof(SelectedSession));
+                return true;
             }
             catch (Exception ex)
             {
