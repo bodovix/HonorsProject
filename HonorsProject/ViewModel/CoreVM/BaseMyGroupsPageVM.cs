@@ -167,6 +167,23 @@ namespace HonorsProject.ViewModel.CoreVM
             GoToEntityCmd = new GoToEntityCmd(this);
             AnalyseEntityCmd = new AnalyseEntityCmd(this);
             CancelCmd = new CancelCmd(this);
+            try
+            {
+                Mediator.Register(MediatorChannels.PoolingUpdate.ToString(), PoolingUpdate);
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+            }
+        }
+
+        private void PoolingUpdate(object obj)
+        {
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                UpdateMyGroupsList(RowLimit);
+                RefreshAvailableStudents(SelectedGroup);
+            });
         }
 
         public abstract bool GoToEntity(BaseEntity entity);
