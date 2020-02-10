@@ -11,7 +11,8 @@
         <DataGrid Name="StudentDataGrid"
                      Grid.Column="0"
                      Grid.Row="3"
-                        ItemsSource="{Binding Path=Students, ElementName=StudentsControl}"
+                     MaxHeight="250"
+                     ItemsSource="{Binding Path=Students, ElementName=StudentsControl}"
                      SelectedItem="{Binding SelectedStudent}"
                      Style="{StaticResource SubgridControlStyle}">
             <!--HeadingStyle-->

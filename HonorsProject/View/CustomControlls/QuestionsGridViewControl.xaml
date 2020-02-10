@@ -11,6 +11,7 @@
             <DataGrid Name="QuestionsDataGrid"
                      Grid.Column="0"
                      Grid.Row="3"
+                     MaxHeight="250"
                      SelectedItem="{Binding SelectedQuestion}"
                      Style="{StaticResource SubgridControlStyle}">
                 <!--HeadingStyle-->
