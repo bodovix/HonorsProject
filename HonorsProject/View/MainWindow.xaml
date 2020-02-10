@@ -11,7 +11,9 @@
     <Window.Resources>
         <cv:RoleToVisibleConverter x:Key="RoleToVisibleConverter" />
     </Window.Resources>
-    <DockPanel Name="ContainerDockPannel">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        
+    <DockPanel Name="ContainerDockPannel" MinHeight="750">
         <!--menu bar-->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -67,4 +69,6 @@
             </Frame>
         </StackPanel>
     </DockPanel>
+    </ScrollViewer>
+
 </Window>
