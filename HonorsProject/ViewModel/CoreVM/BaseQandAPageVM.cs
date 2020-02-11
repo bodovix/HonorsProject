@@ -291,8 +291,11 @@ namespace HonorsProject.ViewModel.CoreVM
 
         private void PoolingUpdate(object obj)
         {
-            UpdateQuestionsList(QuestionSearchTxt);
-            UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                UpdateQuestionsList(QuestionSearchTxt);
+                UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+            });
         }
 
         public abstract bool Save();
