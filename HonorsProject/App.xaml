@@ -73,22 +73,25 @@
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
-        <Style TargetType="Button" x:Key="FormSaveButton">
+        <Style TargetType="Button" x:Key="BaseButon">
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+        <Style TargetType="Button" x:Key="FormSaveButton" BasedOn="{StaticResource BaseButon}">
             <Setter Property="Margin" Value="10" />
-            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Background" Value="LightBlue" />
             <Setter Property="Height" Value="40" />
         </Style>
-        <Style TargetType="Button" x:Key="FormSubmitButton">
+        <Style TargetType="Button" x:Key="FormSubmitButton" BasedOn="{StaticResource BaseButon}">
             <Setter Property="Margin" Value="10" />
             <Setter Property="Background" Value="Green" />
             <Setter Property="Height" Value="40" />
         </Style>
-        <Style TargetType="Button" x:Key="FormCancelButton">
+        <Style TargetType="Button" x:Key="FormCancelButton" BasedOn="{StaticResource BaseButon}">
             <Setter Property="Margin" Value="10" />
             <Setter Property="Background" Value="Red" />
             <Setter Property="Height" Value="40" />
         </Style>
-        <Style TargetType="Button" x:Key="InfoButton">
+        <Style TargetType="Button" x:Key="InfoButton" BasedOn="{StaticResource BaseButon}">
             <Setter Property="Margin" Value="10" />
             <Setter Property="Background" Value="LightGray" />
             <Setter Property="Height" Value="40" />
