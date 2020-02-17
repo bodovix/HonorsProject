@@ -12,32 +12,48 @@
         <cv:ErrorMessageToVisibleConverter x:Key="ErrorMessageToVisibleConverter" />
         <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
-    <StackPanel
-        Name="MainContainer"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Width="200"
-        Margin="10">
-        <TextBlock Text="LS Login" Style="{StaticResource FormTitleText}" />
-        <TextBlock Text="User ID" Style="{StaticResource UserInputLabel}" />
-        <TextBox Text="{Binding UserId, Mode=TwoWay}"
+
+        <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Name="MainContainer"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="200"
+                Height="Auto"
+                Margin="10">
+        <GroupBox Header="LS Login">
+            <StackPanel>
+            <TextBlock Text="LS Login" Style="{StaticResource FormTitleText}" Visibility="Hidden"
+                            VerticalAlignment="Center"/>
+            <TextBlock Text="User ID" Style="{StaticResource UserInputLabel}"
+                            VerticalAlignment="Center"/>
+            <TextBox Text="{Binding UserId, Mode=TwoWay}"
                  KeyUp="LoginEnter_KeyUp"
-                 Style="{StaticResource UserInput}" />
-        <TextBlock Text="Password" Style="{StaticResource UserInputLabel}" />
-        <PasswordBox
+                 Style="{StaticResource UserInput}"
+                          VerticalAlignment="Center"/>
+            <TextBlock Text="Password" Style="{StaticResource UserInputLabel}"
+                            VerticalAlignment="Center"/>
+            <PasswordBox
                     x:Name="PassBox"
                     PasswordChanged="PasswordBox_PasswordChanged"
                     FontFamily="Password"
                      KeyDown="PasswordBox_KeyDown"
                      Style="{StaticResource UserInputPassword}"
-                     KeyUp="LoginEnter_KeyUp" />
-        <Button Content="Login"
+                     KeyUp="LoginEnter_KeyUp" 
+                     VerticalAlignment="Center"/>
+            <Button Content="Login"
                     Command="{Binding LoginCmd}"
-                    Style="{StaticResource FormSubmitButton}" />
+                    Style="{StaticResource FormSubmitButton}"
+                         VerticalAlignment="Center"/>
 
-        <TextBlock Text="{Binding FeedbackMessage}"
+            <TextBlock Text="{Binding FeedbackMessage}"
                    Style="{StaticResource UserInputFeedback}"
                    Visibility="{Binding Path=FeedbackMessage, Converter={StaticResource ErrorMessageToVisibleConverter}}"
-                   Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}" />
+                   Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
+                            VerticalAlignment="Center"/>
+            </StackPanel>
+
+        </GroupBox>
     </StackPanel>
 </Page>

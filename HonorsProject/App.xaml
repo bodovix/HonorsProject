@@ -141,10 +141,10 @@
             <Setter Property="MaxHeight" Value="40" />
         </Style>
         <Style TargetType="Label" x:Key="NumberDisplayBigDataAnalysis">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="48"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="48" />
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Application.Resources>
 </Application>
