@@ -10,7 +10,16 @@
         <SolidColorBrush x:Key="DisabledBorderBrush" Color="DarkGray" />
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="White" />
         <SolidColorBrush x:Key="SolidBorderBrush" Color="Black" />
-
+        
+        <Style TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <Trigger Property="DataGridCell.IsSelected" Value="True">
+                    <Setter Property="Background" Value="#CCDAFF" />
+                    <Setter Property="BorderBrush" Value="#CCDAFF" />
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="TextBox" x:Key="UserInput">
             <Setter Property="Margin" Value="10" />
             <Setter Property="MaxLength" Value="100" />

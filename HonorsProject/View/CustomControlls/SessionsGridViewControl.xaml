@@ -28,6 +28,7 @@
                     <Setter Property="BorderThickness" Value="0,0,1,2" />
                     <Setter Property="BorderBrush" Value="Black" />
                 </Style>
+                
             </DataGrid.Resources>
             <!--Column header and text bindings-->
             <DataGrid.Columns>
