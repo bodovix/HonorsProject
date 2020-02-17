@@ -36,7 +36,7 @@
                             <Button Command="{Binding DataContext.GoToEntityCmd, ElementName=StudentDataGrid}"
                                     CommandParameter="{Binding}">
                                 <Image Source="../Images/magnifyingGlass64Img.png"
-                                Style="{StaticResource IconImage}">
+                                Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
@@ -59,7 +59,7 @@
                                         Command="{Binding DataContext.RemoveEntityCmd, ElementName=StudentDataGrid}"
                                         CommandParameter="{Binding}">
                                 <Image Source="../Images/removeUser.png"
-                                        Style="{StaticResource IconImage}">
+                                        Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>

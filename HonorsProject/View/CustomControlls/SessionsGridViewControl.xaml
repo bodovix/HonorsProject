@@ -42,7 +42,7 @@
                             <Button Command="{Binding DataContext.AnalyseEntityCmd, ElementName=SessionsDataGrid}"
                                     CommandParameter="{Binding}">
                                 <Image Source="../Images/dataAnalisis.png"
-                                Style="{StaticResource IconImage}">
+                                Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
@@ -63,7 +63,7 @@
                             <Button Command="{Binding DataContext.GoToEntityCmd, ElementName=SessionsDataGrid}"
                                     CommandParameter="{Binding}">
                                 <Image Source="../Images/magnifyingGlass64Img.png"
-                                Style="{StaticResource IconImage}">
+                                Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
@@ -87,7 +87,7 @@
                                         Visibility="{Binding DataContext.UserRole, Converter={StaticResource RoleToVisibleConverter},
                     ConverterParameter={x:Static enums:Role.Lecturer}}">
                                 <Image Source="../Images/delete64Icon.png"
-                                        Style="{StaticResource IconImage}">
+                                        Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>

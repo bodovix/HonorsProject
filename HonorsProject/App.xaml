@@ -140,6 +140,9 @@
             <Setter Property="Width" Value="30" />
             <Setter Property="Height" Value="30" />
         </Style>
+        <Style TargetType="Image" x:Key="SubgridIconImage" BasedOn="{StaticResource IconImage}">
+            <Setter Property="Margin" Value="10 0 10 0"/>
+        </Style>
         <Style TargetType="DataGrid" x:Key="SubgridControlStyle">
             <Setter Property="SelectionMode" Value="Single" />
             <Setter Property="SelectionUnit" Value="FullRow" />

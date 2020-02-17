@@ -34,7 +34,7 @@
                             <Button Command="{Binding DataContext.AnalyseEntityCmd, ElementName=GroupDataGrid}"
                                     CommandParameter="{Binding}">
                                 <Image Source="../Images/dataAnalisis.png"
-                                Style="{StaticResource IconImage}">
+                                Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
@@ -55,7 +55,7 @@
                             <Button Command="{Binding DataContext.GoToEntityCmd, ElementName=GroupDataGrid}"
                                     CommandParameter="{Binding}">
                                 <Image Source="../Images/magnifyingGlass64Img.png"
-                                Style="{StaticResource IconImage}">
+                                Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
@@ -78,7 +78,7 @@
                                         Command="{Binding DataContext.RemoveEntityCmd, ElementName=GroupDataGrid}"
                                         CommandParameter="{Binding}">
                                 <Image Source="../Images/removeUser.png"
-                                        Style="{StaticResource IconImage}">
+                                        Style="{StaticResource SubgridIconImage}">
                                     <Image.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
