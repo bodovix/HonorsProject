@@ -169,6 +169,9 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public abstract bool Save();
 
+        public abstract bool GoToAnalyseEntity(BaseEntity entity);
+
+
         public bool Cancel()
         {
             ClearFeedback();
@@ -272,15 +275,7 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             try
             {
-                AvailableLecturers = new ObservableCollection<Lecturer>();
-                List<Lecturer> results = UnitOfWork.LecturerRepo.GetAll().ToList();
-                if (results != null)
-                {
-                    foreach (Lecturer l in results)
-                    {
-                        AvailableLecturers.Add(l);
-                    }
-                }
+                AvailableLecturers = new ObservableCollection<Lecturer>(UnitOfWork.LecturerRepo.GetAll());
             }
             catch (Exception ex)
             {
@@ -295,7 +290,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 Groups = new ObservableCollection<Group>();
                 Groups.Add(new Group());
                 List<Group> results;
-
+                //Have to loop through these manually to include a null Group
                 results = UnitOfWork.GroupRepository.GetAll().ToList();
                 if (results != null)
                 {
@@ -356,6 +351,5 @@ namespace HonorsProject.ViewModel.CoreVM
             return result;
         }
 
-        public abstract bool GoToAnalyseEntity(BaseEntity entity);
     }
 }
