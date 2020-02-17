@@ -120,7 +120,8 @@
             <!--Main Details Form-->
             <GroupBox Header="Sessions"
                       Grid.Column="1"
-                      Grid.Row="0">
+                      Grid.Row="0"
+                      Style="{StaticResource MainFormGroupBox}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

@@ -132,6 +132,7 @@
                       x:Name="QuestionContainer"
                       Grid.Column="0"
                       Grid.Row="0"
+                      Style="{StaticResource MainFormGroupBox}"
                       Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
                     ConverterParameter={x:Static enums:QandAMode.Question}}">
                 <Grid>
@@ -148,7 +149,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Question: "
+                    <TextBlock Text="{Binding SelectedQuestion.Id, StringFormat='Question: {0}'}"
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
@@ -232,6 +233,7 @@
                       x:Name="AnswerContainer"
                       Grid.Column="0"
                       Grid.Row="0"
+                      Style="{StaticResource MainFormGroupBox}"
                       Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
                     ConverterParameter={x:Static enums:QandAMode.Answer}}">
                 <Grid>
@@ -248,7 +250,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Answer:"
+                    <TextBlock Text="{Binding SelectedAnswer.Id,StringFormat='Answer: {0}'}"
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
@@ -257,6 +259,7 @@
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  MaxLength="50"
+                                 Height="50"
                                  IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
                                  Text="{Binding SelectedAnswer.Name}" />
                     </GroupBox>

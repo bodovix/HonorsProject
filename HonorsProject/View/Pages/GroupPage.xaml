@@ -83,7 +83,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <!--main details form-->
-            <GroupBox Header="Group Details:" Style="{StaticResource FormGroupBox}">
+            <GroupBox Header="Group Details:" Style="{StaticResource MainFormGroupBox}">
                 <Grid Grid.Column="0" Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -144,13 +144,12 @@
                   Grid.Row="0"
                   Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                             ConverterParameter={x:Static enums:Role.Lecturer}}">
-                <GroupBox Header="Add Students"
-                          Style="{StaticResource FormGroupBox}">
+                <GroupBox Header="Manage Students:"
+                          Style="{StaticResource MainFormGroupBox}">
                     <StackPanel Grid.Column="2"
                             Grid.Row="0"
                             Grid.RowSpan="3"
                             Width="400">
-                        <TextBlock Text="Manage Students:" Style="{StaticResource FormTitleText}" />
                         <uc:InOrOutControl
                             x:Name="InOrOutControl"
                             EntitiesAvailable="{Binding Path=StudentsNotInGroup,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

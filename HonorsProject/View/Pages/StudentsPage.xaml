@@ -75,7 +75,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!--Details Form-->
-                <GroupBox Header="Student Details:" Style="{StaticResource FormGroupBox}">
+                <GroupBox Header="Student Details:" Style="{StaticResource MainFormGroupBox}">
                     <Grid Grid.Column="0" Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -160,7 +160,7 @@
 
                 <!--Add To Group Form-->
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch">
-                    <GroupBox Header="Group" Style="{StaticResource FormGroupBox}">
+                    <GroupBox Header="Group" Style="{StaticResource MainFormGroupBox}">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Manage Groups:" Style="{StaticResource FormTitleText}" />
                             <uc:InOrOutControl x:Name="InOrOutControl"

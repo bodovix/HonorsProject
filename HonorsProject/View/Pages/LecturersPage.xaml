@@ -74,7 +74,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!--Details Form-->
-                <GroupBox Header="Lecturer Details:" Style="{StaticResource FormGroupBox}">
+                <GroupBox Header="Lecturer Details:" Style="{StaticResource MainFormGroupBox}">
                     <Grid Grid.Column="0" Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />

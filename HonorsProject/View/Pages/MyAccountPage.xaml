@@ -13,7 +13,8 @@
         <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
     </Page.Resources>
     <StackPanel Orientation="Vertical">
-        <GroupBox Header="Details">
+        <GroupBox Header="Details"
+                  Style="{StaticResource MainFormGroupBox}">
             <Grid x:Name="MainContainer" Style="{StaticResource ContainerGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

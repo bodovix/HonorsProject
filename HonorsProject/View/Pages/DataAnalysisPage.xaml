@@ -22,7 +22,7 @@
         <StackPanel Orientation="Horizontal">
             <!--Search Groups-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
-                <Label Content="Search"
+                <Label Content="Search Groups"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchGTxtBox"
                          Text="{Binding GroupSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -44,7 +44,7 @@
             </StackPanel>
             <!--Sessions Search bar-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
-                <Label Content="Search"
+                <Label Content="Search Sessions"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchTxtBox"
                          Text="{Binding SessionSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -86,6 +86,7 @@
             <GroupBox
                 Header="Number of Questions Asked:"
                 Grid.Column="0"
+                Style="{StaticResource MainFormGroupBox}"
                 Grid.Row="1">
                 <Label Content="{Binding NumQuestionsAsked,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource NumberDisplayBigDataAnalysis}" />
@@ -93,7 +94,8 @@
             <GroupBox
                 Header="Most Frequent askers BOUND here in list"
                 Grid.Column="1"
-                Grid.Row="1">
+                Grid.Row="1"
+                Style="{StaticResource MainFormGroupBox}">
                 <ListView x:Name="mostFrequentAskersResultsList"
                        Height="200"
                         ItemsSource="{Binding MostFrequentAskers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -126,7 +128,8 @@
                 Header="Common phrase identification"
                 Grid.Column="0"
                 Grid.Row="2"
-                Grid.ColumnSpan="2">
+                Grid.ColumnSpan="2"
+                Style="{StaticResource MainFormGroupBox}">
                 <ListView x:Name="commonPhrasesListView"
                        Height="200"
                         ItemsSource="{Binding CommonPhrases,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -142,7 +145,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </GroupBox>
-            <GroupBox
+            <!--<GroupBox
                 Header="Common Phrase blacklist for group here"
                 Grid.Column="0"
                 Grid.Row="3"
@@ -153,7 +156,7 @@
                     <ListView>
                     </ListView>
                 </StackPanel>
-            </GroupBox>
+            </GroupBox>-->
             <TextBlock Text="{Binding FeedbackMessage}"
                        Style="{StaticResource UserInputFeedback}"
                        Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"

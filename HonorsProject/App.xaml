@@ -117,9 +117,20 @@
         </Style>
         <Style TargetType="GroupBox" x:Key="FormGroupBox">
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="BorderThickness" Value="3" />
+            <Setter Property="BorderThickness" Value="2" />
             <Setter Property="Padding" Value="5" />
             <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style TargetType="GroupBox" x:Key="MainFormGroupBox" BasedOn="{StaticResource FormGroupBox}">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontWeight="Bold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="Grid" x:Key="ContainerGrid">
             <Setter Property="Margin" Value="10" />
