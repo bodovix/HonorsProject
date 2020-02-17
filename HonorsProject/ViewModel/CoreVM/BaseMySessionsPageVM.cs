@@ -207,21 +207,13 @@ namespace HonorsProject.ViewModel.CoreVM
             try
             {
                 SubgridContext = SubgridContext.ActiveSessions;
-                MySessions = new ObservableCollection<Session>();
-                List<Session> result = User.GetAllMyCurrentSessions(DateTime.Now, UnitOfWork);
-                if (result != null)
-                {
-                    MySessions = new ObservableCollection<Session>(result);
-                    OnPropertyChanged(nameof(MySessions));
-                    OnPropertyChanged(nameof(SelectedSession));
+                MySessions = new ObservableCollection<Session>(User.GetAllMyCurrentSessions(DateTime.Now, UnitOfWork));
+                OnPropertyChanged(nameof(MySessions));
+                OnPropertyChanged(nameof(SelectedSession));
+                if (MySessions != null)
                     return true;
-                }
                 else
-                {
-                    OnPropertyChanged(nameof(MySessions));
-                    OnPropertyChanged(nameof(SelectedSession));
                     return false;
-                }
             }
             catch (Exception ex)
             {
