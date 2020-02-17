@@ -25,6 +25,30 @@ namespace HonorsProject.ViewModel.CoreVM
         public abstract ISystemUser User { get; set; }
         private string _headerMessage;
 
+        private string _questionImageLabel;
+
+        public string QuestionImageLabel
+        {
+            get { return _questionImageLabel; }
+            set
+            {
+                _questionImageLabel = value;
+                OnPropertyChanged(nameof(QuestionImageLabel));
+            }
+        }
+
+        private string _answerImageLabel;
+
+        public string AnswerImageLabel
+        {
+            get { return _answerImageLabel; }
+            set
+            {
+                _answerImageLabel = value;
+                OnPropertyChanged(nameof(AnswerImageLabel));
+            }
+        }
+
         public string HeaderMessage
         {
             get { return _headerMessage; }
@@ -109,12 +133,22 @@ namespace HonorsProject.ViewModel.CoreVM
 
         private async Task AwaitQuestionImage()
         {
+            QuestionImageLabel = "Loading Image...";
             QuestionImage = await RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation);
+            if (QuestionImage == null)
+                QuestionImageLabel = "No Image.";
+            else
+                QuestionImageLabel = SelectedQuestion.ImageLocation;
         }
 
         private async Task AwaitAnswerImage()
         {
+            AnswerImageLabel = "Loading Image...";
             AnswerImage = await RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation);
+            if (QuestionImage == null)
+                AnswerImageLabel = "No Image.";
+            else
+                AnswerImageLabel = SelectedQuestion.ImageLocation;
         }
 
         private async Task<ImageSource> RefreshImage(string nameOfImageProperty, string imageLocation)

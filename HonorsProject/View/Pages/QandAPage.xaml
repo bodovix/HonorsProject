@@ -189,12 +189,19 @@
                                Grid.ColumnSpan="2"
                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
-                    <Image Name="QuestionImage"
-                           Grid.Row="1"
+                    <Border  Grid.Row="1"
                            Grid.Column="2"
                            Grid.RowSpan="3"
+                             BorderBrush="Black"
+                             BorderThickness="1">
+                        <StackPanel>
+                        <Image Name="QuestionImage"
                            Source="{Binding QuestionImage, UpdateSourceTrigger=PropertyChanged}">
-                    </Image>
+                        </Image>
+                        <Label  Content="{Binding QuestionImageLabel}"/>
+                        </StackPanel>
+                    </Border>
+                    
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="QuestionSaveBtn"
                                 Command="{Binding SaveFormCmd}"
@@ -292,12 +299,21 @@
                                Grid.ColumnSpan="2"
                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
-                    <Image Name="AnswerImage"
+                    <Border  Grid.Row="1"
+                           Grid.Column="2"
+                           Grid.RowSpan="3"
+                             BorderBrush="Black"
+                             BorderThickness="1">
+                        <StackPanel>
+                            <Image Name="AnswerImage"
                            Grid.Row="1"
                            Grid.Column="2"
                            Grid.RowSpan="3"
                            Source="{Binding AnswerImage, UpdateSourceTrigger=PropertyChanged}">
-                    </Image>
+                            </Image>
+                            <Label Content="{Binding AnswerImageLabel}"/>
+                        </StackPanel>
+                    </Border>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="AnswerSaveBtn"
                                 Content="{Binding Path=FormContextAnswer,
