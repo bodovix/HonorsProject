@@ -154,8 +154,16 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
+                Session backup = new Session();
+                if (FormContext == FormContext.Create)
+                {
+                    backup = SelectedSession.ShallowCopy();
+                }
                 UpdateMySessionsList();
                 GetAllLecturers();
+                //if create mode re-apply props (they were blanking when sub-grid context was different to time
+                if (FormContext == FormContext.Create)
+                    SelectedSession = backup.ShallowCopy();
             });
         }
 
@@ -170,7 +178,6 @@ namespace HonorsProject.ViewModel.CoreVM
         public abstract bool Save();
 
         public abstract bool GoToAnalyseEntity(BaseEntity entity);
-
 
         public bool Cancel()
         {
@@ -350,6 +357,5 @@ namespace HonorsProject.ViewModel.CoreVM
             }
             return result;
         }
-
     }
 }

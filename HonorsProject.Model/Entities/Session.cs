@@ -42,6 +42,12 @@ namespace HonorsProject.Model.Entities
             Lecturers = new ObservableCollection<Lecturer>();
         }
 
+        public Session ShallowCopy()
+        {
+            Session newSesion = (Session)MemberwiseClone();
+            return newSesion;
+        }
+
         public Session(string name, DateTime startTime, DateTime endTime, ObservableCollection<Lecturer> lecturers, Group group, List<Question> questions, DateTime createdOn, int createdByLecturerId)
         {
             Name = name;
