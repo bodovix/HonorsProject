@@ -23,7 +23,6 @@
                 </MenuItem>
             </Menu>
             <!--Control Panel-->
-            <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0 0 1 0">
                 <StackPanel Name="SideNavigationPannel"
                     DockPanel.Dock="Left"
                     VerticalAlignment="Center"
@@ -63,7 +62,6 @@
                     Click="MyAccountBtn_Click"
                     Style="{StaticResource InfoButton}" />
                 </StackPanel>
-            </Border>
 
             <!--Main Content Area (Center)-->
             <StackPanel HorizontalAlignment="Stretch">
