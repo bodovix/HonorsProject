@@ -43,7 +43,7 @@
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
                                 ConverterParameter={x:Static enums:Role.Student}}"
                         Style="{StaticResource FormSubmitButton}" />
-                <Label Content="Search"
+                <Label Content="Search Questions:"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchQTxtBox"
                          Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -84,7 +84,7 @@
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
                                 ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormSubmitButton}" />
-                <Label Content="Search"
+                <Label Content="Search Answers:"
                    Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchTxtBox"
                          Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
