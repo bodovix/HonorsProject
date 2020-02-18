@@ -41,6 +41,8 @@
             </Grid.RowDefinitions>
             <!--Lecturers Panel-->
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+                <Label Content="Add Lecturers:"
+                       Padding=" 10 0 0 0"/>
                 <StackPanel Orientation="Horizontal" Margin="0 0 10 10">
                     <ComboBox Height="23"
                               Width="160"
