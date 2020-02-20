@@ -92,7 +92,7 @@
                        Style="{StaticResource NumberDisplayBigDataAnalysis}" />
             </GroupBox>
             <GroupBox
-                Header="Most Frequent askers BOUND here in list"
+                Header="Most Frequent Askers:"
                 Grid.Column="1"
                 Grid.Row="1"
                 Style="{StaticResource MainFormGroupBox}">

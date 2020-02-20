@@ -50,8 +50,11 @@ namespace HonorsProject.View.Pages
 
         private void StudnetCSVImport(object obj)
         {
+            VM.IsConfirmed = false;
             string format = obj as string;
-            MessageBox.Show("CSV format must be:\n" + format);
+            MessageBoxResult result = MessageBox.Show("CSV format must be:\n" + format, "test", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.OK)
+                VM.IsConfirmed = true;
         }
 
         private void GoToAnalyseEntity(object obj)

@@ -210,7 +210,7 @@ namespace HonorsProject.ViewModel
             Student studentToDelete = objToDelete as Student;
             if (studentToDelete == null)
             {
-                ShowFeedback("No student selected.", FeedbackType.Error);
+                ShowFeedback("No lecturer selected.", FeedbackType.Error);
                 return result;
             }
             try

@@ -521,6 +521,11 @@ namespace HonorsProject.ViewModel
             string scvFormat = " Delete CSV must start with the ID of the students to be deleted.\nAll other columns are ignored.";
             string feedbackFormat = "\nFormat:" + scvFormat + "\nCanceling delete...";
             Mediator.NotifyColleagues(MediatorChannels.StudnetCSVImport.ToString(), scvFormat);
+            if (IsConfirmed == false)
+            {
+                //Cancel
+                return false;
+            }
             bool result = false;
             OpenFileDialog fileDialog = new OpenFileDialog();
             Uri uri = null;
@@ -616,6 +621,11 @@ namespace HonorsProject.ViewModel
                 string scvFormat = " id,name,email,date of birth (yyyy-mm-dd), password.";
                 string feedbackFormat = "\nFormat:" + scvFormat + "\nCanceling import...";
                 Mediator.NotifyColleagues(MediatorChannels.StudnetCSVImport.ToString(), scvFormat);
+                if (IsConfirmed == false)
+                {
+                    //Cancel
+                    return false;
+                }
                 bool result = false;
                 OpenFileDialog fileDialog = new OpenFileDialog();
                 Uri uri = null;

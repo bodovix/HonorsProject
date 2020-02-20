@@ -160,9 +160,8 @@
 
                 <!--Add To Group Form-->
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch">
-                    <GroupBox Header="Group" Style="{StaticResource MainFormGroupBox}">
+                    <GroupBox Header="Manage Groups:" Style="{StaticResource MainFormGroupBox}">
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Manage Groups:" Style="{StaticResource FormTitleText}" />
                             <uc:InOrOutControl x:Name="InOrOutControl"
                                                 EntitiesAvailable="{Binding Path=AvailableGroups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                AvailableTxt="Available"
