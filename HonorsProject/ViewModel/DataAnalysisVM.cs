@@ -8,13 +8,15 @@ using HonorsProject.ViewModel.CoreVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    internal class DataAnalysisVM : BaseViewModel, IGoToEntityCmd
+    public class DataAnalysisVM : BaseViewModel, IGoToEntityCmd
     {
         #region Properties
 
@@ -230,6 +232,30 @@ namespace HonorsProject.ViewModel
             }
             ShowFeedback("Cannot go to an unsupported object type.", FeedbackType.Error);
             return false;
+        }
+
+        public string GetKeyPhraseAPI()
+        {
+            //using the TextRazor API
+            string html = null;
+            string url = @"https://api.textrazor.com";
+            string content = "TEST: All endpoints expect the API Key to be passed as an HTTP header ";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "POST";
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+            request.Headers.Add("X-TextRazor-Key", "31a755e8066eebf713e7e402cca27c8c406d72f0b24a079525998cad");
+            request.Headers.Add("extractors", "entities,entailments");
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.Headers.Add("text", content);
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                html = reader.ReadToEnd();
+            }
+
+            return html;
         }
 
         private void UpdateGroupsList()

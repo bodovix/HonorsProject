@@ -78,6 +78,7 @@
     <Compile Include="Tests\GroupTest.cs" />
     <Compile Include="Tests\AnswerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\VMTests\DataAnalysisTests.cs" />
     <Compile Include="Tests\VMTests\MyStudentPageVMTest.cs" />
     <Compile Include="Tests\VMTests\MySessionsLecturerVMTest.cs" />
     <Compile Include="Tests\VMTests\LoginVMTest.cs" />
