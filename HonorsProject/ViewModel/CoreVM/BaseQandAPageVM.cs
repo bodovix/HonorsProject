@@ -148,7 +148,7 @@ namespace HonorsProject.ViewModel.CoreVM
             if (QuestionImage == null)
                 AnswerImageLabel = "No Image.";
             else
-                AnswerImageLabel = SelectedQuestion.ImageLocation;
+                AnswerImageLabel = SelectedAnswer.ImageLocation;
         }
 
         private async Task<ImageSource> RefreshImage(string nameOfImageProperty, string imageLocation)
