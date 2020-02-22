@@ -175,6 +175,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         private async Task AddImage(bool ftpResult, bool dbResult)
         {
+            string originalLabel = SelectedAnswer.ImageLocation;
             //Add New Image to Question
             if (openFileDialog.ShowDialog() == true)
             {
@@ -184,6 +185,7 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 //Save the file in FTP
                 SelectedAnswer.ImageLocation = String.Concat("A-" + SelectedAnswer.Id, "-", SelectedAnswer.AnsweredBy.Id, "-", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                AnswerImageLabel = "Uploading Image...";
                 ftpResult = await ImageHandler.WriteImageSourceAsByteArraySFTP(AnswerImage, SelectedAnswer.ImageLocation);
                 if (!ftpResult)
                 {
@@ -201,7 +203,10 @@ namespace HonorsProject.ViewModel.CoreVM
                         await ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
                         SelectedAnswer.ImageLocation = null;
                         UnitOfWork.Complete();
+                        AnswerImageLabel = originalLabel;
                     }
+                    else
+                        AnswerImageLabel = SelectedAnswer.ImageLocation;
                 }
             }
         }
