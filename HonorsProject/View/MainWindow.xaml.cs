@@ -63,7 +63,7 @@ namespace HonorsProject.View
                     MySessionsBtn.Visibility = Visibility.Visible;
                     MyQuestoins.Visibility = Visibility.Visible;
                     MyAnswers.Visibility = Visibility.Collapsed;
-                    DataAnalysisBtn.Visibility = Visibility.Visible;
+                    DataAnalysisBtn.Visibility = Visibility.Collapsed;
                     MyAccountBtn.Visibility = Visibility.Visible;
                     break;
 
