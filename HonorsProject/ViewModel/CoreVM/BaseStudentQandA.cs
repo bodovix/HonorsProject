@@ -172,7 +172,7 @@ namespace HonorsProject.ViewModel.CoreVM
             }
             else
             {
-                ShowFeedback($"Cannot Save: \nSession: {SelectedSession.Name} not open. Start: {SelectedSession.StartTime} - {SelectedSession.EndTime}", FeedbackType.Error);
+                ShowFeedback($"Cannot Save: \nSession: {SelectedSession.Name} is closed. Start: {SelectedSession.StartTime} - {SelectedSession.EndTime}", FeedbackType.Error);
                 result = false;
             }
 
