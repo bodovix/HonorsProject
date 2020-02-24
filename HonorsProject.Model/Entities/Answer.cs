@@ -36,6 +36,12 @@ namespace HonorsProject.Model.Entities
             CreatedOn = createdOn;
         }
 
+        public Answer ShallowCopy()
+        {
+            Answer newAnswer = (Answer)MemberwiseClone();
+            return newAnswer;
+        }
+
         public bool ValidateAnswer(UnitOfWork u)
         {
             if (String.IsNullOrEmpty(Name))
