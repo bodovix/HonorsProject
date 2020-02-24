@@ -190,6 +190,11 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 if (SelectedQuestion != null)
                 {
+                    if (SelectedAnswer.Id == 0)
+                    {
+                        ShowFeedback("Please save your answer before uploading image.", FeedbackType.Error);
+                        return false;
+                    }
                     if (String.IsNullOrEmpty(SelectedQuestion.ImageLocation))
                     {
                         await AddImage(ftpResult, dbResult);

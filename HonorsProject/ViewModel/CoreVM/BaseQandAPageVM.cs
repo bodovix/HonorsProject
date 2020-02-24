@@ -145,7 +145,7 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             AnswerImageLabel = "Loading Image...";
             AnswerImage = await RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation);
-            if (QuestionImage == null)
+            if (AnswerImage == null)
                 AnswerImageLabel = "No Image.";
             else
                 AnswerImageLabel = SelectedAnswer.ImageLocation;
