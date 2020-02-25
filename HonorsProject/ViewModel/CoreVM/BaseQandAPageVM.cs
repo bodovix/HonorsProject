@@ -328,7 +328,16 @@ namespace HonorsProject.ViewModel.CoreVM
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
                 UpdateQuestionsList(QuestionSearchTxt);
-                UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                if (SelectedAnswer != null)
+                {
+                    Answer backup = SelectedAnswer.ShallowCopy();
+                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    SelectedAnswer = backup.ShallowCopy();
+                }
+                else
+                {
+                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                }
             });
         }
 

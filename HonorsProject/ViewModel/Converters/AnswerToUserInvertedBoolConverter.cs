@@ -16,16 +16,24 @@ namespace HonorsProject.ViewModel.Converters
     {
         public object Convert(object obj, Type targetType, object parameter, CultureInfo culture)
         {
-            AnswerStateConverterDTO dto = (AnswerStateConverterDTO)obj;
-            if (dto.Answer == null || dto.User == null)
-                return true;
-            if (dto.Answer.AnsweredBy == null)
-                return true;
-            //if roles match required make the item visible
-            if (dto.User.Id == dto.Answer.AnsweredBy.Id)
+            try
+            {
+                AnswerStateConverterDTO dto = (AnswerStateConverterDTO)obj;
+                if (dto.Answer == null || dto.User == null)
+                    return true;
+                if (dto.Answer.AnsweredBy == null)
+                    return true;
+                //if roles match required make the item visible
+                if (dto.User.Id == dto.Answer.AnsweredBy.Id)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return false;
-            else
-                return true;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
