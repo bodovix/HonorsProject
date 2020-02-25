@@ -275,7 +275,7 @@
                                  MaxLength="50"
                                  Height="50"
                                  IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
-                                 Text="{Binding SelectedAnswer.Name}" />
+                                 Text="{Binding SelectedAnswer.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <Label Content="{Binding SelectedAnswer.AnsweredBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

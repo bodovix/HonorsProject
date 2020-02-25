@@ -333,7 +333,10 @@ namespace HonorsProject.ViewModel.CoreVM
                     Answer backup = new Answer();
                     backup.ShallowCopy(SelectedAnswer);
                     UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    OnPropertyChanged(nameof(SelectedQuestion));
+
                     SelectedAnswer.ShallowCopy(backup);
+                    OnPropertyChanged(nameof(SelectedAnswer));
                 }
                 else
                 {
