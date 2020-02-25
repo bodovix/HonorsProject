@@ -159,6 +159,7 @@
                                  Style="{StaticResource UserInput}"
                                  IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
                                  MaxLength="50"
+                                 Height="50"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
