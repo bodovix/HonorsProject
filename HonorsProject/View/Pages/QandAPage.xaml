@@ -235,7 +235,7 @@
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="QuestoinUploadBtn"
-                                Content="Upload"
+                                Content="Upload Image"
                                 Command="{Binding UploadImageCmd}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
@@ -350,7 +350,7 @@
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="AnswerUploadBtn"
-                                Content="Upload"
+                                Content="Upload Image"
                                 Command="{Binding UploadImageCmd}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
