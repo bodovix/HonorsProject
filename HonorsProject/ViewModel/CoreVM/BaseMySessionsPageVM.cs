@@ -157,13 +157,13 @@ namespace HonorsProject.ViewModel.CoreVM
                 Session backup = new Session();
                 if (FormContext == FormContext.Create)
                 {
-                    backup = SelectedSession.ShallowCopy();
+                    backup.ShallowCopy(SelectedSession);
                 }
                 UpdateMySessionsList();
                 GetAllLecturers();
                 //if create mode re-apply props (they were blanking when sub-grid context was different to time
                 if (FormContext == FormContext.Create)
-                    SelectedSession = backup.ShallowCopy();
+                    SelectedSession.ShallowCopy(backup);
             });
         }
 
