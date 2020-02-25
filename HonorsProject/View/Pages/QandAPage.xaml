@@ -176,12 +176,12 @@
                     </GroupBox>
                     <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
-                             AcceptsReturn="True"
-                         MaxLength="300"
-                         Height="80"
-                         Style="{StaticResource UserInput}"
-                         IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
-                         Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            AcceptsReturn="True"
+                            Height="80"
+                            MaxLength="0"
+                            Style="{StaticResource UserInput}"
+                            IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
+                            Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
                                Grid.Row="4"
@@ -196,18 +196,18 @@
                              BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
-                        <Image Name="QuestionImage"
+                            <Image Name="QuestionImage"
                            Source="{Binding QuestionImage, UpdateSourceTrigger=PropertyChanged}"
                                Grid.Row="0">
-                        </Image>
-                        <Label  Content="{Binding QuestionImageLabel}"
-                                Grid.Row="1"/>
+                            </Image>
+                            <Label  Content="{Binding QuestionImageLabel}"
+                                Grid.Row="1" />
                         </Grid>
                     </Border>
-                    
+
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="QuestionSaveBtn"
                                 Command="{Binding SaveFormCmd}"
@@ -293,8 +293,8 @@
                     <GroupBox Header="Answer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                              AcceptsReturn="True"
-                             MaxLength="300"
                              Height="80"
+                             MaxLength="0"
                              Style="{StaticResource UserInput}"
                              IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -312,15 +312,15 @@
                              BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <Image Name="AnswerImage"
                            Grid.Row="0"
                            Source="{Binding AnswerImage, UpdateSourceTrigger=PropertyChanged}">
                             </Image>
                             <Label Content="{Binding AnswerImageLabel}"
-                                   Grid.Row="1"/>
+                                   Grid.Row="1" />
                         </Grid>
                     </Border>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
