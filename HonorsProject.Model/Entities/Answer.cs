@@ -40,6 +40,7 @@ namespace HonorsProject.Model.Entities
         {
             Id = answerToCopyProperties.Id;
             Name = answerToCopyProperties.Name;
+            AnswerTest = answerToCopyProperties.AnswerTest;
             WasHelpfull = answerToCopyProperties.WasHelpfull;
             AnsweredBy = answerToCopyProperties.AnsweredBy;
             Question = answerToCopyProperties.Question;
