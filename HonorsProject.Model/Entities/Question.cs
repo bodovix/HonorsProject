@@ -52,6 +52,7 @@ namespace HonorsProject.Model.Entities
             Answers = quesitonToShallowCopy.Answers;
             AskedBy = quesitonToShallowCopy.AskedBy;
             CreatedOn = quesitonToShallowCopy.CreatedOn;
+            ImageLocation = quesitonToShallowCopy.ImageLocation;
         }
 
         public bool Validate(UnitOfWork u)
