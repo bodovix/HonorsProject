@@ -330,9 +330,10 @@ namespace HonorsProject.ViewModel.CoreVM
                 UpdateQuestionsList(QuestionSearchTxt);
                 if (SelectedAnswer != null)
                 {
-                    Answer backup = SelectedAnswer.ShallowCopy();
+                    Answer backup = new Answer();
+                    backup.ShallowCopy(SelectedAnswer);
                     UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
-                    SelectedAnswer = backup.ShallowCopy();
+                    SelectedAnswer.ShallowCopy(backup);
                 }
                 else
                 {
