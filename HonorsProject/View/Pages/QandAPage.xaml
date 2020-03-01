@@ -159,6 +159,7 @@
                                  Style="{StaticResource UserInput}"
                                  IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
                                  MaxLength="50"
+                                 Height="50"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
@@ -176,12 +177,12 @@
                     </GroupBox>
                     <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
-                             AcceptsReturn="True"
-                         MaxLength="300"
-                         Height="80"
-                         Style="{StaticResource UserInput}"
-                         IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
-                         Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            AcceptsReturn="True"
+                            Height="80"
+                            MaxLength="0"
+                            Style="{StaticResource UserInput}"
+                            IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
+                            Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage}"
                                Grid.Row="4"
@@ -196,18 +197,18 @@
                              BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
-                        <Image Name="QuestionImage"
+                            <Image Name="QuestionImage"
                            Source="{Binding QuestionImage, UpdateSourceTrigger=PropertyChanged}"
                                Grid.Row="0">
-                        </Image>
-                        <Label  Content="{Binding QuestionImageLabel}"
-                                Grid.Row="1"/>
+                            </Image>
+                            <Label  Content="{Binding QuestionImageLabel}"
+                                Grid.Row="1" />
                         </Grid>
                     </Border>
-                    
+
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
                         <Button Name="QuestionSaveBtn"
                                 Command="{Binding SaveFormCmd}"
@@ -234,7 +235,7 @@
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="QuestoinUploadBtn"
-                                Content="Upload"
+                                Content="Upload Image"
                                 Command="{Binding UploadImageCmd}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
@@ -274,7 +275,7 @@
                                  MaxLength="50"
                                  Height="50"
                                  IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
-                                 Text="{Binding SelectedAnswer.Name}" />
+                                 Text="{Binding SelectedAnswer.Name, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
                     <GroupBox Header="Answered By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <Label Content="{Binding SelectedAnswer.AnsweredBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -293,8 +294,8 @@
                     <GroupBox Header="Answer" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                              AcceptsReturn="True"
-                             MaxLength="300"
                              Height="80"
+                             MaxLength="0"
                              Style="{StaticResource UserInput}"
                              IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
@@ -312,15 +313,15 @@
                              BorderThickness="1">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <Image Name="AnswerImage"
                            Grid.Row="0"
                            Source="{Binding AnswerImage, UpdateSourceTrigger=PropertyChanged}">
                             </Image>
                             <Label Content="{Binding AnswerImageLabel}"
-                                   Grid.Row="1"/>
+                                   Grid.Row="1" />
                         </Grid>
                     </Border>
                     <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
@@ -349,7 +350,7 @@
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
                         <Button Name="AnswerUploadBtn"
-                                Content="Upload"
+                                Content="Upload Image"
                                 Command="{Binding UploadImageCmd}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />

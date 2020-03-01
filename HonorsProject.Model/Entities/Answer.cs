@@ -36,10 +36,16 @@ namespace HonorsProject.Model.Entities
             CreatedOn = createdOn;
         }
 
-        public Answer ShallowCopy()
+        public void ShallowCopy(Answer answerToCopyProperties)
         {
-            Answer newAnswer = (Answer)MemberwiseClone();
-            return newAnswer;
+            Id = answerToCopyProperties.Id;
+            Name = answerToCopyProperties.Name;
+            AnswerTest = answerToCopyProperties.AnswerTest;
+            WasHelpfull = answerToCopyProperties.WasHelpfull;
+            AnsweredBy = answerToCopyProperties.AnsweredBy;
+            Question = answerToCopyProperties.Question;
+            CreatedOn = answerToCopyProperties.CreatedOn;
+            ImageLocation = answerToCopyProperties.ImageLocation;
         }
 
         public bool ValidateAnswer(UnitOfWork u)

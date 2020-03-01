@@ -164,7 +164,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                studentRowsToReturn = 10;
+                studentRowsToReturn = 50;
                 IsConfirmed = false;
                 SubgridContext = SubgridContext.Groups;
                 //commands

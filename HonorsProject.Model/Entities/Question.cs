@@ -41,10 +41,18 @@ namespace HonorsProject.Model.Entities
             CreatedOn = createdOn;
         }
 
-        public Question ShallowCopy()
+        public void ShallowCopy(Question quesitonToShallowCopy)
         {
-            Question newObj = (Question)MemberwiseClone();
-            return newObj;
+            Id = quesitonToShallowCopy.Id;
+            Name = quesitonToShallowCopy.Name;
+            TimeAsked = quesitonToShallowCopy.TimeAsked;
+            QuestionText = quesitonToShallowCopy.QuestionText;
+            IsResolved = quesitonToShallowCopy.IsResolved;
+            Session = quesitonToShallowCopy.Session;
+            Answers = quesitonToShallowCopy.Answers;
+            AskedBy = quesitonToShallowCopy.AskedBy;
+            CreatedOn = quesitonToShallowCopy.CreatedOn;
+            ImageLocation = quesitonToShallowCopy.ImageLocation;
         }
 
         public bool Validate(UnitOfWork u)
