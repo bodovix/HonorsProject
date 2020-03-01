@@ -168,5 +168,14 @@ namespace HonorsProject.View
             System.Windows.Application.Current.Shutdown();
             return;
         }
+
+        private void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Mediator.ClearMediator();
+            InitiallyHideNavigation();
+            App.AppUser = null;
+            Mediator.Register(MediatorChannels.LoginAsUserX.ToString(), LoggInAsX);
+            MainContent.Content = new LoginPage();
+        }
     }
 }
