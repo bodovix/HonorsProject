@@ -214,22 +214,22 @@
                                 Command="{Binding SaveFormCmd}"
                                 Content="{Binding Path=FormContextQuestion,
                                             Converter={StaticResource FormContextToTextConverter},
-                                            ConverterParameter='Add New|Update'}"
+                                            ConverterParameter='Add New Question|Update Question'}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="QuestionCancelBtn"
-                                Content="Cancel"
+                                Content="Cancel Changes"
                                 Command="{Binding CancelCmd}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionDeleteBtn"
-                                Content="Delete"
+                                Content="Delete Question"
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionIdToUserOrAdminVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="QuestionResolvedBtn"
-                                Content="Resolved"
+                                Content="Toggle as Resolved?"
                                 Command="{Binding ToggleMarkQCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
@@ -328,23 +328,23 @@
                         <Button Name="AnswerSaveBtn"
                                 Content="{Binding Path=FormContextAnswer,
                                             Converter={StaticResource FormContextToTextConverter},
-                                            ConverterParameter='Add New|Update'}"
+                                            ConverterParameter='Add New Answer|Update Answer'}"
                                 Command="{Binding SaveFormCmd}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormSaveButton}" />
                         <Button Name="AnswerCancelBtn"
-                                Content="Cancel"
+                                Content="Cancel Changes"
                                 Command="{Binding CancelCmd}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerDeleteBtn"
-                                Content="Delete"
+                                Content="Delete Answer"
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedAnswer}"
                                 Visibility="{Binding Path=AVisConDTO, Converter={StaticResource AnswerToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
                         <Button Name="AnswerResolvedBtn"
-                                Content="Was Helpful"
+                                Content="Toggle was Helpful"
                                 Command="{Binding ToggleMarkACmd}"
                                 CommandParameter="{Binding SelectedAnswer}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"

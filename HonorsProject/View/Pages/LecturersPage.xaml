@@ -129,7 +129,7 @@
                                Style="{StaticResource UserInputFeedback}" />
                         <Button Name="SaveLecturerBtn"
                             Command="{Binding SaveFormCmd}"
-                            Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
+                            Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New Lecturer|Update Lecturer'}"
                             Grid.Row="4"
                             Grid.Column="0"
                             Style="{StaticResource FormSaveButton}" />

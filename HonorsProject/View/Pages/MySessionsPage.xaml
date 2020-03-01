@@ -173,7 +173,7 @@
                                 IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <Button Name="SaveBtn"
-                        Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New|Update'}"
+                        Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New Session|Update Session'}"
                         Command="{Binding SaveFormCmd}"
                         Grid.Row="2"
                         Grid.Column="1"
