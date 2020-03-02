@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       xmlns:uc="clr-namespace:HonorsProject.View.CustomControlls"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
+      xmlns:watermark="clr-namespace:HonorsProject.View.Watermark"
       xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
       x:Name="StudentsPageN"
       mc:Ignorable="d"
@@ -33,7 +34,12 @@
             <Label Content="Search"
                    Style="{StaticResource SearchLabel}" />
             <TextBox Name="SearchTxtBox"
-                     Text="{Binding SearchStudentTxt, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                     Style="{StaticResource SearchTxtBox}"
+                     Text="{Binding SearchStudentTxt, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <watermark:WatermarkService.Watermark>
+                    <TextBlock>Search Students</TextBlock>
+                </watermark:WatermarkService.Watermark>
+            </TextBox>
             <ListView  x:Name="searchResultsList"
                        ItemsSource="{Binding Students, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding SelectedStudent, Mode=TwoWay}"

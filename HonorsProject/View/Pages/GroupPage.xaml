@@ -6,6 +6,7 @@
       xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       xmlns:uc="clr-namespace:HonorsProject.View.CustomControlls"
+      xmlns:watermark="clr-namespace:HonorsProject.View.Watermark"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -34,10 +35,13 @@
                     Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                             ConverterParameter={x:Static enums:Role.Lecturer}}"
                     Style="{StaticResource FormSubmitButton}" />
-            <Label Content="Search"
-                   Style="{StaticResource SearchLabel}" />
             <TextBox Name="SearchTxtBox"
-                     Text="{Binding GroupSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                     Style="{StaticResource SearchTxtBox}"
+                     Text="{Binding GroupSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <watermark:WatermarkService.Watermark>
+                    <TextBlock>Search Groups</TextBlock>
+                </watermark:WatermarkService.Watermark>
+            </TextBox>
             <ListView  x:Name="searchResultsList"
                        Height="500"
                        ItemsSource="{Binding Groups, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
