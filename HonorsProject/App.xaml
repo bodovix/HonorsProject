@@ -115,6 +115,10 @@
             <Setter Property="FontSize" Value="18" />
             <Setter Property="Padding" Value="20 5 5 5 " />
         </Style>
+        <Style TargetType="TextBox" x:Key="SearchTxtBox">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="0 0 0 5"/>
+        </Style>
         <Style TargetType="GroupBox" x:Key="FormGroupBox">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="BorderThickness" Value="2" />

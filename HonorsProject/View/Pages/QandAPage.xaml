@@ -47,9 +47,8 @@
                 <StackPanel>
                    
                     <TextBox Name="SearchQTxtBox"
-                                 Height="40"
-                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="0 0 0 5">
+                            Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource SearchTxtBox}">
                         <watermark:WatermarkService.Watermark>
                             <TextBlock>Search Questions</TextBlock>
                         </watermark:WatermarkService.Watermark>
@@ -93,9 +92,8 @@
                                 ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormSubmitButton}" />
                 <TextBox Name="SearchTxtBox"
-                         Height="40"
                          Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                         Margin="0 0 0 5">
+                         Style="{StaticResource SearchTxtBox}">
                     <watermark:WatermarkService.Watermark>
                         <TextBlock>Search Answers</TextBlock>
                     </watermark:WatermarkService.Watermark>
