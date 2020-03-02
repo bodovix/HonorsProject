@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
       xmlns:enums="clr-namespace:HonorsProject.Model.Enums;assembly=HonorsProject.Model"
+      xmlns:watermark="clr-namespace:HonorsProject.View.Watermark"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -43,10 +44,17 @@
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
                                 ConverterParameter={x:Static enums:Role.Student}}"
                         Style="{StaticResource FormSubmitButton}" />
-                <Label Content="Search Questions:"
-                   Style="{StaticResource SearchLabel}" />
-                <TextBox Name="SearchQTxtBox"
-                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <StackPanel>
+                   
+                    <TextBox Name="SearchQTxtBox"
+                                 Height="40"
+                         Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0 0 0 5">
+                        <watermark:WatermarkService.Watermark>
+                            <TextBlock>Search Questions</TextBlock>
+                        </watermark:WatermarkService.Watermark>
+                    </TextBox>
+                </StackPanel>
                 <ListView  x:Name="searchQResultsList"
                        Height="390"
                            ItemsSource="{Binding Questions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -84,10 +92,14 @@
                         Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
                                 ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormSubmitButton}" />
-                <Label Content="Search Answers:"
-                   Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchTxtBox"
-                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                         Height="40"
+                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="0 0 0 5">
+                    <watermark:WatermarkService.Watermark>
+                        <TextBlock>Search Answers</TextBlock>
+                    </watermark:WatermarkService.Watermark>
+                </TextBox>
                 <ListView  x:Name="searchAResultsList"
                        Height="390"
                         ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

@@ -197,6 +197,8 @@
     <Compile Include="View\Pages\StudentsPage.xaml.cs">
       <DependentUpon>StudentsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Watermark\WatermarkAdorner.cs" />
+    <Compile Include="View\Watermark\WatermarkService.cs" />
     <Page Include="View\CustomControlls\SessionsGridViewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
