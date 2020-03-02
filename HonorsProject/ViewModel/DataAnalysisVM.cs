@@ -104,6 +104,7 @@ namespace HonorsProject.ViewModel
             get { return _selectedSession; }
             set
             {
+                ClearFeedback();
                 _selectedSession = value;
                 OnPropertyChanged(nameof(SelectedSession));
                 try
