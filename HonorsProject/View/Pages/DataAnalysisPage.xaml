@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:cv="clr-namespace:HonorsProject.ViewModel.Converters"
+      xmlns:watermark="clr-namespace:HonorsProject.View.Watermark"
       xmlns:local="clr-namespace:HonorsProject.View.Pages"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
@@ -22,10 +23,15 @@
         <StackPanel Orientation="Horizontal">
             <!--Search Groups-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
-                <Label Content="Search Groups"
-                   Style="{StaticResource SearchLabel}" />
+                <Label Content="Groups"
+                       Style="{StaticResource SearchLabel}"/>
                 <TextBox Name="SearchGTxtBox"
-                         Text="{Binding GroupSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                         Style="{StaticResource SearchTxtBox}"
+                         Text="{Binding GroupSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                    <watermark:WatermarkService.Watermark>
+                        <TextBlock>Search Groups</TextBlock>
+                    </watermark:WatermarkService.Watermark>
+                </TextBox>
                 <ListView  x:Name="searchGroupsResultsList"
                        Height="390"
                            ItemsSource="{Binding Groups,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -44,10 +50,15 @@
             </StackPanel>
             <!--Sessions Search bar-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
-                <Label Content="Search Sessions"
-                   Style="{StaticResource SearchLabel}" />
+                <Label Content="Sessions"
+                       Style="{StaticResource SearchLabel}"/>
                 <TextBox Name="SearchTxtBox"
-                         Text="{Binding SessionSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                         Style="{StaticResource SearchTxtBox}"
+                         Text="{Binding SessionSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                    <watermark:WatermarkService.Watermark>
+                        <TextBlock>Search Sessions</TextBlock>
+                    </watermark:WatermarkService.Watermark>
+                </TextBox>
                 <ListView  x:Name="searchSessionResultsList"
                        Height="390"
                         ItemsSource="{Binding Sessions,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
