@@ -212,6 +212,7 @@ namespace HonorsProject.ViewModel.CoreVM
                     UnitOfWork.Reload(SelectedGroup);
                     UpdateMyGroupsList(RowLimit);
                     OnPropertyChanged(nameof(SelectedGroup));
+                    ShowFeedback("Rolled back unsaved changes.", FeedbackType.Info);
                 }
                 catch
                 {

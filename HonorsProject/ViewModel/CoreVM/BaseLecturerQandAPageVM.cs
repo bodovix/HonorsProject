@@ -228,6 +228,7 @@ namespace HonorsProject.ViewModel.CoreVM
                     UnitOfWork.Reload(SelectedAnswer);
                     UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                     OnPropertyChanged(nameof(SelectedAnswer));
+                    ShowFeedback("Rolled back unsaved changes.", FeedbackType.Info);
                 }
                 catch
                 {

@@ -468,6 +468,7 @@ namespace HonorsProject.ViewModel
                     UnitOfWork.Reload(SelectedStudent);
                     UpdateMyStudentsList(studentRowsToReturn);
                     OnPropertyChanged(nameof(SelectedStudent));
+                    ShowFeedback("Rolled back unsaved changes.", FeedbackType.Info);
                 }
                 catch
                 {

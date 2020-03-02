@@ -67,6 +67,7 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 UnitOfWork.Reload((BaseEntity)User);
                 OnPropertyChanged(nameof(User));
+                ShowFeedback("Rolled back unsaved changes.", FeedbackType.Info);
             }
             catch
             {

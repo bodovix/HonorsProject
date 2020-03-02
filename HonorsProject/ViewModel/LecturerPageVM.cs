@@ -251,6 +251,7 @@ namespace HonorsProject.ViewModel
                     UnitOfWork.Reload(SelectedLecturer);
                     UpdateLecturersList(SearchTxt, rowsToReturn);
                     OnPropertyChanged(nameof(SelectedLecturer));
+                    ShowFeedback("Rolled back unsaved changes.", FeedbackType.Info);
                 }
                 catch
                 {

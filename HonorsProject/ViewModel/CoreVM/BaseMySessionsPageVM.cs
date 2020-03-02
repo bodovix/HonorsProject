@@ -194,6 +194,7 @@ namespace HonorsProject.ViewModel.CoreVM
                     SelectedSession = MySessions.Where(S => S.Id == selectedId).FirstOrDefault();
                     OnPropertyChanged(nameof(MySessions));
                     OnPropertyChanged(nameof(SelectedSession));
+                    ShowFeedback("Rolled back unsaved changes.", FeedbackType.Info);
                 }
                 catch
                 {
