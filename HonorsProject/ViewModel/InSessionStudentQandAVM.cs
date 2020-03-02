@@ -42,6 +42,10 @@ namespace HonorsProject.ViewModel
             FormContextQuestion = FormContext.Create;//Answers loaded when question selected
             SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);
             Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
+            if (SelectedQuestion == null)
+            {
+                EnterNewMode();
+            }
         }
 
         protected override bool UpdateQuestionsList(string questionSearchTxt)
