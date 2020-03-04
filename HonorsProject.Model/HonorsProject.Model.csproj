@@ -80,6 +80,7 @@
     <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="DTO\AnswerStateConverterDTO.cs" />
     <Compile Include="Entities\Answer.cs" />
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Lecturer.cs" />
     <Compile Include="Entities\Question.cs" />
