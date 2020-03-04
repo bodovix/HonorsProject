@@ -34,6 +34,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <!--Search Questions-->
@@ -45,7 +46,7 @@
                                 ConverterParameter={x:Static enums:Role.Student}}"
                         Style="{StaticResource FormSubmitButton}" />
                 <StackPanel>
-                   
+
                     <TextBox Name="SearchQTxtBox"
                             Text="{Binding QuestionSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource SearchTxtBox}">
@@ -92,7 +93,7 @@
                                 ConverterParameter={x:Static enums:Role.Lecturer}}"
                         Style="{StaticResource FormSubmitButton}" />
                 <TextBox Name="SearchTxtBox"
-                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                         Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource SearchTxtBox}">
                     <watermark:WatermarkService.Watermark>
                         <TextBlock>Search Answers</TextBlock>
@@ -366,6 +367,27 @@
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>
+            </GroupBox>
+        </Grid>
+        <!---Discussion area-->
+        <Grid Grid.Column="1" Grid.Row="1" Style="{StaticResource ContainerGrid}">
+            <GroupBox Header="Discussion Board:" Style="{StaticResource MainFormGroupBox}">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Post Comment" Style="{StaticResource FormSubmitButton}"/>
+                    </StackPanel>
+                    <TextBox Height="100"/>
+                    <ListView>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding }"/>
+                                    <Label Content="{Binding }"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
             </GroupBox>
         </Grid>
     </Grid>
