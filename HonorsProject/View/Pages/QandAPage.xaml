@@ -27,6 +27,7 @@
         <cv:AnswerToUserInvertedBoolConverter x:Key="AnswerToUserInvertedBoolConverter" />
         <cv:QuestionToUserInvertedBoolConverter x:Key="QuestionToUserInvertedBoolConverter" />
         <cv:IDToVisConverter x:Key="IDToVisConverter" />
+        <cv:IDOrAdminToVisConverter x:Key="IDOrAdminToVisConverter" />
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -413,7 +414,7 @@
                                             CommandParameter="{Binding}"
                                             Style="{StaticResource InfoButton}" />
                                         <Button Content="Delete"
-                                            Visibility="{Binding PostedById,Converter={StaticResource IDToVisConverter}}"
+                                            Visibility="{Binding PostedById,Converter={StaticResource IDOrAdminToVisConverter}}"
                                             Command="{Binding ElementName=CommentsLV, Path=DataContext.DeleteCommentCmd}"
                                             CommandParameter="{Binding}"
                                             Style="{StaticResource FormCancelButton}" />
