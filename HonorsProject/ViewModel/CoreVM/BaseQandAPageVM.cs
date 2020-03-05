@@ -18,7 +18,7 @@ using HonorsProject.Model.HelperClasses;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd, IPostCmd, IDeleteCmd, IUploadImageCmd, IToggleMarkQCmd, IToggleMarkACmd, ICancelmd, IEnterNewModeCmd
+    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd, ICommentCmd, IDeleteCmd, IUploadImageCmd, IToggleMarkQCmd, IToggleMarkACmd, ICancelmd, IEnterNewModeCmd
     {
         #region Properties
 
@@ -333,6 +333,7 @@ namespace HonorsProject.ViewModel.CoreVM
         public CancelCmd CancelCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
         public PostCmd PostCmd { get; set; }
+        public DeleteCommentCmd DeleteCommentCmd { get; set; }
 
         #endregion Commands
 
@@ -347,6 +348,8 @@ namespace HonorsProject.ViewModel.CoreVM
             CancelCmd = new CancelCmd(this);
             NewModeCmd = new NewModeCmd(this);
             PostCmd = new PostCmd(this);
+            DeleteCommentCmd = new DeleteCommentCmd(this);
+
             //setup
             QVisConDTO = new QuestionStateConverterDTO();
             AVisConDTO = new AnswerStateConverterDTO();
@@ -472,12 +475,11 @@ namespace HonorsProject.ViewModel.CoreVM
                 Comment comment = new Comment(CommentText, User.Name, User.Id, SelectedQuestion);
                 if (comment.Validate())
                 {
-                    Comments.Add(comment);
                     UnitOfWork.CommentRepository.Add(comment);
                     result = (UnitOfWork.Complete() > 0) ? true : false;
                     if (result)
                     {
-                        OnPropertyChanged(nameof(Comments));
+                        UpdateCommentsList();
                         CommentText = "";
                     }
                     else
@@ -486,6 +488,30 @@ namespace HonorsProject.ViewModel.CoreVM
                 }
                 else
                     return false;
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return false;
+            }
+        }
+
+        public bool DeleteComent(Comment commentToDelete)
+        {
+            ClearFeedback();
+            bool result = false;
+            try
+            {
+                UnitOfWork.CommentRepository.Remove(commentToDelete);
+                result = (UnitOfWork.Complete() > 0) ? true : false;
+                if (result)
+                {
+                    UpdateCommentsList();
+                    CommentText = "";
+                }
+                else
+                    ShowFeedback("Failed to delete comment. \n please try again or contact support", FeedbackType.Error);
+                return result;
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using HonorsProject.ViewModel.Commands.IComands;
+﻿using HonorsProject.Model.Entities;
+using HonorsProject.ViewModel.Commands.IComands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,13 @@ using System.Windows.Input;
 
 namespace HonorsProject.ViewModel.Commands
 {
-    public class PostCmd : ICommand
+    public class DeleteCommentCmd : ICommand
     {
         public ICommentCmd VM { get; set; }
 
         public event EventHandler CanExecuteChanged;
 
-        public PostCmd(ICommentCmd vm)
+        public DeleteCommentCmd(ICommentCmd vm)
         {
             VM = vm;
         }
@@ -27,7 +28,8 @@ namespace HonorsProject.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            VM.Post();
+            Comment commentToDelete = parameter as Comment;
+            VM.DeleteComent(commentToDelete);
         }
     }
 }

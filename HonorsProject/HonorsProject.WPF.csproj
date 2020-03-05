@@ -90,7 +90,7 @@
     <Compile Include="ViewModel\Commands\IComands\IAnalyseEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IGoToEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IImportCSVCmd.cs" />
-    <Compile Include="ViewModel\Commands\IComands\IPostCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\ICommentCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkACmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IMoveEntityInList.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkQCmd.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="ViewModel\Commands\IComands\IDeleteCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\INewPassHashCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IRemoveEntity.cs" />
+    <Compile Include="ViewModel\Commands\DeleteCommentCmd.cs" />
     <Compile Include="ViewModel\Commands\RemoveEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IAddLecturerCmd.cs" />
     <Compile Include="ViewModel\Commands\AddLecturerCmd.cs" />

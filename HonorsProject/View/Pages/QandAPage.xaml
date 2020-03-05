@@ -382,6 +382,7 @@
                     <TextBox Height="60"
                              Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     <ListView
+                        Name="CommentsLV"
                         ItemsSource="{Binding Comments,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding SelectedComment,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         HorizontalContentAlignment="Stretch"
@@ -407,6 +408,8 @@
                                             Grid.Row="0"
                                             Grid.RowSpan="2"
                                             Visibility="{Binding PostedById,Converter={StaticResource IDToVisConverter}}"
+                                            Command="{Binding ElementName=CommentsLV, Path=DataContext.DeleteCommentCmd}"
+                                            CommandParameter="{Binding}"
                                             Style="{StaticResource FormCancelButton}" />
                                     <Label Content="{Binding CommentText}"
                                            Grid.Row="1"
