@@ -430,16 +430,6 @@ namespace HonorsProject.ViewModel.CoreVM
             bool result = false;
             try
             {
-                if (SelectedQuestion == null)
-                {
-                    ShowFeedback("No Question selected.", FeedbackType.Error);
-                    return false;
-                }
-                if (SelectedQuestion.Id == 0)
-                {
-                    ShowFeedback("Question must be saved first.", FeedbackType.Error);
-                    return false;
-                }
                 Comment comment = new Comment(CommentText, User.Name, User.Id, SelectedQuestion);
                 if (comment.Validate())
                 {
