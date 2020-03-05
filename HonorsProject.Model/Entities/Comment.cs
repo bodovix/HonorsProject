@@ -25,7 +25,6 @@ namespace HonorsProject.Model.Entities
             PostedById = postedById;
             Quesetion = question;
             CreatedOn = DateTime.Now;
-            Name = PostedById + ":" + PostedByName + ":" + CreatedOn.GetDateTimeFormats();
         }
     }
 }

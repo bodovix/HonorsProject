@@ -374,15 +374,23 @@
             <GroupBox Header="Discussion Board:" Style="{StaticResource MainFormGroupBox}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="Post Comment" Style="{StaticResource FormSubmitButton}"/>
+                        <Button Content="Post Comment"
+                                Style="{StaticResource FormSubmitButton}"
+                                Command="{Binding PostCmd}" />
                     </StackPanel>
-                    <TextBox Height="100"/>
-                    <ListView>
+                    <TextBox Height="100"
+                             Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                    <ListView
+                        ItemsSource="{Binding Comments,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding }"/>
-                                    <Label Content="{Binding }"/>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="{Binding PostedByName}" />
+                                        <Label Content="{Binding PostedById}" />
+                                        <Label Content="{Binding CreatedOn}" />
+                                    </StackPanel>
+                                    <Label Content="{Binding CommentText}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

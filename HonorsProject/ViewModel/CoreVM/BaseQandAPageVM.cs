@@ -18,7 +18,7 @@ using HonorsProject.Model.HelperClasses;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd, IDeleteCmd, IUploadImageCmd, IToggleMarkQCmd, IToggleMarkACmd, ICancelmd, IEnterNewModeCmd
+    public abstract class BaseQandAPageVM : BaseViewModel, ISaveVMFormCmd, IPostCmd, IDeleteCmd, IUploadImageCmd, IToggleMarkQCmd, IToggleMarkACmd, ICancelmd, IEnterNewModeCmd
     {
         #region Properties
 
@@ -92,6 +92,30 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 _selectedSession = value;
                 OnPropertyChanged(nameof(SelectedSession));
+            }
+        }
+
+        private Comment _comments;
+
+        public Comment Comments
+        {
+            get { return _comments; }
+            set
+            {
+                _comments = value;
+                OnPropertyChanged(nameof(Comments));
+            }
+        }
+
+        private string _commentText;
+
+        public string CommentText
+        {
+            get { return _commentText; }
+            set
+            {
+                _commentText = value;
+                OnPropertyChanged(nameof(CommentText));
             }
         }
 
@@ -295,6 +319,7 @@ namespace HonorsProject.ViewModel.CoreVM
         public ToggleMarkACmd ToggleMarkACmd { get; set; }
         public CancelCmd CancelCmd { get; set; }
         public NewModeCmd NewModeCmd { get; set; }
+        public PostCmd PostCmd { get; set; }
 
         #endregion Commands
 
@@ -308,6 +333,7 @@ namespace HonorsProject.ViewModel.CoreVM
             ToggleMarkACmd = new ToggleMarkACmd(this);
             CancelCmd = new CancelCmd(this);
             NewModeCmd = new NewModeCmd(this);
+            PostCmd = new PostCmd(this);
             //setup
             QVisConDTO = new QuestionStateConverterDTO();
             AVisConDTO = new AnswerStateConverterDTO();
@@ -410,5 +436,21 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         protected abstract void SetHeaderMessage();
+
+        public bool Post()
+        {
+            if (SelectedQuestion == null)
+            {
+                ShowFeedback();
+                return false;
+            }
+            if (SelectedQuestion.Id == 0)
+            {
+                ShowFeedback();
+                return false;
+            }
+
+            throw new NotImplementedException();
+        }
     }
 }

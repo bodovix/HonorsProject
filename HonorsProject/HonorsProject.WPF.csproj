@@ -90,6 +90,7 @@
     <Compile Include="ViewModel\Commands\IComands\IAnalyseEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IGoToEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IImportCSVCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\IPostCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkACmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IMoveEntityInList.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkQCmd.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="ViewModel\Commands\CancelCmd.cs" />
     <Compile Include="ViewModel\Commands\GoToEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\ImportCSVCmd.cs" />
+    <Compile Include="ViewModel\Commands\PostCmd.cs" />
     <Compile Include="ViewModel\Commands\ToggleMarkACmd.cs" />
     <Compile Include="ViewModel\Commands\ToggleMarkQCmd.cs" />
     <Compile Include="ViewModel\Commands\UploadImageCmd.cs" />
