@@ -378,20 +378,37 @@
                                 Style="{StaticResource FormSubmitButton}"
                                 Command="{Binding PostCmd}" />
                     </StackPanel>
-                    <TextBox Height="100"
+                    <TextBox Height="60"
                              Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     <ListView
-                        ItemsSource="{Binding SelectedQuestion.Comments,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        ItemsSource="{Binding SelectedQuestion.Comments,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalContentAlignment="Stretch" 
+                        Height="250">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
                                         <Label Content="{Binding PostedByName}" />
                                         <Label Content="{Binding PostedById}" />
                                         <Label Content="{Binding CreatedOn}" />
                                     </StackPanel>
-                                    <Label Content="{Binding CommentText}" />
-                                </StackPanel>
+                                    <Button Content="Delete"
+                                                Grid.Column="1"
+                                                Grid.Row="0"
+                                            Grid.RowSpan="2"
+                                                Style="{StaticResource FormCancelButton}"/>
+                                    <Label Content="{Binding CommentText}" 
+                                           Grid.Row="1" 
+                                           Grid.Column="0" />
+                                </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

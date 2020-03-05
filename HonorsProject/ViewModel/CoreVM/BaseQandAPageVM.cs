@@ -427,6 +427,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool Post()
         {
+            ClearFeedback();
             bool result = false;
             try
             {
@@ -436,7 +437,10 @@ namespace HonorsProject.ViewModel.CoreVM
                     UnitOfWork.CommentRepository.Add(comment);
                     result = (UnitOfWork.Complete() > 0) ? true : false;
                     if (result)
+                    {
                         OnPropertyChanged(nameof(SelectedQuestion));
+                        CommentText = "";
+                    }
                     else
                         ShowFeedback("Failed to post comment. \n please try again or contact support", FeedbackType.Error);
                     return result;
