@@ -21,7 +21,7 @@ namespace HonorsProject.Test.VMTest
         }
 
         [TestMethod]
-        public void MyStudentPageVMInitialize_Success()
+        public void PostComment_Success()
         {
             //Arrange
             ClearDatabase();
@@ -30,10 +30,10 @@ namespace HonorsProject.Test.VMTest
             VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
             VM.SelectedQuestion = VM.Questions.FirstOrDefault();
             VM.CommentText = "its a test comment";
-            int expected = 3;
-            int actual = VM.SelectedQuestion.Comments.Count;
+            int expected = 5;
             //Act
             bool result = VM.Post();
+            int actual = VM.SelectedQuestion.Comments.Count;
 
             //Assert
             Assert.IsTrue(result);

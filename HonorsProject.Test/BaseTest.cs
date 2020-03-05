@@ -26,6 +26,7 @@ namespace HonorsProject.Test
                 //clear data
                 context.Answers.RemoveRange(context.Answers);
                 context.Questions.RemoveRange(context.Questions);
+                context.Comments.RemoveRange(context.Comments);
                 context.Groups.RemoveRange(context.Groups);
                 context.Lecturers.RemoveRange(context.Lecturers);
                 context.Sessions.RemoveRange(context.Sessions);
@@ -34,6 +35,7 @@ namespace HonorsProject.Test
                 context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Answers', RESEED, 0)");
                 context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Groups', RESEED, 0)");
                 context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Questions', RESEED, 0)");
+                context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Comments', RESEED, 0)");
                 context.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Sessions', RESEED, 0)");
 
                 context.SaveChanges();

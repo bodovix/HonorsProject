@@ -427,18 +427,33 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public bool Post()
         {
-            if (SelectedQuestion == null)
+            bool result = false;
+            try
             {
-                ShowFeedback("No Question selected.", FeedbackType.Error);
+                if (SelectedQuestion == null)
+                {
+                    ShowFeedback("No Question selected.", FeedbackType.Error);
+                    return false;
+                }
+                if (SelectedQuestion.Id == 0)
+                {
+                    ShowFeedback("Question must be saved first.", FeedbackType.Error);
+                    return false;
+                }
+                Comment comment = new Comment(CommentText, User.Name, User.Id, SelectedQuestion);
+                UnitOfWork.CommentRepository.Add(comment);
+                result = (UnitOfWork.Complete() > 0) ? true : false;
+                if (result)
+                    OnPropertyChanged(nameof(SelectedQuestion));
+                else
+                    ShowFeedback("Failed to post comment. \n please try again or contact support", FeedbackType.Error);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
-            if (SelectedQuestion.Id == 0)
-            {
-                ShowFeedback("Question must be saved first.", FeedbackType.Error);
-                return false;
-            }
-
-            throw new NotImplementedException();
         }
     }
 }
