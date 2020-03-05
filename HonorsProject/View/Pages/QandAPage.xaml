@@ -26,6 +26,7 @@
         <cv:AnswerToUserBoolConverter x:Key="AnswerToUserBoolConverter" />
         <cv:AnswerToUserInvertedBoolConverter x:Key="AnswerToUserInvertedBoolConverter" />
         <cv:QuestionToUserInvertedBoolConverter x:Key="QuestionToUserInvertedBoolConverter" />
+        <cv:IDToVisConverter x:Key="IDToVisConverter" />
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -405,6 +406,7 @@
                                             Grid.Column="1"
                                             Grid.Row="0"
                                             Grid.RowSpan="2"
+                                            Visibility="{Binding PostedById,Converter={StaticResource IDToVisConverter}}"
                                             Style="{StaticResource FormCancelButton}" />
                                     <Label Content="{Binding CommentText}"
                                            Grid.Row="1"

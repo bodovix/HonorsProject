@@ -121,6 +121,7 @@
     <Compile Include="ViewModel\Converters\QuestionToUserInvertedBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\QuestionToUserBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\QuestionToUserVisConverter.cs" />
+    <Compile Include="ViewModel\Converters\IDToVisConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToStringConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToEditableConverter.cs" />
