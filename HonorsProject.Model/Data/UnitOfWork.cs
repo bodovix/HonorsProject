@@ -25,6 +25,7 @@ namespace HonorsProject.Model.Data
         public IStudentRepository StudentRepo { get; private set; }
         public ISessionRepository SessionRepository { get; private set; }
         public IQuestionRepository QuestionRepository { get; private set; }
+        public ICommentRepository CommentRepository { get; private set; }
         public IAnswerRepository AnswerRepository { get; private set; }
         public IGroupRepository GroupRepository { get; private set; }
 
@@ -37,6 +38,7 @@ namespace HonorsProject.Model.Data
             StudentRepo = new StudentRepository(_context);
             SessionRepository = new SessionRepository(_context);
             QuestionRepository = new QuestionRepository(_context);
+            CommentRepository = new CommentRepository(_context);
             AnswerRepository = new AnswerRepository(_context);
             GroupRepository = new GroupRepository(_context);
         }
