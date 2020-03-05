@@ -12,6 +12,7 @@ namespace HonorsProject.Model.Data
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
 

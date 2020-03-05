@@ -11,17 +11,21 @@ namespace HonorsProject.Model.Entities
     {
         public string CommentText { get; set; }
         public string PostedByName { get; set; }
+        public int PostedById { get; set; }
         public Question Quesetion { get; set; }
 
         public Comment()
         {
         }
 
-        public Comment(string commentText, string postedByName, Question quesetion)
+        public Comment(string commentText, string postedByName, int postedById, Question question)
         {
             CommentText = commentText;
             PostedByName = postedByName;
-            Quesetion = quesetion;
+            PostedById = postedById;
+            Quesetion = question;
+            CreatedOn = DateTime.Now;
+            Name = PostedById + ":" + PostedByName + ":" + CreatedOn.GetDateTimeFormats();
         }
     }
 }
