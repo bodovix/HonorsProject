@@ -381,7 +381,7 @@
                     <TextBox Height="100"
                              Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     <ListView
-                        ItemsSource="{Binding Comments,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        ItemsSource="{Binding SelectedQuestion.Comments,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
