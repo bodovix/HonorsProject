@@ -95,18 +95,6 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
-        private Comment _comments;
-
-        public Comment Comments
-        {
-            get { return _comments; }
-            set
-            {
-                _comments = value;
-                OnPropertyChanged(nameof(Comments));
-            }
-        }
-
         private string _commentText;
 
         public string CommentText
@@ -441,12 +429,12 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             if (SelectedQuestion == null)
             {
-                ShowFeedback();
+                ShowFeedback("No Question selected.", FeedbackType.Error);
                 return false;
             }
             if (SelectedQuestion.Id == 0)
             {
-                ShowFeedback();
+                ShowFeedback("Question must be saved first.", FeedbackType.Error);
                 return false;
             }
 

@@ -15,6 +15,7 @@ namespace HonorsProject.Model.Entities
         public bool IsResolved { get; set; }
         public virtual Session Session { get; set; }
         public virtual List<Answer> Answers { get; set; }
+        public virtual List<Comment> Comments { get; set; }
         public virtual Student AskedBy { get; set; }
         public string ImageLocation { get; set; }
 
@@ -37,6 +38,7 @@ namespace HonorsProject.Model.Entities
             IsResolved = false;
             Session = session;
             Answers = new List<Answer>();
+            Comments = new List<Comment>();
             AskedBy = askedBy;
             CreatedOn = createdOn;
         }

@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 
 namespace HonorsProject.ViewModel
 {
-    internal class InSessionStudentQandAVM : BaseStudentQandA
+    public class InSessionStudentQandAVM : BaseStudentQandA
     {
         private string _quesitonSearchTxt;
 
