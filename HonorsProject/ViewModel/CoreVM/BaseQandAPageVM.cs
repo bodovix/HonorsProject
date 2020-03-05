@@ -107,6 +107,30 @@ namespace HonorsProject.ViewModel.CoreVM
             }
         }
 
+        private ObservableCollection<Comment> _comments;
+
+        public ObservableCollection<Comment> Comments
+        {
+            get { return _comments; }
+            set
+            {
+                _comments = value;
+                OnPropertyChanged(nameof(Comments));
+            }
+        }
+
+        private Comment _selectedComment;
+
+        public Comment SelectedComment
+        {
+            get { return _selectedComment; }
+            set
+            {
+                _selectedComment = value;
+                OnPropertyChanged(nameof(SelectedComment));
+            }
+        }
+
         private ObservableCollection<Question> _questions;
 
         public ObservableCollection<Question> Questions
@@ -134,6 +158,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 FormContextQuestion = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedQuestion = value;
                 UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                UpdateCommentsList();
                 OnPropertyChanged(nameof(SelectedQuestion));
                 QVisConDTO.Question = value;
                 OnPropertyChanged(nameof(QVisConDTO));
@@ -356,6 +381,7 @@ namespace HonorsProject.ViewModel.CoreVM
                 {
                     UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 }
+                UpdateCommentsList();
             });
         }
 
@@ -423,6 +449,18 @@ namespace HonorsProject.ViewModel.CoreVM
                 return false;
         }
 
+        private bool UpdateCommentsList()
+        {
+            if (SelectedQuestion != null)
+                Comments = new ObservableCollection<Comment>(UnitOfWork.CommentRepository.GetCommentsForQuestion(SelectedQuestion));
+            else
+                Comments = new ObservableCollection<Comment>();
+            if (Comments.Count > 0)
+                return true;
+            else
+                return false;
+        }
+
         protected abstract void SetHeaderMessage();
 
         public bool Post()
@@ -434,11 +472,12 @@ namespace HonorsProject.ViewModel.CoreVM
                 Comment comment = new Comment(CommentText, User.Name, User.Id, SelectedQuestion);
                 if (comment.Validate())
                 {
+                    Comments.Add(comment);
                     UnitOfWork.CommentRepository.Add(comment);
                     result = (UnitOfWork.Complete() > 0) ? true : false;
                     if (result)
                     {
-                        OnPropertyChanged(nameof(SelectedQuestion));
+                        OnPropertyChanged(nameof(Comments));
                         CommentText = "";
                     }
                     else

@@ -9,5 +9,6 @@ namespace HonorsProject.Model.Core
 {
     public interface ICommentRepository : IRepository<Comment>
     {
+        List<Comment> GetCommentsForQuestion(Question selectedQuestion);
     }
 }

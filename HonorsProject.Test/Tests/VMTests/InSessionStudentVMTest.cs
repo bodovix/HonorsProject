@@ -41,6 +41,26 @@ namespace HonorsProject.Test.VMTest
         }
 
         [TestMethod]
+        public void PostComment_Success_VMReference()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestData(SubgridContext.ActiveSessions);
+
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            VM.SelectedQuestion = VM.Questions.FirstOrDefault();
+            VM.CommentText = "its a test comment";
+            int expected = 5;
+            //Act
+            bool result = VM.Post();
+            int actual = VM.Comments.Count;
+
+            //Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(expected, actual, "wrong comment count");
+        }
+
+        [TestMethod]
         public void PostComment_NoComment_Fail()
         {
             //Arrange
