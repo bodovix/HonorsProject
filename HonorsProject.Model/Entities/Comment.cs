@@ -30,7 +30,7 @@ namespace HonorsProject.Model.Entities
         public bool Validate()
         {
             if (String.IsNullOrEmpty(CommentText))
-                throw new ArgumentException("Cannot post empty comment.");
+                throw new ArgumentException("Comments cannot be empty.");
             if (PostedById == 0)
                 throw new ArgumentException("Cannot be posted by user with id 0.");
             if (String.IsNullOrEmpty(PostedByName))

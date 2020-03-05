@@ -16,5 +16,9 @@ namespace HonorsProject.ViewModel.Commands.IComands
         DeleteCommentCmd DeleteCommentCmd { get; set; }
 
         bool DeleteComent(Comment commentToDelete);
+
+        EditCommentCmd EditCommentCmd { get; set; }
+
+        bool EditComment(Comment commentToEdit);
     }
 }

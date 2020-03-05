@@ -334,6 +334,7 @@ namespace HonorsProject.ViewModel.CoreVM
         public NewModeCmd NewModeCmd { get; set; }
         public PostCmd PostCmd { get; set; }
         public DeleteCommentCmd DeleteCommentCmd { get; set; }
+        public EditCommentCmd EditCommentCmd { get; set; }
 
         #endregion Commands
 
@@ -349,6 +350,7 @@ namespace HonorsProject.ViewModel.CoreVM
             NewModeCmd = new NewModeCmd(this);
             PostCmd = new PostCmd(this);
             DeleteCommentCmd = new DeleteCommentCmd(this);
+            EditCommentCmd = new EditCommentCmd(this);
 
             //setup
             QVisConDTO = new QuestionStateConverterDTO();
@@ -512,6 +514,40 @@ namespace HonorsProject.ViewModel.CoreVM
                 else
                     ShowFeedback("Failed to delete comment. \n please try again or contact support", FeedbackType.Error);
                 return result;
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return false;
+            }
+        }
+
+        public bool EditComment(Comment commentToEdit)
+        {
+            ClearFeedback();
+            bool result = false;
+            try
+            {
+                if (String.IsNullOrEmpty(CommentText))
+                {
+                    ShowFeedback("Comment cannot be empty.", FeedbackType.Error);
+                    return false;
+                }
+                commentToEdit.CommentText = CommentText;
+                if (commentToEdit.Validate())
+                {
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                    {
+                        UpdateCommentsList();
+                        CommentText = "";
+                    }
+                    else
+                        ShowFeedback("Failed to post comment. \n please try again or contact support", FeedbackType.Error);
+                    return result;
+                }
+                else
+                    return false;
             }
             catch (Exception ex)
             {

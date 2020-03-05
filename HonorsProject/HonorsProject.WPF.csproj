@@ -85,6 +85,7 @@
     <Compile Include="ViewModel\Commands\ChangeSubgridContextCmd.cs" />
     <Compile Include="ViewModel\Commands\DeleteCmd.cs" />
     <Compile Include="ViewModel\Commands\AnalyseEntityCmd.cs" />
+    <Compile Include="ViewModel\Commands\EditCommentCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\ICancelmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IChangeSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IAnalyseEntityCmd.cs" />

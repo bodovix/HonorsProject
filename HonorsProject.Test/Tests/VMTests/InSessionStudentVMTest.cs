@@ -23,7 +23,7 @@ namespace HonorsProject.Test.VMTest
         #region Comments
 
         [TestMethod]
-        public void PostComment_Success_VMReference()
+        public void PostComment_Success()
         {
             //Arrange
             ClearDatabase();
@@ -90,12 +90,36 @@ namespace HonorsProject.Test.VMTest
             VM.SelectedComment = VM.Comments.Where(c => c.PostedById == _appUser.Id).FirstOrDefault();
             int expected = 3;
             //Act
-            bool result = VM.DeleteComent();
+            bool result = VM.DeleteComent(VM.SelectedComment);
             int actual = VM.Comments.Count;
 
             //Assert
             Assert.IsTrue(result);
             Assert.AreEqual(expected, actual, "wrong comment count");
+        }
+
+        [TestMethod]
+        public void EditComment_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestData(SubgridContext.ActiveSessions);
+
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            VM.SelectedQuestion = VM.Questions.FirstOrDefault();
+            VM.SelectedComment = VM.SelectedQuestion.Comments
+                .Where(c => c.PostedById == _appUser.Id)
+                .FirstOrDefault();
+            VM.CommentText = "its a UPDATE test comment";
+            int expected = 4;
+            //Act
+            bool result = VM.EditComment(VM.SelectedComment);
+            int actual = VM.Comments.Count;
+
+            //Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(expected, actual, "wrong comment count");
+            Assert.IsTrue(VM.SelectedComment.CommentText.Contains("UPDATE"));
         }
 
         #endregion Comments
