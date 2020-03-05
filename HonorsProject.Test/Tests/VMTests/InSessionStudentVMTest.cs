@@ -39,5 +39,41 @@ namespace HonorsProject.Test.VMTest
             Assert.IsTrue(result);
             Assert.AreEqual(expected, actual, "wrong comment count");
         }
+
+        [TestMethod]
+        public void PostComment_NoComment_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestData(SubgridContext.ActiveSessions);
+
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            VM.SelectedQuestion = VM.Questions.FirstOrDefault();
+            VM.CommentText = "";
+            int expected = 5;
+            //Act
+            bool result = VM.Post();
+            int actual = VM.SelectedQuestion.Comments.Count;
+
+            //Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void PostComment_NoQuesion_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestData(SubgridContext.ActiveSessions);
+
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            VM.SelectedQuestion = null;
+            VM.CommentText = "its a test comment";
+            //Act
+            bool result = VM.Post();
+
+            //Assert
+            Assert.IsFalse(result);
+        }
     }
 }

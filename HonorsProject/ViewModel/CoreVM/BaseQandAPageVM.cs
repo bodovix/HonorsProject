@@ -441,13 +441,18 @@ namespace HonorsProject.ViewModel.CoreVM
                     return false;
                 }
                 Comment comment = new Comment(CommentText, User.Name, User.Id, SelectedQuestion);
-                UnitOfWork.CommentRepository.Add(comment);
-                result = (UnitOfWork.Complete() > 0) ? true : false;
-                if (result)
-                    OnPropertyChanged(nameof(SelectedQuestion));
+                if (comment.Validate())
+                {
+                    UnitOfWork.CommentRepository.Add(comment);
+                    result = (UnitOfWork.Complete() > 0) ? true : false;
+                    if (result)
+                        OnPropertyChanged(nameof(SelectedQuestion));
+                    else
+                        ShowFeedback("Failed to post comment. \n please try again or contact support", FeedbackType.Error);
+                    return result;
+                }
                 else
-                    ShowFeedback("Failed to post comment. \n please try again or contact support", FeedbackType.Error);
-                return result;
+                    return false;
             }
             catch (Exception ex)
             {
