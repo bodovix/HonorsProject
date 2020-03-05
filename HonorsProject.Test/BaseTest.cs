@@ -127,6 +127,14 @@ namespace HonorsProject.Test
                 u.AnswerRepository.Add(a3);
                 u.AnswerRepository.Add(a4);
 
+                u.CommentRepository.Add(c1);
+                u.CommentRepository.Add(c2);
+                u.CommentRepository.Add(c3);
+                u.CommentRepository.Add(c4);
+                u.CommentRepository.Add(c5);
+                u.CommentRepository.Add(c6);
+                u.CommentRepository.Add(c7);
+                u.CommentRepository.Add(c8);
                 u.Complete();
 
                 switch (context)
@@ -141,7 +149,7 @@ namespace HonorsProject.Test
                         return futureSesh;
 
                     default:
-                        throw new Exception("ivalid context for test data");
+                        throw new Exception("invalid context for test data");
                 }
             }
         }
