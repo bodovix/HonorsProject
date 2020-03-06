@@ -381,7 +381,11 @@
                                 Command="{Binding PostCmd}" />
                     </StackPanel>
                     <TextBox Height="60"
-                             Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"> 
+                        <watermark:WatermarkService.Watermark >
+                            <TextBlock > 'Post Comment' or 'Edit' selected comment with this text..</TextBlock>
+                        </watermark:WatermarkService.Watermark>
+                    </TextBox>
                     <ListView
                         Name="CommentsLV"
                         ItemsSource="{Binding Comments,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
