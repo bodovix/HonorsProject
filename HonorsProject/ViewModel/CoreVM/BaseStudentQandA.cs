@@ -193,8 +193,10 @@ namespace HonorsProject.ViewModel.CoreVM
                 {
                     if (SelectedAnswer.Id == 0)
                     {
-                        ShowFeedback("Please save your answer before uploading image.", FeedbackType.Error);
-                        return false;
+                        //if not already saved, save it. then continue if all happy
+                        bool initSave = Save();
+                        if (!initSave)
+                            return false;
                     }
                     if (String.IsNullOrEmpty(SelectedQuestion.ImageLocation))
                     {

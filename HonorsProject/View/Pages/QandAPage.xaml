@@ -214,8 +214,9 @@
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <Image Name="QuestionImage"
-                           Source="{Binding QuestionImage, UpdateSourceTrigger=PropertyChanged}"
-                               Grid.Row="0">
+                                   Source="{Binding QuestionImage, UpdateSourceTrigger=PropertyChanged}"
+                                   Grid.Row="0"
+                                   MaxHeight="500">
                             </Image>
                             <Label  Content="{Binding QuestionImageLabel}"
                                 Grid.Row="1" />
@@ -330,8 +331,9 @@
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <Image Name="AnswerImage"
-                           Grid.Row="0"
-                           Source="{Binding AnswerImage, UpdateSourceTrigger=PropertyChanged}">
+                                   Grid.Row="0"
+                                   Source="{Binding AnswerImage, UpdateSourceTrigger=PropertyChanged}"
+                                   MaxHeight="500">
                             </Image>
                             <Label Content="{Binding AnswerImageLabel}"
                                    Grid.Row="1" />
