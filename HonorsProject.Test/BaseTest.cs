@@ -46,7 +46,7 @@ namespace HonorsProject.Test
         {
             using (UnitOfWork uow = new UnitOfWork(new LabAssistantContext(dbConName)))
             {
-                Lecturer l = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
+                Lecturer l = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", true, new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
                 Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", new DateTime(2019, 11, 28, 12, 05, 09, 200), 444);
                 l.Register(uow);
                 s.Register(uow);
@@ -58,9 +58,9 @@ namespace HonorsProject.Test
             using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
             {
                 //test data cleared each test - need to re  register users
-                Lecturer l = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
+                Lecturer l = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", true, new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
 
-                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", DateTime.Now.AddYears(-2), 444);
+                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", true, DateTime.Now.AddYears(-2), 444);
                 Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", DateTime.Now.AddYears(-1), 444);
                 Student s2 = new Student(12345678, "test", "12345678@uad.ac.uk", "password", DateTime.Now.AddYears(-2), 444);
                 Student s3 = new Student(01197253, "test2", "01197253@uad.ac.uk", "password", DateTime.Now.AddYears(-2), 444);
@@ -162,7 +162,7 @@ namespace HonorsProject.Test
             {
                 //test data cleared each test - need to re  register users
                 Lecturer l = lecturer;
-                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", DateTime.Now.AddYears(-2), 444);
+                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", true, DateTime.Now.AddYears(-2), 444);
                 Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", DateTime.Now.AddYears(-1), 444);
                 Student s2 = new Student(12345678, "test", "12345678@uad.ac.uk", "password", DateTime.Now.AddYears(-2), 444);
                 Student s3 = new Student(01197253, "test2", "01197253@uad.ac.uk", "password", DateTime.Now.AddYears(-2), 444);

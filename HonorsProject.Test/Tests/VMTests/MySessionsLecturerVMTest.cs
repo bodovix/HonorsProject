@@ -19,7 +19,7 @@ namespace HonorsProject.Test.VMTest
 
         public MySessionsLecturerVMTest() : base()
         {
-            _lecturer = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
+            _lecturer = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", true, new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
         }
 
         [TestMethod]

@@ -30,7 +30,7 @@ namespace HonorsProject.Test.VMTest
             Session selectedSession = CreateInSessionTestData(SubgridContext.ActiveSessions);
 
             VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
-            VM.SelectedQuestion = VM.Questions.FirstOrDefault();
+            VM.SelectedQuestion = VM.Questions.Where(q => q.Id != 0).FirstOrDefault();
             VM.CommentText = "its a test comment";
             int expected = 5;
             //Act

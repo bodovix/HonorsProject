@@ -202,6 +202,10 @@
     <Compile Include="Migrations\202003050855140_CommentsEntityAdded.Designer.cs">
       <DependentUpon>202003050855140_CommentsEntityAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003071442416_SuperAdminBoolFlagAdded.cs" />
+    <Compile Include="Migrations\202003071442416_SuperAdminBoolFlagAdded.Designer.cs">
+      <DependentUpon>202003071442416_SuperAdminBoolFlagAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -285,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003050855140_CommentsEntityAdded.resx">
       <DependentUpon>202003050855140_CommentsEntityAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003071442416_SuperAdminBoolFlagAdded.resx">
+      <DependentUpon>202003071442416_SuperAdminBoolFlagAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

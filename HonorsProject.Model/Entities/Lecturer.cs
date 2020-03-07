@@ -18,6 +18,7 @@ namespace HonorsProject.Model.Entities
 
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsSuperAdmin { get; set; }
         public virtual List<Session> Sessions { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public int CreatedByLecturerId { get; set; }
@@ -30,10 +31,11 @@ namespace HonorsProject.Model.Entities
             Sessions = new List<Session>();
         }
 
-        public Lecturer(int id, string name, string email, string password, DateTime createdOn, int createdByLecturerId)
+        public Lecturer(int id, string name, string email, string password, bool isSuperAdmin, DateTime createdOn, int createdByLecturerId)
         {
             Id = id;
             Name = name;
+            IsSuperAdmin = isSuperAdmin;
             Email = email;
             Password = password;
             CreatedOn = createdOn;

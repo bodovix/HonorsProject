@@ -151,6 +151,11 @@ namespace HonorsProject.ViewModel
 
         public void EnterNewMode()
         {
+            if (!User.IsSuperAdmin)
+            {
+                ShowFeedback("Only Admin can create Lecturers.", FeedbackType.Error);
+                return;
+            }
             FormContext = FormContext.Create;
             SelectedLecturer = new Lecturer();
         }
@@ -158,6 +163,11 @@ namespace HonorsProject.ViewModel
         public bool Save()
         {
             ClearFeedback();
+            if (!User.IsSuperAdmin)
+            {
+                ShowFeedback("Only Admin can Save Changes to lecturers.", FeedbackType.Error);
+                return false;
+            }
             bool result;
             try
             {
@@ -206,6 +216,11 @@ namespace HonorsProject.ViewModel
         public bool Delete(BaseEntity objToDelete)
         {
             ClearFeedback();
+            if (!User.IsSuperAdmin)
+            {
+                ShowFeedback("Only Admin can create Lecturers.", FeedbackType.Error);
+                return false;
+            }
             bool result = false;
             Student studentToDelete = objToDelete as Student;
             if (studentToDelete == null)
@@ -266,6 +281,11 @@ namespace HonorsProject.ViewModel
         public bool GenerateNewPasswordHash(string optionalNewPassword)
         {
             ClearFeedback();
+            if (!User.IsSuperAdmin)
+            {
+                ShowFeedback("Only Admin can generate new passwords.", FeedbackType.Error);
+                return false;
+            }
             bool result = false;
             try
             {
