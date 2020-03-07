@@ -16,6 +16,7 @@
         <cv:FormContextToTextConverter x:Key="FormContextToTextConverter" />
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
         <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
+        <cv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -93,17 +94,20 @@
                         </Grid.RowDefinitions>
                         <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                             <TextBox TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="{Binding SelectedLecturer.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                     IsReadOnly="{Binding User.IsSuperAdmin, Converter={StaticResource InverseBooleanConverter}}"
+                                     Style="{StaticResource UserInput}"
+                                     Text="{Binding SelectedLecturer.Id,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         </GroupBox>
                         <GroupBox Header="Email" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                             <TextBox TextWrapping="Wrap"
-                                 Style="{StaticResource UserInput}"
-                                 Text="{Binding SelectedLecturer.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                     IsReadOnly="{Binding User.IsSuperAdmin, Converter={StaticResource InverseBooleanConverter}}"
+                                     Style="{StaticResource UserInput}"
+                                     Text="{Binding SelectedLecturer.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         </GroupBox>
                         <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                             <TextBox TextWrapping="Wrap"
                                      MaxLength="50"
+                                     IsReadOnly="{Binding User.IsSuperAdmin, Converter={StaticResource InverseBooleanConverter}}"
                                      Style="{StaticResource UserInput}"
                                      Text="{Binding SelectedLecturer.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                         </GroupBox>

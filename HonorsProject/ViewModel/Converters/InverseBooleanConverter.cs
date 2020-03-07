@@ -14,10 +14,7 @@ namespace HonorsProject.ViewModel.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool boolVal = (bool)value;
-
-            if (boolVal)
-                return !boolVal;
-            return boolVal;
+            return !boolVal;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
