@@ -36,7 +36,7 @@ namespace HonorsProject.View.Pages
             entity = entityToFocusOn;
             InitializeComponent();
 
-            PickVM();
+            QandAVMFactory();
             MainContainer.DataContext = VM;
             Mediator.Register(MediatorChannels.DeleteAnswerConfirmation.ToString(), DeleteAnswerConfirmation);
             Mediator.Register(MediatorChannels.DeleteQuestionConfirmation.ToString(), DeleteQuestionConfirmation);
@@ -64,7 +64,7 @@ namespace HonorsProject.View.Pages
                 VM.IsConfirmed = false;
         }
 
-        private void PickVM()
+        private void QandAVMFactory()
         {
             if (App.LoggedInAs == Role.Lecturer)
             {
