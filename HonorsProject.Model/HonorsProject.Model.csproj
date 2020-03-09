@@ -206,6 +206,10 @@
     <Compile Include="Migrations\202003071442416_SuperAdminBoolFlagAdded.Designer.cs">
       <DependentUpon>202003071442416_SuperAdminBoolFlagAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003091207565_IsLectureOnlyQuesitonColumnAdded.cs" />
+    <Compile Include="Migrations\202003091207565_IsLectureOnlyQuesitonColumnAdded.Designer.cs">
+      <DependentUpon>202003091207565_IsLectureOnlyQuesitonColumnAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -292,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003071442416_SuperAdminBoolFlagAdded.resx">
       <DependentUpon>202003071442416_SuperAdminBoolFlagAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003091207565_IsLectureOnlyQuesitonColumnAdded.resx">
+      <DependentUpon>202003091207565_IsLectureOnlyQuesitonColumnAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,6 +18,7 @@ namespace HonorsProject.Model.Entities
         public virtual List<Comment> Comments { get; set; }
         public virtual Student AskedBy { get; set; }
         public string ImageLocation { get; set; }
+        public bool IsLectureOnlyQuestion { get; set; }
 
         public Question()
         {
@@ -55,6 +56,7 @@ namespace HonorsProject.Model.Entities
             AskedBy = quesitonToShallowCopy.AskedBy;
             CreatedOn = quesitonToShallowCopy.CreatedOn;
             ImageLocation = quesitonToShallowCopy.ImageLocation;
+            IsLectureOnlyQuestion = quesitonToShallowCopy.IsLectureOnlyQuestion;
         }
 
         public bool Validate(UnitOfWork u)
