@@ -129,6 +129,7 @@
     <Compile Include="ViewModel\Converters\QuestionToUserVisConverter.cs" />
     <Compile Include="ViewModel\Converters\IDToVisConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToBoolConverter.cs" />
+    <Compile Include="ViewModel\Converters\BoolToStringConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToStringConverter.cs" />
     <Compile Include="ViewModel\Converters\RoleToEditableConverter.cs" />
     <Compile Include="ViewModel\Converters\QandAModeToVisibleConverter.cs" />
