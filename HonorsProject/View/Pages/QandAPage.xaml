@@ -91,8 +91,16 @@
                 <Button Name="NewAnswerBtn"
                         Content="New Answer"
                         Command="{Binding NewModeCmd}"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToHiddenConverter},
+                        CommandParameter="False"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                                 ConverterParameter={x:Static enums:Role.Lecturer}}"
+                        Style="{StaticResource FormSubmitButton}" />
+                <Button Content="New Private Question"
+                        ToolTip="Private Questions are only visible to Lecturers."
+                        Command="{Binding NewModeWithParamCmd}"
+                        CommandParameter="True"
+                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                                ConverterParameter={x:Static enums:Role.Student}}"
                         Style="{StaticResource FormSubmitButton}" />
                 <TextBox Name="SearchTxtBox"
                          Text="{Binding AnswerSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -383,8 +391,8 @@
                                 Command="{Binding PostCmd}" />
                     </StackPanel>
                     <TextBox Height="60"
-                             Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"> 
-                        <watermark:WatermarkService.Watermark >
+                             Text="{Binding CommentText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        <watermark:WatermarkService.Watermark>
                             <TextBlock > 'Post Comment' or 'Edit' selected comment with this text..</TextBlock>
                         </watermark:WatermarkService.Watermark>
                     </TextBox>

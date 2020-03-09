@@ -12,10 +12,12 @@ using HonorsProject.Model.Core;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Enums;
 using HonorsProject.Model.HelperClasses;
+using HonorsProject.ViewModel.Commands;
+using HonorsProject.ViewModel.Commands.IComands;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
-    public abstract class BaseStudentQandA : BaseQandAPageVM
+    public abstract class BaseStudentQandA : BaseQandAPageVM, IEnterNewModePrivateQuestionCmd
     {
         private ISystemUser _user;
 
@@ -35,9 +37,13 @@ namespace HonorsProject.ViewModel.CoreVM
         }
 
         public abstract override string QuestionSearchTxt { get; set; }
+        public NewModePrivateQuestionCmd NewModeWithParamCmd { get; set; }
 
         public BaseStudentQandA(ISystemUser appUser, string dbcontextName) : base(dbcontextName)
         {
+            //commands
+            NewModeWithParamCmd = new NewModePrivateQuestionCmd(this);
+            //setup
             UserRole = Role.Student;
             User = UnitOfWork.StudentRepo.Get(appUser.Id);
             IsConfirmed = false;
@@ -108,6 +114,16 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public override void EnterNewMode()
         {
+            EnterNewModeFlag(false);
+        }
+
+        public void EnterNewModePrivateQuestion()
+        {
+            EnterNewModeFlag(true);
+        }
+
+        private void EnterNewModeFlag(bool IsLectureOnlyQuestion)
+        {
             ClearFeedback();
             if (SelectedSession == null)
             {
@@ -120,6 +136,8 @@ namespace HonorsProject.ViewModel.CoreVM
                 QandAMode = QandAMode.Question;
                 SelectedQuestion = new Question((Student)User);
                 SelectedQuestion.Session = SelectedSession;
+
+                SelectedQuestion.IsLectureOnlyQuestion = IsLectureOnlyQuestion;
                 FormContextQuestion = FormContext.Create;
             }
             else
