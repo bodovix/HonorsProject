@@ -162,7 +162,7 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="InlineImgSearchResultsTextBlock">
             <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="MaxWidth" Value="170" />
+            <Setter Property="MaxWidth" Value="160" />
             <Setter Property="MaxHeight" Value="40" />
         </Style>
         <Style TargetType="TextBlock" x:Key="NoImgSearchResultsTextBlock">
