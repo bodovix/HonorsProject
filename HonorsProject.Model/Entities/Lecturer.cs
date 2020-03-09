@@ -239,6 +239,11 @@ namespace HonorsProject.Model.Entities
                 feedback = "No Lecturer selected.";
                 return result;
             }
+            if (lecToToggle.Id == Id)
+            {
+                feedback = "";
+                return result;
+            }
             lecToToggle.IsSuperAdmin = !lecToToggle.IsSuperAdmin;
             result = (u.Complete() > 0) ? true : false;
             if (result)
