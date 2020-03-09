@@ -239,9 +239,14 @@ namespace HonorsProject.Model.Entities
                 feedback = "No Lecturer selected.";
                 return result;
             }
+            if (lecToToggle.Id == 0)
+            {
+                feedback = "Please save lecturer first.";
+                return result;
+            }
             if (lecToToggle.Id == Id)
             {
-                feedback = "";
+                feedback = "Cannot change your own admin status.";
                 return result;
             }
             lecToToggle.IsSuperAdmin = !lecToToggle.IsSuperAdmin;

@@ -135,7 +135,7 @@
                                     ,Converter={StaticResource BoolToStringConverter}
                                     ,ConverterParameter='Is Admin|Non Admin'}" />
                                 <Button Content="Toggle Admin Role"
-                                    Command="{Binding NewPassHashCmd}" />
+                                    Command="{Binding ToggleAdminRoleCmd}" />
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="Created By" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormGroupBox}">

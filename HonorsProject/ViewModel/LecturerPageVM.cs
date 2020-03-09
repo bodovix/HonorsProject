@@ -321,12 +321,17 @@ namespace HonorsProject.ViewModel
 
         public bool ToggleAdminRole(Lecturer lecturerToToggle)
         {
+            ClearFeedback();
             bool result = false;
             try
             {
                 string feedback;
                 result = User.ToggleSuperAdmin(UnitOfWork, SelectedLecturer, out feedback);
-
+                if (result)
+                    ShowFeedback(feedback, FeedbackType.Success);
+                else
+                    ShowFeedback(feedback, FeedbackType.Error);
+                OnPropertyChanged(nameof(SelectedLecturer));
                 return result;
             }
             catch (Exception ex)
