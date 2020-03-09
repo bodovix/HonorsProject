@@ -158,9 +158,9 @@
                     ConverterParameter={x:Static enums:QandAMode.Question}}">
                 <StackPanel>
                     
-                <TextBlock Text="Is Lecture Only Question" 
+                <TextBlock Text="Lecture Only Question" 
                                    Style="{StaticResource FormTitleText}"
-                                   Background="Red"
+                                   Background="LightBlue"
                                    TextAlignment="Center"
                                    Visibility="{Binding SelectedQuestion.IsLectureOnlyQuestion,
                                                         UpdateSourceTrigger=PropertyChanged,

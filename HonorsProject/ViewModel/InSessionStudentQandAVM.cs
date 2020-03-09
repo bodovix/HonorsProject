@@ -39,19 +39,26 @@ namespace HonorsProject.ViewModel
         public InSessionStudentQandAVM(ISystemUser appUser, Session selectedSession, string dbcontextName) : base(appUser, dbcontextName)
         {
             //Setup
-            FormContextQuestion = FormContext.Create;//Answers loaded when question selected
-            SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);
-            Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSession(SelectedSession).ToList());
-            if (SelectedQuestion == null)
+            try
             {
-                EnterNewMode();
+                FormContextQuestion = FormContext.Create;//Answers loaded when question selected
+                SelectedSession = UnitOfWork.SessionRepository.Get(selectedSession.Id);
+                UpdateQuestionsList(QuestionSearchTxt);
+                if (SelectedQuestion == null)
+                {
+                    EnterNewMode();
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
         }
 
         protected override bool UpdateQuestionsList(string questionSearchTxt)
         {
             if (SelectedSession != null)
-                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetFromSearchForSession(SelectedSession, questionSearchTxt));
+                Questions = new ObservableCollection<Question>(UnitOfWork.QuestionRepository.GetPublicAndStudentQsFromSearchForSession(SelectedSession, (Student)User, questionSearchTxt));
             else
                 Questions = new ObservableCollection<Question>();
             if (Questions.Count > 0)

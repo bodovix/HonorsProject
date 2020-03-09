@@ -19,6 +19,15 @@ namespace HonorsProject.Model.Data
             return _entities.Where(q => q.Session.Id == session.Id).ToList();
         }
 
+        private List<Question> GetPublicAndSQsFromSession(Session session, Student askingStuent)
+        {
+            //get all questions from this session
+            //where their public or private if they're asked by the student
+            return _entities.Where(q => q.Session.Id == session.Id
+                                        && (q.IsLectureOnlyQuestion == false
+                                        || (q.IsLectureOnlyQuestion == true && q.AskedBy.Id == askingStuent.Id))).ToList();
+        }
+
         public List<Question> GetFromSearchForSession(Session session, string searchTxt)
         {
             if (String.IsNullOrEmpty(searchTxt))
@@ -29,6 +38,20 @@ namespace HonorsProject.Model.Data
                                         || q.QuestionText.Contains(searchTxt)
                                         || q.Id.ToString().Contains(searchTxt))
                                         && q.Session.Id == session.Id).ToList();
+        }
+
+        public List<Question> GetPublicAndStudentQsFromSearchForSession(Session session, Student askingStuent, string questionSearchTxt)
+        {
+            if (String.IsNullOrEmpty(questionSearchTxt))
+                return GetPublicAndSQsFromSession(session, askingStuent);
+            else// get sessions questions where they're public or asked by the student with search filter
+                return _entities.Where(q => (q.Id.ToString().Contains(questionSearchTxt)
+                                        || q.Name.Contains(questionSearchTxt)
+                                        || q.QuestionText.Contains(questionSearchTxt)
+                                        || q.Id.ToString().Contains(questionSearchTxt))
+                                        && q.Session.Id == session.Id
+                                        && (q.IsLectureOnlyQuestion == false
+                                            || q.AskedBy.Id == askingStuent.Id)).ToList();
         }
 
         public List<Question> GetAllForStudent(Student user, string searchTxt)
