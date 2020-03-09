@@ -156,6 +156,16 @@
                       Style="{StaticResource MainFormGroupBox}"
                       Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
                     ConverterParameter={x:Static enums:QandAMode.Question}}">
+                <StackPanel>
+                    
+                <TextBlock Text="Is Lecture Only Question" 
+                                   Style="{StaticResource FormTitleText}"
+                                   Background="Red"
+                                   TextAlignment="Center"
+                                   Visibility="{Binding SelectedQuestion.IsLectureOnlyQuestion,
+                                                        UpdateSourceTrigger=PropertyChanged,
+                                                        Converter={StaticResource BoolToVisibleConverter}}"
+                                   HorizontalAlignment="Stretch"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -175,7 +185,7 @@
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Style="{StaticResource FormTitleText}" />
-                    <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                        <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
@@ -263,6 +273,8 @@
                                 Style="{StaticResource InfoButton}" />
                     </StackPanel>
                 </Grid>
+                </StackPanel>
+
             </GroupBox>
             <!--Answer Form-->
             <GroupBox Header="{Binding HeaderMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
