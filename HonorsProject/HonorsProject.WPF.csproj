@@ -94,8 +94,10 @@
     <Compile Include="ViewModel\Commands\IComands\ICommentCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkACmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IMoveEntityInList.cs" />
+    <Compile Include="ViewModel\Commands\IComands\IToggleAdminRoleCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkQCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IUploadImageCmd.cs" />
+    <Compile Include="ViewModel\Commands\ToggleAdminRoleCmd.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityInToListCmd.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityOutOfListCmd.cs" />
     <Compile Include="ViewModel\Commands\NewPassHashCmd.cs" />
