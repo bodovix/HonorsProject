@@ -17,6 +17,7 @@
         <cv:SubgridContextToColourConverter x:Key="SubgridContextToColourConverter" />
         <cv:FeedbackTypeToForcolorConverter x:Key="FeedbackTypeToForcolorConverter" />
         <cv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        <cv:BoolToStringConverter x:Key="BoolToStringConverter" />
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -89,6 +90,7 @@
                             <RowDefinition Height="96" />
                             <RowDefinition Height="24*" />
                             <RowDefinition Height="19*" />
+                            <RowDefinition Height="19*" />
                             <RowDefinition Height="9*" />
                             <RowDefinition Height="9*" />
                         </Grid.RowDefinitions>
@@ -125,12 +127,23 @@
                             <Label Content="{Binding SelectedLecturer.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource UserFormLbl}" />
                         </GroupBox>
-                        <GroupBox Header="Created By" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                        <GroupBox Header="Toggle Admin Role" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                            <StackPanel>
+                                <Label
+                                 Style="{StaticResource UserFormLbl}"
+                                 Content="{Binding SelectedLecturer.IsSuperAdmin,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged
+                                    ,Converter={StaticResource BoolToStringConverter}
+                                    ,ConverterParameter='Is Admin|Non Admin'}" />
+                                <Button Content="Toggle Admin Role"
+                                    Command="{Binding NewPassHashCmd}" />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Created By" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                             <Label Content="{Binding SelectedLecturer.CreatedByLecturerId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource UserFormLbl}" />
                         </GroupBox>
                         <TextBlock Text="{Binding FeedbackMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                               Grid.Row="3"
+                               Grid.Row="4"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
@@ -138,13 +151,13 @@
                         <Button Name="SaveLecturerBtn"
                             Command="{Binding SaveFormCmd}"
                             Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New Lecturer|Update Lecturer'}"
-                            Grid.Row="4"
+                            Grid.Row="5"
                             Grid.Column="0"
                             Style="{StaticResource FormSaveButton}" />
                         <Button Name="CancelLecturerBtn"
                             Content="Cancel"
                             Command="{Binding CancelCmd}"
-                            Grid.Row="4"
+                            Grid.Row="5"
                             Grid.Column="1"
                             Style="{StaticResource FormCancelButton}" />
                     </Grid>

@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class LecturerPageVM : BaseViewModel, IEnterNewModeCmd, ISaveVMFormCmd, IDeleteCmd, ICancelmd, INewPassHashCmd
+    public class LecturerPageVM : BaseViewModel, IEnterNewModeCmd, ISaveVMFormCmd, IDeleteCmd, ICancelmd, INewPassHashCmd, IToggleAdminRoleCmd
     {
         #region Properties
 
@@ -109,6 +109,7 @@ namespace HonorsProject.ViewModel
         public DeleteCmd DeleteCmd { get; set; }
         public CancelCmd CancelCmd { get; set; }
         public NewPassHashCmd NewPassHashCmd { get; set; }
+        public ToggleAdminRoleCmd ToggleAdminRoleCmd { get; set; }
 
         #endregion Commands
 
@@ -125,6 +126,7 @@ namespace HonorsProject.ViewModel
                 DeleteCmd = new DeleteCmd(this);
                 CancelCmd = new CancelCmd(this);
                 NewPassHashCmd = new NewPassHashCmd(this);
+                ToggleAdminRoleCmd = new ToggleAdminRoleCmd(this);
                 //TODO: will likely need to attach lecturer to the DbContext..
                 User = UnitOfWork.LecturerRepo.Get(loggedInLectuer.Id);
                 SearchTxt = "";
@@ -309,6 +311,23 @@ namespace HonorsProject.ViewModel
                     ShowFeedback("Generation of new password Canceled.", FeedbackType.Error);
                     return false;
                 }
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return false;
+            }
+        }
+
+        public bool ToggleAdminRole(Lecturer lecturerToToggle)
+        {
+            bool result = false;
+            try
+            {
+                string feedback;
+                result = User.ToggleSuperAdmin(UnitOfWork, SelectedLecturer, out feedback);
+
+                return result;
             }
             catch (Exception ex)
             {

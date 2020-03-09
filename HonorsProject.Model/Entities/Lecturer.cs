@@ -225,5 +225,27 @@ namespace HonorsProject.Model.Entities
         {
             throw new NotImplementedException("Lecturers cannot ask questions. Please contact support.");
         }
+
+        public bool ToggleSuperAdmin(UnitOfWork u, Lecturer lecToToggle, out string feedback)
+        {
+            bool result = false;
+            if (!IsSuperAdmin)
+            {
+                feedback = "Only a admin can change a lecturers role.";
+                return result;
+            }
+            if (lecToToggle == null)
+            {
+                feedback = "No Lecturer selected.";
+                return result;
+            }
+            lecToToggle.IsSuperAdmin = !lecToToggle.IsSuperAdmin;
+            result = (u.Complete() > 0) ? true : false;
+            if (result)
+                feedback = "Admin role updated.";
+            else
+                feedback = "Failed to update admin role.";
+            return result;
+        }
     }
 }
