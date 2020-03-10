@@ -112,7 +112,7 @@
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  MaxLength="50"
-                                 Text="{Binding SelectedGroup.Name}"
+                                 Text="{Binding SelectedGroup.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
