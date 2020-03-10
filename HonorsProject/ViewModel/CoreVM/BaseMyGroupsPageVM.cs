@@ -183,6 +183,12 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 UpdateMyGroupsList(RowLimit);
                 RefreshAvailableStudents(SelectedGroup);
+
+                foreach (Group g in Groups)
+                {//safe way to get record value updates from database
+                    if (g.Id != SelectedGroup.Id)
+                        UnitOfWork.Reload(g);
+                }
             });
         }
 
