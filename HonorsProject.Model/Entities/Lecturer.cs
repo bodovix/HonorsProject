@@ -250,9 +250,9 @@ namespace HonorsProject.Model.Entities
                 return result;
             }
             lecToToggle.IsSuperAdmin = !lecToToggle.IsSuperAdmin;
-            result = (u.Complete() > 0) ? true : false;
+            result = true;
             if (result)
-                feedback = "Admin role updated.";
+                feedback = "Admin role updated. \nDon't forget to save your changes!.";
             else
                 feedback = "Failed to update admin role.";
             return result;
