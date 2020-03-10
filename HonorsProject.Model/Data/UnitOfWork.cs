@@ -53,11 +53,6 @@ namespace HonorsProject.Model.Data
             _context.Entry(baseEntityToReload).Reload();
         }
 
-        public void ReloadRange(ObservableCollection<BaseEntity> entitysToReload)
-        {
-            _context.Entry(entitysToReload).Reload();
-        }
-
         public void Dispose()
         {
             _context.Dispose();

@@ -149,7 +149,13 @@ namespace HonorsProject.ViewModel
             {
                 Lecturer tempLecturer = new Lecturer();
                 tempLecturer.ShallowCopy(SelectedLecturer);
+                //get new and deleted changes from the database
                 UpdateLecturersList(SearchTxt, rowsToReturn);
+                foreach (BaseEntity l in Lecturers)
+                {//a slow but safe way to get record updates from the pooling
+                    if (l.Id != tempLecturer.Id)
+                        UnitOfWork.Reload(l);
+                }
                 SelectedLecturer.ShallowCopy(tempLecturer);
             });
         }
