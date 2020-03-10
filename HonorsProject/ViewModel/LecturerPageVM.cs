@@ -147,7 +147,10 @@ namespace HonorsProject.ViewModel
         {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
+                Lecturer tempLecturer = new Lecturer();
+                tempLecturer.ShallowCopy(SelectedLecturer);
                 UpdateLecturersList(SearchTxt, rowsToReturn);
+                SelectedLecturer.ShallowCopy(tempLecturer);
             });
         }
 

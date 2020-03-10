@@ -42,6 +42,19 @@ namespace HonorsProject.Model.Entities
             CreatedByLecturerId = createdByLecturerId;
         }
 
+        public void ShallowCopy(Lecturer selectedLecturer)
+        {
+            Id = selectedLecturer.Id;
+            Name = selectedLecturer.Name;
+            Email = selectedLecturer.Email;
+            Password = selectedLecturer.Password;
+            IsSuperAdmin = selectedLecturer.IsSuperAdmin;
+            Sessions = selectedLecturer.Sessions;
+            Answers = selectedLecturer.Answers;
+            CreatedByLecturerId = selectedLecturer.CreatedByLecturerId;
+            CreatedOn = selectedLecturer.CreatedOn;
+        }
+
         public ISystemUser Login(int userId, string password, string conName)
         {
             //attempt student login
