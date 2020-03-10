@@ -193,7 +193,10 @@ namespace HonorsProject.ViewModel.CoreVM
                 {//safe way to get record value updates from database
                     if (g.Id != SelectedGroup.Id)
                         UnitOfWork.Reload(g);
+                    if (g.Id == SelectedGroup.Id)//reload the groups list
+                        SelectedGroup.Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetStudentsFromGroup(g));
                 }
+                OnPropertyChanged(nameof(SelectedGroup));
             });
         }
 
@@ -287,12 +290,10 @@ namespace HonorsProject.ViewModel.CoreVM
 
         protected void RefreshAvailableStudents(Group group)
         {
-            List<Student> students;
             //if (group == null || group.Id == 0) // If in New Mode
             //    students = UnitOfWork.StudentRepo.GetAll().ToList();
             //else // if student already selected
-            students = UnitOfWork.StudentRepo.GetStudentsNotInGroup(group).ToList();
-            StudentsNotInGroup = new ObservableCollection<Student>(students);
+            StudentsNotInGroup = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetStudentsNotInGroup(group).ToList());
         }
 
         protected void UpdateMyGroupsList(int rows)
