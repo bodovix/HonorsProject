@@ -180,6 +180,7 @@ namespace HonorsProject.ViewModel
                 {
                     //Create New
                     result = User.AddNewLecturer(SelectedLecturer, UnitOfWork);
+                    SelectedLecturer = SelectedLecturer;
                     if (result)
                     {
                         UpdateLecturersList(SearchTxt, rowsToReturn);
