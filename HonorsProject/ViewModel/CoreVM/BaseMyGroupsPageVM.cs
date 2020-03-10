@@ -181,8 +181,13 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
+                //Temp group holds the selected Group's properties so they don't get cleared with pooling
+                Group tempGroup = new Group();
+                tempGroup.ShallowCopy(SelectedGroup);
+
                 UpdateMyGroupsList(RowLimit);
                 RefreshAvailableStudents(SelectedGroup);
+                SelectedGroup.ShallowCopy(tempGroup);
 
                 foreach (Group g in Groups)
                 {//safe way to get record value updates from database
