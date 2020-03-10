@@ -139,9 +139,10 @@ namespace HonorsProject.ViewModel.CoreVM
 
                 SelectedQuestion.IsLectureOnlyQuestion = IsLectureOnlyQuestion;
                 FormContextQuestion = FormContext.Create;
+                OnPropertyChanged(nameof(SelectedQuestion));
             }
             else
-                ShowFeedback("Cannot enter new question.\nNo Session Selected.", FeedbackType.Error);
+                ShowFeedback("Cannot enter new question.\nSession is not active.", FeedbackType.Error);
         }
 
         public override bool Save()
