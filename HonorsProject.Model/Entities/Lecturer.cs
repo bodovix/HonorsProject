@@ -226,7 +226,7 @@ namespace HonorsProject.Model.Entities
             throw new NotImplementedException("Lecturers cannot ask questions. Please contact support.");
         }
 
-        public bool ToggleSuperAdmin(UnitOfWork u, Lecturer lecToToggle, out string feedback)
+        public bool ToggleSuperAdmin(Lecturer lecToToggle, out string feedback)
         {
             bool result = false;
             if (!IsSuperAdmin)
@@ -237,11 +237,6 @@ namespace HonorsProject.Model.Entities
             if (lecToToggle == null)
             {
                 feedback = "No Lecturer selected.";
-                return result;
-            }
-            if (lecToToggle.Id == 0)
-            {
-                feedback = "Please save lecturer first.";
                 return result;
             }
             if (lecToToggle.Id == Id)

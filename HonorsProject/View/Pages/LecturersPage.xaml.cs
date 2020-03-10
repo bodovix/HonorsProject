@@ -36,7 +36,7 @@ namespace HonorsProject.View.Pages
             InitializeComponent();
             Mediator.Register(MediatorChannels.LecturerPageGeneratePasswordCheck.ToString(), ShowPasswordConfBox);
             Mediator.Register(MediatorChannels.LecturerPageNewPasswordDisplay.ToString(), ShowPasswordDisplay);
-            Mediator.Register(MediatorChannels.DeleteStudentConfirmation.ToString(), DeleteStudentConfrimation);
+            Mediator.Register(MediatorChannels.DeleteLecturerConfirmation.ToString(), DeleteLecturerConfirmation);
 
             DataContext = VM;
         }
@@ -58,11 +58,11 @@ namespace HonorsProject.View.Pages
                 VM.IsConfirmed = false;
         }
 
-        private void DeleteStudentConfrimation(object obj)
+        private void DeleteLecturerConfirmation(object obj)
         {
             VM.IsConfirmed = false;
-            Student s = obj as Student;
-            MessageBoxResult dialogResult = MessageBox.Show($"Delete student {s.Name}? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
+            Lecturer l = obj as Lecturer;
+            MessageBoxResult dialogResult = MessageBox.Show($"Delete lecturer {l.Name}? \nThis action cannot be undone", "Are you sure?", MessageBoxButton.YesNo);
 
             if (dialogResult == MessageBoxResult.Yes)
                 VM.IsConfirmed = true;

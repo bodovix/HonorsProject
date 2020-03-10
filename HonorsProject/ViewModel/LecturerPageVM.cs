@@ -224,27 +224,27 @@ namespace HonorsProject.ViewModel
                 return false;
             }
             bool result = false;
-            Student studentToDelete = objToDelete as Student;
-            if (studentToDelete == null)
+            Lecturer lecturerToDelete = (Lecturer)objToDelete;
+            if (lecturerToDelete == null)
             {
                 ShowFeedback("No lecturer selected.", FeedbackType.Error);
                 return result;
             }
             try
             {
-                Mediator.NotifyColleagues(MediatorChannels.DeleteStudentConfirmation.ToString(), studentToDelete);
+                Mediator.NotifyColleagues(MediatorChannels.DeleteLecturerConfirmation.ToString(), lecturerToDelete);
                 if (IsConfirmed)
                 {
-                    int id = studentToDelete.Id;
-                    UnitOfWork.StudentRepo.Remove(studentToDelete);
+                    int id = lecturerToDelete.Id;
+                    UnitOfWork.LecturerRepo.Remove(lecturerToDelete);
                     result = (UnitOfWork.Complete() > 0) ? true : false;
                     if (result)
                     {
                         UpdateLecturersList(SearchTxt, rowsToReturn);
-                        ShowFeedback($"Deleted Student: {id}.", FeedbackType.Success);
+                        ShowFeedback($"Deleted Lecturer: {id}.", FeedbackType.Success);
                     }
                     else
-                        ShowFeedback($"Failed to delete Student: {id}.", FeedbackType.Error);
+                        ShowFeedback($"Failed to delete Lecturer: {id}.", FeedbackType.Error);
                 }
 
                 return result;
@@ -326,7 +326,7 @@ namespace HonorsProject.ViewModel
             try
             {
                 string feedback;
-                result = User.ToggleSuperAdmin(UnitOfWork, SelectedLecturer, out feedback);
+                result = User.ToggleSuperAdmin(SelectedLecturer, out feedback);
                 if (result)
                     ShowFeedback(feedback, FeedbackType.Success);
                 else

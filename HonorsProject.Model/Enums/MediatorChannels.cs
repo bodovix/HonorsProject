@@ -32,6 +32,7 @@ namespace HonorsProject.Model.Enums
         LecturerPageGeneratePasswordCheck,
         LecturerPageNewPasswordDisplay,
         GoToAnalyseEntity,
-        PoolingUpdate
+        PoolingUpdate,
+        DeleteLecturerConfirmation
     }
 }
