@@ -154,16 +154,29 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
-                Session backup = new Session();
-                if (FormContext == FormContext.Create)
+                try
                 {
-                    backup.ShallowCopy(SelectedSession);
+                    Session backup = new Session();
+                    if (FormContext == FormContext.Create)
+                    {
+                        backup.ShallowCopy(SelectedSession);
+                    }
+                    UpdateMySessionsList();
+                    GetAllLecturers();
+                    //if create mode re-apply props (they were blanking when sub-grid context was different to time
+                    if (FormContext == FormContext.Create)
+                        SelectedSession.ShallowCopy(backup);
+                    //safe way to get updates to records
+                    foreach (Session s in MySessions)
+                    {
+                        if (s.Id != SelectedSession.Id)
+                            UnitOfWork.Reload(s);
+                    }
                 }
-                UpdateMySessionsList();
-                GetAllLecturers();
-                //if create mode re-apply props (they were blanking when sub-grid context was different to time
-                if (FormContext == FormContext.Create)
-                    SelectedSession.ShallowCopy(backup);
+                catch (Exception ex)
+                {
+                    ShowFeedback($"Error updating database:\n{ex.Message}", FeedbackType.Error);
+                }
             });
         }
 
