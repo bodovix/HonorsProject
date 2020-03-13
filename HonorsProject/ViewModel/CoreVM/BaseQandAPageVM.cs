@@ -371,22 +371,39 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
-                UpdateQuestionsList(QuestionSearchTxt);
-                if (SelectedAnswer != null)
+                try
                 {
-                    Answer backup = new Answer();
-                    backup.ShallowCopy(SelectedAnswer);
-                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
-                    OnPropertyChanged(nameof(SelectedQuestion));
+                    UpdateQuestionsList(QuestionSearchTxt);
+                    if (SelectedAnswer != null)
+                    {
+                        Answer backup = new Answer();
+                        backup.ShallowCopy(SelectedAnswer);
+                        UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                        OnPropertyChanged(nameof(SelectedQuestion));
 
-                    SelectedAnswer.ShallowCopy(backup);
-                    OnPropertyChanged(nameof(SelectedAnswer));
+                        SelectedAnswer.ShallowCopy(backup);
+                        OnPropertyChanged(nameof(SelectedAnswer));
+
+                        //thread safe way to get record updates pulled from database (doesn't do selected Q or A)
+                        if (QandAMode == QandAMode.Answer)
+                            foreach (Answer a in Answers)
+                                if (a.Id != SelectedAnswer.Id)
+                                    UnitOfWork.Reload(a);
+                        if (QandAMode == QandAMode.Question)
+                            foreach (Question q in Questions)
+                                if (q.Id != SelectedQuestion.Id)
+                                    UnitOfWork.Reload(q);
+                    }
+                    else
+                    {
+                        UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    }
+                    UpdateCommentsList();
                 }
-                else
+                catch (Exception ex)
                 {
-                    UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
+                    ShowFeedback($"Error updating from database:\n{ex.Message}", FeedbackType.Error);
                 }
-                UpdateCommentsList();
             });
         }
 

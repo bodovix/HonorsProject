@@ -79,8 +79,8 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="{Binding Id}"   Grid.Column="0" Grid.Row="0" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
-                                    <TextBlock Text="{Binding Name}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"   Grid.Column="0" Grid.Row="0" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0" Grid.Row="1" Style="{StaticResource InlineImgSearchResultsTextBlock}" />
                                 </Grid>
                             </StackPanel>
                         </DataTemplate>
@@ -158,124 +158,123 @@
                       Visibility="{Binding Path=QandAMode, Converter={StaticResource QandAModeToVisibleConverter},
                     ConverterParameter={x:Static enums:QandAMode.Question}}">
                 <StackPanel>
-                    
-                <TextBlock Text="Lecture Only Question" 
+
+                    <TextBlock Text="Lecture Only Question"
                                    Style="{StaticResource FormTitleText}"
                                    Background="LightBlue"
                                    TextAlignment="Center"
                                    Visibility="{Binding SelectedQuestion.IsLectureOnlyQuestion,
                                                         UpdateSourceTrigger=PropertyChanged,
                                                         Converter={StaticResource BoolToVisibleConverter}}"
-                                   HorizontalAlignment="Stretch"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="{Binding SelectedQuestion.Id, StringFormat='Question: {0}'}"
+                                   HorizontalAlignment="Stretch" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding SelectedQuestion.Id, StringFormat='Question: {0}'}"
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Style="{StaticResource FormTitleText}" />
                         <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                        <TextBox TextWrapping="Wrap"
+                            <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
                                  MaxLength="50"
                                  Height="50"
                                  Text="{Binding SelectedQuestion.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                    </GroupBox>
-                    <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <Label Content="{Binding SelectedQuestion.AskedBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        </GroupBox>
+                        <GroupBox Header="Asked By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                            <Label Content="{Binding SelectedQuestion.AskedBy.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource UserFormLbl}" />
-                    </GroupBox>
-                    <GroupBox Header="Time Asked" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
-                        <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        </GroupBox>
+                        <GroupBox Header="Time Asked" Grid.Row="2" Grid.Column="0" Style="{StaticResource FormGroupBox}">
+                            <Label Content="{Binding SelectedQuestion.TimeAsked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                Style="{StaticResource UserFormLbl}" />
-                    </GroupBox>
-                    <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
-                        <Image Source="{Binding SelectedQuestion.IsResolved,
+                        </GroupBox>
+                        <GroupBox Header="Resolved?" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormGroupBox}">
+                            <Image Source="{Binding SelectedQuestion.IsResolved,
                             Converter={StaticResource BoolToResolvedImgConverter}}"
                                Style="{StaticResource IconImage}" />
-                    </GroupBox>
-                    <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
-                        <TextBox TextWrapping="Wrap"
+                        </GroupBox>
+                        <GroupBox Header="Question" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormGroupBox}">
+                            <TextBox TextWrapping="Wrap"
                             AcceptsReturn="True"
                             Height="80"
                             MaxLength="0"
                             Style="{StaticResource UserInput}"
                             IsReadOnly="{Binding QVisConDTO,Converter={StaticResource QuestionToUserInvertedBoolConverter}}"
                             Text="{Binding SelectedQuestion.QuestionText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                    </GroupBox>
-                    <TextBlock Text="{Binding FeedbackMessage}"
+                        </GroupBox>
+                        <TextBlock Text="{Binding FeedbackMessage}"
                                Grid.Row="4"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
-                    <Border  Grid.Row="1"
+                        <Border  Grid.Row="1"
                            Grid.Column="2"
                            Grid.RowSpan="3"
                              BorderBrush="Black"
                              BorderThickness="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-                            <Image Name="QuestionImage"
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Image Name="QuestionImage"
                                    Source="{Binding QuestionImage, UpdateSourceTrigger=PropertyChanged}"
                                    Grid.Row="0"
                                    MaxHeight="500">
-                            </Image>
-                            <Label  Content="{Binding QuestionImageLabel}"
+                                </Image>
+                                <Label  Content="{Binding QuestionImageLabel}"
                                 Grid.Row="1" />
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
 
-                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
-                        <Button Name="QuestionSaveBtn"
+                        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
+                            <Button Name="QuestionSaveBtn"
                                 Command="{Binding SaveFormCmd}"
                                 Content="{Binding Path=FormContextQuestion,
                                             Converter={StaticResource FormContextToTextConverter},
                                             ConverterParameter='Add New Question|Update Question'}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSaveButton}" />
-                        <Button Name="QuestionCancelBtn"
+                            <Button Name="QuestionCancelBtn"
                                 Content="Cancel Changes"
                                 Command="{Binding CancelCmd}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
-                        <Button Name="QuestionDeleteBtn"
+                            <Button Name="QuestionDeleteBtn"
                                 Content="Delete Question"
                                 Command="{Binding DeleteCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionIdToUserOrAdminVisConverter}}"
                                 Style="{StaticResource FormCancelButton}" />
-                        <Button Name="QuestionResolvedBtn"
+                            <Button Name="QuestionResolvedBtn"
                                 Content="Toggle as Resolved?"
                                 Command="{Binding ToggleMarkQCmd}"
                                 CommandParameter="{Binding SelectedQuestion}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource FormSubmitButton}" />
-                        <Button Name="QuestoinUploadBtn"
+                            <Button Name="QuestoinUploadBtn"
                                 Content="Upload Image"
                                 Command="{Binding UploadImageCmd}"
                                 Visibility="{Binding Path=QVisConDTO, Converter={StaticResource QuestionToUserVisConverter}}"
                                 Style="{StaticResource InfoButton}" />
-                    </StackPanel>
-                </Grid>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
-
             </GroupBox>
             <!--Answer Form-->
             <GroupBox Header="{Binding HeaderMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -335,7 +334,7 @@
                              IsReadOnly="{Binding AVisConDTO,Converter={StaticResource AnswerToUserInvertedBoolConverter}}"
                              Text="{Binding SelectedAnswer.AnswerTest,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </GroupBox>
-                    <TextBlock Text="{Binding FeedbackMessage}"
+                    <TextBlock Text="{Binding FeedbackMessage, UpdateSourceTrigger=PropertyChanged}"
                                Grid.Row="4"
                                Grid.Column="0"
                                Grid.ColumnSpan="2"
