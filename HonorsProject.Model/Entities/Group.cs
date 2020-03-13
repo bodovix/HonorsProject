@@ -30,6 +30,16 @@ namespace HonorsProject.Model.Entities
             CreatedByLecturerId = createdByLecturerId;
         }
 
+        public void ShallowCopy(Group selectedGroup)
+        {
+            Id = selectedGroup.Id;
+            Name = selectedGroup.Name;
+            Students = selectedGroup.Students;
+            Sessions = selectedGroup.Sessions;
+            CreatedOn = selectedGroup.CreatedOn;
+            CreatedByLecturerId = selectedGroup.CreatedByLecturerId;
+        }
+
         public bool ValidateGroup(UnitOfWork u)
         {
             //ID auto incremented by EF

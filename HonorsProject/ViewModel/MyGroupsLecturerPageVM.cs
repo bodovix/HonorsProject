@@ -235,13 +235,11 @@ namespace HonorsProject.ViewModel
                     SelectedGroup.Students.Remove(student);
                     result = (UnitOfWork.Complete() > 0) ? true : false;
                     if (result)
-                    {
-                        RefreshAvailableStudents(SelectedGroup);
                         ShowFeedback($"Student {sId} removed from Group {SelectedGroup.Id}.", FeedbackType.Success);
-                    }
                     else
                         ShowFeedback($"Failed to remove student {sId} from Group {SelectedGroup.Id}. \n Please try again or contact support.", FeedbackType.Error);
                     RefreshAvailableStudents(SelectedGroup);
+                    OnPropertyChanged(nameof(SelectedGroup));
                     return true;
                 }
                 return result;
@@ -273,6 +271,7 @@ namespace HonorsProject.ViewModel
                     }
                     int sId = student.Id;
                     SelectedGroup.Students.Add(student);
+                    SelectedGroup.Students = SelectedGroup.Students;
                     result = (UnitOfWork.Complete() > 0) ? true : false;
                     if (result)
                     {

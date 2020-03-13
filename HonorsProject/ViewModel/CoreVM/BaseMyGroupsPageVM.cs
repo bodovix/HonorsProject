@@ -181,8 +181,22 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
+                //Temp group holds the selected Group's properties so they don't get cleared with pooling
+                Group tempGroup = new Group();
+                tempGroup.ShallowCopy(SelectedGroup);
+
                 UpdateMyGroupsList(RowLimit);
                 RefreshAvailableStudents(SelectedGroup);
+                SelectedGroup.ShallowCopy(tempGroup);
+
+                foreach (Group g in Groups)
+                {//safe way to get record value updates from database
+                    if (g.Id != SelectedGroup.Id)
+                        UnitOfWork.Reload(g);
+                    if (g.Id == SelectedGroup.Id)//reload the groups list
+                        SelectedGroup.Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetStudentsFromGroup(SelectedGroup));
+                }
+                OnPropertyChanged(nameof(SelectedGroup));
             });
         }
 
@@ -276,11 +290,7 @@ namespace HonorsProject.ViewModel.CoreVM
 
         protected void RefreshAvailableStudents(Group group)
         {
-            List<Student> students;
-            //if (group == null || group.Id == 0) // If in New Mode
-            //    students = UnitOfWork.StudentRepo.GetAll().ToList();
-            //else // if student already selected
-            students = UnitOfWork.StudentRepo.GetStudentsNotInGroup(group).ToList();
+            List<Student> students = UnitOfWork.StudentRepo.GetStudentsNotInGroup(group).ToList();
             StudentsNotInGroup = new ObservableCollection<Student>(students);
         }
 

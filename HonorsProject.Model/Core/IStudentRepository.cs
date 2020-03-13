@@ -14,6 +14,9 @@ namespace HonorsProject.Model.Core
         Student FindById(int id);
 
         List<Student> GetTopXFromSearch(string searchStudentTxt, int rows);
+
         List<Student> GetStudentsNotInGroup(Group group);
+
+        List<Student> GetStudentsFromGroup(Group group);
     }
 }

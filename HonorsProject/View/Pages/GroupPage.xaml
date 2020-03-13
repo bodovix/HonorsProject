@@ -101,23 +101,23 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox Header="ID" Grid.Row="0" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <Label  Style="{StaticResource UserFormLbl  }"
-                                 Content="{Binding SelectedGroup.Id}" />
+                                Content="{Binding SelectedGroup.Id}" />
                     </GroupBox>
                     <GroupBox Header="Created On" Grid.Row="0" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <Label Content="{Binding SelectedGroup.CreatedOn,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           Height="30" />
+                               Height="30" />
                     </GroupBox>
 
                     <GroupBox Header="Name" Grid.Row="1" Grid.Column="0" Style="{StaticResource FormGroupBox}">
                         <TextBox TextWrapping="Wrap"
                                  Style="{StaticResource UserInput}"
                                  MaxLength="50"
-                                 Text="{Binding SelectedGroup.Name}"
+                                 Text="{Binding SelectedGroup.Name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  IsEnabled="{Binding UserRole,Converter={StaticResource RoleToBoolConverter},ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     </GroupBox>
                     <GroupBox Header="Created By" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormGroupBox}">
                         <Label Content="{Binding SelectedGroup.CreatedByLecturerId, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                           Height="30" />
+                               Height="30" />
                     </GroupBox>
                     <TextBlock Text="{Binding FeedbackMessage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                Grid.Row="2"
@@ -126,12 +126,12 @@
                                Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"
                                Style="{StaticResource UserInputFeedback}" />
                     <Button Name="SaveBtn"
-                        Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New Group|Update Group'}"
-                        Command="{Binding SaveFormCmd}"
-                        Grid.Column="0"
-                        Grid.Row="3"
-                        Style="{StaticResource FormSaveButton}"
-                        Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
+                            Content="{Binding Path=FormContext, Converter={StaticResource FormContextToTextConverter},ConverterParameter='Add New Group|Update Group'}"
+                            Command="{Binding SaveFormCmd}"
+                            Grid.Column="0"
+                            Grid.Row="3"
+                            Style="{StaticResource FormSaveButton}"
+                            Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
                             ConverterParameter={x:Static enums:Role.Lecturer}}" />
                     <Button Name="CancelBtn"
                         Content="Cancel"
