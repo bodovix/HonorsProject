@@ -181,22 +181,32 @@ namespace HonorsProject.ViewModel.CoreVM
         {
             App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
             {
-                //Temp group holds the selected Group's properties so they don't get cleared with pooling
-                Group tempGroup = new Group();
-                tempGroup.ShallowCopy(SelectedGroup);
+                try
+                {
+                    //Temp group holds the selected Group's properties so they don't get cleared with pooling
+                    Group tempGroup = new Group();
+                    tempGroup.ShallowCopy(SelectedGroup);
 
-                UpdateMyGroupsList(RowLimit);
-                RefreshAvailableStudents(SelectedGroup);
-                SelectedGroup.ShallowCopy(tempGroup);
+                    UpdateMyGroupsList(RowLimit);
+                    RefreshAvailableStudents(SelectedGroup);
+                    SelectedGroup.ShallowCopy(tempGroup);
 
-                foreach (Group g in Groups)
-                {//safe way to get record value updates from database
-                    if (g.Id != SelectedGroup.Id)
-                        UnitOfWork.Reload(g);
-                    if (g.Id == SelectedGroup.Id)//reload the groups list
-                        SelectedGroup.Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetStudentsFromGroup(SelectedGroup));
+                    foreach (Group g in Groups)
+                    {//safe way to get record value updates from database
+                        if (g.Id != SelectedGroup.Id)
+                            UnitOfWork.Reload(g);
+                        if (g.Id == SelectedGroup.Id)//reload the groups list
+                        {
+                            //SelectedGroup.Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetStudentsFromGroup(SelectedGroup));
+                            UnitOfWork.LoadStudents(SelectedGroup);
+                        }
+                    }
+                    OnPropertyChanged(nameof(SelectedGroup));
                 }
-                OnPropertyChanged(nameof(SelectedGroup));
+                catch (Exception ex)
+                {
+                    ShowFeedback($"Error refreshing content. \n{ex.Message}", FeedbackType.Error);
+                }
             });
         }
 

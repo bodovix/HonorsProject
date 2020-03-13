@@ -53,6 +53,11 @@ namespace HonorsProject.Model.Data
             _context.Entry(baseEntityToReload).Reload();
         }
 
+        public void LoadStudents(Group group)
+        {
+            _context.Entry(group).Collection(g => g.Students).Load();
+        }
+
         public void Dispose()
         {
             _context.Dispose();
