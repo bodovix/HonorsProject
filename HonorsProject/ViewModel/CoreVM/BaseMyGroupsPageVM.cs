@@ -195,10 +195,15 @@ namespace HonorsProject.ViewModel.CoreVM
                     {//safe way to get record value updates from database
                         if (g.Id != SelectedGroup.Id)
                             UnitOfWork.Reload(g);
-                        if (g.Id == SelectedGroup.Id)//reload the groups list
+                        if (g.Id == SelectedGroup.Id)//reload the groups Students list
                         {
-                            //SelectedGroup.Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetStudentsFromGroup(SelectedGroup));
-                            UnitOfWork.LoadStudents(SelectedGroup);
+                            ////SelectedGroup.Students = new ObservableCollection<Student>(UnitOfWork.StudentRepo.GetStudentsFromGroup(SelectedGroup));
+                            //foreach (Student s in SelectedGroup.Students)
+                            //{
+                            //    UnitOfWork.Detach(s);
+                            //    SelectedGroup.Students.Remove(s);
+                            //}
+                            //UnitOfWork.LoadStudents(SelectedGroup);
                         }
                     }
                     OnPropertyChanged(nameof(SelectedGroup));

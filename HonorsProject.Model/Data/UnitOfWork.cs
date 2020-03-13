@@ -3,6 +3,7 @@ using HonorsProject.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,11 @@ namespace HonorsProject.Model.Data
         public void LoadStudents(Group group)
         {
             _context.Entry(group).Collection(g => g.Students).Load();
+        }
+
+        public void Detach(BaseEntity ent)
+        {
+            _context.Entry(ent).State = EntityState.Detached;
         }
 
         public void Dispose()
