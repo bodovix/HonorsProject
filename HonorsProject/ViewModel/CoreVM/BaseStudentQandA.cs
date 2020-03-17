@@ -210,7 +210,7 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 if (SelectedQuestion != null)
                 {
-                    if (SelectedAnswer.Id == 0)
+                    if (SelectedQuestion.Id == 0)
                     {
                         //if not already saved, save it. then continue if all happy
                         bool initSave = Save();
