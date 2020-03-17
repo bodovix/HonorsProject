@@ -385,22 +385,18 @@ namespace HonorsProject.ViewModel.CoreVM
                         OnPropertyChanged(nameof(SelectedAnswer));
 
                         //thread safe way to get record updates pulled from database (doesn't do selected Q or A)
-                        if (QandAMode == QandAMode.Answer)
-                        {
-                            foreach (Answer a in Answers)
-                                if (a.Id != SelectedAnswer.Id)
-                                    UnitOfWork.Reload(a);
-                            foreach (Question q in Questions)
-                                UnitOfWork.Reload(q);
-                        }
-                        if (QandAMode == QandAMode.Question)
-                        {
-                            foreach (Question q in Questions)
-                                if (q.Id != SelectedQuestion.Id)
-                                    UnitOfWork.Reload(q);
-                            foreach (Answer a in Answers)
+
+                        foreach (Answer a in Answers)
+                            if (a.Id != SelectedAnswer.Id)
                                 UnitOfWork.Reload(a);
-                        }
+                        foreach (Question q in Questions)
+                            UnitOfWork.Reload(q);
+
+                        foreach (Question q in Questions)
+                            if (q.Id != SelectedQuestion.Id)
+                                UnitOfWork.Reload(q);
+                        foreach (Answer a in Answers)
+                            UnitOfWork.Reload(a);
                     }
                     else
                     {
