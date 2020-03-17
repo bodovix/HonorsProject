@@ -27,6 +27,7 @@ namespace HonorsProject.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool HasLoggedInOnce { get; set; }
         public MainWindowVM VM { get; set; }
 
         public MainWindow()
@@ -36,8 +37,26 @@ namespace HonorsProject.View
             InitializeComponent();
             ContainerDockPannel.DataContext = VM;
             InitiallyHideNavigation();
+            if (App.AppUser == null)
+                MakeWindowSmall();
+            else if (App.AppUser.Id == 0)
+                MakeWindowSmall();
+            else
+                MakeWindowBig();
 
             Mediator.Register(MediatorChannels.LoginAsUserX.ToString(), LoggInAsX);
+        }
+
+        private void MakeWindowBig()
+        {
+            WindowState = WindowState.Maximized;
+        }
+
+        private void MakeWindowSmall()
+        {
+            Height = 300;
+            Width = 300;
+            this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
         private void InitiallyHideNavigation()
@@ -88,6 +107,11 @@ namespace HonorsProject.View
             Role userRole = (Role)obj;
             App.LoggedInAs = userRole;
             ShowAppropriateNavigation();
+            if (!HasLoggedInOnce)
+            {
+                MakeWindowBig();
+                HasLoggedInOnce = true;
+            }
             MainContent.Content = new MySessionsPage();
         }
 
@@ -175,6 +199,7 @@ namespace HonorsProject.View
             InitiallyHideNavigation();
             App.AppUser = null;
             Mediator.Register(MediatorChannels.LoginAsUserX.ToString(), LoggInAsX);
+
             MainContent.Content = new LoginPage();
         }
     }
