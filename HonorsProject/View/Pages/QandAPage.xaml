@@ -481,10 +481,13 @@
                                                     CommandParameter="{Binding}"
                                                     Style="{StaticResource FormCancelButton}" />
                                             </StackPanel>
-                                            <Label Content="{Binding CommentText}"
-                                                   Grid.Row="1"
-                                                   Grid.Column="0">
-                                            </Label>
+                                            <TextBlock  
+                                                Text="{Binding CommentText}"
+                                                TextWrapping="Wrap"
+                                                MaxWidth="1000"
+                                                Grid.Row="1"
+                                                Grid.Column="0">
+                                            </TextBlock>
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
