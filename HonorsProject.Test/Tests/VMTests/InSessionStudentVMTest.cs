@@ -52,7 +52,6 @@ namespace HonorsProject.Test.VMTest
             VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
             VM.SelectedQuestion = VM.Questions.FirstOrDefault();
             VM.CommentText = "";
-            int expected = 5;
             //Act
             bool result = VM.Post();
             int actual = VM.SelectedQuestion.Comments.Count;
