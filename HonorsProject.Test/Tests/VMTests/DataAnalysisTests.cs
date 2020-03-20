@@ -1,6 +1,8 @@
 ﻿using System;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
+using HonorsProject.Model.Entities;
+using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,14 +20,40 @@ namespace HonorsProject.Test.VMTest
         }
 
         [TestMethod]
-        public void TextRazorSucces()
+        public void Constructor_Empty_Success()
         {
             //Arrange
-
+            //--already constructed
             //Act
-            string result = VM.GetKeyPhraseAPI();
+            //--act in the constructor
             //Assert
-            Assert.IsTrue(!String.IsNullOrEmpty(result));
+            Assert.IsNull(VM.CommonPhrases);
+            Assert.AreEqual(2, VM.Groups.Count);
+            Assert.IsNull(VM.MostFrequentAskers);
+            Assert.AreEqual(0, VM.NumQuestionsAsked);
+            Assert.IsNull(VM.SelectedSession);
+            Assert.IsNull(VM.SelectedGroup);
+            Assert.AreEqual("No Groups or Sessions selected.", VM.SelectionTitle);
+        }
+
+        [TestMethod]
+        public void Constructor_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            //--act in the constructor
+            //Assert
+            Assert.AreEqual(3, VM.CommonPhrases.Count);
+            Assert.AreEqual(2, VM.Groups.Count);
+            Assert.AreEqual(1, VM.MostFrequentAskers.Count);
+            Assert.AreEqual(2, VM.NumQuestionsAsked);
+            Assert.AreEqual(1, VM.SelectedSession.Id);
+            Assert.AreEqual(1, VM.SelectedGroup.Id);
+            Assert.AreEqual("Computing 19/20 - Todays Sesh", VM.SelectionTitle);
         }
     }
 }
