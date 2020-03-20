@@ -68,20 +68,5 @@ namespace HonorsProject.Test.VMTest
             Assert.IsFalse(result);
             Assert.IsTrue(VM.SelectedLecturer.IsSuperAdmin);
         }
-
-        [TestMethod]
-        public void ToggleAdmin_NonLectureId_False()
-        {
-            //Arrange
-            ClearDatabase();
-            CreateMySessionTestData(_lecturer);
-            VM = new LecturerPageVM(dbConName, _lecturer);
-            VM.SelectedLecturer = VM.Lecturers.Where(l => l.Id == -2).FirstOrDefault();
-            //Act
-            bool result = VM.ToggleAdminRole(VM.SelectedLecturer);
-            result = VM.ToggleAdminRole(VM.SelectedLecturer);
-            //Assert
-            Assert.IsFalse(result);
-        }
     }
 }
