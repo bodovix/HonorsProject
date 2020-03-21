@@ -70,21 +70,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Tests\CommentTest.cs" />
+    <Compile Include="Tests\ModelTests\CommentTest.cs" />
     <Compile Include="Tests\RepositoryTests\SessionRepositoryTest.cs" />
-    <Compile Include="Tests\SessionTest.cs" />
-    <Compile Include="Tests\StudentTest.cs" />
-    <Compile Include="Tests\QuestionTest.cs" />
-    <Compile Include="Tests\LecturerTest.cs" />
-    <Compile Include="Tests\GroupTest.cs" />
-    <Compile Include="Tests\AnswerTest.cs" />
+    <Compile Include="Tests\ModelTests\SessionTest.cs" />
+    <Compile Include="Tests\ModelTests\StudentTest.cs" />
+    <Compile Include="Tests\ModelTests\QuestionTest.cs" />
+    <Compile Include="Tests\ModelTests\LecturerTest.cs" />
+    <Compile Include="Tests\ModelTests\GroupTest.cs" />
+    <Compile Include="Tests\ModelTests\AnswerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\VMTests\DataAnalysisTests.cs" />
-    <Compile Include="Tests\VMTests\InSessionStudentVMTest.cs" />
-    <Compile Include="Tests\VMTests\LecturerVMTests.cs" />
-    <Compile Include="Tests\VMTests\MyStudentPageVMTest.cs" />
-    <Compile Include="Tests\VMTests\MySessionsLecturerVMTest.cs" />
-    <Compile Include="Tests\VMTests\LoginVMTest.cs" />
+    <Compile Include="Tests\ViewModelTests\DataAnalysisTests.cs" />
+    <Compile Include="Tests\ViewModelTests\InSessionStudentVMTest.cs" />
+    <Compile Include="Tests\ViewModelTests\LecturerVMTests.cs" />
+    <Compile Include="Tests\ViewModelTests\MyStudentPageVMTest.cs" />
+    <Compile Include="Tests\ViewModelTests\MySessionsLecturerVMTest.cs" />
+    <Compile Include="Tests\ViewModelTests\LoginVMTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

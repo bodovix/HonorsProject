@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HonorsProject.Model.Entities;
 using HonorsProject.Model.Data;
 
-namespace HonorsProject.Test
+namespace HonorsProject.Test.Model
 {
     [TestClass]
     public class AnswerTest : BaseTest

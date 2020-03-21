@@ -6,7 +6,7 @@ using HonorsProject.Model.Enums;
 using HonorsProject.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HonorsProject.Test.VMTest
+namespace HonorsProject.Test.ViewModel
 {
     [TestClass]
     public class DataAnalysisTests : BaseTest

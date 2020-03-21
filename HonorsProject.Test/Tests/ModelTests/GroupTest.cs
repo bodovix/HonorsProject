@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HonorsProject.Test
+namespace HonorsProject.Test.Model
 {
     [TestClass]
-    public class SessionTest
+    public class GroupTest
     {
         [TestMethod]
         public void TestMethod1()

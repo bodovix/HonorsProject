@@ -2,7 +2,7 @@
 using HonorsProject.Model.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HonorsProject.Test
+namespace HonorsProject.Test.Model
 {
     [TestClass]
     public class CommentTest
