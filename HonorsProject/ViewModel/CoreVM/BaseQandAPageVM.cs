@@ -171,6 +171,7 @@ namespace HonorsProject.ViewModel.CoreVM
         private async Task AwaitQuestionImage()
         {
             QuestionImageLabel = "Loading Image...";
+            QuestionImage = null;
             QuestionImage = await RefreshImage(nameof(QuestionImage), SelectedQuestion.ImageLocation);
             if (QuestionImage == null)
                 QuestionImageLabel = "No Image.";
@@ -181,6 +182,7 @@ namespace HonorsProject.ViewModel.CoreVM
         private async Task AwaitAnswerImage()
         {
             AnswerImageLabel = "Loading Image...";
+            AnswerImage = null;
             AnswerImage = await RefreshImage(nameof(AnswerImage), SelectedAnswer.ImageLocation);
             if (AnswerImage == null)
                 AnswerImageLabel = "No Image.";
@@ -388,16 +390,22 @@ namespace HonorsProject.ViewModel.CoreVM
                         if (QandAMode == QandAMode.Answer)
                         {
                             if (Answers != null)
+                            {
                                 foreach (Answer a in Answers)
                                     if (a.Id != SelectedAnswer.Id)
                                         UnitOfWork.Reload(a);
+                                OnPropertyChanged(nameof(AVisConDTO));
+                            }
                         }
                         else
                         {
                             if (Questions != null)
+                            {
                                 foreach (Question q in Questions)
                                     if (q.Id != SelectedQuestion.Id)
                                         UnitOfWork.Reload(q);
+                                OnPropertyChanged(nameof(AVisConDTO));
+                            }
                         }
                     }
                     else
