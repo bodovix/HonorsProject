@@ -163,6 +163,8 @@ namespace HonorsProject.ViewModel.CoreVM
                 QVisConDTO.Question = value;
                 OnPropertyChanged(nameof(QVisConDTO));
                 SetHeaderMessage();
+                if (SelectedQuestion.IsNotificationHighlighted)
+                    SelectedQuestion.IsNotificationHighlighted = false;
                 //if selected question has image. download it
                 AsyncRunner.Run(AwaitQuestionImage());
             }
@@ -252,6 +254,13 @@ namespace HonorsProject.ViewModel.CoreVM
                 AVisConDTO.Answer = value;
                 OnPropertyChanged(nameof(AVisConDTO));
                 SetHeaderMessage();
+                if (SelectedAnswer.IsNotificationHighlighted)
+                {
+                    SelectedAnswer.IsNotificationHighlighted = false;
+                    if (SelectedQuestion != null)
+                        SelectedQuestion.IsNotificationHighlighted = false;
+                    OnPropertyChanged(nameof(SelectedQuestion));
+                }
                 //if selected answer has image. download it
                 AsyncRunner.Run(AwaitAnswerImage());
             }

@@ -119,10 +119,12 @@
                         ItemsSource="{Binding Answers,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding SelectedAnswer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                           HorizontalContentAlignment="Stretch"
                         PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Stretch"
                                         Background="{Binding IsNotificationHighlighted,
                                             Converter={StaticResource IsHighlightedToColorConverter}}">
                                 <Image Source="../Images/starIcon.png"
