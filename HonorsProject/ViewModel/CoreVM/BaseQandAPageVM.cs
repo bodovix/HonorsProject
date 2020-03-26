@@ -15,6 +15,7 @@ using System.Windows.Media;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using HonorsProject.Model.HelperClasses;
+using System.Media;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
@@ -159,12 +160,14 @@ namespace HonorsProject.ViewModel.CoreVM
                 _selectedQuestion = value;
                 UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                 UpdateCommentsList();
+                if (SelectedQuestion.IsNotificationHighlighted)
+                    SelectedQuestion.IsNotificationHighlighted = false;
                 OnPropertyChanged(nameof(SelectedQuestion));
+
+                //Other property stuff...
                 QVisConDTO.Question = value;
                 OnPropertyChanged(nameof(QVisConDTO));
                 SetHeaderMessage();
-                if (SelectedQuestion.IsNotificationHighlighted)
-                    SelectedQuestion.IsNotificationHighlighted = false;
                 //if selected question has image. download it
                 AsyncRunner.Run(AwaitQuestionImage());
             }
@@ -250,10 +253,6 @@ namespace HonorsProject.ViewModel.CoreVM
                 //if selected.id == 0 create else update
                 FormContextAnswer = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedAnswer = value;
-                OnPropertyChanged(nameof(SelectedAnswer));
-                AVisConDTO.Answer = value;
-                OnPropertyChanged(nameof(AVisConDTO));
-                SetHeaderMessage();
                 if (SelectedAnswer.IsNotificationHighlighted)
                 {
                     SelectedAnswer.IsNotificationHighlighted = false;
@@ -261,6 +260,11 @@ namespace HonorsProject.ViewModel.CoreVM
                         SelectedQuestion.IsNotificationHighlighted = false;
                     OnPropertyChanged(nameof(SelectedQuestion));
                 }
+                OnPropertyChanged(nameof(SelectedAnswer));
+                //other properties stuff...
+                AVisConDTO.Answer = value;
+                OnPropertyChanged(nameof(AVisConDTO));
+                SetHeaderMessage();
                 //if selected answer has image. download it
                 AsyncRunner.Run(AwaitAnswerImage());
             }
@@ -460,6 +464,13 @@ namespace HonorsProject.ViewModel.CoreVM
                                 if (newAs.Contains(answer.Id))
                                     q.IsNotificationHighlighted = true;
             //update view
+            if (newAs != null)
+                if (newAs.Count > 0)
+                {
+                    SoundPlayer player = new SoundPlayer(@"..\..\View\Sound\bing.wav");
+                    player.Play();
+                }
+
             OnPropertyChanged(nameof(Questions));
             OnPropertyChanged(nameof(Answers));
 

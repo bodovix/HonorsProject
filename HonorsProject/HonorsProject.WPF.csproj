@@ -334,5 +334,8 @@
   <ItemGroup>
     <Resource Include="View\Images\dataAnalisis.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="View\Sound\bing.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
