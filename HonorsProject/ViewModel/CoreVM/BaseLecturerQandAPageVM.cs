@@ -144,40 +144,48 @@ namespace HonorsProject.ViewModel.CoreVM
 
         public async override Task<bool> UploadImage(Image imageToUpload)
         {
-            ClearFeedback();
-            bool ftpResult = false;
-            bool dbResult = false;
-            bool finalResult = false;
-
-            if (SelectedAnswer.AnsweredBy == User)
+            try
             {
-                if (SelectedAnswer != null)
+                ClearFeedback();
+                bool ftpResult = false;
+                bool dbResult = false;
+                bool finalResult = false;
+
+                if (SelectedAnswer.AnsweredBy == User)
                 {
-                    if (SelectedAnswer.Id == 0)
+                    if (SelectedAnswer != null)
                     {
-                        //if not already saved, save it. then continue if all happy
-                        bool initSave = Save();
-                        if (!initSave)
-                            return false;
-                    }
-                    if (String.IsNullOrEmpty(SelectedAnswer.ImageLocation))
-                    {
-                        await AddImage(ftpResult, dbResult);
+                        if (SelectedAnswer.Id == 0)
+                        {
+                            //if not already saved, save it. then continue if all happy
+                            bool initSave = Save();
+                            if (!initSave)
+                                return false;
+                        }
+                        if (String.IsNullOrEmpty(SelectedAnswer.ImageLocation))
+                        {
+                            await AddImage(ftpResult, dbResult);
+                        }
+                        else
+                        {
+                            //Replace existing Question image
+                            bool result = await ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
+                            if (result)
+                                await AddImage(ftpResult, dbResult);
+                            else
+                                ShowFeedback("Failed to Replace Existing image. Try again or contact support", FeedbackType.Error);
+                        }
                     }
                     else
-                    {
-                        //Replace existing Question image
-                        bool result = await ImageHandler.DeleteFileFromFTPServer(SelectedAnswer.ImageLocation);
-                        if (result)
-                            await AddImage(ftpResult, dbResult);
-                        else
-                            ShowFeedback("Failed to Replace Existing image. Try again or contact support", FeedbackType.Error);
-                    }
+                        FeedbackMessage = "You can only add an image to a question or answer you posted.";
                 }
-                else
-                    FeedbackMessage = "You can only add an image to a question or answer you posted.";
+                return finalResult;
             }
-            return finalResult;
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return false;
+            }
         }
 
         private async Task AddImage(bool ftpResult, bool dbResult)
