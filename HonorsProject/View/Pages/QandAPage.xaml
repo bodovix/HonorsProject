@@ -29,6 +29,7 @@
         <cv:IDToVisConverter x:Key="IDToVisConverter" />
         <cv:IDOrAdminToVisConverter x:Key="IDOrAdminToVisConverter" />
         <cv:SessionDatesToVisible x:Key="SessionDatesToVisible" />
+        <cv:IsHighlightedToColorConverter x:Key="IsHighlightedToColorConverter" />
     </Page.Resources>
     <Grid Name="MainContainer">
         <Grid.ColumnDefinitions>
@@ -67,7 +68,9 @@
                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal"
+                                        Background="{Binding IsNotificationHighlighted,
+                                            Converter={StaticResource IsHighlightedToColorConverter}}">
                                 <Image Source="{Binding IsResolved,
                                         Converter={StaticResource BoolToResolvedImgConverter}}"
                                            HorizontalAlignment="Left"
@@ -119,7 +122,9 @@
                         PreviewMouseLeftButtonUp="searchAResultsList_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal"
+                                        Background="{Binding IsNotificationHighlighted,
+                                            Converter={StaticResource IsHighlightedToColorConverter}}">
                                 <Image Source="../Images/starIcon.png"
                                         HorizontalAlignment="Left"
                                         Visibility="{Binding WasHelpfull,
@@ -481,7 +486,7 @@
                                                     CommandParameter="{Binding}"
                                                     Style="{StaticResource FormCancelButton}" />
                                             </StackPanel>
-                                            <TextBlock  
+                                            <TextBlock
                                                 Text="{Binding CommentText}"
                                                 TextWrapping="Wrap"
                                                 MaxWidth="1000"

@@ -123,6 +123,7 @@
     <Compile Include="ViewModel\Converters\AnswerToUserBoolConverter.cs" />
     <Compile Include="ViewModel\Converters\BoolToResolvedImgConverter.cs" />
     <Compile Include="ViewModel\Converters\AnswerToUserVisConverter.cs" />
+    <Compile Include="ViewModel\Converters\IsHighlightedToColorConverter.cs" />
     <Compile Include="ViewModel\Converters\SessionDatesToVisible.cs" />
     <Compile Include="ViewModel\Converters\InverseBooleanConverter.cs" />
     <Compile Include="ViewModel\Converters\FeedbackTypeToForcolorConverter.cs" />
