@@ -434,38 +434,22 @@ namespace HonorsProject.ViewModel.CoreVM
             List<int> newAs = recentAIds.Where(oa => originalAids.All(ra => ra != oa)).ToList();
             //highlight new Q's
             if (newQs != null)
-            {
                 foreach (Question q in Questions)
-                {
                     if (newQs.Contains(q.Id))
                         q.IsNotificationHighlighted = true;
-                }
-            }
             //highlight new A's
             if (newAs != null)
-            {
                 foreach (Answer a in Answers)
-                {
                     if (newAs.Contains(a.Id))
                         a.IsNotificationHighlighted = true;
-                }
-            }
             //highlight new A's Q's
             if (newAs != null)
-            {
                 if (Questions != null)
                     foreach (Question q in Questions)
-                    {
                         if (q.Answers != null)
                             foreach (Answer answer in q.Answers)
-                            {
                                 if (newAs.Contains(answer.Id))
-                                {
                                     q.IsNotificationHighlighted = true;
-                                }
-                            }
-                    }
-            }
             //update view
             OnPropertyChanged(nameof(Questions));
             OnPropertyChanged(nameof(Answers));
