@@ -80,7 +80,7 @@ namespace HonorsProject.ViewModel
             {
                 if (value == null)
                     value = new Student();
-                FeedbackMessage = "";
+                ClearFeedback();
                 //if selected.id == 0 create else update
                 FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedStudent = value;
@@ -372,7 +372,7 @@ namespace HonorsProject.ViewModel
                 {
                     if (SelectedStudent.Groups.Contains(entityToAdd))
                     {
-                        FeedbackMessage = $"Student already belongs to group: {entityToAdd.Name}";
+                        ShowFeedback($"Student already belongs to group: {entityToAdd.Name}", FeedbackType.Info);
                         return false;
                     }
                     SelectedStudent.Groups.Add(group);

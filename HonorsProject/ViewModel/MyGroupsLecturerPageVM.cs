@@ -52,7 +52,7 @@ namespace HonorsProject.ViewModel
             }
             catch (Exception ex)
             {
-                FeedbackMessage = ex.Message;
+                ShowFeedback(ex.Message, FeedbackType.Error);
             }
         }
 

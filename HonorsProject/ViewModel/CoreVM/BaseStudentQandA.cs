@@ -234,7 +234,7 @@ namespace HonorsProject.ViewModel.CoreVM
                         }
                     }
                     else
-                        FeedbackMessage = "You can only add an image to a question you proposed.";
+                        ShowFeedback("You can only add an image to a question you proposed.", FeedbackType.Error);
                 }
                 return finalResult;
             }
