@@ -375,6 +375,9 @@ namespace HonorsProject.ViewModel.CoreVM
             {
                 try
                 {
+                    List<int> originalQids = Questions.Select(q => q.Id).ToList();
+                    List<int> originalAids = Answers.Select(a => a.Id).ToList();
+
                     UpdateQuestionsList(QuestionSearchTxt);
                     if (SelectedAnswer != null)
                     {
@@ -412,6 +415,9 @@ namespace HonorsProject.ViewModel.CoreVM
                     {
                         UpdateAnswersList(SelectedQuestion, AnswerSearchTxt);
                     }
+                    List<int> newQIds = Questions.Select(q => q.Id).ToList();
+                    List<int> newAIds = Answers.Select(a => a.Id).ToList();
+                    SortNotifications(originalQids, originalAids, newQIds, newAIds);
                     UpdateCommentsList();
                 }
                 catch (Exception ex)
@@ -419,6 +425,20 @@ namespace HonorsProject.ViewModel.CoreVM
                     ShowFeedback($"Error updating from database:\n{ex.Message}", FeedbackType.Error);
                 }
             });
+        }
+
+        private void SortNotifications(List<int> originalQids, List<int> originalAids, List<int> recentQIds, List<int> recentAIds)
+        {
+            //find out which Q and A's are new
+            List<int> newQs = recentQIds.Where(oq => originalQids.All(rq => rq != oq)).ToList();
+            //highlight new Q's
+
+            //highlight new A's
+
+            //highlight new A's Q's
+
+            //Q and A's  highlights are cleared once they are the selected item
+            //or when page re-loaded as they default to plain
         }
 
         public abstract bool Save();

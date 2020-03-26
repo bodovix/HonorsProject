@@ -19,6 +19,7 @@ namespace HonorsProject.Model.Entities
         public virtual Student AskedBy { get; set; }
         public string ImageLocation { get; set; }
         public bool IsLectureOnlyQuestion { get; set; }
+        public bool IsNotificationHighlighted { get; set; }//defaults to false
 
         public Question()
         {

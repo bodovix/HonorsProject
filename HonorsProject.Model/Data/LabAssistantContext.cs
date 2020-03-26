@@ -53,10 +53,14 @@ namespace HonorsProject.Model.Data
                 .HasMany<Answer>(p => p.Answers)
                 .WithRequired(a => a.Question)
                 .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Question>()
+                .Ignore(q => q.IsNotificationHighlighted);
             //Answer
             modelBuilder.Entity<Answer>()
                 .Property(q => q.AnswerTest)
                 .IsRequired();
+            modelBuilder.Entity<Answer>()
+                .Ignore(a => a.IsNotificationHighlighted);
             //Lecturer
             modelBuilder.Entity<Lecturer>()
                 .HasMany<Answer>(l => l.Answers)
