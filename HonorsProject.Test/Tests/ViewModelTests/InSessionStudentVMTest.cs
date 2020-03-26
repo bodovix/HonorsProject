@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
@@ -122,5 +123,108 @@ namespace HonorsProject.Test.ViewModel
         }
 
         #endregion Comments
+
+        #region Notifications
+
+        [TestMethod]
+        public void Notify_NoNew_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestData(SubgridContext.ActiveSessions);
+            int notifiedQuestionId = 2;
+            bool notifyState = true;
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            List<int> orinailQs = new List<int>() { 1, 2 };
+            List<int> recentQs = new List<int>() { 1, 2 };
+            List<int> orinailAs = new List<int>() { 1, 2, 3 };
+            List<int> recentAs = new List<int>() { 1, 2, 3 };
+
+            //Act
+            bool result = VM.Post();
+            VM.SortNotifications(orinailQs, orinailAs, recentQs, recentAs);
+
+            bool qChanged = false;
+            bool aChanged = false;
+            foreach (Question q in VM.Questions)
+                if (q.IsNotificationHighlighted)
+                    qChanged = true;
+            foreach (Answer a in VM.Answers)
+                if (a.IsNotificationHighlighted)
+                    aChanged = true;
+            //Assert
+            Assert.IsFalse(qChanged);
+            Assert.IsFalse(aChanged);
+        }
+
+        [TestMethod]
+        public void Notify_NewQuestion_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestData(SubgridContext.ActiveSessions);
+            int notifiedQuestionId = 2;
+            bool notifyState = true;
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            List<int> orinailQs = new List<int>() { 1 };
+            List<int> recentQs = new List<int>() { 1, 2 };
+            List<int> orinailAs = new List<int>() { 1, 2, 3 };
+            List<int> recentAs = new List<int>() { 1, 2, 3 };
+
+            //Act
+            bool result = VM.Post();
+            VM.SortNotifications(orinailQs, orinailAs, recentQs, recentAs);
+
+            //Assert
+            Assert.AreEqual(notifyState, VM.Questions.Where(q => q.Id == notifiedQuestionId).FirstOrDefault().IsNotificationHighlighted);
+        }
+
+        [TestMethod]
+        public void Notify_NewAnswer_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestDataForNotifications(SubgridContext.ActiveSessions);
+            int notifiedId = 2;
+            bool notifyState = true;
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            VM.SelectedQuestion = VM.Questions.Where(q => q.Id == 2).FirstOrDefault();
+            List<int> orinailQs = new List<int>() { 1, 2 };
+            List<int> recentQs = new List<int>() { 1, 2 };
+            List<int> orinailAs = new List<int>() { 1 };
+            List<int> recentAs = new List<int>() { 1, 2 };
+
+            //Act
+            bool result = VM.Post();
+            VM.SortNotifications(orinailQs, orinailAs, recentQs, recentAs);
+
+            //Assert
+            Assert.AreEqual(notifyState, VM.Answers.Where(a => a.Id == notifiedId).FirstOrDefault().IsNotificationHighlighted);
+        }
+
+        [TestMethod]
+        public void Notify_NewAnswer_QuestionHighlighted_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            Session selectedSession = CreateInSessionTestDataForNotifications(SubgridContext.ActiveSessions);
+            int partenQuestionToBeNotifiedId = 2;
+            bool notifyState = true;
+            VM = new InSessionStudentQandAVM(_appUser, selectedSession, dbConName);
+            VM.SelectedQuestion = VM.Questions.Where(q => q.Id == 2).FirstOrDefault();
+            List<int> orinailQs = new List<int>() { 1, 2 };
+            List<int> recentQs = new List<int>() { 1, 2 };
+            List<int> orinailAs = new List<int>() { 1 };
+            List<int> recentAs = new List<int>() { 1, 2 };
+
+            //Act
+            bool result = VM.Post();
+            VM.SortNotifications(orinailQs, orinailAs, recentQs, recentAs);
+
+            //Assert
+            Assert.AreEqual(notifyState, VM.Questions.Where(q => q.Id == partenQuestionToBeNotifiedId).FirstOrDefault().IsNotificationHighlighted);
+        }
+
+        #endregion Notifications
     }
 }
