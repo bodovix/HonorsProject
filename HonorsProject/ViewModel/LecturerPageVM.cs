@@ -80,7 +80,7 @@ namespace HonorsProject.ViewModel
             {
                 if (value == null)
                     value = new Lecturer();
-                FeedbackMessage = "";
+                ClearFeedback();
                 //if selected.id == 0 create else update
                 FormContext = (value.Id == 0) ? FormContext.Create : FormContext.Update;
                 _selectedLecturer = value;

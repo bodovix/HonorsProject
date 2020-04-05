@@ -177,7 +177,7 @@ namespace HonorsProject.ViewModel.CoreVM
                         }
                     }
                     else
-                        FeedbackMessage = "You can only add an image to a question or answer you posted.";
+                        ShowFeedback("You can only add an image to a question or answer you posted.", FeedbackType.Error);
                 }
                 return finalResult;
             }
@@ -255,12 +255,12 @@ namespace HonorsProject.ViewModel.CoreVM
             ClearFeedback();
             if (SelectedQuestion == null)
             {
-                FeedbackMessage = "Question not selected to answer.";
+                ShowFeedback("Question not selected to answer.", FeedbackType.Info);
                 return;
             }
             if (SelectedQuestion.Id == 0)
             {
-                FeedbackMessage = "Question not selected to answer.";
+                ShowFeedback("Question not selected to answer.", FeedbackType.Info);
                 return;
             }
             //Lecturers can only create answers
