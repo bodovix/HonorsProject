@@ -214,16 +214,24 @@ namespace HonorsProject.Test.ViewModel
         }
 
         [TestMethod]
+        public void BLANKTEST_RESET()
+        {
+        }
+
+        [TestMethod]
         public void Save_Update_InvalidStudent_NoEmail_Fail()
         {
             //Arrange
+            Lecturer _appUser2 = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", true, new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234); ;
+            StudentsPageVM VM2 = new StudentsPageVM(dbConName, new Student(), _appUser2);
+
             ClearDatabase();
-            CreateMySessionTestData(_appUser);
-            VM.SelectedStudent = VM.UnitOfWork.StudentRepo.Get(444);
-            VM.SelectedStudent.Name = "Updated";
-            VM.FormContext = FormContext.Update;
+            CreateMySessionTestData(_appUser2);
+            VM2.SelectedStudent = VM.UnitOfWork.StudentRepo.Get(444);
+            VM2.SelectedStudent.Name = "Updated";
+            VM2.FormContext = FormContext.Update;
             //Act
-            bool result = VM.Save();
+            bool result = VM2.Save();
             int newScount = 3;
             //Assert
             Assert.IsFalse(result);
@@ -244,11 +252,6 @@ namespace HonorsProject.Test.ViewModel
             //Assert
             Assert.IsTrue(result);
             Assert.IsTrue(VM.SelectedStudent.Password.Contains("HASH"));
-        }
-
-        [TestMethod]
-        public void GenerateNewPasswordHash_Update_Random_Success()
-        {
         }
 
         [TestMethod]
