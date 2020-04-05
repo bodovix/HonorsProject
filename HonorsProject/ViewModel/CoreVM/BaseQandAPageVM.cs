@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using HonorsProject.Model.HelperClasses;
 using System.Media;
+using System.IO;
 
 namespace HonorsProject.ViewModel.CoreVM
 {
@@ -468,7 +469,10 @@ namespace HonorsProject.ViewModel.CoreVM
                 if (newAs.Count > 0)
                 {
                     SoundPlayer player = new SoundPlayer(@"..\..\View\Sound\bing.wav");
-                    player.Play();
+                    if (File.Exists(@"..\..\View\Sound\bing.wav"))
+                        player.Play();
+                    else
+                        Console.WriteLine("file not found from location");
                 }
 
             OnPropertyChanged(nameof(Questions));
