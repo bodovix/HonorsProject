@@ -17,7 +17,7 @@ namespace HonorsProject.ViewModel.Converters
             bool isHighlighted = (bool)value;
 
             if (isHighlighted)
-                return new SolidColorBrush(Colors.LightYellow);
+                return new SolidColorBrush(Colors.LightBlue);
             return new SolidColorBrush();
         }
 
