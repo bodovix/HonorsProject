@@ -144,5 +144,21 @@ namespace HonorsProject.View.Pages
                     VM.QandAMode = QandAMode.Question;
                 }
         }
+
+        private void QuesitonImageClicker_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (sender as Button);
+            ImageViewer view = new ImageViewer((button.Content as Image).Source);
+            view.Owner = (MainWindow)System.Windows.Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void AnswerImageClicker_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (sender as Button);
+            ImageViewer view = new ImageViewer((button.Content as Image).Source);
+            view.Owner = (MainWindow)System.Windows.Application.Current.MainWindow;
+            view.Show();
+        }
     }
 }

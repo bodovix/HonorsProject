@@ -176,5 +176,17 @@
             <Setter Property="FontSize" Value="48" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
+        <Style x:Key="ClearButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
