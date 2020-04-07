@@ -18,7 +18,6 @@ namespace HonorsProject.Test.ViewModel
         public MyStudentPageVMTest() : base()
         {
             _appUser = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", true, new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234); ;
-            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
         }
 
         [TestMethod]
@@ -27,6 +26,8 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
+
             //Act
             //VM initialize is the act
             //Assert
@@ -52,6 +53,8 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
+
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             Group studentsGroup = VM.SelectedStudent.Groups.Where(g => g.Name.Equals("Computing 19/20")).FirstOrDefault();
             //Act
@@ -70,6 +73,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 12345678).FirstOrDefault();
             Group studentsGroup = VM.SelectedStudent.Groups.Where(g => g.Name.Equals("NonExitstantGroup")).FirstOrDefault();
             //Act
@@ -86,6 +90,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 12345678).FirstOrDefault();
             //Act
             VM.EnterNewMode();
@@ -103,6 +108,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = new Student(999, "Student", "Student@uad.ac.uk", "Password", DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             //Act
@@ -119,6 +125,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = new Student(999, "Student", "Student@uad.ac.uk", null, DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             //Act
@@ -135,6 +142,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = new Student(999, "", "Student@uad.ac.uk", "password", DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             //Act
@@ -151,6 +159,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             //Act
@@ -167,6 +176,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Update;
             //Act
@@ -186,6 +196,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Update;
             //Act
@@ -203,6 +214,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = new Student(999, "", "Student@uad.ac.uk", "password", DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Update;
             //Act
@@ -227,6 +239,7 @@ namespace HonorsProject.Test.ViewModel
 
             ClearDatabase();
             CreateMySessionTestData(_appUser2);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM2.SelectedStudent = VM.UnitOfWork.StudentRepo.Get(444);
             VM2.SelectedStudent.Name = "Updated";
             VM2.FormContext = FormContext.Update;
@@ -244,6 +257,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             VM.IsConfirmed = true;
@@ -260,6 +274,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = new Student(999, "Student", null, "password", DateTime.Now.Date, 444);
             VM.FormContext = FormContext.Create;
             VM.IsConfirmed = false;
@@ -275,6 +290,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -292,6 +308,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -310,6 +327,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -327,6 +345,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -344,6 +363,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -361,6 +381,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -379,6 +400,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -396,6 +418,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             VM.FormContext = FormContext.Create;
             //Act
@@ -413,6 +436,7 @@ namespace HonorsProject.Test.ViewModel
             //Arrange
             ClearDatabase();
             CreateMySessionTestData(_appUser);
+            VM = new StudentsPageVM(dbConName, new Student(), _appUser);
             VM.IsConfirmed = true;
             VM.SelectedStudent = VM.Students.Where(s => s.Id == 1701267).FirstOrDefault();
             //Act
