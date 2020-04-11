@@ -24,10 +24,10 @@
             <!--Search Groups-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
                 <Label Content="Groups"
-                       Style="{StaticResource SearchLabel}"/>
+                       Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchGTxtBox"
                          Style="{StaticResource SearchTxtBox}"
-                         Text="{Binding GroupSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                         Text="{Binding GroupSearchTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <watermark:WatermarkService.Watermark>
                         <TextBlock>Search Groups</TextBlock>
                     </watermark:WatermarkService.Watermark>
@@ -51,10 +51,10 @@
             <!--Sessions Search bar-->
             <StackPanel Grid.Column="0" Grid.Row ="0" Orientation="Vertical" Width="200">
                 <Label Content="Sessions"
-                       Style="{StaticResource SearchLabel}"/>
+                       Style="{StaticResource SearchLabel}" />
                 <TextBox Name="SearchTxtBox"
                          Style="{StaticResource SearchTxtBox}"
-                         Text="{Binding SessionSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                         Text="{Binding SessionSearchTxt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <watermark:WatermarkService.Watermark>
                         <TextBlock>Search Sessions</TextBlock>
                     </watermark:WatermarkService.Watermark>
@@ -136,10 +136,10 @@
                 </ListView>
             </GroupBox>
             <GroupBox
-                Header="Common phrase identification"
+                Header="Common Phrase Identification"
                 Grid.Column="0"
                 Grid.Row="2"
-                Grid.ColumnSpan="2"
+                Grid.ColumnSpan="1"
                 Style="{StaticResource MainFormGroupBox}">
                 <ListView x:Name="commonPhrasesListView"
                        Height="200"
@@ -156,18 +156,28 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </GroupBox>
-            <!--<GroupBox
-                Header="Common Phrase blacklist for group here"
-                Grid.Column="0"
-                Grid.Row="3"
-                Grid.ColumnSpan="2">
-                <StackPanel Orientation="Vertical">
-                    <TextBox />
-                    <Button Content="Add new Blacklist" />
-                    <ListView>
-                    </ListView>
-                </StackPanel>
-            </GroupBox>-->
+            <GroupBox
+                Header="Key Words Identification"
+                ToolTip="paralleldots API used to identify key words"
+                Grid.Column="1"
+                Grid.Row="2"
+                Grid.ColumnSpan="1"
+                Style="{StaticResource MainFormGroupBox}">
+                <ListView x:Name="keyWordsListView"
+                       Height="200"
+                        ItemsSource="{Binding KeyWords,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Key}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text=" - Occurrences - " Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text="{Binding Value}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </GroupBox>
             <TextBlock Text="{Binding FeedbackMessage}"
                        Style="{StaticResource UserInputFeedback}"
                        Foreground="{Binding FeedbackType,Converter={StaticResource FeedbackTypeToForcolorConverter}}"

@@ -94,25 +94,30 @@ namespace HonorsProject.Model.Entities
                                 }).OrderByDescending(tuple => tuple.Count).ToList();
         }
 
-        public Dictionary<string, int> CalcKeyPhrasesAPI()
+        public Dictionary<string, int> CalcKeyWordsAPI()
         {
             List<string> allQuestionsTextArray = new List<string>();
             //get all question text into array format
             foreach (Question q in Questions)
                 allQuestionsTextArray.Add(q.QuestionText.ToLower());
-
+            if (allQuestionsTextArray.Count == 0)
+                return null;
             //get keywords for each question
             List<string> keywordsList = new List<string>();
             foreach (string text in allQuestionsTextArray)
             {
                 string responceJson = KeyWordsAPI(text);
-                KeywordsDTO keywordsDTO = JsonConvert.DeserializeObject<KeywordsDTO>(responceJson);
-                foreach (Keyword word in keywordsDTO.Keywords)
+                if (!String.IsNullOrEmpty(responceJson))
                 {
-                    keywordsList.Add(word.Key.ToString());
+                    KeywordsDTO keywordsDTO = JsonConvert.DeserializeObject<KeywordsDTO>(responceJson);
+                    foreach (Keyword word in keywordsDTO.Keywords)
+                    {
+                        keywordsList.Add(word.Key.ToString());
+                    }
                 }
             }
-
+            if (keywordsList.Count == 0)
+                return null;
             //tally up the keywords and return the most common ones
             Dictionary<String, int> results = new Dictionary<string, int>();
             foreach (string key in keywordsList)

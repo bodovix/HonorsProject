@@ -101,7 +101,7 @@ namespace HonorsProject.ViewModel
         {
             try
             {
-                return SelectedSession.CalcKeyPhrasesAPI();
+                return SelectedSession.CalcKeyWordsAPI();
             }
             catch (Exception ex)
             {
@@ -131,12 +131,15 @@ namespace HonorsProject.ViewModel
                             CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
                             if (CommonPhrases.Count == 0)
                                 CommonPhrases.Add("No Common Phrases detected.", 0);
+                            KeyWords = SelectedSession.CalcKeyWordsAPI();
+                            if (KeyWords.Count == 0)
+                                KeyWords.Add("No Key Words detected.", 0);
                         }
                     UpdateHeader();
                 }
                 catch (Exception ex)
                 {
-                    ShowFeedback(ex.Message, FeedbackType.Error);
+                    Console.WriteLine("Error with API responce: " + ex.Message);
                 }
             }
         }
@@ -186,6 +189,20 @@ namespace HonorsProject.ViewModel
             {
                 _commonPhrases = value;
                 OnPropertyChanged(nameof(CommonPhrases));
+            }
+        }
+
+        private Dictionary<string, int> _keyWords;
+
+        public Dictionary<string, int> KeyWords
+        {
+            get { return _keyWords; }
+            set
+            {
+                if (value == null)
+                    value = new Dictionary<string, int>();
+                _keyWords = value;
+                OnPropertyChanged(nameof(KeyWords));
             }
         }
 
