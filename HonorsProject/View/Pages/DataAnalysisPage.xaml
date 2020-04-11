@@ -148,9 +148,12 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Key}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                                <TextBlock Text=" - Occurrences - " Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                                <TextBlock Text="{Binding Value}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text="{Binding Value}" 
+                                           Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text=":   " Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                <TextBlock Text="{Binding Key}" 
+                                           Style="{StaticResource NoImgSearchResultsTextBlock}"
+                                            MaxWidth="300"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -169,11 +172,15 @@
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Key}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                                <TextBlock Text=" - Occurrences - " Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                                <TextBlock Text="{Binding Value}" Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Background="Transparent">
+                                <TextBlock Text="{Binding Value}" 
+                                           Style="{StaticResource NoImgSearchResultsTextBlock}"/>
+                                <TextBlock Text=":   " Style="{StaticResource NoImgSearchResultsTextBlock}" />
+                                    <TextBlock Text="{Binding Key}" 
+                                           Style="{StaticResource NoImgSearchResultsTextBlock}"
+                                           MaxWidth="300"/>
+                                </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
