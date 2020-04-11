@@ -97,6 +97,19 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        public Dictionary<string, int> KeyWordsAPI()
+        {
+            try
+            {
+                return SelectedSession.CalcKeyPhrasesAPI();
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
+                return null;
+            }
+        }
+
         private Session _selectedSession;
 
         public Session SelectedSession

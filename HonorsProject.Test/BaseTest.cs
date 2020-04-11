@@ -53,6 +53,143 @@ namespace HonorsProject.Test
             }
         }
 
+        protected Session CreateInSessionTestDataForKeyWordsAPI()
+        {
+            using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))
+            {
+                string ashesToAshes = @"Do you remember a guy that's been.
+                                        In such an early song?
+                                        I've heard a rumor from Ground Control.
+                                        Oh no, don't say it's true.
+                                        They got a message from the Action Man.
+                                        I'm happy, hope you're happy too.
+                                        I've loved all I've needed, love.
+                                        Sordid details following.
+                                        The shrieking of nothing is killing, just.
+                                        Pictures of Jap girls in synthesis and I.
+                                        Ain't got no money and I ain't got no hair.
+                                        But I'm hoping to kick but the planet it's glowing.
+                                        Ashes to ashes, funk to funky.
+                                        We know Major Tom's a junkie.
+                                        Strung out in heaven's high.
+                                        Hitting an all - time low.
+                                        Time and again I tell myself.
+                                        I'll stay clean tonight.
+                                        But the little green wheels are following me.
+                                        Oh no, not again.
+                                        I'm stuck with a valuable friend.
+                                        I'm happy, hope you're happy too.
+                                        One flash of light but no smoking pistol.";
+                string ashesToAshesAgain = @"Do you remember a guy that's been.
+                                        In such an early song?
+                                        I've heard a rumor from Ground Control.
+                                        Oh no, don't say it's true.
+                                        They got a message from the Action Man.
+                                        I'm happy, hope you're happy too.
+                                        I've loved all I've needed, love.
+                                        Sordid details following.
+                                        The shrieking of nothing is killing, just.
+                                        Pictures of Jap girls in synthesis and I.
+                                        Ain't got no money and I ain't got no hair.
+                                        But I'm hoping to kick but the planet it's glowing.
+                                        Ashes to ashes, funk to funky.
+                                        We know Major Tom's a junkie.
+                                        Strung out in heaven's high.
+                                        Hitting an all - time low.
+                                        Time and again I tell myself.
+                                        I'll stay clean tonight.
+                                        But the little green wheels are following me.
+                                        Oh no, not again.
+                                        I'm stuck with a valuable friend.
+                                        I'm happy, hope you're happy too.
+                                        One flash of light but no smoking pistol.";
+                string spaceOdity = @"This is Major Tom to Ground Control.
+                                        I'm stepping through the door.
+                                        And I'm floating in a most peculiar way.
+                                        Can I please get back inside? if I may.
+                                        For here.
+                                        Am I sitting in a tin can.
+                                        Far above the world.
+                                        Planet Earth is blue.
+                                        And there's nothing I can do.
+                                        This is Major Tom to Ground Control.
+                                        I'm feeling very still.
+                                        And I think my spaceship knows which way to go.
+                                        Tell my wife I love her very much.
+                                        She knows.
+                                        Though I'm past one hundred thousand miles.
+                                        I'm feeling very still.
+                                        And I think my spaceship knows what I must do.
+                                        And I think my life on Earth is nearly through.
+                                        Ground Control to Major Tom….";
+                //test data cleared each test - need to re  register users
+                Lecturer l = new Lecturer(444, "Suzy", "lecturer1@uad.ac.uk", "password", true, new DateTime(2019, 11, 28, 16, 22, 27, 813), 1234);
+
+                Lecturer l2 = new Lecturer(555, "Gavin Hales", "gav@test.com", "password", true, DateTime.Now.AddYears(-2), 444);
+                Student s = new Student(1701267, "Gwydion", "1701267@uad.ac.uk", "password", DateTime.Now.AddYears(-1), 444);
+                Student s2 = new Student(12345678, "test", "12345678@uad.ac.uk", "password", DateTime.Now.AddYears(-2), 444);
+                Student s3 = new Student(01197253, "test2", "01197253@uad.ac.uk", "password", DateTime.Now.AddYears(-2), 444);
+                l.Register(u);
+                l2.Register(u);
+                s.Register(u);
+                s2.Register(u);
+                s3.Register(u);
+                ObservableCollection<Lecturer> lecL = new ObservableCollection<Lecturer>();
+                lecL.Add(l);
+                lecL.Add(l2);
+                ObservableCollection<Student> stL = new ObservableCollection<Student>();
+                ObservableCollection<Student> stLEmpty = new ObservableCollection<Student>();
+                stL.Add(s);
+                //group added before session
+                Group g = new Group("Computing 19/20", stL, null, DateTime.Now.AddMonths(-6), 444);
+                g.Students.Add(s2);
+                Group g2 = new Group("Ethical Hacking 19/20", stLEmpty, null, DateTime.Now.AddMonths(-5), 555);
+                g2.Students.Add(s3);
+                g2.Students.Add(s);
+                u.GroupRepository.Add(g);
+                u.GroupRepository.Add(g2);
+
+                //session added with group
+                //active session
+                Session todaysSesh = new Session("Todays Sesh", DateTime.Now.Date.AddHours(-1), DateTime.Now.Date.AddHours(1), lecL, g, null, DateTime.Now.AddHours(-2), 444);
+                Session longTermSesh = new Session("Long term Sesh", DateTime.Now.AddDays(-1).Date, DateTime.Now.AddDays(1).Date, lecL, g, null, DateTime.Now, 444);
+                Session previousSesh = new Session("Previous Sesh", DateTime.Now.AddMonths(-1).Date, DateTime.Now.AddMonths(-1).Date, lecL, g, null, DateTime.Now.AddMonths(-2), 444);
+                Session futureSesh = new Session("Future Sesh", DateTime.Now.AddMonths(1).Date, DateTime.Now.AddMonths(1).Date, lecL, g, null, DateTime.Now, 444);
+                Session oneForDeleteSesh = new Session("Delete Sesh", DateTime.Now.AddMonths(1).Date, DateTime.Now.AddMonths(1).Date, lecL, g, null, DateTime.Now, 444);
+
+                //questions
+                Question q2 = new Question(DateTime.Now.Date, "Null Ref?", spaceOdity, todaysSesh, s, DateTime.Now.AddMinutes(6).Date);
+                Question q4 = new Question(DateTime.Now.Date, "invalid syntax?", ashesToAshes, todaysSesh, s, DateTime.Now.AddMinutes(4).Date);
+                Question q5 = new Question(DateTime.Now.Date, "invalid syntax?", ashesToAshesAgain, todaysSesh, s, DateTime.Now.AddMinutes(4).Date);
+
+                Answer a1 = new Answer("answer 1", "null objects don't have properties", false, l2, q2, DateTime.Now.AddMinutes(13).Date);
+                Answer a2 = new Answer("answer 1", "null objects don't have properties", false, l2, q2, DateTime.Now.AddMinutes(13).Date);
+
+                Comment c1 = new Comment("comment 1", "Gwydion", 1701267, q2);
+                Comment c2 = new Comment("comment 2", "Suzy", 444, q2);
+                Comment c3 = new Comment("comment 3", "Gwydion", 1701267, q2);
+                Comment c4 = new Comment("comment 4", "Suzy", 444, q2);
+
+                u.SessionRepository.Add(todaysSesh);
+                u.SessionRepository.Add(longTermSesh);
+                u.SessionRepository.Add(previousSesh);
+                u.SessionRepository.Add(futureSesh);
+                u.QuestionRepository.Add(q2);
+                u.QuestionRepository.Add(q4);
+                u.QuestionRepository.Add(q5);
+                u.AnswerRepository.Add(a1);
+                u.AnswerRepository.Add(a2);
+
+                u.CommentRepository.Add(c1);
+                u.CommentRepository.Add(c2);
+                u.CommentRepository.Add(c3);
+                u.CommentRepository.Add(c4);
+                u.Complete();
+
+                return todaysSesh;
+            }
+        }
+
         protected Session CreateInSessionTestData(SubgridContext context)
         {
             using (UnitOfWork u = new UnitOfWork(new LabAssistantContext(dbConName)))

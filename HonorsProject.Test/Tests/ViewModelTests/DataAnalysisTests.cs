@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
@@ -54,6 +55,21 @@ namespace HonorsProject.Test.ViewModel
             Assert.AreEqual(1, VM.SelectedSession.Id);
             Assert.AreEqual(1, VM.SelectedGroup.Id);
             Assert.AreEqual("Computing 19/20 - Todays Sesh", VM.SelectionTitle);
+        }
+
+        [TestMethod]
+        public void KeyWordsAPI_Test()
+        {
+            //Arrange
+            ClearDatabase();
+
+            CreateInSessionTestDataForKeyWordsAPI();
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            Dictionary<string, int> result = VM.KeyWordsAPI();
+            //Assert
+            Assert.IsTrue(result.Count == 8);
         }
     }
 }

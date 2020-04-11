@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using HonorsProject.Model.Core;
 using System.Collections.ObjectModel;
 using HonorsProject.Model.HelperClasses;
+using Newtonsoft.Json.Linq;
+using ParallelDots;
+using Newtonsoft.Json;
+using HonorsProject.Model.DTO;
 
 namespace HonorsProject.Model.Entities
 {
@@ -88,6 +92,67 @@ namespace HonorsProject.Model.Entities
                                     Student = sesh.Key,
                                     Count = sesh.Count()
                                 }).OrderByDescending(tuple => tuple.Count).ToList();
+        }
+
+        public Dictionary<string, int> CalcKeyPhrasesAPI()
+        {
+            List<string> allQuestionsTextArray = new List<string>();
+            //get all question text into array format
+            foreach (Question q in Questions)
+                allQuestionsTextArray.Add(q.QuestionText.ToLower());
+
+            //get keywords for each question
+            List<string> keywordsList = new List<string>();
+            foreach (string text in allQuestionsTextArray)
+            {
+                string responceJson = KeyWordsAPI(text);
+                KeywordsDTO keywordsDTO = JsonConvert.DeserializeObject<KeywordsDTO>(responceJson);
+                foreach (Keyword word in keywordsDTO.Keywords)
+                {
+                    keywordsList.Add(word.Key.ToString());
+                }
+            }
+
+            //tally up the keywords and return the most common ones
+            Dictionary<String, int> results = new Dictionary<string, int>();
+            foreach (string key in keywordsList)
+            {
+                if (!String.IsNullOrEmpty(key))
+                {
+                    if (!results.ContainsKey(key))
+                        results.Add(key, 1);
+                    else
+                        results[key]++;
+                }
+            }
+            return results;
+        }
+
+        /// <summary>
+        /// https://user.apis.paralleldots.com/
+        /// Key:82ByzdYGAOwfVQwLoF76lcj1BgqbYQ2FMwd37BU0BbU
+        /// this api is free for a month
+        /// return keywords from the above api
+        /// </summary>
+        /// <returns>an array of all the keywords</returns>
+        private string KeyWordsAPI(string phraseToAnalise)
+        {
+            if (String.IsNullOrEmpty(phraseToAnalise) || String.IsNullOrWhiteSpace(phraseToAnalise))
+            {
+                //no phrase to analise return empty
+                return "";
+            }
+            // Initialize instance of api class
+            paralleldots pd = new paralleldots("82ByzdYGAOwfVQwLoF76lcj1BgqbYQ2FMwd37BU0BbU");
+
+            // for single sentences
+            String keywords = pd.keywords(phraseToAnalise);
+            return keywords;
+
+            //// for multiple sentence
+            //JArray text_list = JArray.Parse("[\"" + phraseToAnalise + "\"]");
+            //String keywords_batch = pd.keywords_batch(text_list);
+            //return keywords_batch;
         }
 
         public Dictionary<string, int> CalcCommonPhraseIdentification()
