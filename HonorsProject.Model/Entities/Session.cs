@@ -16,6 +16,8 @@ namespace HonorsProject.Model.Entities
 {
     public class Session : BaseEntity
     {
+        #region Properties
+
         private DateTime _startTime;
 
         public DateTime StartTime
@@ -39,6 +41,10 @@ namespace HonorsProject.Model.Entities
         public virtual Group Group { get; set; }
         public virtual List<Question> Questions { get; set; }
         public int CreatedByLecturerId { get; set; }
+
+        #endregion Properties
+
+        #region Constructors
 
         public Session()
         {
@@ -69,6 +75,8 @@ namespace HonorsProject.Model.Entities
             CreatedOn = createdOn;
             CreatedByLecturerId = createdByLecturerId;
         }
+
+        #endregion Constructors
 
         private DateTime DefaultDate(ref DateTime value)
         {
@@ -183,16 +191,39 @@ namespace HonorsProject.Model.Entities
                     if (index > -1)
                     {
                         Console.WriteLine("Phrase : {0} found at {1}", sphrase, index);
-
-                        if (!Counts.ContainsKey(sphrase))
-                            Counts.Add(sphrase, 1);
-
-                        Counts[sphrase]++;
+                        if (ApproveFilterCommonPhrases(sphrase))
+                        {
+                            if (!Counts.ContainsKey(sphrase))
+                                Counts.Add(sphrase, 1);
+                            Counts[sphrase]++;
+                        }
                     }
                 }
             }
-
             return Counts;
+        }
+
+        private bool ApproveFilterCommonPhrases(string proposedKey)
+        {
+            bool isBlacklisted = true;
+            string[] blacklist = { "and", "i", "the", "this", "or"
+                    , "it", "is", "a", "to", "be"
+                     ,"me","that","want"};
+
+            //get all the words in the phrase
+            string[] wordsInKey = proposedKey.Split(' ');
+            //loop through the blacklisted words
+            foreach (string word in wordsInKey)
+                if (!blacklist.Contains(word.ToLower()))
+                {
+                    //if all words in record are blacklisted remove it from the dictionary
+                    isBlacklisted = false;
+                    break;
+                }
+            if (isBlacklisted)
+                return false;
+            else
+                return true;
         }
 
         private static string[] GetPhrase(string[] words, int startpos, int len)
