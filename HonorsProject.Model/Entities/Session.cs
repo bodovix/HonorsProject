@@ -191,6 +191,7 @@ namespace HonorsProject.Model.Entities
                     if (index > -1)
                     {
                         Console.WriteLine("Phrase : {0} found at {1}", sphrase, index);
+                        //check the sphrase isnt entirely blacklisted before adding to dictionary
                         if (ApproveFilterCommonPhrases(sphrase))
                         {
                             if (!Counts.ContainsKey(sphrase))
