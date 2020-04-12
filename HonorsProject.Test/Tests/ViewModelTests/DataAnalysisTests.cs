@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using HonorsProject.Model.Core;
 using HonorsProject.Model.Data;
 using HonorsProject.Model.Entities;
@@ -85,6 +86,71 @@ namespace HonorsProject.Test.ViewModel
             Dictionary<string, int> result = VM.KeyWordsAPI();
             //Assert
             Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void AddWordToBlacklist_Success()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            ObservableCollection<string> originalBlacklistArray = VM.BlacklistList;
+            bool result = VM.Add("black");
+            //Assert
+            Assert.IsTrue(result, "wrong return value");
+            Assert.IsTrue(originalBlacklistArray.Count + 1 == VM.BlacklistList.Count, "wrong count");
+            Assert.IsTrue(VM.BlacklistList.Contains("black"), "new word not found");
+            Assert.IsTrue(VM.BlacklistList.ToString().EndsWith(" "), "doesnt end with space");
+        }
+
+        [TestMethod]
+        public void AddWordToBlacklist_ContainsSpace_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            ObservableCollection<string> originalBlacklistArray = VM.BlacklistList;
+            bool result = VM.Add("black");
+            //Assert
+            Assert.IsTrue(result, "wrong return value");
+            Assert.IsTrue(originalBlacklistArray.Count + 1 == VM.BlacklistList.Count, "wrong count");
+            Assert.IsTrue(VM.BlacklistList.Contains("black list"), "new word not found");
+        }
+
+        [TestMethod]
+        public void AddWordToBlacklist_AlreadyExists_Fail()
+        {
+        }
+
+        [TestMethod]
+        public void AddWordToBlacklist_NullWord_Fail()
+        {
+        }
+
+        [TestMethod]
+        public void AddWordToBlacklist_EmptyWord_Fail()
+        {
+        }
+
+        [TestMethod]
+        public void RemoveWordFromBlacklist_Success()
+        {
+        }
+
+        [TestMethod]
+        public void RemoveWordFromBlacklist_NotFound_Fail()
+        {
+        }
+
+        [TestMethod]
+        public void RemoveWordFromBlacklist_ListEmpty_Fail()
+        {
         }
     }
 }
