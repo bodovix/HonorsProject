@@ -383,11 +383,13 @@ namespace HonorsProject.ViewModel
         {
             string wordToAdd = objToAdd as string;
             string feedback = "";
+            //set new blacklist and update the VM collection
             bool result = SelectedSession.AddToBlacklist(UnitOfWork, wordToAdd, ref feedback);
-            OnPropertyChanged(nameof(blacklistList));
+            BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
+            //show appropriate feedback
             if (result)
             {
-                ShowFeedback($"{wordToAdd} Added to blacklist.", FeedbackType.Success);
+                ShowFeedback($"{wordToAdd} added to blacklist.", FeedbackType.Success);
                 return true;
             }
             else

@@ -97,13 +97,13 @@ namespace HonorsProject.Test.ViewModel
             Session selected = VM.UnitOfWork.SessionRepository.Get(1);
             VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
             //Act
-            ObservableCollection<string> originalBlacklistArray = VM.BlacklistList;
+            int expectedCount = VM.BlacklistList.Count + 1;
             bool result = VM.Add("black");
             //Assert
             Assert.IsTrue(result, "wrong return value");
-            Assert.IsTrue(originalBlacklistArray.Count + 1 == VM.BlacklistList.Count, "wrong count");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
             Assert.IsTrue(VM.BlacklistList.Contains("black"), "new word not found");
-            Assert.IsTrue(VM.BlacklistList.ToString().EndsWith(" "), "doesnt end with space");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
         }
 
         [TestMethod]

@@ -44,8 +44,8 @@ namespace HonorsProject.Model.Entities
         //blacklists are tokenized by spaces
         public string Blacklist { get; set; }
 
-        private string blaclistOriginalSource = @"and i the this or
-                     it is a to be me that want";
+        //space at the end of the default list is important
+        private string blaclistOriginalSource = "and i the this or it is a to be me that want ";
 
         public int CreatedByLecturerId { get; set; }
 
