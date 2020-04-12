@@ -54,11 +54,11 @@ namespace HonorsProject.Test.ViewModel
             Assert.AreEqual(2, VM.NumQuestionsAsked);
             Assert.AreEqual(1, VM.SelectedSession.Id);
             Assert.AreEqual(1, VM.SelectedGroup.Id);
-            Assert.AreEqual("Computing 19/20 - Todays Sesh", VM.SelectionTitle);
+            Assert.AreEqual("Computing 19/20", VM.SelectionTitle);
         }
 
         [TestMethod]
-        public void KeyWordsAPI_Test()
+        public void KeyWordsAPI_Success()
         {
             //Arrange
             ClearDatabase();
@@ -70,6 +70,21 @@ namespace HonorsProject.Test.ViewModel
             Dictionary<string, int> result = VM.KeyWordsAPI();
             //Assert
             Assert.IsTrue(result.Count == 8);
+        }
+
+        [TestMethod]
+        public void KeyWordsAPI_NoOrEmpty_Fail()
+        {
+            //Arrange
+            ClearDatabase();
+
+            CreateInSessionTestDataForKeyWordsAPINoKEYWORDS();
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            Dictionary<string, int> result = VM.KeyWordsAPI();
+            //Assert
+            Assert.IsNull(result);
         }
     }
 }
