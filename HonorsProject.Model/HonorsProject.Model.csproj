@@ -225,6 +225,10 @@
     <Compile Include="Migrations\202003091207565_IsLectureOnlyQuesitonColumnAdded.Designer.cs">
       <DependentUpon>202003091207565_IsLectureOnlyQuesitonColumnAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004121244543_SessionBlacklistAdded.cs" />
+    <Compile Include="Migrations\202004121244543_SessionBlacklistAdded.Designer.cs">
+      <DependentUpon>202004121244543_SessionBlacklistAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -314,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003091207565_IsLectureOnlyQuesitonColumnAdded.resx">
       <DependentUpon>202003091207565_IsLectureOnlyQuesitonColumnAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004121244543_SessionBlacklistAdded.resx">
+      <DependentUpon>202004121244543_SessionBlacklistAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

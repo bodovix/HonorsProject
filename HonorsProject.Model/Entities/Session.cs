@@ -40,6 +40,13 @@ namespace HonorsProject.Model.Entities
         public virtual ObservableCollection<Lecturer> Lecturers { get; set; }
         public virtual Group Group { get; set; }
         public virtual List<Question> Questions { get; set; }
+
+        //blacklists are tokenized by spaces
+        public string Blacklist { get; set; }
+
+        private string blaclistOriginalSource = @"and i the this or
+                     it is a to be me that want";
+
         public int CreatedByLecturerId { get; set; }
 
         #endregion Properties
@@ -50,6 +57,7 @@ namespace HonorsProject.Model.Entities
         {
             Questions = new List<Question>();
             Lecturers = new ObservableCollection<Lecturer>();
+            Blacklist = blaclistOriginalSource;
         }
 
         public void ShallowCopy(Session sessionToShallowCopy)
@@ -62,6 +70,7 @@ namespace HonorsProject.Model.Entities
             Group = sessionToShallowCopy.Group;
             Questions = sessionToShallowCopy.Questions;
             CreatedByLecturerId = sessionToShallowCopy.CreatedByLecturerId;
+            Blacklist = sessionToShallowCopy.Blacklist;
         }
 
         public Session(string name, DateTime startTime, DateTime endTime, ObservableCollection<Lecturer> lecturers, Group group, List<Question> questions, DateTime createdOn, int createdByLecturerId)
@@ -74,6 +83,7 @@ namespace HonorsProject.Model.Entities
             Questions = questions;
             CreatedOn = createdOn;
             CreatedByLecturerId = createdByLecturerId;
+            Blacklist = blaclistOriginalSource;
         }
 
         #endregion Constructors
@@ -207,9 +217,7 @@ namespace HonorsProject.Model.Entities
         private bool ApproveFilterCommonPhrases(string proposedKey)
         {
             bool isBlacklisted = true;
-            string[] blacklist = { "and", "i", "the", "this", "or"
-                    , "it", "is", "a", "to", "be"
-                     ,"me","that","want"};
+            string[] blacklist = Blacklist.Split(' ');
 
             //get all the words in the phrase
             string[] wordsInKey = proposedKey.Split(' ');
