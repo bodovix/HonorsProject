@@ -143,11 +143,12 @@
                 Grid.Row="1"
                 Style="{StaticResource MainFormGroupBox}">
                 <StackPanel>
-                    <TextBox Style="{StaticResource SearchTxtBox}"/>
+                    <TextBox Style="{StaticResource SearchTxtBox}"
+                             Text="{Binding ProposedBlacklist, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     <Button Content="Add To Blacklist"
                             Style="{StaticResource InfoButton}"
-                            Command=""
-                            CommandParameter=""/>
+                            Command="{Binding AddCmd}"
+                            CommandParameter="{Binding ProposedBlacklist}" />
                     <ListView x:Name="CommonPhraseBlacklistLV"
                         ItemsSource="{Binding BlacklistList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -161,12 +162,12 @@
                         <ListView.ContextMenu>
                             <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
                                 <MenuItem  Header="Remove Blacklist"
-                                           Command="{Binding DataContext.Remove}"
+                                           Command="{Binding DataContext.RemoveCmd}"
                                            CommandParameter="{Binding SelectedItem}">
                                     <MenuItem.ToolTip>
                                         <ToolTip>
                                             <StackPanel>
-                                                <TextBlock FontWeight="Bold">Remove Blacklist</TextBlock>
+                                                <TextBlock FontWeight="Bold">Remove From Blacklist</TextBlock>
                                             </StackPanel>
                                         </ToolTip>
                                     </MenuItem.ToolTip>

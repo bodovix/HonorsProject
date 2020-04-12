@@ -205,6 +205,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private string proposedBlacklist;
+
+        public string ProposedBlacklist
+        {
+            get { return proposedBlacklist; }
+            set
+            {
+                proposedBlacklist = value;
+                OnPropertyChanged(nameof(ProposedBlacklist));
+            }
+        }
+
         private Dictionary<string, int> _keyWords;
 
         public Dictionary<string, int> KeyWords
@@ -358,18 +370,32 @@ namespace HonorsProject.ViewModel
         /// <returns></returns>
         public bool Remove(object objToRemove)
         {
-            string wordToRemove = objToRemove as string;
-            string feedback = "";
-            bool result = SelectedSession.RemoveFromBlacklist(UnitOfWork, wordToRemove, ref feedback);
-            BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
-            if (result)
+            if (SelectedSession == null)
             {
-                ShowFeedback($"{wordToRemove} Removed from blacklist.", FeedbackType.Success);
-                return true;
+                ShowFeedback("No Session selected", FeedbackType.Info);
+                return false;
             }
-            else
+            try
             {
-                ShowFeedback(feedback, FeedbackType.Error);
+                string wordToRemove = objToRemove as string;
+                string feedback = "";
+                bool result = SelectedSession.RemoveFromBlacklist(UnitOfWork, wordToRemove, ref feedback);
+                BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
+                CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
+                if (result)
+                {
+                    ShowFeedback($"{wordToRemove} Removed from blacklist.", FeedbackType.Success);
+                    return true;
+                }
+                else
+                {
+                    ShowFeedback(feedback, FeedbackType.Error);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
@@ -381,20 +407,35 @@ namespace HonorsProject.ViewModel
         /// <returns></returns>
         public bool Add(object objToAdd)
         {
-            string wordToAdd = objToAdd as string;
-            string feedback = "";
-            //set new blacklist and update the VM collection
-            bool result = SelectedSession.AddToBlacklist(UnitOfWork, wordToAdd, ref feedback);
-            BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
-            //show appropriate feedback
-            if (result)
+            if (SelectedSession == null)
             {
-                ShowFeedback($"{wordToAdd} added to blacklist.", FeedbackType.Success);
-                return true;
+                ShowFeedback("No Session selected", FeedbackType.Info);
+                return false;
             }
-            else
+
+            try
             {
-                ShowFeedback(feedback, FeedbackType.Error);
+                string wordToAdd = objToAdd as string;
+                string feedback = "";
+                //set new blacklist and update the VM collection
+                bool result = SelectedSession.AddToBlacklist(UnitOfWork, wordToAdd, ref feedback);
+                BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
+                CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
+                //show appropriate feedback
+                if (result)
+                {
+                    ShowFeedback($"{wordToAdd} added to blacklist.", FeedbackType.Success);
+                    return true;
+                }
+                else
+                {
+                    ShowFeedback(feedback, FeedbackType.Error);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowFeedback(ex.Message, FeedbackType.Error);
                 return false;
             }
         }
