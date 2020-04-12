@@ -42,7 +42,19 @@ namespace HonorsProject.Model.Entities
         public virtual List<Question> Questions { get; set; }
 
         //blacklists are tokenized by spaces
-        public string Blacklist { get; set; }
+        private string blacklist;
+
+        public string Blacklist
+        {
+            get { return blacklist; }
+            set
+            {
+                //prevent prepending spaces
+                if (value == " ")
+                    value = "";
+                blacklist = value.ToLower();
+            }
+        }
 
         //space at the end of the default list is important
         private string blaclistOriginalSource = "and i the this or it is a to be me that want ";
@@ -238,7 +250,13 @@ namespace HonorsProject.Model.Entities
         public bool AddToBlacklist(UnitOfWork u, string newWord, ref string feedback)
         {
             //validate new word
-            if (Blacklist.Contains(newWord))
+            if (String.IsNullOrEmpty(newWord))
+            {
+                feedback = "New word required cannot contain spaces.";
+                return false;
+            }
+
+            if (Blacklist.Contains(newWord.ToLower()))
             {
                 feedback = "Word already blacklisted.";
                 return false;
@@ -248,11 +266,7 @@ namespace HonorsProject.Model.Entities
                 feedback = "New word cannot contain spaces.";
                 return false;
             }
-            if (String.IsNullOrEmpty(newWord))
-            {
-                feedback = "New word required cannot contain spaces.";
-                return false;
-            }
+
             if (String.IsNullOrWhiteSpace(newWord))
             {
                 feedback = "New word required cannot contain whitespace.";
@@ -261,19 +275,26 @@ namespace HonorsProject.Model.Entities
             //apply new word with appended whitespace
             Blacklist = Blacklist + newWord + " ";
             //save changes
-            u.Complete();
-            return true;
+            bool result = (u.Complete() > 0) ? true : false;
+            if (result)
+                return true;
+            else
+                return false;
         }
 
-        public bool RemoveFromBlacklist(UnitOfWork u, string wordToRemove, ref string feedback)
+        public bool RemoveFromBlacklist(UnitOfWork u, string w, ref string feedback)
         {
+            string wordToRemove = w.ToLower();
             string[] blacklistArray = Blacklist.Split(' ');
             if (blacklistArray.Contains(wordToRemove))
             {
                 //remove word and appended whitespace
-                Blacklist.Replace(wordToRemove + " ", string.Empty);
-                u.Complete();
-                return true;
+                Blacklist = Blacklist.Replace(wordToRemove + " ", string.Empty);
+                bool result = (u.Complete() > 0) ? true : false;
+                if (result)
+                    return true;
+                else
+                    return false;
             }
             else
             {

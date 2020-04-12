@@ -115,42 +115,140 @@ namespace HonorsProject.Test.ViewModel
             Session selected = VM.UnitOfWork.SessionRepository.Get(1);
             VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
             //Act
-            ObservableCollection<string> originalBlacklistArray = VM.BlacklistList;
-            bool result = VM.Add("black");
+            int expectedCount = VM.BlacklistList.Count;
+            bool result = VM.Add("black list");
             //Assert
-            Assert.IsTrue(result, "wrong return value");
-            Assert.IsTrue(originalBlacklistArray.Count + 1 == VM.BlacklistList.Count, "wrong count");
-            Assert.IsTrue(VM.BlacklistList.Contains("black list"), "new word not found");
+            Assert.IsFalse(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
+            Assert.IsFalse(VM.BlacklistList.Contains("black"), "invalid word found");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
         }
 
         [TestMethod]
         public void AddWordToBlacklist_AlreadyExists_Fail()
         {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            int expectedCount = VM.BlacklistList.Count;
+            bool result = VM.Add("is");
+            //Assert
+            Assert.IsFalse(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
+            Assert.IsFalse(VM.BlacklistList.Contains("black"), "invalid word found");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
         }
 
         [TestMethod]
         public void AddWordToBlacklist_NullWord_Fail()
         {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            int expectedCount = VM.BlacklistList.Count;
+            bool result = VM.Add(null);
+            //Assert
+            Assert.IsFalse(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
+            Assert.IsFalse(VM.BlacklistList.Contains("black"), "invalid word found");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
         }
 
         [TestMethod]
         public void AddWordToBlacklist_EmptyWord_Fail()
         {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            int expectedCount = VM.BlacklistList.Count;
+            bool result = VM.Add("");
+            //Assert
+            Assert.IsFalse(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
+            Assert.IsFalse(VM.BlacklistList.Contains("black"), "invalid word found");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
         }
 
         [TestMethod]
         public void RemoveWordFromBlacklist_Success()
+        {//Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            int expectedCount = VM.BlacklistList.Count - 2; // minus 2 becase of the whitspace removal too
+            bool result = VM.Remove("is");
+            //Assert
+            Assert.IsTrue(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
+            Assert.IsFalse(VM.BlacklistList.Contains("is"), "invalid word found");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
+        }
+
+        [TestMethod]
+        public void RemoveWordFromBlacklist_UPPERCASE_Success()
         {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            int expectedCount = VM.BlacklistList.Count - 2;// minus 2 becase of the whitspace removal too
+            bool result = VM.Remove("IS");
+            //Assert
+            Assert.IsTrue(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
+            Assert.IsFalse(VM.BlacklistList.Contains("is"), "invalid word found");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
         }
 
         [TestMethod]
         public void RemoveWordFromBlacklist_NotFound_Fail()
         {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            //Act
+            int expectedCount = VM.BlacklistList.Count;
+            bool result = VM.Remove("invalidWord");
+            //Assert
+            Assert.IsFalse(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
+            Assert.IsFalse(VM.BlacklistList.Contains("invalidword"), "invalid word found");
+            Assert.IsTrue(VM.SelectedSession.Blacklist.EndsWith(" "), "doesnt end with space");
         }
 
         [TestMethod]
         public void RemoveWordFromBlacklist_ListEmpty_Fail()
         {
+            //Arrange
+            ClearDatabase();
+            CreateInSessionTestData(SubgridContext.ActiveSessions);
+            Session selected = VM.UnitOfWork.SessionRepository.Get(1);
+            VM = new DataAnalysisVM((BaseEntity)selected, dbConName);
+            VM.SelectedSession.Blacklist = "";
+            VM.BlacklistList = new ObservableCollection<string>(VM.SelectedSession.Blacklist.Split(' '));
+            VM.UnitOfWork.Complete();
+
+            //Act
+            int expectedCount = 1;
+            bool result = VM.Remove("is");
+            //Assert
+            Assert.IsFalse(result, "wrong return value");
+            Assert.AreEqual(expectedCount, VM.BlacklistList.Count, "wrong count");
         }
     }
 }

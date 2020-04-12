@@ -361,7 +361,7 @@ namespace HonorsProject.ViewModel
             string wordToRemove = objToRemove as string;
             string feedback = "";
             bool result = SelectedSession.RemoveFromBlacklist(UnitOfWork, wordToRemove, ref feedback);
-            OnPropertyChanged(nameof(blacklistList));
+            BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
             if (result)
             {
                 ShowFeedback($"{wordToRemove} Removed from blacklist.", FeedbackType.Success);
