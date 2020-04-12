@@ -83,13 +83,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\AddCmd.cs" />
     <Compile Include="ViewModel\Commands\ChangeSubgridContextCmd.cs" />
     <Compile Include="ViewModel\Commands\DeleteCmd.cs" />
     <Compile Include="ViewModel\Commands\AnalyseEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\EditCommentCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\IAddCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\ICancelmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IChangeSubgridCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IAnalyseEntityCmd.cs" />
+    <Compile Include="ViewModel\Commands\IComands\IRemoveCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IEnterNewModePrivateQuestionCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IGoToEntityCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IImportCSVCmd.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="ViewModel\Commands\IComands\IToggleMarkQCmd.cs" />
     <Compile Include="ViewModel\Commands\IComands\IUploadImageCmd.cs" />
     <Compile Include="ViewModel\Commands\NewModePrivateQuestionCmd.cs" />
+    <Compile Include="ViewModel\Commands\RemoveCmd.cs" />
     <Compile Include="ViewModel\Commands\ToggleAdminRoleCmd.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityInToListCmd.cs" />
     <Compile Include="ViewModel\Commands\MoveEntityOutOfListCmd.cs" />

@@ -78,6 +78,7 @@
         </StackPanel>
         <Grid Grid.Column="1" Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -136,6 +137,46 @@
                 </ListView>
             </GroupBox>
             <GroupBox
+                Header="Common Phrase Blacklist:"
+                Grid.Column="2"
+                Grid.RowSpan="2"
+                Grid.Row="1"
+                Style="{StaticResource MainFormGroupBox}">
+                <StackPanel>
+                    <TextBox Style="{StaticResource SearchTxtBox}"/>
+                    <Button Content="Add To Blacklist"
+                            Style="{StaticResource InfoButton}"
+                            Command=""
+                            CommandParameter=""/>
+                    <ListView x:Name="CommonPhraseBlacklistLV"
+                        ItemsSource="{Binding BlacklistList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ContextMenu>
+                            <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                                <MenuItem  Header="Remove Blacklist"
+                                           Command="{Binding DataContext.Remove}"
+                                           CommandParameter="{Binding SelectedItem}">
+                                    <MenuItem.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold">Remove Blacklist</TextBlock>
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </MenuItem.ToolTip>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox
                 Header="Common Phrase Identification"
                 Grid.Column="0"
                 Grid.Row="2"
@@ -148,12 +189,12 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Value}" 
+                                <TextBlock Text="{Binding Value}"
                                            Style="{StaticResource NoImgSearchResultsTextBlock}" />
                                 <TextBlock Text=":   " Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                                <TextBlock Text="{Binding Key}" 
+                                <TextBlock Text="{Binding Key}"
                                            Style="{StaticResource NoImgSearchResultsTextBlock}"
-                                            MaxWidth="300"/>
+                                            MaxWidth="300" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -174,13 +215,13 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
                                         Background="Transparent">
-                                <TextBlock Text="{Binding Value}" 
-                                           Style="{StaticResource NoImgSearchResultsTextBlock}"/>
+                                <TextBlock Text="{Binding Value}"
+                                           Style="{StaticResource NoImgSearchResultsTextBlock}" />
                                 <TextBlock Text=":   " Style="{StaticResource NoImgSearchResultsTextBlock}" />
-                                    <TextBlock Text="{Binding Key}" 
+                                <TextBlock Text="{Binding Key}"
                                            Style="{StaticResource NoImgSearchResultsTextBlock}"
-                                           MaxWidth="300"/>
-                                </StackPanel>
+                                           MaxWidth="300" />
+                            </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

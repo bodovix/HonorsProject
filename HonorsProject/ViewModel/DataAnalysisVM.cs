@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HonorsProject.ViewModel
 {
-    public class DataAnalysisVM : BaseViewModel, IGoToEntityCmd
+    public class DataAnalysisVM : BaseViewModel, IGoToEntityCmd, IRemoveCmd, IAddCmd
     {
         #region Properties
 
@@ -128,6 +128,7 @@ namespace HonorsProject.ViewModel
                         {
                             NumQuestionsAsked = SelectedSession.CalcNumberQuestionsAsked();
                             MostFrequentAskers = new ObservableCollection<FrequentAskersTuple>(SelectedSession.CalcMostFrequentAskers());
+                            BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
                             CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
                             if (CommonPhrases.Count == 0)
                                 CommonPhrases.Add("No Common Phrases detected.", 0);
@@ -192,6 +193,18 @@ namespace HonorsProject.ViewModel
             }
         }
 
+        private ObservableCollection<string> blacklistList;
+
+        public ObservableCollection<string> BlacklistList
+        {
+            get { return blacklistList; }
+            set
+            {
+                blacklistList = value;
+                OnPropertyChanged(nameof(BlacklistList));
+            }
+        }
+
         private Dictionary<string, int> _keyWords;
 
         public Dictionary<string, int> KeyWords
@@ -209,10 +222,17 @@ namespace HonorsProject.ViewModel
         #endregion Properties
 
         public GoToEntityCmd GoToEntityCmd { get; set; }
+        public RemoveCmd RemoveCmd { get; set; }
+        public AddCmd AddCmd { get; set; }
 
         public DataAnalysisVM(BaseEntity entityToFocusOn, string dbcontextName) : base(dbcontextName)
         {
+            //commands
             GoToEntityCmd = new GoToEntityCmd(this);
+            RemoveCmd = new RemoveCmd(this);
+            AddCmd = new AddCmd(this);
+
+            //initialize
             UpdateHeader();
             try
             {
@@ -328,6 +348,52 @@ namespace HonorsProject.ViewModel
             else
             {
                 SelectionTitle = $"{SelectedGroup.Name} - {SelectedSession.Name}";
+            }
+        }
+
+        /// <summary>
+        /// Remove command used to remove items from blacklist
+        /// </summary>
+        /// <param name="objToRemove">String word to remove from blacklist</param>
+        /// <returns></returns>
+        public bool Remove(object objToRemove)
+        {
+            string wordToRemove = objToRemove as string;
+            string feedback = "";
+            bool result = SelectedSession.RemoveFromBlacklist(UnitOfWork, wordToRemove, ref feedback);
+            OnPropertyChanged(nameof(blacklistList));
+            if (result)
+            {
+                ShowFeedback($"{wordToRemove} Removed from blacklist.", FeedbackType.Success);
+                return true;
+            }
+            else
+            {
+                ShowFeedback(feedback, FeedbackType.Error);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Add Command used to add items to the blacklist
+        /// </summary>
+        /// <param name="objToAdd">String word to add to blacklist</param>
+        /// <returns></returns>
+        public bool Add(object objToAdd)
+        {
+            string wordToAdd = objToAdd as string;
+            string feedback = "";
+            bool result = SelectedSession.AddToBlacklist(UnitOfWork, wordToAdd, ref feedback);
+            OnPropertyChanged(nameof(blacklistList));
+            if (result)
+            {
+                ShowFeedback($"{wordToAdd} Added to blacklist.", FeedbackType.Success);
+                return true;
+            }
+            else
+            {
+                ShowFeedback(feedback, FeedbackType.Error);
+                return false;
             }
         }
     }

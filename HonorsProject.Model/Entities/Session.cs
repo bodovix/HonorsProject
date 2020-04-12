@@ -235,6 +235,53 @@ namespace HonorsProject.Model.Entities
                 return true;
         }
 
+        public bool AddToBlacklist(UnitOfWork u, string newWord, ref string feedback)
+        {
+            //validate new word
+            if (Blacklist.Contains(newWord))
+            {
+                feedback = "Word already blacklisted.";
+                return false;
+            }
+            if (newWord.Contains(' '))
+            {
+                feedback = "New word cannot contain spaces.";
+                return false;
+            }
+            if (String.IsNullOrEmpty(newWord))
+            {
+                feedback = "New word required cannot contain spaces.";
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(newWord))
+            {
+                feedback = "New word required cannot contain whitespace.";
+                return false;
+            }
+            //apply new word with appended whitespace
+            Blacklist = Blacklist + newWord + " ";
+            //save changes
+            u.Complete();
+            return true;
+        }
+
+        public bool RemoveFromBlacklist(UnitOfWork u, string wordToRemove, ref string feedback)
+        {
+            string[] blacklistArray = Blacklist.Split(' ');
+            if (blacklistArray.Contains(wordToRemove))
+            {
+                //remove word and appended whitespace
+                Blacklist.Replace(wordToRemove + " ", string.Empty);
+                u.Complete();
+                return true;
+            }
+            else
+            {
+                feedback = $"Word '{wordToRemove}' not found in blacklist.";
+                return false;
+            }
+        }
+
         private static string[] GetPhrase(string[] words, int startpos, int len)
         {
             return words.Skip(startpos).Take(len).ToArray();
