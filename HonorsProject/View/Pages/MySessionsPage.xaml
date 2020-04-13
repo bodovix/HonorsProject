@@ -103,9 +103,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.ContextMenu>
-                        <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}"
-                                     Visibility="{Binding Path=UserRole, Converter={StaticResource RoleToVisibleConverter},
-                    ConverterParameter={x:Static enums:Role.Lecturer}}">
+                        <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
                             <MenuItem  Header="Remove"
                                            Command="{Binding DataContext.RemoveEntityCmd}"
                                            CommandParameter="{Binding SelectedItem}">
