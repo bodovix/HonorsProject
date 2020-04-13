@@ -292,6 +292,16 @@ namespace HonorsProject.ViewModel
                 Mediator.NotifyColleagues(MediatorChannels.GoToThisStudent.ToString(), entity);
                 return true;
             }
+            if (entity is Group)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisGroup.ToString(), entity);
+                return true;
+            }
+            if (entity is Session)
+            {
+                Mediator.NotifyColleagues(MediatorChannels.GoToThisSession.ToString(), entity);
+                return true;
+            }
             else if (entity is null)
             {
                 ShowFeedback("Cannot go to a NULL object.", FeedbackType.Error);

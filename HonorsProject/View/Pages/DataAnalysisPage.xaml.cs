@@ -37,7 +37,25 @@ namespace HonorsProject.View.Pages
             InitializeComponent();
             VM = new DataAnalysisVM(entity, ConnectionConfigs.LiveConfig);
             Mediator.Register(MediatorChannels.GoToThisStudent.ToString(), GoToThisStudent);
+            Mediator.Register(MediatorChannels.GoToThisSession.ToString(), GoToThisSession);
+            Mediator.Register(MediatorChannels.GoToThisGroup.ToString(), GoToThisGroup);
             MainContainer.DataContext = VM;
+        }
+
+        private void GoToThisGroup(object obj)
+        {
+            Mediator.ClearMediator();
+
+            BaseEntity entity = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GotoGroupPageWithGroup(entity);
+        }
+
+        private void GoToThisSession(object obj)
+        {
+            Mediator.ClearMediator();
+
+            BaseEntity entity = (BaseEntity)obj;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).GoToSessionPageWithSession(entity);
         }
 
         private void GoToThisStudent(object obj)

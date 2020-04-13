@@ -112,7 +112,13 @@ namespace HonorsProject.View
                 MakeWindowBig();
                 HasLoggedInOnce = true;
             }
-            MainContent.Content = new MySessionsPage();
+            MainContent.Content = new MySessionsPage(null);
+        }
+
+        internal void GoToSessionPageWithSession(BaseEntity session)
+        {
+            Mediator.ClearMediator();
+            MainContent.Content = new MySessionsPage((Session)session);
         }
 
         internal void GoToStudentPageWithStudent(BaseEntity student)
@@ -160,7 +166,7 @@ namespace HonorsProject.View
         private void MySessionsBtn_Click(object sender, RoutedEventArgs e)
         {
             Mediator.ClearMediator();
-            MainContent.Content = new MySessionsPage();
+            MainContent.Content = new MySessionsPage(null);
         }
 
         private void MyQuestoins_Click(object sender, RoutedEventArgs e)

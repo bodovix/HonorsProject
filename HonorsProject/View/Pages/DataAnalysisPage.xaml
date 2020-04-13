@@ -46,6 +46,21 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                            <MenuItem  Header="Go To Group"
+                                           Command="{Binding DataContext.GoToEntityCmd}"
+                                           CommandParameter="{Binding SelectedItem}">
+                                <MenuItem.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold">Navigate to Group.</TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </MenuItem.ToolTip>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                 </ListView>
             </StackPanel>
             <!--Sessions Search bar-->
@@ -73,6 +88,21 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+                    <ListView.ContextMenu>
+                        <ContextMenu DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+                            <MenuItem  Header="Go To Session"
+                                           Command="{Binding DataContext.GoToEntityCmd}"
+                                           CommandParameter="{Binding SelectedItem}">
+                                <MenuItem.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold">Navigate to Session.</TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </MenuItem.ToolTip>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                 </ListView>
             </StackPanel>
         </StackPanel>
@@ -144,7 +174,7 @@
                 Style="{StaticResource MainFormGroupBox}">
                 <StackPanel>
                     <TextBox Style="{StaticResource SearchTxtBox}"
-                             Text="{Binding ProposedBlacklist, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                             Text="{Binding ProposedBlacklist, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <watermark:WatermarkService.Watermark>
                             <TextBlock>Blacklist Words</TextBlock>
                         </watermark:WatermarkService.Watermark>

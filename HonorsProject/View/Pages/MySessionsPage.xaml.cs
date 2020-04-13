@@ -31,12 +31,21 @@ namespace HonorsProject.View.Pages
         //Polymorphic VM for Students or Lecturers
         private BaseMySessionsPageVM VM;
 
-        public MySessionsPage()
+        public MySessionsPage(Session selectedSession)
         {
             CreateMySesoinVM();
             this.SetMenuButtonColor(MenuButtonsSelection.MySessionPage);
             InitializeComponent();
             MainContainer.DataContext = VM;
+            try
+            {
+                if (selectedSession != null)
+                    VM.SelectedSession = VM.UnitOfWork.SessionRepository.Get(selectedSession.Id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Mediator.Register(MediatorChannels.DeleteSessionConfirmation.ToString(), ShowDeleteConfMessage);
             Mediator.Register(MediatorChannels.GoToThisSession.ToString(), GoToSession);
             Mediator.Register(MediatorChannels.GoToAnalyseEntity.ToString(), GoToAnalyseEntity);
