@@ -47,7 +47,8 @@ namespace HonorsProject.ViewModel
 
         public override bool Save()
         {
-            throw new NotImplementedException("Students Cannot Save Sessions.");
+            ShowFeedback("Students Cannot Save Sessions.", FeedbackType.Error);
+            return false;
         }
 
         public override bool Delete(BaseEntity objectToDelete)
@@ -58,17 +59,19 @@ namespace HonorsProject.ViewModel
 
         public override void EnterNewMode()
         {
-            throw new NotImplementedException("Students Cannot Create New Sessions");
+            ShowFeedback("Students Cannot Create New Sessions", FeedbackType.Error);
         }
 
         public override bool AddLecturer()
         {
-            throw new NotImplementedException("Students cannot add lecturers to sessions");
+            ShowFeedback("Students cannot add lecturers to sessions", FeedbackType.Error);
+            return false;
         }
 
         public override bool Remove(BaseEntity entityToRemove)
         {
-            throw new NotImplementedException("Students cannot remove lecturers from sessions");
+            ShowFeedback("Students cannot remove lecturers from sessions", FeedbackType.Error);
+            return false;
         }
 
         public override bool GoToAnalyseEntity(BaseEntity entity)
