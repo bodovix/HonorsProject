@@ -32,6 +32,7 @@ namespace HonorsProject.Model.Data
             List<Session> results = _entities.Where(s => (s.Lecturers.Any(l => l.Id == lecturer.Id) || s.CreatedByLecturerId == lecturer.Id)
                                                 && s.StartTime <= dateTime
                                                 && s.EndTime >= dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -43,6 +44,7 @@ namespace HonorsProject.Model.Data
             List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
                                                 && sesh.StartTime <= dateTime
                                                 && sesh.EndTime >= dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -54,6 +56,7 @@ namespace HonorsProject.Model.Data
             List<Session> results = _entities.Where(sesh => sesh.Group.Id == group.Id
                                                 && sesh.StartTime <= dateTime
                                                 && sesh.EndTime >= dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -64,6 +67,7 @@ namespace HonorsProject.Model.Data
             //and start date is ahead of inputted date
             List<Session> results = _entities.Where(s => (s.Lecturers.Any(l => l.Id == lecturer.Id) || s.CreatedByLecturerId == lecturer.Id)
                                                 && s.StartTime > dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -74,6 +78,7 @@ namespace HonorsProject.Model.Data
             //and start date is ahead of inputted date
             List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
                                                 && sesh.StartTime > dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -84,6 +89,7 @@ namespace HonorsProject.Model.Data
             //and start date is ahead of inputted date
             List<Session> results = _entities.Where(sesh => sesh.Group.Id == group.Id
                                                 && sesh.StartTime > dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -94,6 +100,7 @@ namespace HonorsProject.Model.Data
             //and end date is behind inputted date
             List<Session> results = _entities.Where(s => (s.Lecturers.Any(l => l.Id == lecturer.Id) || s.CreatedByLecturerId == lecturer.Id)
                                                 && s.EndTime < dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -104,6 +111,7 @@ namespace HonorsProject.Model.Data
             //and end date is behind inputted date
             List<Session> results = _entities.Where(sesh => sesh.Group.Students.Any(st => st.Id == student.Id)
                                                 && sesh.EndTime < dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
@@ -114,6 +122,7 @@ namespace HonorsProject.Model.Data
             //and end date is behind inputted date
             List<Session> results = _entities.Where(sesh => sesh.Group.Id == group.Id
                                                 && sesh.EndTime < dateTime)
+                                                    .OrderByDescending(s => s.StartTime)
                                                     .ToList();
             return results;
         }
