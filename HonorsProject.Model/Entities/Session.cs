@@ -256,7 +256,7 @@ namespace HonorsProject.Model.Entities
                 return false;
             }
 
-            if (Blacklist.Contains(newWord.ToLower()))
+            if (Blacklist.Contains(" " + newWord.ToLower() + " "))
             {
                 feedback = "Word already blacklisted.";
                 return false;

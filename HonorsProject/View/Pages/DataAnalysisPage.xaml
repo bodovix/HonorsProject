@@ -144,14 +144,19 @@
                 Style="{StaticResource MainFormGroupBox}">
                 <StackPanel>
                     <TextBox Style="{StaticResource SearchTxtBox}"
-                             Text="{Binding ProposedBlacklist, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding ProposedBlacklist, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                        <watermark:WatermarkService.Watermark>
+                            <TextBlock>Blacklist Words</TextBlock>
+                        </watermark:WatermarkService.Watermark>
+                    </TextBox>
                     <Button Content="Add To Blacklist"
                             Style="{StaticResource InfoButton}"
                             Command="{Binding AddCmd}"
                             CommandParameter="{Binding ProposedBlacklist}" />
                     <ListView x:Name="CommonPhraseBlacklistLV"
                         ItemsSource="{Binding BlacklistList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         Height="400">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">

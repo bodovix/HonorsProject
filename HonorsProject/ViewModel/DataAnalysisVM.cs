@@ -130,11 +130,7 @@ namespace HonorsProject.ViewModel
                             MostFrequentAskers = new ObservableCollection<FrequentAskersTuple>(SelectedSession.CalcMostFrequentAskers());
                             BlacklistList = new ObservableCollection<string>(SelectedSession.Blacklist.Split(' '));
                             CommonPhrases = SelectedSession.CalcCommonPhraseIdentification();
-                            if (CommonPhrases.Count == 0)
-                                CommonPhrases.Add("No Common Phrases detected.", 0);
                             KeyWords = SelectedSession.CalcKeyWordsAPI();
-                            if (KeyWords.Count == 0)
-                                KeyWords.Add("No Key Words detected.", 0);
                         }
                     UpdateHeader();
                 }
@@ -189,6 +185,12 @@ namespace HonorsProject.ViewModel
             set
             {
                 _commonPhrases = value;
+                //set defaults for common phrases
+                if (CommonPhrases == null)
+                    CommonPhrases = new Dictionary<string, int>();
+                if (CommonPhrases.Count == 0)
+                    CommonPhrases.Add("No Common Phrases detected.", 0);
+                //update view
                 OnPropertyChanged(nameof(CommonPhrases));
             }
         }
@@ -227,6 +229,8 @@ namespace HonorsProject.ViewModel
                 if (value == null)
                     value = new Dictionary<string, int>();
                 _keyWords = value;
+                if (KeyWords.Count == 0)
+                    KeyWords.Add("No Key Words detected.", 0);
                 OnPropertyChanged(nameof(KeyWords));
             }
         }
