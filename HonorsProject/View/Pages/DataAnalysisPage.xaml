@@ -256,7 +256,8 @@
                                 <TextBlock Text=":   " Style="{StaticResource NoImgSearchResultsTextBlock}" />
                                 <TextBlock Text="{Binding Key}"
                                            Style="{StaticResource NoImgSearchResultsTextBlock}"
-                                           MaxWidth="300" />
+                                           TextWrapping="Wrap"
+                                           MaxWidth="150" />
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
